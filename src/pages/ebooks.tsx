@@ -1,0 +1,646 @@
+import { useState, useEffect, useMemo } from 'react';
+import Head from 'next/head';
+import Link from 'next/link';
+import Image from 'next/image';
+import { useRouter } from 'next/router';
+import Layout from '@/layouts/NavbarLayout';
+
+interface Category {
+  id: number;
+  name: string;
+}
+
+interface EBook {
+  id: number;
+  title: string;
+  slug: string;
+  shortDescription: string;
+  category: Category;
+  coverImage?: string;
+  isFree: boolean;
+  price?: number;
+  format: 'pdf' | 'epub';
+  pageCount: number;
+  publishedDate: string;
+}
+
+interface FilterState {
+  search: string;
+  categories: number[];
+  priceTypes: ('free' | 'paid')[];
+  formats: ('pdf' | 'epub')[];
+  sort: 'newest' | 'title_asc' | 'title_desc' | 'price_asc' | 'price_desc';
+}
+
+// Mock data - în aplicația reală, acestea ar veni din API
+const mockCategories: Category[] = [
+  { id: 1, name: 'Nutriție de bază' },
+  { id: 2, name: 'Diete speciale' },
+  { id: 3, name: 'Rețete sănătoase' },
+  { id: 4, name: 'Nutriție sportivă' },
+  { id: 5, name: 'Sănătate digestivă' },
+  { id: 6, name: 'Prevenție boli' }
+];
+
+const mockEbooks: EBook[] = [
+  {
+    id: 1,
+    title: 'Ghidul complet al alimentației sănătoase',
+    slug: 'ghidul-complet-alimentatie-sanatoasa',
+    shortDescription: 'Totul despre nutriția echilibrată și beneficiile unei alimentații corecte pentru sănătate.',
+    category: mockCategories[0],
+    coverImage: '/images/ebook1.jpg',
+    isFree: true,
+    format: 'pdf',
+    pageCount: 120,
+    publishedDate: '2024-01-15'
+  },
+  {
+    id: 2,
+    title: 'Dieta mediteraneană modernă',
+    slug: 'dieta-mediteraneana-moderna',
+    shortDescription: 'Principiile dietei mediteraneene adaptate stilului de viață contemporan.',
+    category: mockCategories[1],
+    coverImage: '/images/ebook2.jpg',
+    isFree: false,
+    price: 29.99,
+    format: 'epub',
+    pageCount: 180,
+    publishedDate: '2024-02-20'
+  },
+  {
+    id: 3,
+    title: '50 de rețete pentru micul dejun',
+    slug: '50-retete-micul-dejun',
+    shortDescription: 'Rețete nutritive și delicioase pentru a începe ziua cu energie.',
+    category: mockCategories[2],
+    coverImage: '/images/ebook3.jpg',
+    isFree: true,
+    format: 'pdf',
+    pageCount: 95,
+    publishedDate: '2024-03-10'
+  },
+  {
+    id: 4,
+    title: 'Nutriția în sport de performanță',
+    slug: 'nutritia-sport-performanta',
+    shortDescription: 'Strategii nutriționale pentru optimizarea performanțelor sportive.',
+    category: mockCategories[3],
+    coverImage: '/images/ebook4.jpg',
+    isFree: false,
+    price: 45.50,
+    format: 'pdf',
+    pageCount: 200,
+    publishedDate: '2024-04-05'
+  },
+  {
+    id: 5,
+    title: 'Sănătatea intestinului',
+    slug: 'sanatatea-intestinului',
+    shortDescription: 'Tot ce trebuie să știi despre microbiota intestinală și digestie.',
+    category: mockCategories[4],
+    isFree: false,
+    price: 35.00,
+    format: 'epub',
+    pageCount: 150,
+    publishedDate: '2024-05-12'
+  },
+  {
+    id: 6,
+    title: 'Prevenirea diabetului prin alimentație',
+    slug: 'prevenirea-diabetului-alimentatie',
+    shortDescription: 'Ghid practic pentru prevenirea și managementul diabetului prin nutriție.',
+    category: mockCategories[5],
+    isFree: true,
+    format: 'pdf',
+    pageCount: 110,
+    publishedDate: '2024-06-01'
+  }
+];
+
+const ITEMS_PER_PAGE = 6;
+
+export default function EBooksPage() {
+  const router = useRouter();
+  const [currentPage, setCurrentPage] = useState(1);
+  const [emailSubscription, setEmailSubscription] = useState('');
+  const [filters, setFilters] = useState<FilterState>({
+    search: '',
+    categories: [],
+    priceTypes: [],
+    formats: [],
+    sort: 'newest'
+  });
+
+  // Sincronizarea cu URL query parameters
+  useEffect(() => {
+    const { query } = router;
+    
+    setFilters({
+      search: (query.search as string) || '',
+      categories: query.category ? 
+        (Array.isArray(query.category) ? query.category.map(Number) : [Number(query.category)]) : 
+        [],
+      priceTypes: query.price ? 
+        (Array.isArray(query.price) ? query.price as ('free' | 'paid')[] : [query.price as ('free' | 'paid')]) : 
+        [],
+      formats: query.format ? 
+        (Array.isArray(query.format) ? query.format as ('pdf' | 'epub')[] : [query.format as ('pdf' | 'epub')]) : 
+        [],
+      sort: (query.sort as FilterState['sort']) || 'newest'
+    });
+
+    setCurrentPage(Number(query.page) || 1);
+  }, [router.query]);
+
+  // Actualizarea URL-ului când se schimbă filtrele
+  const updateFilters = (newFilters: Partial<FilterState>) => {
+    const updatedFilters = { ...filters, ...newFilters };
+    setFilters(updatedFilters);
+    setCurrentPage(1);
+
+    const queryParams: any = {};
+    if (updatedFilters.search) queryParams.search = updatedFilters.search;
+    if (updatedFilters.categories.length > 0) queryParams.category = updatedFilters.categories;
+    if (updatedFilters.priceTypes.length > 0) queryParams.price = updatedFilters.priceTypes;
+    if (updatedFilters.formats.length > 0) queryParams.format = updatedFilters.formats;
+    if (updatedFilters.sort !== 'newest') queryParams.sort = updatedFilters.sort;
+
+    router.push({
+      pathname: router.pathname,
+      query: queryParams
+    }, undefined, { shallow: true });
+  };
+
+  // Filtrarea și sortarea eBooks-urilor
+  const filteredAndSortedEbooks = useMemo(() => {
+    let filtered = mockEbooks.filter(ebook => {
+      // Filtrare după search
+      if (filters.search) {
+        const searchLower = filters.search.toLowerCase();
+        if (!ebook.title.toLowerCase().includes(searchLower) && 
+            !ebook.shortDescription.toLowerCase().includes(searchLower)) {
+          return false;
+        }
+      }
+
+      // Filtrare după categorii
+      if (filters.categories.length > 0 && !filters.categories.includes(ebook.category.id)) {
+        return false;
+      }
+
+      // Filtrare după tip preț
+      if (filters.priceTypes.length > 0) {
+        const isFreeSelected = filters.priceTypes.includes('free');
+        const isPaidSelected = filters.priceTypes.includes('paid');
+        if (isFreeSelected && !ebook.isFree) return false;
+        if (isPaidSelected && ebook.isFree) return false;
+        if (!isFreeSelected && !isPaidSelected) return false;
+      }
+
+      // Filtrare după format
+      if (filters.formats.length > 0 && !filters.formats.includes(ebook.format)) {
+        return false;
+      }
+
+      return true;
+    });
+
+    // Sortare
+    filtered.sort((a, b) => {
+      switch (filters.sort) {
+        case 'title_asc':
+          return a.title.localeCompare(b.title);
+        case 'title_desc':
+          return b.title.localeCompare(a.title);
+        case 'price_asc':
+          const priceA = a.isFree ? 0 : a.price || 0;
+          const priceB = b.isFree ? 0 : b.price || 0;
+          return priceA - priceB;
+        case 'price_desc':
+          const priceA2 = a.isFree ? 0 : a.price || 0;
+          const priceB2 = b.isFree ? 0 : b.price || 0;
+          return priceB2 - priceA2;
+        case 'newest':
+        default:
+          return new Date(b.publishedDate).getTime() - new Date(a.publishedDate).getTime();
+      }
+    });
+
+    return filtered;
+  }, [filters]);
+
+  // Paginare
+  const totalPages = Math.ceil(filteredAndSortedEbooks.length / ITEMS_PER_PAGE);
+  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+  const endIndex = startIndex + ITEMS_PER_PAGE;
+  const currentEbooks = filteredAndSortedEbooks.slice(startIndex, endIndex);
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+    const query = { ...router.query, page: page.toString() };
+    router.push({ pathname: router.pathname, query }, undefined, { shallow: true });
+  };
+
+  const handleClearFilters = () => {
+    setFilters({
+      search: '',
+      categories: [],
+      priceTypes: [],
+      formats: [],
+      sort: 'newest'
+    });
+    setCurrentPage(1);
+    router.push(router.pathname, undefined, { shallow: true });
+  };
+
+  const handleSubscription = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Aici ar fi logica pentru abonarea la newsletter
+    console.log('Subscription for:', emailSubscription);
+    setEmailSubscription('');
+    // Ar putea fi afișat un mesaj de succes
+  };
+
+  const formatDate = (dateString: string) => {
+    return new Date(dateString).toLocaleDateString('ro-RO', { 
+      year: 'numeric', 
+      month: 'short' 
+    });
+  };
+
+  return (
+    <Layout>
+      <Head>
+        <title>E-Books & Resurse | APNS - Asociația pentru Promovarea Nutriției Sănătoase</title>
+        <meta name="description" content="Descarcă e-books gratuite și premium despre nutriție, alimentație sănătoasă și prevenirea bolilor. Ghiduri de specialitate de la experți în nutriție." />
+        <meta name="keywords" content="e-books nutriție, ghiduri alimentație, cărți digitale sănătate, resurse nutriție, APNS" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="canonical" href="/ebooks" />
+      </Head>
+
+      <div className="min-h-screen bg-gray-50">
+        {/* Banner Section */}
+        <div className="bg-white py-16 border-b border-green-100">
+          <div className="max-w-7xl mx-auto px-6 text-center">
+            <h1 className="text-4xl md:text-5xl font-bold text-green-700 mb-6">
+              E-Books & Resurse
+            </h1>
+            <p className="text-gray-600 text-xl max-w-3xl mx-auto leading-relaxed">
+              Informații și ghiduri de la experți pentru a vă ajuta să gestionați alimentația și să trăiți o viață mai sănătoasă
+            </p>
+          </div>
+        </div>
+
+        {/* Main Content */}
+        <div className="max-w-7xl mx-auto px-6 py-12">
+          <div className="flex flex-col lg:flex-row gap-8">
+            {/* Sidebar with Filters */}
+            <div className="w-full lg:w-1/4">
+              <div className="bg-white rounded-xl shadow-md border border-gray-200 p-6 sticky top-6">
+                <h2 className="text-xl font-bold mb-6 text-gray-800">Filtre</h2>
+                
+                {/* Search */}
+                <div className="mb-6">
+                  <label htmlFor="search" className="block text-sm font-semibold text-gray-700 mb-2">
+                    Caută
+                  </label>
+                  <div className="relative">
+                    <input 
+                      type="text" 
+                      id="search" 
+                      value={filters.search}
+                      onChange={(e) => updateFilters({ search: e.target.value })}
+                      placeholder="Caută e-books..."
+                      className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all"
+                    />
+                    <div className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400">
+                      <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Categories Filter */}
+                <div className="mb-6">
+                  <h3 className="text-sm font-semibold text-gray-700 mb-3">Categorii</h3>
+                  <div className="space-y-3">
+                    {mockCategories.map((category) => (
+                      <label key={category.id} className="flex items-center cursor-pointer">
+                        <input 
+                          type="checkbox" 
+                          checked={filters.categories.includes(category.id)}
+                          onChange={(e) => {
+                            const newCategories = e.target.checked
+                              ? [...filters.categories, category.id]
+                              : filters.categories.filter(id => id !== category.id);
+                            updateFilters({ categories: newCategories });
+                          }}
+                          className="h-4 w-4 text-green-600 focus:ring-green-500 border-gray-300 rounded"
+                        />
+                        <span className="ml-3 text-sm text-gray-700 hover:text-green-600 transition-colors">
+                          {category.name}
+                        </span>
+                      </label>
+                    ))}
+                  </div>
+                </div>
+                
+                {/* Price Filter */}
+                <div className="mb-6">
+                  <h3 className="text-sm font-semibold text-gray-700 mb-3">Preț</h3>
+                  <div className="space-y-3">
+                    <label className="flex items-center cursor-pointer">
+                      <input 
+                        type="checkbox" 
+                        checked={filters.priceTypes.includes('free')}
+                        onChange={(e) => {
+                          const newPriceTypes = e.target.checked
+                            ? [...filters.priceTypes, 'free' as const]
+                            : filters.priceTypes.filter(type => type !== 'free');
+                          updateFilters({ priceTypes: newPriceTypes });
+                        }}
+                        className="h-4 w-4 text-green-600 focus:ring-green-500 border-gray-300 rounded"
+                      />
+                      <span className="ml-3 text-sm text-gray-700 hover:text-green-600 transition-colors">Gratuit</span>
+                    </label>
+                    <label className="flex items-center cursor-pointer">
+                      <input 
+                        type="checkbox" 
+                        checked={filters.priceTypes.includes('paid')}
+                        onChange={(e) => {
+                          const newPriceTypes = e.target.checked
+                            ? [...filters.priceTypes, 'paid' as const]
+                            : filters.priceTypes.filter(type => type !== 'paid');
+                          updateFilters({ priceTypes: newPriceTypes });
+                        }}
+                        className="h-4 w-4 text-green-600 focus:ring-green-500 border-gray-300 rounded"
+                      />
+                      <span className="ml-3 text-sm text-gray-700 hover:text-green-600 transition-colors">Cu plată</span>
+                    </label>
+                  </div>
+                </div>
+                
+                {/* Format Filter */}
+                <div className="mb-6">
+                  <h3 className="text-sm font-semibold text-gray-700 mb-3">Format</h3>
+                  <div className="space-y-3">
+                    <label className="flex items-center cursor-pointer">
+                      <input 
+                        type="checkbox" 
+                        checked={filters.formats.includes('pdf')}
+                        onChange={(e) => {
+                          const newFormats = e.target.checked
+                            ? [...filters.formats, 'pdf' as const]
+                            : filters.formats.filter(format => format !== 'pdf');
+                          updateFilters({ formats: newFormats });
+                        }}
+                        className="h-4 w-4 text-green-600 focus:ring-green-500 border-gray-300 rounded"
+                      />
+                      <span className="ml-3 text-sm text-gray-700 hover:text-green-600 transition-colors">PDF</span>
+                    </label>
+                    <label className="flex items-center cursor-pointer">
+                      <input 
+                        type="checkbox" 
+                        checked={filters.formats.includes('epub')}
+                        onChange={(e) => {
+                          const newFormats = e.target.checked
+                            ? [...filters.formats, 'epub' as const]
+                            : filters.formats.filter(format => format !== 'epub');
+                          updateFilters({ formats: newFormats });
+                        }}
+                        className="h-4 w-4 text-green-600 focus:ring-green-500 border-gray-300 rounded"
+                      />
+                      <span className="ml-3 text-sm text-gray-700 hover:text-green-600 transition-colors">EPUB</span>
+                    </label>
+                  </div>
+                </div>
+                
+                {/* Filter Actions */}
+                <div className="pt-4 border-t border-gray-200">
+                  <button 
+                    onClick={handleClearFilters}
+                    className="w-full text-center text-gray-600 hover:text-green-600 text-sm font-medium transition-colors"
+                  >
+                    Șterge toate filtrele
+                  </button>
+                </div>
+              </div>
+            </div>
+            
+            {/* E-Books Content */}
+            <div className="w-full lg:w-3/4">
+              {/* Results Summary and Sort */}
+              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4">
+                <div>
+                  <p className="text-gray-600">
+                    Se afișează <span className="font-semibold">{startIndex + 1}</span> până la{' '}
+                    <span className="font-semibold">{Math.min(endIndex, filteredAndSortedEbooks.length)}</span> din{' '}
+                    <span className="font-semibold">{filteredAndSortedEbooks.length}</span> e-books
+                  </p>
+                </div>
+                <div className="flex items-center gap-3">
+                  <label htmlFor="sort" className="text-sm text-gray-600 font-medium">
+                    Sortează după:
+                  </label>
+                  <select 
+                    id="sort" 
+                    value={filters.sort}
+                    onChange={(e) => updateFilters({ sort: e.target.value as FilterState['sort'] })}
+                    className="border border-gray-300 rounded-lg px-4 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all"
+                  >
+                    <option value="newest">Cele mai noi</option>
+                    <option value="title_asc">Titlu: A-Z</option>
+                    <option value="title_desc">Titlu: Z-A</option>
+                    <option value="price_asc">Preț: Crescător</option>
+                    <option value="price_desc">Preț: Descrescător</option>
+                  </select>
+                </div>
+              </div>
+              
+              {/* E-Books Grid */}
+              {currentEbooks.length > 0 ? (
+                <>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+                    {currentEbooks.map((ebook) => (
+                      <div key={ebook.id} className="bg-white rounded-xl shadow-md border border-gray-200 overflow-hidden hover:shadow-lg transition-all duration-300 group">
+                        <Link href={`/ebooks/${ebook.slug}`}>
+                          <div className="relative aspect-square overflow-hidden bg-gradient-to-br from-green-100 to-green-200">
+                            {ebook.coverImage ? (
+                              <Image 
+                                src={ebook.coverImage} 
+                                alt={ebook.title} 
+                                width={400}
+                                height={400}
+                                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                              />
+                            ) : (
+                              <div className="w-full h-full flex items-center justify-center">
+                                <svg className="h-20 w-20 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                                </svg>
+                              </div>
+                            )}
+                            
+                            {ebook.isFree ? (
+                              <span className="absolute top-3 right-3 bg-green-600 text-white px-3 py-1 text-xs font-bold rounded-full shadow-lg">
+                                Gratuit
+                              </span>
+                            ) : (
+                              <span className="absolute top-3 right-3 bg-blue-600 text-white px-3 py-1 text-xs font-bold rounded-full shadow-lg">
+                                {ebook.price} Lei
+                              </span>
+                            )}
+                          </div>
+                          
+                          <div className="p-6">
+                            <div className="flex items-center justify-between mb-3">
+                              <span className="inline-block bg-green-100 text-green-800 text-xs px-3 py-1 rounded-full font-medium">
+                                {ebook.category.name}
+                              </span>
+                              <span className="text-gray-500 text-xs font-medium">
+                                {ebook.format.toUpperCase()}
+                              </span>
+                            </div>
+                            
+                            <h3 className="font-bold text-gray-800 mb-2 text-lg group-hover:text-green-600 transition-colors line-clamp-2">
+                              {ebook.title}
+                            </h3>
+                            
+                            <p className="text-gray-600 text-sm mb-4 line-clamp-2 leading-relaxed">
+                              {ebook.shortDescription}
+                            </p>
+                            
+                            <div className="flex items-center justify-between text-xs text-gray-500">
+                              <span>{ebook.pageCount} pagini</span>
+                              <span>{formatDate(ebook.publishedDate)}</span>
+                            </div>
+                          </div>
+                        </Link>
+                        
+                        <div className="px-6 pb-6">
+                          <Link 
+                            href={`/ebooks/${ebook.slug}`}
+                            className="block w-full bg-green-600 text-white text-center py-3 rounded-lg hover:bg-green-700 transition-colors font-semibold"
+                          >
+                            {ebook.isFree ? 'Descarcă Acum' : 'Vezi Detalii'}
+                          </Link>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                  
+                  {/* Pagination */}
+                  {totalPages > 1 && (
+                    <div className="flex justify-center">
+                      <nav className="flex items-center space-x-2">
+                        <button
+                          onClick={() => handlePageChange(currentPage - 1)}
+                          disabled={currentPage === 1}
+                          className={`px-3 py-2 rounded-lg ${
+                            currentPage === 1
+                              ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                              : 'bg-white text-gray-700 hover:bg-green-50 hover:text-green-600 border border-gray-300'
+                          } transition-colors`}
+                        >
+                          <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
+                          </svg>
+                        </button>
+                        
+                        {Array.from({ length: totalPages }, (_, i) => i + 1)
+                          .filter(page => page === 1 || page === totalPages || Math.abs(page - currentPage) <= 2)
+                          .map((page, index, array) => (
+                            <div key={page} className="flex items-center">
+                              {index > 0 && array[index - 1] !== page - 1 && (
+                                <span className="px-2 text-gray-400">...</span>
+                              )}
+                              <button
+                                onClick={() => handlePageChange(page)}
+                                className={`px-4 py-2 rounded-lg font-medium ${
+                                  currentPage === page
+                                    ? 'bg-green-600 text-white'
+                                    : 'bg-white text-gray-700 hover:bg-green-50 hover:text-green-600 border border-gray-300'
+                                } transition-colors`}
+                              >
+                                {page}
+                              </button>
+                            </div>
+                          ))}
+                        
+                        <button
+                          onClick={() => handlePageChange(currentPage + 1)}
+                          disabled={currentPage === totalPages}
+                          className={`px-3 py-2 rounded-lg ${
+                            currentPage === totalPages
+                              ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                              : 'bg-white text-gray-700 hover:bg-green-50 hover:text-green-600 border border-gray-300'
+                          } transition-colors`}
+                        >
+                          <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                          </svg>
+                        </button>
+                      </nav>
+                    </div>
+                  )}
+                </>
+              ) : (
+                /* No Results */
+                <div className="bg-white rounded-xl shadow-md border border-gray-200 p-12 text-center">
+                  <svg className="mx-auto h-16 w-16 text-gray-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  <h3 className="text-xl font-bold text-gray-900 mb-2">Nu s-au găsit e-books</h3>
+                  <p className="text-gray-500 mb-6 max-w-md mx-auto">
+                    Încercați să ajustați criteriile de căutare sau filtrare pentru a găsi ceea ce căutați.
+                  </p>
+                  <button 
+                    onClick={handleClearFilters}
+                    className="inline-flex items-center px-6 py-3 border border-transparent rounded-lg shadow-sm text-sm font-semibold text-white bg-green-600 hover:bg-green-700 transition-colors"
+                  >
+                    Șterge filtrele
+                  </button>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+
+        {/* Newsletter Subscription */}
+        <div className="bg-gradient-to-r from-green-50 to-green-100 py-16 border-t border-green-200">
+          <div className="max-w-4xl mx-auto px-6 text-center">
+            <h2 className="text-3xl font-bold text-green-800 mb-4">
+              Abonează-te la Newsletter
+            </h2>
+            <p className="text-gray-600 mb-8 text-lg max-w-2xl mx-auto leading-relaxed">
+              Fii la curent cu cele mai noi e-books, resurse și sfaturi nutriționale direct în inbox-ul tău.
+            </p>
+            
+            <form onSubmit={handleSubscription} className="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto">
+              <input 
+                type="email" 
+                value={emailSubscription}
+                onChange={(e) => setEmailSubscription(e.target.value)}
+                placeholder="Adresa ta de email" 
+                className="px-6 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-green-500 flex-grow transition-all"
+                required
+              />
+              <button 
+                type="submit" 
+                className="bg-green-600 text-white px-8 py-3 rounded-xl hover:bg-green-700 hover:shadow-lg transform hover:scale-105 transition-all duration-300 font-semibold whitespace-nowrap"
+              >
+                Abonează-te
+              </button>
+            </form>
+            
+            <p className="text-xs text-gray-500 mt-4">
+              Ne respectăm abonații. Dezabonează-te oricând cu un singur click.
+            </p>
+          </div>
+        </div>
+      </div>
+    </Layout>
+  );
+}
