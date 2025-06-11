@@ -1,0 +1,195 @@
+import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
+import { membersService, Member } from '@/lib/services/membersService';
+import VolunteerCard from './VolunteerCard';
+import VolunteerModal from './VolunteerModal';
+
+const VolunteerCarousel: React.FC = () => {
+  const [volunteers, setVolunteers] = useState<Member[]>([]);
+  const [currentVolunteerIndex, setCurrentVolunteerIndex] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+  const [volunteersLoading, setVolunteersLoading] = useState(true);
+  const [selectedVolunteer, setSelectedVolunteer] = useState<Member | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  useEffect(() => {
+    const fetchVolunteers = async () => {
+      try {
+        const data = await membersService.getMembers();
+        // Limităm la primii 6 membri pentru carousel
+        setVolunteers(data.slice(0, 6));
+      } catch (error) {
+        console.error('Eroare la încărcarea voluntarilor:', error);
+      } finally {
+        setVolunteersLoading(false);
+      }
+    };
+
+    fetchVolunteers();
+
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const maxVolunteerIndex = isMobile
+    ? Math.max(volunteers.length - 1, 0)
+    : Math.max(Math.ceil(volunteers.length / 3) - 1, 0);
+
+  const nextVolunteer = () => {
+    setCurrentVolunteerIndex(Math.min(currentVolunteerIndex + 1, maxVolunteerIndex));
+  };
+
+  const prevVolunteer = () => {
+    setCurrentVolunteerIndex(Math.max(currentVolunteerIndex - 1, 0));
+  };
+
+  const handleCardClick = (volunteer: Member) => {
+    setSelectedVolunteer(volunteer);
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setSelectedVolunteer(null);
+  };
+
+  return (
+    <>
+      <section className="bg-green-50 py-16">
+        <div className="max-w-screen-xl mx-auto px-6">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-green-800 mb-4">
+              Echipa Noastră de Specialiști
+            </h2>
+            <p className="text-lg text-green-700 max-w-2xl mx-auto">
+              Întâlnește profesioniștii dedicați care fac posibilă misiunea asociației noastre
+            </p>
+            <div className="inline-flex items-center space-x-4 mt-6">
+              <span className="h-px w-12 bg-green-300"></span>
+              <span className="text-green-600 font-medium">Oamenii din spatele schimbării</span>
+              <span className="h-px w-12 bg-green-300"></span>
+            </div>
+          </div>
+
+          {volunteersLoading ? (
+            // Loading State
+            <div className="relative overflow-hidden">
+              <div className="flex space-x-6">
+                {[...Array(3)].map((_, index) => (
+                  <div key={index} className="min-w-full md:min-w-[calc(33.333%-16px)] bg-white rounded-2xl shadow-lg overflow-hidden">
+                    <div className="animate-pulse">
+                      <div className="h-80 bg-gray-200"></div>
+                      <div className="p-6">
+                        <div className="h-6 bg-gray-200 rounded mb-3"></div>
+                        <div className="h-4 bg-gray-200 rounded mb-4 w-3/4"></div>
+                        <div className="h-10 bg-gray-200 rounded"></div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ) : (
+            <div className="relative">
+              {/* Carousel Container */}
+              <div className="overflow-hidden">
+                <div
+                  className="flex transition-transform duration-500 ease-out"
+                  style={{
+                    transform: `translateX(-${currentVolunteerIndex * (isMobile ? 100 : (100 / 3 + 2))}%)`,
+                    gap: isMobile ? '0px' : '24px'
+                  }}
+                >
+                  {volunteers.map((volunteer) => (
+                    <VolunteerCard
+                      key={volunteer.id}
+                      volunteer={volunteer}
+                      isMobile={isMobile}
+                      onCardClick={handleCardClick}
+                    />
+                  ))}
+                </div>
+              </div>
+
+              {/* Navigation Arrows */}
+              {volunteers.length > (isMobile ? 1 : 3) && (
+                <>
+                  <button
+                    onClick={prevVolunteer}
+                    className={`absolute top-1/2 -left-6 transform -translate-y-1/2 bg-white p-3 rounded-full shadow-lg hover:shadow-xl transition-all z-20 ${
+                      currentVolunteerIndex === 0 ? 'opacity-50 cursor-not-allowed' : 'hover:bg-green-50'
+                    }`}
+                    disabled={currentVolunteerIndex === 0}
+                    style={{ marginTop: '-60px' }}
+                  >
+                    <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
+                    </svg>
+                  </button>
+
+                  <button
+                    onClick={nextVolunteer}
+                    className={`absolute top-1/2 -right-6 transform -translate-y-1/2 bg-white p-3 rounded-full shadow-lg hover:shadow-xl transition-all z-20 ${
+                      currentVolunteerIndex >= maxVolunteerIndex ? 'opacity-50 cursor-not-allowed' : 'hover:bg-green-50'
+                    }`}
+                    disabled={currentVolunteerIndex >= maxVolunteerIndex}
+                    style={{ marginTop: '-60px' }}
+                  >
+                    <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                  </button>
+                </>
+              )}
+
+              {/* Dots Indicator */}
+              {volunteers.length > (isMobile ? 1 : 3) && (
+                <div className="flex justify-center mt-8 space-x-2">
+                  {Array.from({ 
+                    length: isMobile 
+                      ? volunteers.length 
+                      : Math.ceil(volunteers.length / 3)
+                  }).map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setCurrentVolunteerIndex(index)}
+                    className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                      index === currentVolunteerIndex 
+                        ? 'bg-green-600 w-6' 
+                        : 'bg-green-200 hover:bg-green-300'
+                    }`}
+                  />
+                ))}
+              </div>
+            )}
+
+            {/* View All Team Button */}
+            <div className="text-center mt-12">
+              <Link
+                href="/team"
+                className="inline-flex items-center bg-green-600 text-white font-semibold px-8 py-3 rounded-lg hover:bg-green-700 transition-all duration-300 shadow-md hover:shadow-lg"
+              >
+                Vezi toată echipa
+                <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </Link>
+            </div>
+          </div>
+        )}
+      </div>
+    </section>
+
+    {/* Volunteer Modal */}
+    <VolunteerModal
+      volunteer={selectedVolunteer}
+      isOpen={isModalOpen}
+      onClose={handleCloseModal}
+    />
+  </>
+  );
+};
+
+export default VolunteerCarousel;

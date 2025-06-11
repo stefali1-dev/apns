@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { GetStaticProps, GetStaticPaths } from 'next';
 import { EBook, ebookService } from '@/lib/services/ebookService';
+import Layout from '@/layouts/NavbarLayout';
 
 interface EBookDetailProps {
   ebook: EBook | null;
@@ -113,7 +114,7 @@ export default function EBookDetail({ ebook, relatedEbooks }: EBookDetailProps) 
   };
 
   return (
-    <>
+    <Layout>
       <Head>
         <title>{ebook.title} | APNS - Asociația pentru Promovarea Nutriției Sănătoase</title>
         <meta name="description" content={ebook.shortDescription} />
@@ -570,7 +571,7 @@ export default function EBookDetail({ ebook, relatedEbooks }: EBookDetailProps) 
           </>
         )}
       </div>
-    </>
+    </Layout>
   );
 }
 

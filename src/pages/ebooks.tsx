@@ -4,6 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import Layout from '@/layouts/NavbarLayout';
+import { mockEbooks } from '@/lib/services/ebookService';
 
 interface Category {
   id: number;
@@ -34,88 +35,7 @@ interface FilterState {
 
 // Mock data - în aplicația reală, acestea ar veni din API
 const mockCategories: Category[] = [
-  { id: 1, name: 'Nutriție de bază' },
-  { id: 2, name: 'Diete speciale' },
-  { id: 3, name: 'Rețete sănătoase' },
-  { id: 4, name: 'Nutriție sportivă' },
-  { id: 5, name: 'Sănătate digestivă' },
-  { id: 6, name: 'Prevenție boli' }
-];
-
-const mockEbooks: EBook[] = [
-  {
-    id: 1,
-    title: 'Ghidul complet al alimentației sănătoase',
-    slug: 'ghidul-complet-alimentatie-sanatoasa',
-    shortDescription: 'Totul despre nutriția echilibrată și beneficiile unei alimentații corecte pentru sănătate.',
-    category: mockCategories[0],
-    coverImage: '/images/ebook1.jpg',
-    isFree: true,
-    format: 'pdf',
-    pageCount: 120,
-    publishedDate: '2024-01-15'
-  },
-  {
-    id: 2,
-    title: 'Dieta mediteraneană modernă',
-    slug: 'dieta-mediteraneana-moderna',
-    shortDescription: 'Principiile dietei mediteraneene adaptate stilului de viață contemporan.',
-    category: mockCategories[1],
-    coverImage: '/images/ebook2.jpg',
-    isFree: false,
-    price: 29.99,
-    format: 'epub',
-    pageCount: 180,
-    publishedDate: '2024-02-20'
-  },
-  {
-    id: 3,
-    title: '50 de rețete pentru micul dejun',
-    slug: '50-retete-micul-dejun',
-    shortDescription: 'Rețete nutritive și delicioase pentru a începe ziua cu energie.',
-    category: mockCategories[2],
-    coverImage: '/images/ebook3.jpg',
-    isFree: true,
-    format: 'pdf',
-    pageCount: 95,
-    publishedDate: '2024-03-10'
-  },
-  {
-    id: 4,
-    title: 'Nutriția în sport de performanță',
-    slug: 'nutritia-sport-performanta',
-    shortDescription: 'Strategii nutriționale pentru optimizarea performanțelor sportive.',
-    category: mockCategories[3],
-    coverImage: '/images/ebook4.jpg',
-    isFree: false,
-    price: 45.50,
-    format: 'pdf',
-    pageCount: 200,
-    publishedDate: '2024-04-05'
-  },
-  {
-    id: 5,
-    title: 'Sănătatea intestinului',
-    slug: 'sanatatea-intestinului',
-    shortDescription: 'Tot ce trebuie să știi despre microbiota intestinală și digestie.',
-    category: mockCategories[4],
-    isFree: false,
-    price: 35.00,
-    format: 'epub',
-    pageCount: 150,
-    publishedDate: '2024-05-12'
-  },
-  {
-    id: 6,
-    title: 'Prevenirea diabetului prin alimentație',
-    slug: 'prevenirea-diabetului-alimentatie',
-    shortDescription: 'Ghid practic pentru prevenirea și managementul diabetului prin nutriție.',
-    category: mockCategories[5],
-    isFree: true,
-    format: 'pdf',
-    pageCount: 110,
-    publishedDate: '2024-06-01'
-  }
+  { id: 1, name: 'Nutriție de bază' }
 ];
 
 const ITEMS_PER_PAGE = 6;
@@ -135,17 +55,17 @@ export default function EBooksPage() {
   // Sincronizarea cu URL query parameters
   useEffect(() => {
     const { query } = router;
-    
+
     setFilters({
       search: (query.search as string) || '',
-      categories: query.category ? 
-        (Array.isArray(query.category) ? query.category.map(Number) : [Number(query.category)]) : 
+      categories: query.category ?
+        (Array.isArray(query.category) ? query.category.map(Number) : [Number(query.category)]) :
         [],
-      priceTypes: query.price ? 
-        (Array.isArray(query.price) ? query.price as ('free' | 'paid')[] : [query.price as ('free' | 'paid')]) : 
+      priceTypes: query.price ?
+        (Array.isArray(query.price) ? query.price as ('free' | 'paid')[] : [query.price as ('free' | 'paid')]) :
         [],
-      formats: query.format ? 
-        (Array.isArray(query.format) ? query.format as ('pdf' | 'epub')[] : [query.format as ('pdf' | 'epub')]) : 
+      formats: query.format ?
+        (Array.isArray(query.format) ? query.format as ('pdf' | 'epub')[] : [query.format as ('pdf' | 'epub')]) :
         [],
       sort: (query.sort as FilterState['sort']) || 'newest'
     });
@@ -178,8 +98,8 @@ export default function EBooksPage() {
       // Filtrare după search
       if (filters.search) {
         const searchLower = filters.search.toLowerCase();
-        if (!ebook.title.toLowerCase().includes(searchLower) && 
-            !ebook.shortDescription.toLowerCase().includes(searchLower)) {
+        if (!ebook.title.toLowerCase().includes(searchLower) &&
+          !ebook.shortDescription.toLowerCase().includes(searchLower)) {
           return false;
         }
       }
@@ -263,9 +183,9 @@ export default function EBooksPage() {
   };
 
   const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString('ro-RO', { 
-      year: 'numeric', 
-      month: 'short' 
+    return new Date(dateString).toLocaleDateString('ro-RO', {
+      year: 'numeric',
+      month: 'short'
     });
   };
 
@@ -281,13 +201,11 @@ export default function EBooksPage() {
 
       <div className="min-h-screen bg-gray-50">
         {/* Banner Section */}
-        <div className="bg-white py-16 border-b border-green-100">
-          <div className="max-w-7xl mx-auto px-6 text-center">
-            <h1 className="text-4xl md:text-5xl font-bold text-green-700 mb-6">
-              E-Books & Resurse
-            </h1>
-            <p className="text-gray-600 text-xl max-w-3xl mx-auto leading-relaxed">
-              Informații și ghiduri de la experți pentru a vă ajuta să gestionați alimentația și să trăiți o viață mai sănătoasă
+        <div className="bg-white py-12 border-b border-green-100">
+          <div className="max-w-7xl mx-auto px-4 text-center">
+            <h1 className="text-4xl font-extrabold text-green-700 mb-4">E-Books & Resurse</h1>
+            <p className="text-gray-600 text-lg">
+              Informații și ghiduri de la experți pentru a vă ajuta să gestionați alimentația și să trăiți o viață mai sănătoasă.
             </p>
           </div>
         </div>
@@ -299,16 +217,16 @@ export default function EBooksPage() {
             <div className="w-full lg:w-1/4">
               <div className="bg-white rounded-xl shadow-md border border-gray-200 p-6 sticky top-6">
                 <h2 className="text-xl font-bold mb-6 text-gray-800">Filtre</h2>
-                
+
                 {/* Search */}
                 <div className="mb-6">
                   <label htmlFor="search" className="block text-sm font-semibold text-gray-700 mb-2">
                     Caută
                   </label>
                   <div className="relative">
-                    <input 
-                      type="text" 
-                      id="search" 
+                    <input
+                      type="text"
+                      id="search"
                       value={filters.search}
                       onChange={(e) => updateFilters({ search: e.target.value })}
                       placeholder="Caută e-books..."
@@ -328,8 +246,8 @@ export default function EBooksPage() {
                   <div className="space-y-3">
                     {mockCategories.map((category) => (
                       <label key={category.id} className="flex items-center cursor-pointer">
-                        <input 
-                          type="checkbox" 
+                        <input
+                          type="checkbox"
                           checked={filters.categories.includes(category.id)}
                           onChange={(e) => {
                             const newCategories = e.target.checked
@@ -346,14 +264,14 @@ export default function EBooksPage() {
                     ))}
                   </div>
                 </div>
-                
+
                 {/* Price Filter */}
                 <div className="mb-6">
                   <h3 className="text-sm font-semibold text-gray-700 mb-3">Preț</h3>
                   <div className="space-y-3">
                     <label className="flex items-center cursor-pointer">
-                      <input 
-                        type="checkbox" 
+                      <input
+                        type="checkbox"
                         checked={filters.priceTypes.includes('free')}
                         onChange={(e) => {
                           const newPriceTypes = e.target.checked
@@ -366,8 +284,8 @@ export default function EBooksPage() {
                       <span className="ml-3 text-sm text-gray-700 hover:text-green-600 transition-colors">Gratuit</span>
                     </label>
                     <label className="flex items-center cursor-pointer">
-                      <input 
-                        type="checkbox" 
+                      <input
+                        type="checkbox"
                         checked={filters.priceTypes.includes('paid')}
                         onChange={(e) => {
                           const newPriceTypes = e.target.checked
@@ -381,14 +299,14 @@ export default function EBooksPage() {
                     </label>
                   </div>
                 </div>
-                
+
                 {/* Format Filter */}
                 <div className="mb-6">
                   <h3 className="text-sm font-semibold text-gray-700 mb-3">Format</h3>
                   <div className="space-y-3">
                     <label className="flex items-center cursor-pointer">
-                      <input 
-                        type="checkbox" 
+                      <input
+                        type="checkbox"
                         checked={filters.formats.includes('pdf')}
                         onChange={(e) => {
                           const newFormats = e.target.checked
@@ -401,8 +319,8 @@ export default function EBooksPage() {
                       <span className="ml-3 text-sm text-gray-700 hover:text-green-600 transition-colors">PDF</span>
                     </label>
                     <label className="flex items-center cursor-pointer">
-                      <input 
-                        type="checkbox" 
+                      <input
+                        type="checkbox"
                         checked={filters.formats.includes('epub')}
                         onChange={(e) => {
                           const newFormats = e.target.checked
@@ -416,10 +334,10 @@ export default function EBooksPage() {
                     </label>
                   </div>
                 </div>
-                
+
                 {/* Filter Actions */}
                 <div className="pt-4 border-t border-gray-200">
-                  <button 
+                  <button
                     onClick={handleClearFilters}
                     className="w-full text-center text-gray-600 hover:text-green-600 text-sm font-medium transition-colors"
                   >
@@ -428,7 +346,7 @@ export default function EBooksPage() {
                 </div>
               </div>
             </div>
-            
+
             {/* E-Books Content */}
             <div className="w-full lg:w-3/4">
               {/* Results Summary and Sort */}
@@ -444,8 +362,8 @@ export default function EBooksPage() {
                   <label htmlFor="sort" className="text-sm text-gray-600 font-medium">
                     Sortează după:
                   </label>
-                  <select 
-                    id="sort" 
+                  <select
+                    id="sort"
                     value={filters.sort}
                     onChange={(e) => updateFilters({ sort: e.target.value as FilterState['sort'] })}
                     className="border border-gray-300 rounded-lg px-4 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all"
@@ -458,7 +376,7 @@ export default function EBooksPage() {
                   </select>
                 </div>
               </div>
-              
+
               {/* E-Books Grid */}
               {currentEbooks.length > 0 ? (
                 <>
@@ -468,9 +386,9 @@ export default function EBooksPage() {
                         <Link href={`/ebooks/${ebook.slug}`}>
                           <div className="relative aspect-square overflow-hidden bg-gradient-to-br from-green-100 to-green-200">
                             {ebook.coverImage ? (
-                              <Image 
-                                src={ebook.coverImage} 
-                                alt={ebook.title} 
+                              <Image
+                                src={ebook.coverImage}
+                                alt={ebook.title}
                                 width={400}
                                 height={400}
                                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
@@ -482,7 +400,7 @@ export default function EBooksPage() {
                                 </svg>
                               </div>
                             )}
-                            
+
                             {ebook.isFree ? (
                               <span className="absolute top-3 right-3 bg-green-600 text-white px-3 py-1 text-xs font-bold rounded-full shadow-lg">
                                 Gratuit
@@ -493,7 +411,7 @@ export default function EBooksPage() {
                               </span>
                             )}
                           </div>
-                          
+
                           <div className="p-6">
                             <div className="flex items-center justify-between mb-3">
                               <span className="inline-block bg-green-100 text-green-800 text-xs px-3 py-1 rounded-full font-medium">
@@ -503,24 +421,24 @@ export default function EBooksPage() {
                                 {ebook.format.toUpperCase()}
                               </span>
                             </div>
-                            
+
                             <h3 className="font-bold text-gray-800 mb-2 text-lg group-hover:text-green-600 transition-colors line-clamp-2">
                               {ebook.title}
                             </h3>
-                            
+
                             <p className="text-gray-600 text-sm mb-4 line-clamp-2 leading-relaxed">
                               {ebook.shortDescription}
                             </p>
-                            
+
                             <div className="flex items-center justify-between text-xs text-gray-500">
                               <span>{ebook.pageCount} pagini</span>
                               <span>{formatDate(ebook.publishedDate)}</span>
                             </div>
                           </div>
                         </Link>
-                        
+
                         <div className="px-6 pb-6">
-                          <Link 
+                          <Link
                             href={`/ebooks/${ebook.slug}`}
                             className="block w-full bg-green-600 text-white text-center py-3 rounded-lg hover:bg-green-700 transition-colors font-semibold"
                           >
@@ -530,7 +448,7 @@ export default function EBooksPage() {
                       </div>
                     ))}
                   </div>
-                  
+
                   {/* Pagination */}
                   {totalPages > 1 && (
                     <div className="flex justify-center">
@@ -538,17 +456,16 @@ export default function EBooksPage() {
                         <button
                           onClick={() => handlePageChange(currentPage - 1)}
                           disabled={currentPage === 1}
-                          className={`px-3 py-2 rounded-lg ${
-                            currentPage === 1
-                              ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
-                              : 'bg-white text-gray-700 hover:bg-green-50 hover:text-green-600 border border-gray-300'
-                          } transition-colors`}
+                          className={`px-3 py-2 rounded-lg ${currentPage === 1
+                            ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                            : 'bg-white text-gray-700 hover:bg-green-50 hover:text-green-600 border border-gray-300'
+                            } transition-colors`}
                         >
                           <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
                           </svg>
                         </button>
-                        
+
                         {Array.from({ length: totalPages }, (_, i) => i + 1)
                           .filter(page => page === 1 || page === totalPages || Math.abs(page - currentPage) <= 2)
                           .map((page, index, array) => (
@@ -558,25 +475,23 @@ export default function EBooksPage() {
                               )}
                               <button
                                 onClick={() => handlePageChange(page)}
-                                className={`px-4 py-2 rounded-lg font-medium ${
-                                  currentPage === page
-                                    ? 'bg-green-600 text-white'
-                                    : 'bg-white text-gray-700 hover:bg-green-50 hover:text-green-600 border border-gray-300'
-                                } transition-colors`}
+                                className={`px-4 py-2 rounded-lg font-medium ${currentPage === page
+                                  ? 'bg-green-600 text-white'
+                                  : 'bg-white text-gray-700 hover:bg-green-50 hover:text-green-600 border border-gray-300'
+                                  } transition-colors`}
                               >
                                 {page}
                               </button>
                             </div>
                           ))}
-                        
+
                         <button
                           onClick={() => handlePageChange(currentPage + 1)}
                           disabled={currentPage === totalPages}
-                          className={`px-3 py-2 rounded-lg ${
-                            currentPage === totalPages
-                              ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
-                              : 'bg-white text-gray-700 hover:bg-green-50 hover:text-green-600 border border-gray-300'
-                          } transition-colors`}
+                          className={`px-3 py-2 rounded-lg ${currentPage === totalPages
+                            ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                            : 'bg-white text-gray-700 hover:bg-green-50 hover:text-green-600 border border-gray-300'
+                            } transition-colors`}
                         >
                           <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
@@ -596,7 +511,7 @@ export default function EBooksPage() {
                   <p className="text-gray-500 mb-6 max-w-md mx-auto">
                     Încercați să ajustați criteriile de căutare sau filtrare pentru a găsi ceea ce căutați.
                   </p>
-                  <button 
+                  <button
                     onClick={handleClearFilters}
                     className="inline-flex items-center px-6 py-3 border border-transparent rounded-lg shadow-sm text-sm font-semibold text-white bg-green-600 hover:bg-green-700 transition-colors"
                   >
@@ -617,24 +532,24 @@ export default function EBooksPage() {
             <p className="text-gray-600 mb-8 text-lg max-w-2xl mx-auto leading-relaxed">
               Fii la curent cu cele mai noi e-books, resurse și sfaturi nutriționale direct în inbox-ul tău.
             </p>
-            
+
             <form onSubmit={handleSubscription} className="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto">
-              <input 
-                type="email" 
+              <input
+                type="email"
                 value={emailSubscription}
                 onChange={(e) => setEmailSubscription(e.target.value)}
-                placeholder="Adresa ta de email" 
+                placeholder="Adresa ta de email"
                 className="px-6 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-green-500 flex-grow transition-all"
                 required
               />
-              <button 
-                type="submit" 
+              <button
+                type="submit"
                 className="bg-green-600 text-white px-8 py-3 rounded-xl hover:bg-green-700 hover:shadow-lg transform hover:scale-105 transition-all duration-300 font-semibold whitespace-nowrap"
               >
                 Abonează-te
               </button>
             </form>
-            
+
             <p className="text-xs text-gray-500 mt-4">
               Ne respectăm abonații. Dezabonează-te oricând cu un singur click.
             </p>

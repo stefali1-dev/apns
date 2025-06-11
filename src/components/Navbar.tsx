@@ -142,10 +142,10 @@ export default function Navbar() {
                   left-1/2 -translate-x-1/2" // Added centering classes here
                 >
                   <Link
-                    href="/volunteers"
+                    href="/team"
                     className="px-12 block py-2 text-base text-gray-700 hover:bg-green-50 hover:text-green-700 transition-colors"
                   >
-                    Voluntari
+                    Echipă
                   </Link>
                   <Link
                     href="#"
@@ -216,7 +216,7 @@ export default function Navbar() {
           {/* Regular menu items */}
           <li className="px-12">
             <Link
-              href="/ebook"
+              href="/ebooks"
               className="text-lg transition-colors duration-200 hover:text-green-700 hover:underline underline-offset-4"
             >
               eBooks
@@ -311,7 +311,7 @@ export default function Navbar() {
               </button>
               {mobileDespreNoiOpen && (
                 <div className="pl-4 space-y-1">
-                  <Link href="/volunteers" className="block px-3 py-2 text-gray-600 hover:bg-green-50 hover:text-green-700 rounded-lg transition-colors">Voluntari</Link>
+                  <Link href="/team" className="block px-3 py-2 text-gray-600 hover:bg-green-50 hover:text-green-700 rounded-lg transition-colors">Voluntari</Link>
                   <Link href="#" className="block px-3 py-2 text-gray-600 hover:bg-green-50 hover:text-green-700 rounded-lg transition-colors">Proiecte</Link>
                   <Link href="#" className="block px-3 py-2 text-gray-600 hover:bg-green-50 hover:text-green-700 rounded-lg transition-colors">Statut</Link>
                 </div>
@@ -344,7 +344,7 @@ export default function Navbar() {
             </div>
 
             {/* Other menu items */}
-            <Link href="/ebook" className="block px-3 py-2 text-gray-700 font-semibold hover:bg-gray-50 hover:text-green-700 rounded-lg transition-colors">
+            <Link href="/ebooks" className="block px-3 py-2 text-gray-700 font-semibold hover:bg-gray-50 hover:text-green-700 rounded-lg transition-colors">
               eBooks
             </Link>
             <Link href="/blog" className="block px-3 py-2 text-gray-700 font-semibold hover:bg-gray-50 hover:text-green-700 rounded-lg transition-colors">

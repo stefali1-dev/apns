@@ -34,7 +34,7 @@ export default function DiabetesArticle() {
                 <meta property="og:description" content="Ghid complet despre diabetul zaharat: prevenție prin nutriție, managementul alimentației pentru diabetici, alimente recomandate și sfaturi practice." />
                 <meta property="og:image" content="/images/diabetes1.png" />
                 <meta property="og:type" content="article" />
-                <link rel="canonical" href="/articles/diabetes" />
+                <link rel="canonical" href="/article/diabetes" />
             </Head>
 
             <div className="">
