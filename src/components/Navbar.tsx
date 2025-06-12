@@ -43,7 +43,7 @@ export default function Navbar() {
             <input
               type="search"
               name="q"
-              placeholder="Search"
+              placeholder="Caută nutriționiști..."
               className="border border-gray-300 rounded-lg pl-4 pr-10 py-1 focus:outline-none
                       focus:ring-2 focus:ring-green-600 focus:border-transparent transition-all duration-200"
             />
