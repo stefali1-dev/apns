@@ -14,7 +14,7 @@ const ContactPage: React.FC<ContactPageProps> = ({
     tel_1 = '0727 590 656',
     tel_2 = '0311 234 567',
     contact_email = 'contact@appns.ro',
-    address_street = 'Strada Vasile Alexandri nr. 4',
+    address_street = '',
     address_city = 'Iași, 700333'
 }) => {
     const [formData, setFormData] = useState({
@@ -196,18 +196,6 @@ const ContactPage: React.FC<ContactPageProps> = ({
                                         </div>
                                     </div>
 
-                                    <div className="flex items-start">
-                                        <div className="bg-green-100 p-3 rounded-full mr-4 flex-shrink-0">
-                                            <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                            </svg>
-                                        </div>
-                                        <div>
-                                            <h3 className="font-semibold text-green-800 mb-1">Program</h3>
-                                            <p className="mb-1">Luni - Vineri: 09:00 - 17:00</p>
-                                            <p>Sâmbătă: 10:00 - 14:00</p>
-                                        </div>
-                                    </div>
                                 </div>
 
                                 {/* Address and social */}

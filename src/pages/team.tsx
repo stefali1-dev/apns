@@ -135,7 +135,7 @@ const TeamPage: React.FC = () => {
                 }
             `}</style>
 
-            <div className="bg-green-50 min-h-screen">
+            <div className="bg-white min-h-screen">
                 {/* Hero Section */}
                 <section className="gradient-bg relative overflow-hidden">
                     <div className="absolute inset-0">
@@ -205,7 +205,7 @@ const TeamPage: React.FC = () => {
                                             <h3 className="text-xl font-bold text-green-800 mb-2">
                                                 {member.name}
                                             </h3>
-                                            <p className="text-green-600 font-medium mb-4">
+                                            <p className="text-gray-700 font-medium mb-4">
                                                 {member.position}
                                             </p>
                                             <button className="w-full bg-green-600 text-white py-2 px-4 rounded-lg hover:bg-green-700 transition duration-300 font-medium">

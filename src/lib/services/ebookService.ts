@@ -109,32 +109,6 @@ export const mockEbooks: EBook[] = [
           </ul>
         </div>
         
-        <div class="bg-blue-50 border border-blue-200 rounded-lg p-6">
-          <h4 class="text-lg font-semibold text-blue-800 mb-3">📚 Conținut practic inclus:</h4>
-          <div class="grid md:grid-cols-2 gap-4 text-sm text-gray-700">
-            <div>
-              <h5 class="font-medium text-blue-700 mb-2">Ghiduri practice:</h5>
-              <ul class="space-y-1">
-                <li>• Exemple de meniuri zilnice</li>
-                <li>• Liste de cumpărături optimizate</li>
-                <li>• Planificator săptămânal de mese</li>
-              </ul>
-            </div>
-            <div>
-              <h5 class="font-medium text-blue-700 mb-2">Sfaturi culinare:</h5>
-              <ul class="space-y-1">
-                <li>• Tehnici de preparare sănătoasă</li>
-                <li>• Conservarea valorii nutriționale</li>
-                <li>• Substituții alimentare inteligente</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        
-        <blockquote class="border-l-4 border-gray-300 pl-6 italic text-gray-600 bg-gray-50 p-4 rounded-r-lg">
-          "Sănătatea nu este doar absența bolii, ci o stare de bine fizic, mental și social complet." 
-          <footer class="text-sm font-medium text-gray-500 mt-2">— Organizația Mondială a Sănătății</footer>
-        </blockquote>
         
         <p class="text-gray-700 leading-relaxed">
           <strong class="text-green-700">Ideal pentru:</strong> începători care doresc să își îmbunătățească alimentația, 
@@ -142,11 +116,6 @@ export const mockEbooks: EBook[] = [
           progresiv, de la concepte de bază la aplicații practice avansate.
         </p>
         
-        <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
-          <p class="text-sm text-yellow-800">
-            <strong>💡 Bonus:</strong> Acces la comunitatea online APNS pentru întrebări și suport continuu în parcursul dvs. către o alimentație mai sănătoasă.
-          </p>
-        </div>
       </div>
     `,
     toc: `
