@@ -6,7 +6,7 @@ export default function GoutArticle(){
         <ArticleLayout>
   <header className="article-header">
     <h1 className="text-3xl font-bold text-green-800 mb-4">Guta: Înțelegere și Control prin Alimentație Corectă</h1>
-    <div className="article-meta flex items-center text-sm text-green-700 mb-6">
+    <div className="article-meta flex items-center text-sm text-[#09a252] mb-6">
       <span className="mr-4"><i className="fas fa-calendar-alt mr-1"></i> 7 Iunie 2025</span>
       <span className="mr-4"><i className="fas fa-user mr-1"></i> Palade Andra Gabriela</span>
       <span><i className="fas fa-tag mr-1"></i> Gută, Nutriție, Acid Uric</span>
@@ -80,7 +80,7 @@ export default function GoutArticle(){
       <h2 className="text-2xl font-bold text-green-800 mb-4">Recomandări generale pentru stilul de viață</h2>
       
       <div className="mb-6">
-        <h3 className="text-xl font-semibold text-green-700 mb-3">1. Activitate fizică</h3>
+        <h3 className="text-xl font-semibold text-[#09a252] mb-3">1. Activitate fizică</h3>
         <ul className="list-disc ml-5 space-y-2 text-gray-700">
           <li>Se recomandă cel puțin 150 de minute pe săptămână de exercițiu aerobic moderat</li>
           <li>Activitatea fizică regulată ajută la scăderea acidului uric din sânge și reduce inflamația</li>
@@ -90,7 +90,7 @@ export default function GoutArticle(){
       </div>
       
       <div className="mb-6">
-        <h3 className="text-xl font-semibold text-green-700 mb-3">2. Importanța hidratării</h3>
+        <h3 className="text-xl font-semibold text-[#09a252] mb-3">2. Importanța hidratării</h3>
         <ul className="list-disc ml-5 space-y-2 text-gray-700">
           <li>Consumați multe lichide, apă - cel puțin ~8 pahare pe zi (≈2 litri)</li>
           <li>Hidratarea adecvată ajută la eliminarea acidului uric prin urină</li>
@@ -99,7 +99,7 @@ export default function GoutArticle(){
       </div>
       
       <div className="mb-6">
-        <h3 className="text-xl font-semibold text-green-700 mb-3">3. Impactul stresului și gestionarea acestuia</h3>
+        <h3 className="text-xl font-semibold text-[#09a252] mb-3">3. Impactul stresului și gestionarea acestuia</h3>
         <ul className="list-disc ml-5 space-y-2 text-gray-700">
           <li>Stresul fizic sau emoțional intens poate agrava guta indirect</li>
           <li>Stresul poate conduce la obiceiuri nesănătoase</li>
@@ -109,7 +109,7 @@ export default function GoutArticle(){
       </div>
       
       <div className="mb-6">
-        <h3 className="text-xl font-semibold text-green-700 mb-3">4. Monitorizarea greutății și a glicemiei</h3>
+        <h3 className="text-xl font-semibold text-[#09a252] mb-3">4. Monitorizarea greutății și a glicemiei</h3>
         <ul className="list-disc ml-5 space-y-2 text-gray-700">
           <li>Mențineți evidența greutății corporale</li>
           <li>O reducere de 5-10% a greutății poate îmbunătăți semnificativ controlul glicemic</li>
@@ -118,7 +118,7 @@ export default function GoutArticle(){
       </div>
       
       <div className="mb-6">
-        <h3 className="text-xl font-semibold text-green-700 mb-3">5. Cunoașteți-vă nivelul acidului uric - și „mergeți pe șase"</h3>
+        <h3 className="text-xl font-semibold text-[#09a252] mb-3">5. Cunoașteți-vă nivelul acidului uric - și „mergeți pe șase"</h3>
         <ul className="list-disc ml-5 space-y-2 text-gray-700">
           <li>Cunoașterea nivelului de acid uric este la fel de importantă ca și cunoașterea celorlalte valori de referință sănătoase</li>
           <li>Un <strong>nivel sănătos</strong> al <strong>acidului uric</strong> de <strong>6,0 mg/dL sau mai mic</strong></li>
@@ -132,7 +132,7 @@ export default function GoutArticle(){
       <p className="mb-4">O dietă echilibrată este esențială pentru controlul gutei. Se va axa pe alimente cu conținut scăzut de purine, bogate în nutrienți.</p>
       
       <div className="mb-6">
-        <h3 className="text-xl font-semibold text-green-700 mb-3">Regula semaforului</h3>
+        <h3 className="text-xl font-semibold text-[#09a252] mb-3">Regula semaforului</h3>
         <p className="mb-4">Regula semaforului împarte alimentele în <strong>trei categorii</strong>, asemănător culorilor unui semafor:</p>
         
         <div className="grid md:grid-cols-3 gap-4 mb-6">
@@ -145,17 +145,17 @@ export default function GoutArticle(){
             <p className="text-gray-700 text-sm">Pot fi consumate în cantități limitate și ocazional</p>
           </div>
           <div className="bg-white p-4 rounded-lg shadow-sm border border-green-100">
-            <h3 className="text-lg font-semibold text-green-600 mb-2">Alimente permise</h3>
+            <h3 className="text-lg font-semibold text-[#09a252] mb-2">Alimente permise</h3>
             <p className="text-gray-700 text-sm">Sigure și recomandate, nu cresc riscul de apariție a crizelor</p>
           </div>
         </div>
       </div>
       
       <div className="mb-8">
-        <h3 className="text-xl font-semibold text-green-700 mb-3">Alimente permise</h3>
+        <h3 className="text-xl font-semibold text-[#09a252] mb-3">Alimente permise</h3>
         <div className="grid md:grid-cols-2 gap-6">
           <div>
-            <h4 className="font-semibold text-green-600 mb-2">Proteine slabe</h4>
+            <h4 className="font-semibold text-[#09a252] mb-2">Proteine slabe</h4>
             <ul className="list-disc ml-5 space-y-1 text-gray-700">
               <li>Carne albă slabă (pui, curcan) fără piele</li>
               <li>Pește cu conținut redus de purine (somon, cod, biban etc.)</li>
@@ -164,7 +164,7 @@ export default function GoutArticle(){
             </ul>
           </div>
           <div>
-            <h4 className="font-semibold text-green-600 mb-2">Alte alimente</h4>
+            <h4 className="font-semibold text-[#09a252] mb-2">Alte alimente</h4>
             <ul className="list-disc ml-5 space-y-1 text-gray-700">
               <li>Legume și leguminoase (fasole, linte, năut)</li>
               <li>Fructe proaspete (cireșe, fructe de pădure, mere)</li>
@@ -220,12 +220,12 @@ export default function GoutArticle(){
     <div className="references">
       <h2 className="text-xl font-bold text-green-800 mb-4">Surse și referințe</h2>
       <ul className="list-disc ml-6 space-y-2 text-gray-700">
-        <li>JHONS HOPKINS MEDICINE - <a href="https://www.hopkinsmedicine.org/" className="text-green-600 hover:underline">www.hopkinsmedicine.org</a></li>
-        <li>Cleveland Clinic - <a href="https://my.clevelandclinic.org" className="text-green-600 hover:underline">my.clevelandclinic.org</a></li>
-        <li>Guts UK - <a href="https://gutscharity.org.uk/" className="text-green-600 hover:underline">gutscharity.org.uk</a></li>
-        <li>American Gastroenterological Association - <a href="https://gastro.org/" className="text-green-600 hover:underline">gastro.org</a></li>
-        <li>World Gastroenterology Organisation - <a href="https://www.worldgastroenterology.org/" className="text-green-600 hover:underline">www.worldgastroenterology.org</a></li>
-        <li>IFFGD - International Foundation for Gastrointestinal Disorders - <a href="https://iffgd.org/" className="text-green-600 hover:underline">iffgd.org</a></li>
+        <li>JHONS HOPKINS MEDICINE - <a href="https://www.hopkinsmedicine.org/" className="text-[#09a252] hover:underline">www.hopkinsmedicine.org</a></li>
+        <li>Cleveland Clinic - <a href="https://my.clevelandclinic.org" className="text-[#09a252] hover:underline">my.clevelandclinic.org</a></li>
+        <li>Guts UK - <a href="https://gutscharity.org.uk/" className="text-[#09a252] hover:underline">gutscharity.org.uk</a></li>
+        <li>American Gastroenterological Association - <a href="https://gastro.org/" className="text-[#09a252] hover:underline">gastro.org</a></li>
+        <li>World Gastroenterology Organisation - <a href="https://www.worldgastroenterology.org/" className="text-[#09a252] hover:underline">www.worldgastroenterology.org</a></li>
+        <li>IFFGD - International Foundation for Gastrointestinal Disorders - <a href="https://iffgd.org/" className="text-[#09a252] hover:underline">iffgd.org</a></li>
       </ul>
     </div>
   </div>
@@ -233,18 +233,18 @@ export default function GoutArticle(){
   <div className="article-footer mt-8 pt-6 border-t border-green-200">
     <div className="flex flex-wrap justify-between items-center">
       <div className="tags mb-4 md:mb-0">
-        <span className="font-semibold text-green-700">Subiecte:</span>
+        <span className="font-semibold text-[#09a252]">Subiecte:</span>
         <a href="#" className="inline-block bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm mr-2 hover:bg-green-200">Gută</a>
         <a href="#" className="inline-block bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm mr-2 hover:bg-green-200">Acid Uric</a>
         <a href="#" className="inline-block bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm mr-2 hover:bg-green-200">Nutriție</a>
         <a href="#" className="inline-block bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm hover:bg-green-200">Artrită</a>
       </div>
       <div className="share">
-        <span className="font-semibold text-green-700 mr-2">Distribuie:</span>
-        <a href="#" className="inline-block text-green-700 hover:text-green-900 mr-3"><i className="fab fa-facebook-f"></i></a>
-        <a href="#" className="inline-block text-green-700 hover:text-green-900 mr-3"><i className="fab fa-twitter"></i></a>
-        <a href="#" className="inline-block text-green-700 hover:text-green-900 mr-3"><i className="fab fa-linkedin-in"></i></a>
-        <a href="#" className="inline-block text-green-700 hover:text-green-900"><i className="fas fa-envelope"></i></a>
+        <span className="font-semibold text-[#09a252] mr-2">Distribuie:</span>
+        <a href="#" className="inline-block text-[#09a252] hover:text-green-900 mr-3"><i className="fab fa-facebook-f"></i></a>
+        <a href="#" className="inline-block text-[#09a252] hover:text-green-900 mr-3"><i className="fab fa-twitter"></i></a>
+        <a href="#" className="inline-block text-[#09a252] hover:text-green-900 mr-3"><i className="fab fa-linkedin-in"></i></a>
+        <a href="#" className="inline-block text-[#09a252] hover:text-green-900"><i className="fas fa-envelope"></i></a>
       </div>
     </div>
   </div>

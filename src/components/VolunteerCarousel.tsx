@@ -57,20 +57,15 @@ const VolunteerCarousel: React.FC = () => {
 
   return (
     <>
-      <section className="bg-green-50 py-16">
+      <section className="bg-white py-16">
         <div className="max-w-screen-xl mx-auto px-6">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-green-800 mb-4">
+          <div className="mb-12">
+                        <h2 className="text-3xl font-bold text-gray-900 mb-8">
               Echipa Noastră de Specialiști
             </h2>
-            <p className="text-lg text-green-700 max-w-2xl mx-auto">
+            <p className="text-lg text-gray-600 mb-10">
               Întâlnește profesioniștii dedicați care fac posibilă misiunea asociației noastre
             </p>
-            <div className="inline-flex items-center space-x-4 mt-6">
-              <span className="h-px w-12 bg-green-300"></span>
-              <span className="text-green-600 font-medium">Oamenii din spatele schimbării</span>
-              <span className="h-px w-12 bg-green-300"></span>
-            </div>
           </div>
 
           {volunteersLoading ? (
@@ -119,12 +114,12 @@ const VolunteerCarousel: React.FC = () => {
                   <button
                     onClick={prevVolunteer}
                     className={`absolute top-1/2 -left-6 transform -translate-y-1/2 bg-white p-3 rounded-full shadow-lg hover:shadow-xl transition-all z-20 ${
-                      currentVolunteerIndex === 0 ? 'opacity-50 cursor-not-allowed' : 'hover:bg-green-50'
+                      currentVolunteerIndex === 0 ? 'opacity-50 cursor-not-allowed' : 'hover:bg-white'
                     }`}
                     disabled={currentVolunteerIndex === 0}
                     style={{ marginTop: '-60px' }}
                   >
-                    <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-6 h-6 text-[#09a252]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
                     </svg>
                   </button>
@@ -132,12 +127,12 @@ const VolunteerCarousel: React.FC = () => {
                   <button
                     onClick={nextVolunteer}
                     className={`absolute top-1/2 -right-6 transform -translate-y-1/2 bg-white p-3 rounded-full shadow-lg hover:shadow-xl transition-all z-20 ${
-                      currentVolunteerIndex >= maxVolunteerIndex ? 'opacity-50 cursor-not-allowed' : 'hover:bg-green-50'
+                      currentVolunteerIndex >= maxVolunteerIndex ? 'opacity-50 cursor-not-allowed' : 'hover:bg-white'
                     }`}
                     disabled={currentVolunteerIndex >= maxVolunteerIndex}
                     style={{ marginTop: '-60px' }}
                   >
-                    <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-6 h-6 text-[#09a252]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
                     </svg>
                   </button>
@@ -157,7 +152,7 @@ const VolunteerCarousel: React.FC = () => {
                     onClick={() => setCurrentVolunteerIndex(index)}
                     className={`w-3 h-3 rounded-full transition-all duration-300 ${
                       index === currentVolunteerIndex 
-                        ? 'bg-green-600 w-6' 
+                        ? 'bg-[#09a252] w-6' 
                         : 'bg-green-200 hover:bg-green-300'
                     }`}
                   />
@@ -169,7 +164,7 @@ const VolunteerCarousel: React.FC = () => {
             <div className="text-center mt-12">
               <Link
                 href="/team"
-                className="inline-flex items-center bg-green-600 text-white font-semibold px-8 py-3 rounded-lg hover:bg-green-700 transition-all duration-300 shadow-md hover:shadow-lg"
+                className="inline-flex items-center bg-[#09a252] text-white font-semibold px-8 py-3 rounded-lg hover:bg-[#09a252] transition-all duration-300 shadow-md hover:shadow-lg"
               >
                 Vezi toată echipa
                 <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">

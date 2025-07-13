@@ -104,13 +104,13 @@ const VolunteerModal: React.FC<VolunteerModalProps> = ({ volunteer, isOpen, onCl
               <h2 className="text-3xl font-bold text-green-800 mb-2">
                 {volunteer.name}
               </h2>
-              <p className="text-xl text-green-600 font-medium mb-6">
+              <p className="text-xl text-[#09a252] font-medium mb-6">
                 {volunteer.position}
               </p>
 
               <div className="space-y-6">
                 <div>
-                  <h3 className="text-lg font-semibold text-green-700 mb-2">Despre</h3>
+                  <h3 className="text-lg font-semibold text-[#09a252] mb-2">Despre</h3>
                   <p className="text-gray-700 leading-relaxed">
                     {volunteer.description}
                   </p>
@@ -118,7 +118,7 @@ const VolunteerModal: React.FC<VolunteerModalProps> = ({ volunteer, isOpen, onCl
 
                 {volunteer.specializations && volunteer.specializations.length > 0 && (
                   <div>
-                    <h3 className="text-lg font-semibold text-green-700 mb-3">Specializări</h3>
+                    <h3 className="text-lg font-semibold text-[#09a252] mb-3">Specializări</h3>
                     <div className="flex flex-wrap gap-2">
                       {volunteer.specializations.map((spec, index) => (
                         <span
@@ -134,14 +134,14 @@ const VolunteerModal: React.FC<VolunteerModalProps> = ({ volunteer, isOpen, onCl
 
                 {volunteer.education && (
                   <div>
-                    <h3 className="text-lg font-semibold text-green-700 mb-2">Educație</h3>
+                    <h3 className="text-lg font-semibold text-[#09a252] mb-2">Educație</h3>
                     <p className="text-gray-700">{volunteer.education}</p>
                   </div>
                 )}
 
                 {volunteer.experience && (
                   <div>
-                    <h3 className="text-lg font-semibold text-green-700 mb-2">Experiență</h3>
+                    <h3 className="text-lg font-semibold text-[#09a252] mb-2">Experiență</h3>
                     <p className="text-gray-700">{volunteer.experience}</p>
                   </div>
                 )}

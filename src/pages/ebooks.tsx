@@ -203,7 +203,7 @@ export default function EBooksPage() {
         {/* Banner Section */}
         <div className="bg-white py-12 border-b border-green-100">
           <div className="max-w-7xl mx-auto px-4 text-center">
-            <h1 className="text-4xl font-extrabold text-green-700 mb-4">E-Books & Resurse</h1>
+            <h1 className="text-4xl font-extrabold text-[#09a252] mb-4">E-Books & Resurse</h1>
             <p className="text-gray-600 text-lg">
               Informații și ghiduri de la experți pentru a vă ajuta să gestionați alimentația și să trăiți o viață mai sănătoasă.
             </p>
@@ -255,9 +255,9 @@ export default function EBooksPage() {
                               : filters.categories.filter(id => id !== category.id);
                             updateFilters({ categories: newCategories });
                           }}
-                          className="h-4 w-4 text-green-600 focus:ring-green-500 border-gray-300 rounded"
+                          className="h-4 w-4 text-[#09a252] focus:ring-green-500 border-gray-300 rounded"
                         />
-                        <span className="ml-3 text-sm text-gray-700 hover:text-green-600 transition-colors">
+                        <span className="ml-3 text-sm text-gray-700 hover:text-[#09a252] transition-colors">
                           {category.name}
                         </span>
                       </label>
@@ -279,9 +279,9 @@ export default function EBooksPage() {
                             : filters.priceTypes.filter(type => type !== 'free');
                           updateFilters({ priceTypes: newPriceTypes });
                         }}
-                        className="h-4 w-4 text-green-600 focus:ring-green-500 border-gray-300 rounded"
+                        className="h-4 w-4 text-[#09a252] focus:ring-green-500 border-gray-300 rounded"
                       />
-                      <span className="ml-3 text-sm text-gray-700 hover:text-green-600 transition-colors">Gratuit</span>
+                      <span className="ml-3 text-sm text-gray-700 hover:text-[#09a252] transition-colors">Gratuit</span>
                     </label>
                     <label className="flex items-center cursor-pointer">
                       <input
@@ -293,9 +293,9 @@ export default function EBooksPage() {
                             : filters.priceTypes.filter(type => type !== 'paid');
                           updateFilters({ priceTypes: newPriceTypes });
                         }}
-                        className="h-4 w-4 text-green-600 focus:ring-green-500 border-gray-300 rounded"
+                        className="h-4 w-4 text-[#09a252] focus:ring-green-500 border-gray-300 rounded"
                       />
-                      <span className="ml-3 text-sm text-gray-700 hover:text-green-600 transition-colors">Cu plată</span>
+                      <span className="ml-3 text-sm text-gray-700 hover:text-[#09a252] transition-colors">Cu plată</span>
                     </label>
                   </div>
                 </div>
@@ -314,9 +314,9 @@ export default function EBooksPage() {
                             : filters.formats.filter(format => format !== 'pdf');
                           updateFilters({ formats: newFormats });
                         }}
-                        className="h-4 w-4 text-green-600 focus:ring-green-500 border-gray-300 rounded"
+                        className="h-4 w-4 text-[#09a252] focus:ring-green-500 border-gray-300 rounded"
                       />
-                      <span className="ml-3 text-sm text-gray-700 hover:text-green-600 transition-colors">PDF</span>
+                      <span className="ml-3 text-sm text-gray-700 hover:text-[#09a252] transition-colors">PDF</span>
                     </label>
                     <label className="flex items-center cursor-pointer">
                       <input
@@ -328,9 +328,9 @@ export default function EBooksPage() {
                             : filters.formats.filter(format => format !== 'epub');
                           updateFilters({ formats: newFormats });
                         }}
-                        className="h-4 w-4 text-green-600 focus:ring-green-500 border-gray-300 rounded"
+                        className="h-4 w-4 text-[#09a252] focus:ring-green-500 border-gray-300 rounded"
                       />
-                      <span className="ml-3 text-sm text-gray-700 hover:text-green-600 transition-colors">EPUB</span>
+                      <span className="ml-3 text-sm text-gray-700 hover:text-[#09a252] transition-colors">EPUB</span>
                     </label>
                   </div>
                 </div>
@@ -339,7 +339,7 @@ export default function EBooksPage() {
                 <div className="pt-4 border-t border-gray-200">
                   <button
                     onClick={handleClearFilters}
-                    className="w-full text-center text-gray-600 hover:text-green-600 text-sm font-medium transition-colors"
+                    className="w-full text-center text-gray-600 hover:text-[#09a252] text-sm font-medium transition-colors"
                   >
                     Șterge toate filtrele
                   </button>
@@ -395,14 +395,14 @@ export default function EBooksPage() {
                               />
                             ) : (
                               <div className="w-full h-full flex items-center justify-center">
-                                <svg className="h-20 w-20 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <svg className="h-20 w-20 text-[#09a252]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                                 </svg>
                               </div>
                             )}
 
                             {ebook.isFree ? (
-                              <span className="absolute top-3 right-3 bg-green-600 text-white px-3 py-1 text-xs font-bold rounded-full shadow-lg">
+                              <span className="absolute top-3 right-3 bg-[#09a252] text-white px-3 py-1 text-xs font-bold rounded-full shadow-lg">
                                 Gratuit
                               </span>
                             ) : (
@@ -422,7 +422,7 @@ export default function EBooksPage() {
                               </span>
                             </div>
 
-                            <h3 className="font-bold text-gray-800 mb-2 text-lg group-hover:text-green-600 transition-colors line-clamp-2">
+                            <h3 className="font-bold text-gray-800 mb-2 text-lg group-hover:text-[#09a252] transition-colors line-clamp-2">
                               {ebook.title}
                             </h3>
 
@@ -440,7 +440,7 @@ export default function EBooksPage() {
                         <div className="px-6 pb-6">
                           <Link
                             href={`/ebooks/${ebook.slug}`}
-                            className="block w-full bg-green-600 text-white text-center py-3 rounded-lg hover:bg-green-700 transition-colors font-semibold"
+                            className="block w-full bg-[#09a252] text-white text-center py-3 rounded-lg hover:bg-[#09a252] transition-colors font-semibold"
                           >
                             {ebook.isFree ? 'Descarcă Acum' : 'Vezi Detalii'}
                           </Link>
@@ -458,7 +458,7 @@ export default function EBooksPage() {
                           disabled={currentPage === 1}
                           className={`px-3 py-2 rounded-lg ${currentPage === 1
                             ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
-                            : 'bg-white text-gray-700 hover:bg-green-50 hover:text-green-600 border border-gray-300'
+                            : 'bg-white text-gray-700 hover:bg-green-50 hover:text-[#09a252] border border-gray-300'
                             } transition-colors`}
                         >
                           <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -476,8 +476,8 @@ export default function EBooksPage() {
                               <button
                                 onClick={() => handlePageChange(page)}
                                 className={`px-4 py-2 rounded-lg font-medium ${currentPage === page
-                                  ? 'bg-green-600 text-white'
-                                  : 'bg-white text-gray-700 hover:bg-green-50 hover:text-green-600 border border-gray-300'
+                                  ? 'bg-[#09a252] text-white'
+                                  : 'bg-white text-gray-700 hover:bg-green-50 hover:text-[#09a252] border border-gray-300'
                                   } transition-colors`}
                               >
                                 {page}
@@ -490,7 +490,7 @@ export default function EBooksPage() {
                           disabled={currentPage === totalPages}
                           className={`px-3 py-2 rounded-lg ${currentPage === totalPages
                             ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
-                            : 'bg-white text-gray-700 hover:bg-green-50 hover:text-green-600 border border-gray-300'
+                            : 'bg-white text-gray-700 hover:bg-green-50 hover:text-[#09a252] border border-gray-300'
                             } transition-colors`}
                         >
                           <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -513,7 +513,7 @@ export default function EBooksPage() {
                   </p>
                   <button
                     onClick={handleClearFilters}
-                    className="inline-flex items-center px-6 py-3 border border-transparent rounded-lg shadow-sm text-sm font-semibold text-white bg-green-600 hover:bg-green-700 transition-colors"
+                    className="inline-flex items-center px-6 py-3 border border-transparent rounded-lg shadow-sm text-sm font-semibold text-white bg-[#09a252] hover:bg-[#09a252] transition-colors"
                   >
                     Șterge filtrele
                   </button>
@@ -544,7 +544,7 @@ export default function EBooksPage() {
               />
               <button
                 type="submit"
-                className="bg-green-600 text-white px-8 py-3 rounded-xl hover:bg-green-700 hover:shadow-lg transform hover:scale-105 transition-all duration-300 font-semibold whitespace-nowrap"
+                className="bg-[#09a252] text-white px-8 py-3 rounded-xl hover:bg-[#09a252] hover:shadow-lg transform hover:scale-105 transition-all duration-300 font-semibold whitespace-nowrap"
               >
                 Abonează-te
               </button>

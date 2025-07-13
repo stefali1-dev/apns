@@ -29,7 +29,7 @@ export default function Navbar() {
 
           <Link
             href="/"
-            className="text-green-700 font-bold text-base sm:text-lg lg:text-xl leading-tight" // Adjusted font size and line height
+            className="text-[#09a252] font-bold text-base sm:text-lg lg:text-xl leading-tight" // Adjusted font size and line height
           >
             {/* Removed whitespace-nowrap and text-wrap for proper wrapping */}
             Asociația pentru Promovarea Nutriției Sănătoase
@@ -45,11 +45,11 @@ export default function Navbar() {
               name="q"
               placeholder="Caută nutriționiști..."
               className="border border-gray-300 rounded-lg pl-4 pr-10 py-1 focus:outline-none
-                      focus:ring-2 focus:ring-green-600 focus:border-transparent transition-all duration-200"
+                      focus:ring-2 focus:ring-[#09a252] focus:border-transparent transition-all duration-200"
             />
             <button
               type="submit"
-              className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-green-700 transition-colors"
+              className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-[#09a252] transition-colors"
             >
               <svg
                 className="h-4 w-4"
@@ -69,7 +69,7 @@ export default function Navbar() {
           {/* Donate button */}
           <Link
             href="/donate"
-            className="text-base bg-green-600 text-white font-bold py-1 px-4 rounded-lg hover:bg-green-800 transition-colors duration-200"
+            className="text-base bg-[#09a252] text-white font-bold py-1 px-4 rounded-lg hover:bg-green-800 transition-colors duration-200"
           >
             Donează
           </Link>
@@ -79,7 +79,7 @@ export default function Navbar() {
         <div className="md:hidden">
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="text-gray-500 hover:text-green-700 transition-colors"
+            className="text-gray-500 hover:text-[#09a252] transition-colors"
           >
             {mobileMenuOpen ? (
               <svg
@@ -110,7 +110,7 @@ export default function Navbar() {
           <li className="px-12">
             <Link
               href="/"
-              className="text-lg transition-colors duration-200 hover:text-green-700 hover:underline underline-offset-4"
+              className="text-lg transition-colors duration-200 hover:text-[#09a252] hover:underline underline-offset-4"
             >
               Acasă
             </Link>
@@ -123,7 +123,7 @@ export default function Navbar() {
               className="relative" // Keep this relative for proper positioning of the dropdown
             >
               <button
-                className="text-lg transition-colors duration-200 hover:text-green-700 underline-offset-4 flex items-center"
+                className="text-lg transition-colors duration-200 hover:text-[#09a252] underline-offset-4 flex items-center"
               >
                 Despre noi
                 <svg
@@ -143,19 +143,19 @@ export default function Navbar() {
                 >
                   <Link
                     href="/team"
-                    className="px-12 block py-2 text-base text-gray-700 hover:bg-green-50 hover:text-green-700 transition-colors"
+                    className="px-12 block py-2 text-base text-gray-700 hover:bg-green-50 hover:text-[#09a252] transition-colors"
                   >
                     Echipă
                   </Link>
                   <Link
                     href="#"
-                    className="px-12 block py-2 text-base text-gray-700 hover:bg-green-50 hover:text-green-700 transition-colors"
+                    className="px-12 block py-2 text-base text-gray-700 hover:bg-green-50 hover:text-[#09a252] transition-colors"
                   >
                     Proiecte
                   </Link>
                   <Link
                     href="#"
-                    className="px-12 block py-2 text-base text-gray-700 hover:bg-green-50 hover:text-green-700 transition-colors"
+                    className="px-12 block py-2 text-base text-gray-700 hover:bg-green-50 hover:text-[#09a252] transition-colors"
                   >
                     Statut
                   </Link>
@@ -172,7 +172,7 @@ export default function Navbar() {
               className="relative" // Keep this relative for proper positioning of the dropdown
             >
               <button
-                className="text-lg transition-colors duration-200 hover:text-green-700 underline-offset-4 flex items-center"
+                className="text-lg transition-colors duration-200 hover:text-[#09a252] underline-offset-4 flex items-center"
               >
                 Articole
                 <svg
@@ -192,19 +192,19 @@ export default function Navbar() {
                 >
                   <Link
                     href="/article/diabetes"
-                    className="px-12 block py-2 text-base text-gray-700 hover:bg-green-50 hover:text-green-700 transition-colors"
+                    className="px-12 block py-2 text-base text-gray-700 hover:bg-green-50 hover:text-[#09a252] transition-colors"
                   >
                     Diabet
                   </Link>
                   <Link
                     href="/article/obesity"
-                    className="px-12 block py-2 text-base text-gray-700 hover:bg-green-50 hover:text-green-700 transition-colors"
+                    className="px-12 block py-2 text-base text-gray-700 hover:bg-green-50 hover:text-[#09a252] transition-colors"
                   >
                     Obezitate
                   </Link>
                   <Link
                     href="/article/gout"
-                    className="px-12 block py-2 text-base text-gray-700 hover:bg-green-50 hover:text-green-700 transition-colors"
+                    className="px-12 block py-2 text-base text-gray-700 hover:bg-green-50 hover:text-[#09a252] transition-colors"
                   >
                     Guta
                   </Link>
@@ -217,7 +217,7 @@ export default function Navbar() {
           <li className="px-12">
             <Link
               href="/ebooks"
-              className="text-lg transition-colors duration-200 hover:text-green-700 hover:underline underline-offset-4"
+              className="text-lg transition-colors duration-200 hover:text-[#09a252] hover:underline underline-offset-4"
             >
               eBooks
             </Link>
@@ -225,7 +225,7 @@ export default function Navbar() {
           <li className="px-12">
             <Link
               href="/webinars"
-              className="text-lg transition-colors duration-200 hover:text-green-700 hover:underline underline-offset-4"
+              className="text-lg transition-colors duration-200 hover:text-[#09a252] hover:underline underline-offset-4"
             >
               Webinarii
             </Link>
@@ -233,7 +233,7 @@ export default function Navbar() {
           <li className="px-12">
             <Link
               href="/enroll"
-              className="text-lg transition-colors duration-200 hover:text-green-700 hover:underline underline-offset-4"
+              className="text-lg transition-colors duration-200 hover:text-[#09a252] hover:underline underline-offset-4"
             >
               Înscriere
             </Link>
@@ -241,7 +241,7 @@ export default function Navbar() {
           <li className="px-12">
             <Link
               href="/contact"
-              className="text-lg transition-colors duration-200 hover:text-green-700 hover:underline underline-offset-4"
+              className="text-lg transition-colors duration-200 hover:text-[#09a252] hover:underline underline-offset-4"
             >
               Contact
             </Link>
@@ -263,11 +263,11 @@ export default function Navbar() {
                   name="q"
                   placeholder="Search"
                   className="w-full border border-gray-300 rounded-full pl-4 pr-10 py-2 focus:outline-none
-                         focus:ring-2 focus:ring-green-600 focus:border-transparent transition-all"
+                         focus:ring-2 focus:ring-[#09a252] focus:border-transparent transition-all"
                 />
                 <button
                   type="submit"
-                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-green-700"
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-[#09a252]"
                 >
                   <svg
                     className="h-4 w-4"
@@ -286,7 +286,7 @@ export default function Navbar() {
 
               <Link
                 href="/donate"
-                className="block w-full text-center bg-green-600 text-white font-bold py-2 px-4 rounded-full hover:bg-green-800 transition-colors"
+                className="block w-full text-center bg-[#09a252] text-white font-bold py-2 px-4 rounded-full hover:bg-green-800 transition-colors"
               >
                 Donează
               </Link>
@@ -311,9 +311,9 @@ export default function Navbar() {
               </button>
               {mobileDespreNoiOpen && (
                 <div className="pl-4 space-y-1">
-                  <Link href="/team" className="block px-3 py-2 text-gray-600 hover:bg-green-50 hover:text-green-700 rounded-lg transition-colors">Voluntari</Link>
-                  <Link href="#" className="block px-3 py-2 text-gray-600 hover:bg-green-50 hover:text-green-700 rounded-lg transition-colors">Proiecte</Link>
-                  <Link href="#" className="block px-3 py-2 text-gray-600 hover:bg-green-50 hover:text-green-700 rounded-lg transition-colors">Statut</Link>
+                  <Link href="/team" className="block px-3 py-2 text-gray-600 hover:bg-green-50 hover:text-[#09a252] rounded-lg transition-colors">Voluntari</Link>
+                  <Link href="#" className="block px-3 py-2 text-gray-600 hover:bg-green-50 hover:text-[#09a252] rounded-lg transition-colors">Proiecte</Link>
+                  <Link href="#" className="block px-3 py-2 text-gray-600 hover:bg-green-50 hover:text-[#09a252] rounded-lg transition-colors">Statut</Link>
                 </div>
               )}
             </div>
@@ -336,24 +336,24 @@ export default function Navbar() {
               </button>
               {mobileArticoleOpen && (
                 <div className="pl-4 space-y-1">
-                  <Link href="/article/diabetes" className="block px-3 py-2 text-gray-600 hover:bg-green-50 hover:text-green-700 rounded-lg transition-colors">Diabet</Link>
-                  <Link href="/article/obesity" className="block px-3 py-2 text-gray-600 hover:bg-green-50 hover:text-green-700 rounded-lg transition-colors">Obezitate</Link>
-                  <Link href="/article/gout" className="block px-3 py-2 text-gray-600 hover:bg-green-50 hover:text-green-700 rounded-lg transition-colors">Guta</Link>
+                  <Link href="/article/diabetes" className="block px-3 py-2 text-gray-600 hover:bg-green-50 hover:text-[#09a252] rounded-lg transition-colors">Diabet</Link>
+                  <Link href="/article/obesity" className="block px-3 py-2 text-gray-600 hover:bg-green-50 hover:text-[#09a252] rounded-lg transition-colors">Obezitate</Link>
+                  <Link href="/article/gout" className="block px-3 py-2 text-gray-600 hover:bg-green-50 hover:text-[#09a252] rounded-lg transition-colors">Guta</Link>
                 </div>
               )}
             </div>
 
             {/* Other menu items */}
-            <Link href="/ebooks" className="block px-3 py-2 text-gray-700 font-semibold hover:bg-gray-50 hover:text-green-700 rounded-lg transition-colors">
+            <Link href="/ebooks" className="block px-3 py-2 text-gray-700 font-semibold hover:bg-gray-50 hover:text-[#09a252] rounded-lg transition-colors">
               eBooks
             </Link>
-            <Link href="/blog" className="block px-3 py-2 text-gray-700 font-semibold hover:bg-gray-50 hover:text-green-700 rounded-lg transition-colors">
+            <Link href="/blog" className="block px-3 py-2 text-gray-700 font-semibold hover:bg-gray-50 hover:text-[#09a252] rounded-lg transition-colors">
               Blog
             </Link>
-            <Link href="/enroll" className="block px-3 py-2 text-gray-700 font-semibold hover:bg-gray-50 hover:text-green-700 rounded-lg transition-colors">
+            <Link href="/enroll" className="block px-3 py-2 text-gray-700 font-semibold hover:bg-gray-50 hover:text-[#09a252] rounded-lg transition-colors">
               Înscriere
             </Link>
-            <Link href="/contact" className="block px-3 py-2 text-gray-700 font-semibold hover:bg-gray-50 hover:text-green-700 rounded-lg transition-colors">
+            <Link href="/contact" className="block px-3 py-2 text-gray-700 font-semibold hover:bg-gray-50 hover:text-[#09a252] rounded-lg transition-colors">
               Contact
             </Link>
           </div>

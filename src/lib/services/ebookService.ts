@@ -76,34 +76,34 @@ export const mockEbooks: EBook[] = [
     fullDescription: `
       <div class="space-y-6">
         <p class="text-lg leading-relaxed text-gray-700">
-          Acest <strong class="text-green-700">ghid complet</strong> vă oferă toate informațiile necesare pentru a adopta un stil de viață alimentar sănătos și echilibrat. Veți descoperi principiile fundamentale ale nutriției moderne, bazate pe cele mai recente cercetări științifice.
+          Acest <strong class="text-[#09a252]">ghid complet</strong> vă oferă toate informațiile necesare pentru a adopta un stil de viață alimentar sănătos și echilibrat. Veți descoperi principiile fundamentale ale nutriției moderne, bazate pe cele mai recente cercetări științifice.
         </p>
         
         <div class="bg-green-50 border-l-4 border-green-500 p-6 rounded-r-lg">
           <h4 class="text-lg font-semibold text-green-800 mb-3">🎯 Ce veți învăța din acest e-book:</h4>
           <ul class="space-y-2 text-gray-700">
             <li class="flex items-start">
-              <span class="text-green-600 mr-2 mt-1">✓</span>
+              <span class="text-[#09a252] mr-2 mt-1">✓</span>
               <span>Principiile de bază ale unei <em>alimentații echilibrate</em></span>
             </li>
             <li class="flex items-start">
-              <span class="text-green-600 mr-2 mt-1">✓</span>
+              <span class="text-[#09a252] mr-2 mt-1">✓</span>
               <span>Rolul <strong>macronutrienților și micronutrienților</strong> în organism</span>
             </li>
             <li class="flex items-start">
-              <span class="text-green-600 mr-2 mt-1">✓</span>
+              <span class="text-[#09a252] mr-2 mt-1">✓</span>
               <span>Cum să planificați mesele pentru o nutriție optimă</span>
             </li>
             <li class="flex items-start">
-              <span class="text-green-600 mr-2 mt-1">✓</span>
+              <span class="text-[#09a252] mr-2 mt-1">✓</span>
               <span>Strategii pentru menținerea unei <strong class="text-blue-600">greutăți sănătoase</strong></span>
             </li>
             <li class="flex items-start">
-              <span class="text-green-600 mr-2 mt-1">✓</span>
+              <span class="text-[#09a252] mr-2 mt-1">✓</span>
               <span>Alimente funcționale și beneficiile lor pentru sănătate</span>
             </li>
             <li class="flex items-start">
-              <span class="text-green-600 mr-2 mt-1">✓</span>
+              <span class="text-[#09a252] mr-2 mt-1">✓</span>
               <span>Cum să citiți și să interpretați <em>etichetele alimentare</em></span>
             </li>
           </ul>
@@ -111,7 +111,7 @@ export const mockEbooks: EBook[] = [
         
         
         <p class="text-gray-700 leading-relaxed">
-          <strong class="text-green-700">Ideal pentru:</strong> începători care doresc să își îmbunătățească alimentația, 
+          <strong class="text-[#09a252]">Ideal pentru:</strong> începători care doresc să își îmbunătățească alimentația, 
           dar și pentru cei care vor să își aprofundeze cunoștințele în domeniul nutriției. Ghidul este structurat 
           progresiv, de la concepte de bază la aplicații practice avansate.
         </p>

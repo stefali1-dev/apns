@@ -89,7 +89,7 @@ export default function SubscribeModal({
                   <>
                     <div className="mx-auto bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mb-4">
                       <svg
-                        className="w-8 h-8 text-green-600"
+                        className="w-8 h-8 text-[#09a252]"
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
@@ -110,7 +110,7 @@ export default function SubscribeModal({
                     </p>
                     <button
                       onClick={handleClose}
-                      className="mt-6 bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-6 rounded-lg transition"
+                      className="mt-6 bg-[#09a252] hover:bg-[#09a252] text-white font-semibold py-2 px-6 rounded-lg transition"
                     >
                       Închide
                     </button>
@@ -119,7 +119,7 @@ export default function SubscribeModal({
                   <>
                     <div className="mx-auto bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mb-4">
                       <svg
-                        className="w-8 h-8 text-green-600"
+                        className="w-8 h-8 text-[#09a252]"
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
@@ -157,7 +157,7 @@ export default function SubscribeModal({
                         className={`w-full font-semibold py-3 px-6 rounded-lg transition-all transform ${
                           loading
                             ? 'bg-green-400 cursor-not-allowed'
-                            : 'bg-green-600 hover:bg-green-700 text-white hover:scale-[1.02] active:scale-95'
+                            : 'bg-[#09a252] hover:bg-[#09a252] text-white hover:scale-[1.02] active:scale-95'
                         }`}
                       >
                         {loading ? 'Se procesează...' : 'Abonați-vă acum!'}

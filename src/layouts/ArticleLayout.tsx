@@ -15,9 +15,9 @@ export default function ArticleLayout({ children }: { children: React.ReactNode 
                     <form className="max-w-md mx-auto flex gap-4">
                         <input type="email"
                             placeholder="Adresa ta de email"
-                            className="flex-1 px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-600" />
+                            className="flex-1 px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#09a252]" />
                         <button type="submit"
-                            className="bg-green-700 text-white px-6 py-3 rounded-lg shadow hover:bg-green-800 transition-colors">
+                            className="bg-[#09a252] text-white px-6 py-3 rounded-lg shadow hover:bg-green-800 transition-colors">
                             Abonează-te
                         </button>
                     </form>

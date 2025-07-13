@@ -161,7 +161,7 @@ const TeamPage: React.FC = () => {
                         <div className="max-w-3xl mx-auto text-center">
                             <div className="inline-flex items-center space-x-4">
                                 <span className="h-px w-12 bg-green-300"></span>
-                                <span className="text-green-700 font-medium">Oamenii din spatele misiunii</span>
+                                <span className="text-[#09a252] font-medium">Oamenii din spatele misiunii</span>
                                 <span className="h-px w-12 bg-green-300"></span>
                             </div>
                         </div>
@@ -208,7 +208,7 @@ const TeamPage: React.FC = () => {
                                             <p className="text-gray-700 font-medium mb-4">
                                                 {member.position}
                                             </p>
-                                            <button className="w-full bg-green-600 text-white py-2 px-4 rounded-lg hover:bg-green-700 transition duration-300 font-medium">
+                                            <button className="w-full bg-[#09a252] text-white py-2 px-4 rounded-lg hover:bg-[#09a252] transition duration-300 font-medium">
                                                 Citește mai mult
                                             </button>
                                         </div>
@@ -218,12 +218,12 @@ const TeamPage: React.FC = () => {
                         )}
 
                         {/* Call to action */}
-                        <div className="mt-12 bg-gradient-to-r from-green-700 to-green-600 rounded-lg shadow-lg p-8 text-white text-center">
+                        <div className="mt-12 bg-gradient-to-r from-[#09a252] to-[#09a252] rounded-lg shadow-lg p-8 text-white text-center">
                             <h2 className="text-3xl font-bold mb-4">Vrei să te alături echipei?</h2>
                             <p className="text-lg mb-6 max-w-2xl mx-auto">
                                 Căutăm mereu profesioniști pasionați de nutriție și sănătate pentru a ne extinde echipa și impactul pozitiv în comunitate.
                             </p>
-                            <a href="/contact" className="bg-white text-green-700 hover:bg-green-100 font-semibold py-3 px-8 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg inline-block">
+                            <a href="/contact" className="bg-white text-[#09a252] hover:bg-green-100 font-semibold py-3 px-8 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg inline-block">
                                 Contactează-ne
                             </a>
                         </div>
@@ -256,13 +256,13 @@ const TeamPage: React.FC = () => {
                                     <h2 className="text-3xl font-bold text-green-800 mb-2">
                                         {selectedMember.name}
                                     </h2>
-                                    <p className="text-xl text-green-600 font-medium mb-6">
+                                    <p className="text-xl text-[#09a252] font-medium mb-6">
                                         {selectedMember.position}
                                     </p>
                                     
                                     <div className="space-y-6">
                                         <div>
-                                            <h3 className="text-lg font-semibold text-green-700 mb-2">Despre</h3>
+                                            <h3 className="text-lg font-semibold text-[#09a252] mb-2">Despre</h3>
                                             <p className="text-gray-700 leading-relaxed">
                                                 {selectedMember.description}
                                             </p>
@@ -270,7 +270,7 @@ const TeamPage: React.FC = () => {
                                         
                                         {selectedMember.specializations && selectedMember.specializations.length > 0 && (
                                             <div>
-                                                <h3 className="text-lg font-semibold text-green-700 mb-3">Specializări</h3>
+                                                <h3 className="text-lg font-semibold text-[#09a252] mb-3">Specializări</h3>
                                                 <div className="flex flex-wrap gap-2">
                                                     {selectedMember.specializations.map((spec, index) => (
                                                         <span
@@ -286,14 +286,14 @@ const TeamPage: React.FC = () => {
                                         
                                         {selectedMember.education && (
                                             <div>
-                                                <h3 className="text-lg font-semibold text-green-700 mb-2">Educație</h3>
+                                                <h3 className="text-lg font-semibold text-[#09a252] mb-2">Educație</h3>
                                                 <p className="text-gray-700">{selectedMember.education}</p>
                                             </div>
                                         )}
                                         
                                         {selectedMember.experience && (
                                             <div>
-                                                <h3 className="text-lg font-semibold text-green-700 mb-2">Experiență</h3>
+                                                <h3 className="text-lg font-semibold text-[#09a252] mb-2">Experiență</h3>
                                                 <p className="text-gray-700">{selectedMember.experience}</p>
                                             </div>
                                         )}

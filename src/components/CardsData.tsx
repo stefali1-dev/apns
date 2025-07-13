@@ -37,7 +37,7 @@ const DiabetesIcon = (props: SVGProps<SVGSVGElement>) => (
 
 const ObesityIcon = (props: SVGProps<SVGSVGElement>) => (
     <svg
-        className="w-20 h-20 mt-2 mb-6 text-gray-500 group-hover:text-green-600 transition-colors duration-300"
+        className="w-20 h-20 mt-2 mb-6 text-gray-500 group-hover:text-[#09a252] transition-colors duration-300"
         version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 512 512">
         <path
@@ -107,7 +107,7 @@ const ObesityIcon = (props: SVGProps<SVGSVGElement>) => (
 
 const GoutIcon = (props: SVGProps<SVGSVGElement>) => (
     <svg version="1.1"
-        className="w-20 h-20 mt-2 mb-6 text-gray-500 group-hover:text-green-600 transition-colors duration-300"
+        className="w-20 h-20 mt-2 mb-6 text-gray-500 group-hover:text-[#09a252] transition-colors duration-300"
         id="Layer_1" xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 432 432">
 

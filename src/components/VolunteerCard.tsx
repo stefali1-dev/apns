@@ -38,7 +38,7 @@ const VolunteerCard: React.FC<VolunteerCardProps> = ({ volunteer, isMobile = fal
           <p className="text-gray-900 font-medium mb-4">
             {volunteer.position}
           </p>
-          <button className="w-full bg-green-600 text-white py-2 px-4 rounded-lg hover:bg-green-700 transition duration-300 font-medium">
+          <button className="w-full bg-[#09a252] text-white py-2 px-4 rounded-lg hover:bg-[#09a252] transition duration-300 font-medium">
             Citește mai mult
           </button>
         </div>

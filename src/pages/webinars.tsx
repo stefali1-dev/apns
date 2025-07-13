@@ -151,7 +151,7 @@ const WebinarRegistrationModal = ({
             <div className="bg-white rounded-2xl max-w-md w-full max-h-[90vh] overflow-y-auto">
                 {/* Header */}
                 <div className="flex items-center justify-between p-6 border-b border-gray-200">
-                    <h2 className="text-xl font-semibold text-green-700">
+                    <h2 className="text-xl font-semibold text-[#09a252]">
                         Înscrie-te la Webinar
                     </h2>
                     <button
@@ -227,7 +227,7 @@ const WebinarRegistrationModal = ({
                                     <button
                                         type="submit"
                                         disabled={isSubmitting}
-                                        className="flex-1 px-4 py-2 bg-green-700 text-white rounded-lg hover:bg-green-800 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center justify-center"
+                                        className="flex-1 px-4 py-2 bg-[#09a252] text-white rounded-lg hover:bg-green-800 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center justify-center"
                                     >
                                         {isSubmitting ? (
                                             <>
@@ -248,11 +248,11 @@ const WebinarRegistrationModal = ({
                         /* Success State */
                         <div className="text-center py-4">
                             <div className="bg-green-100 rounded-full p-3 w-16 h-16 mx-auto mb-4 flex items-center justify-center">
-                                <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <svg className="w-8 h-8 text-[#09a252]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                                 </svg>
                             </div>
-                            <h3 className="text-lg font-medium text-green-700 mb-2">
+                            <h3 className="text-lg font-medium text-[#09a252] mb-2">
                                 Înregistrare Reușită!
                             </h3>
                             <p className="text-gray-600 text-sm">
@@ -317,7 +317,7 @@ const WebinarCard = ({
             </div>
 
             <div className="p-6">
-                <h3 className="text-xl font-semibold text-green-700 mb-2 line-clamp-2">
+                <h3 className="text-xl font-semibold text-[#09a252] mb-2 line-clamp-2">
                     {webinar.title}
                 </h3>
 
@@ -351,7 +351,7 @@ const WebinarCard = ({
                 {webinar.status === 'completed' ? (
                     <Link
                         href={webinar.registrationLink}
-                        className="inline-flex items-center px-4 py-2 bg-green-700 text-white rounded-lg hover:bg-green-800 transition-colors duration-200 font-medium text-sm"
+                        className="inline-flex items-center px-4 py-2 bg-[#09a252] text-white rounded-lg hover:bg-green-800 transition-colors duration-200 font-medium text-sm"
                     >
                         Vizionează
                         <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -361,7 +361,7 @@ const WebinarCard = ({
                 ) : (
                     <button
                         onClick={() => onRegisterClick(webinar)}
-                        className="inline-flex items-center px-4 py-2 bg-green-700 text-white rounded-lg hover:bg-green-800 transition-colors duration-200 font-medium text-sm"
+                        className="inline-flex items-center px-4 py-2 bg-[#09a252] text-white rounded-lg hover:bg-green-800 transition-colors duration-200 font-medium text-sm"
                     >
                         Înscrie-te
                         <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -378,12 +378,12 @@ const WebinarCard = ({
 const EmptyState = () => (
     <div className="col-span-full flex flex-col items-center justify-center py-16 px-4">
         <div className="bg-green-50 rounded-full p-6 mb-6">
-            <svg className="w-16 h-16 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-16 h-16 text-[#09a252]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
             </svg>
         </div>
 
-        <h3 className="text-2xl font-semibold text-green-700 mb-3">
+        <h3 className="text-2xl font-semibold text-[#09a252] mb-3">
             Aici vom posta webinarele
         </h3>
 
@@ -394,7 +394,7 @@ const EmptyState = () => (
 
         <Link
             href="/newsletter"
-            className="inline-flex items-center px-6 py-3 bg-green-700 text-white rounded-lg hover:bg-green-800 transition-colors duration-200 font-medium"
+            className="inline-flex items-center px-6 py-3 bg-[#09a252] text-white rounded-lg hover:bg-green-800 transition-colors duration-200 font-medium"
         >
             Abonează-te la Newsletter
             <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -444,7 +444,7 @@ export default function WebinarsPage() {
             <div className="bg-white py-12 border-b border-green-100">
 
                 <div className="max-w-7xl mx-auto px-4 text-center">
-                    <h1 className="text-4xl font-extrabold text-green-700 mb-4">
+                    <h1 className="text-4xl font-extrabold text-[#09a252] mb-4">
                         Webinarii & Evenimente Live
                     </h1>
                     <p className="text-gray-600 text-lg">

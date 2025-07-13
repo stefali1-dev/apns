@@ -45,30 +45,6 @@ const EnrollPage = () => {
               </div>
             </div>
           </div>
-
-          {/* Statistics */}
-          <div className="bg-green-800 py-6">
-            <div className="container mx-auto px-4">
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
-                <div className="p-4">
-                  <p className="text-3xl font-bold text-white">50+</p>
-                  <p className="text-green-200">Voluntari activi</p>
-                </div>
-                <div className="p-4">
-                  <p className="text-3xl font-bold text-white">1000+</p>
-                  <p className="text-green-200">Persoane ajutate</p>
-                </div>
-                <div className="p-4">
-                  <p className="text-3xl font-bold text-white">25+</p>
-                  <p className="text-green-200">Proiecte anuale</p>
-                </div>
-                <div className="p-4">
-                  <p className="text-3xl font-bold text-white">5</p>
-                  <p className="text-green-200">Ani de activitate</p>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
 
         {/* Transition section */}
@@ -77,7 +53,7 @@ const EnrollPage = () => {
             <div className="max-w-3xl mx-auto text-center">
               <div className="inline-flex items-center space-x-4">
                 <span className="h-px w-12 bg-green-300"></span>
-                <span className="text-green-600 font-medium">Fii parte din schimbare</span>
+                <span className="text-[#09a252] font-medium">Fii parte din schimbare</span>
                 <span className="h-px w-12 bg-green-300"></span>
               </div>
             </div>
@@ -87,7 +63,7 @@ const EnrollPage = () => {
         {/* Main content */}
         <div id="detalii" className="container mx-auto px-4 py-8">
           <div className="max-w-3xl mx-auto bg-white rounded-lg shadow-lg p-8 mb-12">
-            <h2 className="text-2xl font-bold text-green-600 mb-6">Cum te poți înscrie în asociația noastră</h2>
+            <h2 className="text-2xl font-bold text-[#09a252] mb-6">Cum te poți înscrie în asociația noastră</h2>
 
             <div className="mb-8">
               <p className="text-lg mb-4">
@@ -110,15 +86,15 @@ const EnrollPage = () => {
               <div className="bg-green-50 p-6 rounded-lg border border-green-200 hover:shadow-md transition-shadow duration-300">
                 <h3 className="text-xl font-semibold text-green-800 mb-4">Contactează-ne telefonic</h3>
                 <p className="mb-3">Ne poți suna pentru a discuta despre posibilitățile de voluntariat:</p>
-                <p className="text-xl font-bold text-green-600">{contact_phone}</p>
-                <p className="text-sm text-green-600 mt-2">Program: Luni-Vineri, 9:00-17:00</p>
+                <p className="text-xl font-bold text-[#09a252]">{contact_phone}</p>
+                <p className="text-sm text-[#09a252] mt-2">Program: Luni-Vineri, 9:00-17:00</p>
               </div>
 
               <div className="bg-green-50 p-6 rounded-lg border border-green-200 hover:shadow-md transition-shadow duration-300">
                 <h3 className="text-xl font-semibold text-green-800 mb-4">Contactează-ne prin email</h3>
                 <p className="mb-3">Trimite-ne un email cu datele tale de contact și interesul pentru voluntariat:</p>
-                <p className="text-xl font-bold text-green-600">{contact_email}</p>
-                <p className="text-sm text-green-600 mt-2">Răspundem în maxim 48 de ore</p>
+                <p className="text-xl font-bold text-[#09a252]">{contact_email}</p>
+                <p className="text-sm text-[#09a252] mt-2">Răspundem în maxim 48 de ore</p>
               </div>
             </div>
 
@@ -141,7 +117,7 @@ const EnrollPage = () => {
               <div className="grid md:grid-cols-2 gap-4">
                 <div className="flex items-start">
                   <div className="bg-green-200 p-2 rounded-full mr-3 mt-1">
-                    <svg className="w-5 h-5 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                    <svg className="w-5 h-5 text-[#09a252]" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"></path>
                     </svg>
                   </div>
@@ -149,7 +125,7 @@ const EnrollPage = () => {
                 </div>
                 <div className="flex items-start">
                   <div className="bg-green-200 p-2 rounded-full mr-3 mt-1">
-                    <svg className="w-5 h-5 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                    <svg className="w-5 h-5 text-[#09a252]" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"></path>
                     </svg>
                   </div>
@@ -157,7 +133,7 @@ const EnrollPage = () => {
                 </div>
                 <div className="flex items-start">
                   <div className="bg-green-200 p-2 rounded-full mr-3 mt-1">
-                    <svg className="w-5 h-5 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                    <svg className="w-5 h-5 text-[#09a252]" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"></path>
                     </svg>
                   </div>
@@ -165,7 +141,7 @@ const EnrollPage = () => {
                 </div>
                 <div className="flex items-start">
                   <div className="bg-green-200 p-2 rounded-full mr-3 mt-1">
-                    <svg className="w-5 h-5 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                    <svg className="w-5 h-5 text-[#09a252]" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"></path>
                     </svg>
                   </div>
@@ -174,7 +150,7 @@ const EnrollPage = () => {
               </div>
             </div>
 
-            <div className="bg-gradient-to-r from-green-600 to-green-600 text-white p-6 rounded-lg mb-6 text-center">
+            <div className="bg-gradient-to-r from-[#09a252] to-[#09a252] text-white p-6 rounded-lg mb-6 text-center">
               <h3 className="text-xl font-bold mb-3">Pregătit să faci o diferență?</h3>
               <p className="mb-4">
                 Alătură-te echipei noastre de voluntari și contribuie la educația nutrițională în comunitate!
@@ -189,19 +165,19 @@ const EnrollPage = () => {
               <h3 className="text-xl font-semibold text-green-800 mb-4">Întrebări frecvente</h3>
               <div className="space-y-4">
                 <div className="border-b border-green-200 pb-4">
-                  <h4 className="font-medium text-green-600 mb-2">Ce pregătire trebuie să am pentru a deveni voluntar?</h4>
+                  <h4 className="font-medium text-[#09a252] mb-2">Ce pregătire trebuie să am pentru a deveni voluntar?</h4>
                   <p>
                     Nu este necesară o pregătire specifică. Căutăm persoane entuziasmaste, care doresc să învețe și să contribuie la promovarea unui stil de viață sănătos.
                   </p>
                 </div>
                 <div className="border-b border-green-200 pb-4">
-                  <h4 className="font-medium text-green-600 mb-2">Câte ore pe săptămână trebuie să dedic voluntariatului?</h4>
+                  <h4 className="font-medium text-[#09a252] mb-2">Câte ore pe săptămână trebuie să dedic voluntariatului?</h4>
                   <p>
                     Programul este flexibil și depinde de disponibilitatea ta. Poți aloca minim 2-4 ore pe săptămână, în funcție de proiectele în care dorești să te implici.
                   </p>
                 </div>
                 <div className="border-b border-green-200 pb-4">
-                  <h4 className="font-medium text-green-600 mb-2">Ce activități voi desfășura ca voluntar?</h4>
+                  <h4 className="font-medium text-[#09a252] mb-2">Ce activități voi desfășura ca voluntar?</h4>
                   <p>
                     Activitățile includ organizarea de evenimente educaționale, asistență la workshopuri de nutriție, crearea de materiale informative și participarea la campanii de conștientizare.
                   </p>

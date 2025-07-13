@@ -6,7 +6,7 @@ export default function ObesityArticle() {
         <ArticleLayout>
             <header className="article-header">
                 <h1 className="text-3xl font-bold text-green-800 mb-4">Obezitatea: O Provocare Globală de Sănătate Publică</h1>
-                <div className="article-meta flex items-center text-sm text-green-700 mb-6">
+                <div className="article-meta flex items-center text-sm text-[#09a252] mb-6">
                     <span className="mr-4"><i className="fas fa-calendar-alt mr-1"></i> 13 Aprilie 2025</span>
                     <span className="mr-4"><i className="fas fa-user mr-1"></i> Asociația pentru Promovarea Nutriției Sănătoase</span>
                     <span><i className="fas fa-tag mr-1"></i> Obezitate, Nutriție, Sănătate</span>
@@ -36,15 +36,15 @@ export default function ObesityArticle() {
 
                     <div className="grid md:grid-cols-3 gap-4 mb-6">
                         <div className="bg-white p-4 rounded-lg shadow-sm border border-green-100">
-                            <h3 className="text-lg font-semibold text-green-700 mb-2">IMC: 18.5-24.9</h3>
+                            <h3 className="text-lg font-semibold text-[#09a252] mb-2">IMC: 18.5-24.9</h3>
                             <p className="text-gray-700 text-sm">Greutate normală</p>
                         </div>
                         <div className="bg-white p-4 rounded-lg shadow-sm border border-green-100">
-                            <h3 className="text-lg font-semibold text-green-700 mb-2">IMC: 25-29.9</h3>
+                            <h3 className="text-lg font-semibold text-[#09a252] mb-2">IMC: 25-29.9</h3>
                             <p className="text-gray-700 text-sm">Suprapondere</p>
                         </div>
                         <div className="bg-white p-4 rounded-lg shadow-sm border border-green-100">
-                            <h3 className="text-lg font-semibold text-green-700 mb-2">IMC: ≥30</h3>
+                            <h3 className="text-lg font-semibold text-[#09a252] mb-2">IMC: ≥30</h3>
                             <p className="text-gray-700 text-sm">Obezitate</p>
                         </div>
                     </div>
@@ -63,7 +63,7 @@ export default function ObesityArticle() {
 
                     <div className="grid md:grid-cols-2 gap-6 mb-6">
                         <div>
-                            <h3 className="text-xl font-semibold text-green-700 mb-3">Factori comportamentali</h3>
+                            <h3 className="text-xl font-semibold text-[#09a252] mb-3">Factori comportamentali</h3>
                             <ul className="list-disc ml-5 space-y-2 text-gray-700">
                                 <li>Alimentație hipercalorică, bogată în grăsimi saturate și zahăr adăugat</li>
                                 <li>Consum crescut de alimente ultraprocesate</li>
@@ -74,7 +74,7 @@ export default function ObesityArticle() {
                             </ul>
                         </div>
                         <div>
-                            <h3 className="text-xl font-semibold text-green-700 mb-3">Factori sociali și de mediu</h3>
+                            <h3 className="text-xl font-semibold text-[#09a252] mb-3">Factori sociali și de mediu</h3>
                             <ul className="list-disc ml-5 space-y-2 text-gray-700">
                                 <li>Mediul alimentar toxic (abundența de alimente nesănătoase, accesibile și intens promovate)</li>
                                 <li>Factori socioeconomici (accesul redus la alimente sănătoase în comunitățile defavorizate)</li>
@@ -94,7 +94,7 @@ export default function ObesityArticle() {
 
                     <div className="grid md:grid-cols-3 gap-4 mb-6">
                         <div className="bg-white p-4 rounded-lg shadow-sm border border-green-100">
-                            <h3 className="text-lg font-semibold text-green-700 mb-2">Cardiovasculare</h3>
+                            <h3 className="text-lg font-semibold text-[#09a252] mb-2">Cardiovasculare</h3>
                             <ul className="list-disc ml-5 text-gray-700 text-sm">
                                 <li>Hipertensiune arterială</li>
                                 <li>Boli coronariene</li>
@@ -103,7 +103,7 @@ export default function ObesityArticle() {
                             </ul>
                         </div>
                         <div className="bg-white p-4 rounded-lg shadow-sm border border-green-100">
-                            <h3 className="text-lg font-semibold text-green-700 mb-2">Metabolice</h3>
+                            <h3 className="text-lg font-semibold text-[#09a252] mb-2">Metabolice</h3>
                             <ul className="list-disc ml-5 text-gray-700 text-sm">
                                 <li>Diabet zaharat tip 2</li>
                                 <li>Dislipidemie</li>
@@ -112,7 +112,7 @@ export default function ObesityArticle() {
                             </ul>
                         </div>
                         <div className="bg-white p-4 rounded-lg shadow-sm border border-green-100">
-                            <h3 className="text-lg font-semibold text-green-700 mb-2">Alte complicații</h3>
+                            <h3 className="text-lg font-semibold text-[#09a252] mb-2">Alte complicații</h3>
                             <ul className="list-disc ml-5 text-gray-700 text-sm">
                                 <li>Apnee de somn</li>
                                 <li>Probleme osteoarticulare</li>
@@ -133,10 +133,10 @@ export default function ObesityArticle() {
                     <p className="mb-4">Tratamentul obezității necesită o abordare personalizată, multidisciplinară, care să țină cont de particularitățile fiecărui individ. Componentele esențiale includ:</p>
 
                     <div className="mb-6">
-                        <h3 className="text-xl font-semibold text-green-700 mb-3">1. Modificarea stilului de viață</h3>
+                        <h3 className="text-xl font-semibold text-[#09a252] mb-3">1. Modificarea stilului de viață</h3>
                         <div className="grid md:grid-cols-2 gap-4">
                             <div className="bg-white p-4 rounded-lg shadow-sm border border-green-100">
-                                <h4 className="font-semibold text-green-600 mb-2">Intervenții nutriționale</h4>
+                                <h4 className="font-semibold text-[#09a252] mb-2">Intervenții nutriționale</h4>
                                 <ul className="list-disc ml-5 space-y-1 text-gray-700">
                                     <li>Reducerea moderată a aportului caloric (deficitul de 500-750 kcal/zi)</li>
                                     <li>Creșterea consumului de alimente cu densitate nutritivă ridicată</li>
@@ -146,7 +146,7 @@ export default function ObesityArticle() {
                                 </ul>
                             </div>
                             <div className="bg-white p-4 rounded-lg shadow-sm border border-green-100">
-                                <h4 className="font-semibold text-green-600 mb-2">Activitate fizică</h4>
+                                <h4 className="font-semibold text-[#09a252] mb-2">Activitate fizică</h4>
                                 <ul className="list-disc ml-5 space-y-1 text-gray-700">
                                     <li>Minimum 150-300 minute de activitate fizică moderată săptămânal</li>
                                     <li>Combinarea exercițiilor aerobice cu antrenamentul de forță</li>
@@ -159,7 +159,7 @@ export default function ObesityArticle() {
                     </div>
 
                     <div className="mb-6">
-                        <h3 className="text-xl font-semibold text-green-700 mb-3">2. Intervenții comportamentale</h3>
+                        <h3 className="text-xl font-semibold text-[#09a252] mb-3">2. Intervenții comportamentale</h3>
                         <p className="mb-4">Tehnicile de modificare comportamentală sunt esențiale pentru susținerea schimbărilor pe termen lung:</p>
                         <ul className="list-disc ml-6 mb-4 space-y-1 text-gray-700">
                             <li>Stabilirea unor obiective realiste și măsurabile</li>
@@ -172,7 +172,7 @@ export default function ObesityArticle() {
                     </div>
 
                     <div className="mb-6">
-                        <h3 className="text-xl font-semibold text-green-700 mb-3">3. Tratamente medicamentoase și chirurgicale</h3>
+                        <h3 className="text-xl font-semibold text-[#09a252] mb-3">3. Tratamente medicamentoase și chirurgicale</h3>
                         <p className="mb-4">Pentru anumite persoane, intervenții suplimentare pot fi necesare:</p>
                         <ul className="list-disc ml-6 mb-4 space-y-1 text-gray-700">
                             <li>Farmacoterapie pentru obezitate (sub strictă supraveghere medicală)</li>
@@ -193,7 +193,7 @@ export default function ObesityArticle() {
 
                     <div className="grid md:grid-cols-2 gap-6 mb-6">
                         <div>
-                            <h3 className="text-xl font-semibold text-green-700 mb-3">Strategii individuale</h3>
+                            <h3 className="text-xl font-semibold text-[#09a252] mb-3">Strategii individuale</h3>
                             <ul className="list-disc ml-5 space-y-2 text-gray-700">
                                 <li>Dezvoltarea obiceiurilor alimentare sănătoase din copilărie</li>
                                 <li>Activitate fizică regulată integrată în rutina zilnică</li>
@@ -203,7 +203,7 @@ export default function ObesityArticle() {
                             </ul>
                         </div>
                         <div>
-                            <h3 className="text-xl font-semibold text-green-700 mb-3">Politici publice și intervenții comunitare</h3>
+                            <h3 className="text-xl font-semibold text-[#09a252] mb-3">Politici publice și intervenții comunitare</h3>
                             <ul className="list-disc ml-5 space-y-2 text-gray-700">
                                 <li>Educație nutrițională în școli și grădinițe</li>
                                 <li>Reglementarea marketingului alimentar adresat copiilor</li>
@@ -224,10 +224,10 @@ export default function ObesityArticle() {
                 <div className="references">
                     <h2 className="text-xl font-bold text-green-800 mb-4">Resurse și referințe</h2>
                     <ul className="list-disc ml-6 space-y-2 text-gray-700">
-                        <li>Organizația Mondială a Sănătății - <a href="#" className="text-green-600 hover:underline">www.who.int/topics/obesity</a></li>
-                        <li>Societatea Europeană pentru Studiul Obezității - <a href="#" className="text-green-600 hover:underline">www.easo.org</a></li>
-                        <li>Institutul Național de Sănătate Publică - <a href="#" className="text-green-600 hover:underline">www.insp.gov.ro</a></li>
-                        <li>Asociația Română pentru Studiul Obezității - <a href="#" className="text-green-600 hover:underline">www.arso.ro</a></li>
+                        <li>Organizația Mondială a Sănătății - <a href="#" className="text-[#09a252] hover:underline">www.who.int/topics/obesity</a></li>
+                        <li>Societatea Europeană pentru Studiul Obezității - <a href="#" className="text-[#09a252] hover:underline">www.easo.org</a></li>
+                        <li>Institutul Național de Sănătate Publică - <a href="#" className="text-[#09a252] hover:underline">www.insp.gov.ro</a></li>
+                        <li>Asociația Română pentru Studiul Obezității - <a href="#" className="text-[#09a252] hover:underline">www.arso.ro</a></li>
                     </ul>
                 </div>
             </div>
@@ -235,18 +235,18 @@ export default function ObesityArticle() {
             <div className="article-footer mt-8 pt-6 border-t border-green-200">
                 <div className="flex flex-wrap justify-between items-center">
                     <div className="tags mb-4 md:mb-0">
-                        <span className="font-semibold text-green-700">Subiecte:</span>
+                        <span className="font-semibold text-[#09a252]">Subiecte:</span>
                         <a href="#" className="inline-block bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm mr-2 hover:bg-green-200">Obezitate</a>
                         <a href="#" className="inline-block bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm mr-2 hover:bg-green-200">Nutriție</a>
                         <a href="#" className="inline-block bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm mr-2 hover:bg-green-200">Sănătate publică</a>
                         <a href="#" className="inline-block bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm hover:bg-green-200">Prevenție</a>
                     </div>
                     <div className="share">
-                        <span className="font-semibold text-green-700 mr-2">Distribuie:</span>
-                        <a href="#" className="inline-block text-green-700 hover:text-green-900 mr-3"><i className="fab fa-facebook-f"></i></a>
-                        <a href="#" className="inline-block text-green-700 hover:text-green-900 mr-3"><i className="fab fa-twitter"></i></a>
-                        <a href="#" className="inline-block text-green-700 hover:text-green-900 mr-3"><i className="fab fa-linkedin-in"></i></a>
-                        <a href="#" className="inline-block text-green-700 hover:text-green-900"><i className="fas fa-envelope"></i></a>
+                        <span className="font-semibold text-[#09a252] mr-2">Distribuie:</span>
+                        <a href="#" className="inline-block text-[#09a252] hover:text-green-900 mr-3"><i className="fab fa-facebook-f"></i></a>
+                        <a href="#" className="inline-block text-[#09a252] hover:text-green-900 mr-3"><i className="fab fa-twitter"></i></a>
+                        <a href="#" className="inline-block text-[#09a252] hover:text-green-900 mr-3"><i className="fab fa-linkedin-in"></i></a>
+                        <a href="#" className="inline-block text-[#09a252] hover:text-green-900"><i className="fas fa-envelope"></i></a>
                     </div>
                 </div>
             </div>
