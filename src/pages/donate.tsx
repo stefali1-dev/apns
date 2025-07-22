@@ -18,7 +18,7 @@ const DonateButton: React.FC<{
 }> = ({ style, href, text, external = false }) => {
   const baseClasses = "inline-flex items-center px-6 py-3 rounded-lg font-medium transition-all duration-200 text-center";
   const primaryClasses = "bg-white text-[#09a252] hover:bg-green-50 shadow-lg hover:shadow-xl";
-  const secondaryClasses = "bg-green-800 text-white hover:bg-green-900 border border-[#09a252]";
+  const secondaryClasses = "bg-[#09a252] text-white hover:bg-green-900 border border-[#09a252]";
 
   const classes = `${baseClasses} ${style === 'primary' ? primaryClasses : secondaryClasses}`;
 
@@ -52,25 +52,11 @@ const DonatePage: React.FC<DonatePageProps> = ({
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <style jsx>{`
-        .gradient-bg {
-          background: linear-gradient(135deg, #10b968 0%, #059646 100%);
-        }
-
-      `}</style>
-
       <div className="bg-green-50 min-h-screen">
         {/* Hero section */}
-        <div className="relative gradient-bg text-white overflow-hidden">
-          <div className="absolute inset-0">
-            <div className="absolute top-0 left-0 w-64 h-64 bg-white/10 rounded-full -translate-x-32 -translate-y-32"></div>
-            <div className="absolute bottom-0 right-0 w-96 h-96 bg-white/5 rounded-full translate-x-48 translate-y-48"></div>
-          </div>
+        <div className="relative bg-[#09a252] text-white overflow-hidden">
           <div className="container mx-auto px-4 pt-16 pb-12 relative z-10">
             <div className="max-w-4xl mx-auto text-center">
-              <span className="inline-block px-4 py-1 rounded-full bg-green-800 text-green-100 text-sm font-medium mb-4">
-                Susține-ne misiunea
-              </span>
               <h1 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">
                 Redirecționează 3.5% din impozit
               </h1>
@@ -80,14 +66,13 @@ const DonatePage: React.FC<DonatePageProps> = ({
 
               <div className="flex flex-wrap justify-center gap-4 mb-8">
                 <DonateButton style="primary" href="#persoane-fizice" text="Pentru persoane fizice" />
-                <DonateButton style="secondary" href="#persoane-juridice" text="Pentru companii" />
+                <DonateButton style="primary" href="#persoane-juridice" text="Pentru companii" />
               </div>
             </div>
           </div>
 
           {/* Imagine ilustrativă */}
           <div className="relative mx-auto max-w-4xl px-4 pb-16">
-            <div className="absolute inset-0 bg-green-800 opacity-20 transform rotate-1 rounded-xl mx-8 my-4"></div>
             <div className="relative bg-white rounded-xl shadow-2xl overflow-hidden">
               <img
                 className="w-full h-64 sm:h-72 md:h-80 object-cover rounded-lg"
@@ -95,9 +80,6 @@ const DonatePage: React.FC<DonatePageProps> = ({
                 alt="Redirecționează impozitul"
                 style={{ objectPosition: '50% 65%' }}
               />
-              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-green-900 to-transparent p-4 md:p-6">
-                {/* Optional overlay content */}
-              </div>
             </div>
           </div>
         </div>
@@ -127,8 +109,9 @@ const DonatePage: React.FC<DonatePageProps> = ({
               <p className="mb-4">
                 Acești bani reprezintă o parte din impozitul pe care deja îl plătești statului. Nu este o donație suplimentară, ci doar o redirecționare a unor fonduri care oricum ar merge la bugetul de stat.
               </p>
-              <div className="bg-green-100 p-6 rounded-lg mt-6">
-                <h3 className="text-xl font-semibold text-green-800 mb-3">Beneficiile redirecționării:</h3>
+
+              <div className="bg-green-50 border border-green-200 rounded-lg p-6 mb-6">
+                <h3 className="text-xl font-semibold text-gray-800 mb-3">Beneficiile redirecționării:</h3>
                 <ul className="list-disc pl-5 space-y-2">
                   <li>Nu te costă nimic în plus</li>
                   <li>Susții programe nutriționale pentru comunitate</li>
@@ -154,7 +137,7 @@ const DonatePage: React.FC<DonatePageProps> = ({
               </p>
 
               <div className="bg-green-50 border border-green-200 rounded-lg p-6 mb-6">
-                <h3 className="text-xl font-semibold text-green-800 mb-4">Cine poate redirecționa 3.5%?</h3>
+                <h3 className="text-xl font-semibold text-gray-800 mb-4">Cine poate redirecționa 3.5%?</h3>
                 <p className="mb-2">Contribuabilii care au realizat în anul anterior venituri din:</p>
                 <ul className="list-disc pl-5 space-y-1 mb-4">
                   <li>Salarii și asimilate salariilor</li>
@@ -164,18 +147,14 @@ const DonatePage: React.FC<DonatePageProps> = ({
                   <li>Investiții</li>
                   <li>Activități agricole, silvicultură și piscicultură</li>
                 </ul>
-                <p className="text-sm text-[#09a252]">
-                  Notă: Pentru veniturile obținute în regim de reținere la sursă (salarii, pensii), impozitul este calculat și reținut de angajator sau casa de pensii.
-                </p>
               </div>
 
               <h3 className="text-xl font-semibold text-[#09a252] mb-4">Cum poți redirecționa 3.5% către asociația noastră?</h3>
 
               <div className="space-y-6 mb-8">
                 <div className="flex items-start">
-                  <div className="bg-green-200 rounded-full w-8 h-8 flex items-center justify-center text-[#09a252] font-bold mr-4 flex-shrink-0 mt-1">1</div>
                   <div>
-                    <h4 className="font-medium text-green-800 mb-1">Completează formularul 230</h4>
+                    <h4 className="font-medium text-gray-800 mb-1"><strong>1.</strong> Completează formularul 230</h4>
                     <p className="mb-2">
                       Pentru veniturile din salarii și pensii, trebuie să completezi formularul 230 "Cerere privind destinația sumei reprezentând până la 3,5% din impozitul anual datorat".
                     </p>
@@ -197,26 +176,24 @@ const DonatePage: React.FC<DonatePageProps> = ({
                 </div>
 
                 <div className="flex items-start">
-                  <div className="bg-green-200 rounded-full w-8 h-8 flex items-center justify-center text-[#09a252] font-bold mr-4 flex-shrink-0 mt-1">2</div>
-                  <div>
-                    <h4 className="font-medium text-green-800 mb-1">Completează datele asociației noastre în formular</h4>
-                    <div className="bg-green-50 border border-green-200 p-4 rounded-lg mb-2">
+                  <div className="w-full">
+                    <h4 className="font-medium text-gray-800 mb-1"><strong>2. </strong>Completează datele asociației noastre în formular</h4>
+                    <div className="bg-green-50 border border-green-200 p-4 rounded-lg mb-2 w-full">
                       <p className="font-medium mb-1">Denumire entitate nonprofit:</p>
-                      <p className="mb-2">{orgName}</p>
+                      <p className="mb-2 font-bold">{orgName}</p>
 
                       <p className="font-medium mb-1">Cod de identificare fiscală (CIF):</p>
-                      <p className="mb-2">{orgCif}</p>
+                      <p className="mb-2 font-bold">{orgCif}</p>
 
                       <p className="font-medium mb-1">Cont bancar (IBAN):</p>
-                      <p>{orgIban}</p>
+                      <p className="font-bold">{orgIban}</p>
                     </div>
                   </div>
                 </div>
 
                 <div className="flex items-start">
-                  <div className="bg-green-200 rounded-full w-8 h-8 flex items-center justify-center text-[#09a252] font-bold mr-4 flex-shrink-0 mt-1">3</div>
                   <div>
-                    <h4 className="font-medium text-green-800 mb-1">Depune formularul completat</h4>
+                    <h4 className="font-medium text-gray-800 mb-1"><strong>3. </strong>Depune formularul completat</h4>
                     <p className="mb-2">Ai trei opțiuni pentru depunerea formularului:</p>
                     <ul className="list-disc pl-5 space-y-2">
                       <li>
@@ -229,16 +206,12 @@ const DonatePage: React.FC<DonatePageProps> = ({
                         <span className="font-medium">Prin poștă</span> - Cu scrisoare recomandată cu confirmare de primire
                       </li>
                     </ul>
-                    <p className="mt-2 text-sm text-[#09a252]">
-                      Formularul trebuie depus până la data de 25 mai a anului curent pentru veniturile realizate în anul precedent.
-                    </p>
                   </div>
                 </div>
 
                 <div className="flex items-start">
-                  <div className="bg-green-200 rounded-full w-8 h-8 flex items-center justify-center text-[#09a252] font-bold mr-4 flex-shrink-0 mt-1">4</div>
                   <div>
-                    <h4 className="font-medium text-green-800 mb-1">Trimite-ne o copie (opțional)</h4>
+                    <h4 className="font-medium text-gray-800 mb-1"><strong>4. </strong>Trimite-ne o copie (opțional)</h4>
                     <p>
                       Dacă dorești, ne poți trimite o copie a formularului depus la{' '}
                       <a href={`mailto:${contactEmail}`} className="text-[#09a252] underline">
@@ -259,88 +232,6 @@ const DonatePage: React.FC<DonatePageProps> = ({
               </div>
             </div>
 
-            {/* Persoane juridice */}
-            <div id="persoane-juridice" className="bg-white rounded-lg shadow-lg p-8 mb-8">
-              <div className="flex items-center mb-6">
-                <div className="bg-green-100 p-3 rounded-full mr-4">
-                  <svg className="w-6 h-6 text-[#09a252]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
-                  </svg>
-                </div>
-                <h2 className="text-2xl font-bold text-[#09a252]">Pentru companii: 20% din impozitul pe profit</h2>
-              </div>
-
-              <p className="mb-4">
-                Conform Codului Fiscal (Legea 227/2015), persoanele juridice pot direcționa până la 20% din impozitul pe profit datorat către entități nonprofit.
-              </p>
-
-              <div className="bg-green-50 border border-green-200 rounded-lg p-6 mb-6">
-                <h3 className="text-xl font-semibold text-green-800 mb-4">Aspecte importante:</h3>
-                <ul className="list-disc pl-5 space-y-2">
-                  <li>Sponsorizările se înregistrează în contabilitate ca și cheltuieli de sponsorizare</li>
-                  <li>Suma direcționată nu poate depăși 0,75% din cifra de afaceri anuală</li>
-                  <li>Beneficiul fiscal se acordă doar pentru sponsorizările către entități nonprofit înregistrate în Registrul entităților/unităților de cult</li>
-                  <li>Redirecționarea poate fi făcută cumulat, în limita a 20% din impozitul pe profit</li>
-                </ul>
-              </div>
-
-              <h3 className="text-xl font-semibold text-[#09a252] mb-4">Cum poate compania ta să redirecționeze din impozitul pe profit?</h3>
-
-              <div className="space-y-6 mb-8">
-                <div className="flex items-start">
-                  <div className="bg-green-200 rounded-full w-8 h-8 flex items-center justify-center text-[#09a252] font-bold mr-4 flex-shrink-0 mt-1">1</div>
-                  <div>
-                    <h4 className="font-medium text-green-800 mb-1">Încheie un contract de sponsorizare</h4>
-                    <p className="mb-2">Primul pas este încheierea unui contract de sponsorizare între compania ta și asociația noastră.</p>
-                    <div className="flex flex-wrap gap-2 mt-3">
-                      <DonateButton
-                        style="secondary"
-                        href="/documents/model-contract-sponsorizare.doc"
-                        text="Descarcă model contract"
-                        external
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                <div className="flex items-start">
-                  <div className="bg-green-200 rounded-full w-8 h-8 flex items-center justify-center text-[#09a252] font-bold mr-4 flex-shrink-0 mt-1">2</div>
-                  <div>
-                    <h4 className="font-medium text-green-800 mb-1">Efectuează plata sponsorizării</h4>
-                    <p>Efectuează plata sumei de sponsorizare prin transfer bancar în contul asociației noastre, menționând în descriere "Sponsorizare conform contract nr. [număr contract]".</p>
-                    <div className="bg-green-50 border border-green-200 p-4 rounded-lg mt-2">
-                      <p className="font-medium mb-1">Cont bancar (IBAN):</p>
-                      <p>{orgIban}</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="flex items-start">
-                  <div className="bg-green-200 rounded-full w-8 h-8 flex items-center justify-center text-[#09a252] font-bold mr-4 flex-shrink-0 mt-1">3</div>
-                  <div>
-                    <h4 className="font-medium text-green-800 mb-1">Înregistrează sponsorizarea în contabilitate</h4>
-                    <p>Suma sponsorizată se înregistrează ca și cheltuială de sponsorizare și se evidențiază distinct în declarația de impozit pe profit.</p>
-                    <p className="mt-2 text-sm text-[#09a252]">Sugestie pentru departamentul contabil: Folosiți contul contabil 6582 "Donații și subvenții acordate" pentru înregistrarea sponsorizării.</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start">
-                  <div className="bg-green-200 rounded-full w-8 h-8 flex items-center justify-center text-[#09a252] font-bold mr-4 flex-shrink-0 mt-1">4</div>
-                  <div>
-                    <h4 className="font-medium text-green-800 mb-1">Aplică reducerea fiscală</h4>
-                    <p>La calculul impozitului pe profit, suma sponsorizată (în limita a 20% din impozitul pe profit) se deduce direct din impozitul pe profit datorat.</p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="bg-[#09a252] text-white p-6 rounded-lg text-center">
-                <h3 className="text-xl font-bold mb-2">Devino partener corporativ</h3>
-                <p className="mb-4">Pe lângă redirecționarea din impozitul pe profit, compania ta poate deveni un partener strategic în promovarea nutriției sănătoase.</p>
-                <div className="py-4">
-                  <DonateButton style="primary" href="/contact" text="Discută cu noi" />
-                </div>
-              </div>
-            </div>
 
             {/* Întrebări frecvente */}
             <div className="bg-white rounded-lg shadow-lg p-8 mb-8">
@@ -391,7 +282,7 @@ const DonatePage: React.FC<DonatePageProps> = ({
                   external
                 />
                 <DonateButton
-                  style="secondary"
+                  style="primary"
                   href="/contact"
                   text="Contactează-ne pentru asistență"
                 />

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
 import Layout from '@/layouts/NavbarLayout';
 import { membersService, Member } from '@/lib/services/membersService';
+import VolunteerModal from '@/components/VolunteerModal';
 
 const TeamPage: React.FC = () => {
     const [members, setMembers] = useState<Member[]>([]);
@@ -27,19 +28,11 @@ const TeamPage: React.FC = () => {
     const openModal = (member: Member) => {
         setSelectedMember(member);
         setIsModalOpen(true);
-        document.body.style.overflow = 'hidden';
     };
 
     const closeModal = () => {
         setIsModalOpen(false);
         setSelectedMember(null);
-        document.body.style.overflow = 'unset';
-    };
-
-    const handleBackdropClick = (e: React.MouseEvent) => {
-        if (e.target === e.currentTarget) {
-            closeModal();
-        }
     };
 
     return (
@@ -79,48 +72,6 @@ const TeamPage: React.FC = () => {
 
                 .member-card:hover .member-image {
                     transform: scale(1.05);
-                }
-
-                .modal-backdrop {
-                    position: fixed;
-                    top: 0;
-                    left: 0;
-                    right: 0;
-                    bottom: 0;
-                    background: rgba(0, 0, 0, 0.6);
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    z-index: 1000;
-                    animation: fadeIn 0.3s ease;
-                    padding: 20px;
-                }
-
-                .modal-content {
-                    background: white;
-                    border-radius: 16px;
-                    max-width: 600px;
-                    width: 100%;
-                    max-height: 90vh;
-                    overflow-y: auto;
-                    animation: slideIn 0.3s ease;
-                    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
-                }
-
-                @keyframes fadeIn {
-                    from { opacity: 0; }
-                    to { opacity: 1; }
-                }
-
-                @keyframes slideIn {
-                    from { 
-                        opacity: 0;
-                        transform: translateY(-20px) scale(0.95);
-                    }
-                    to { 
-                        opacity: 1;
-                        transform: translateY(0) scale(1);
-                    }
                 }
 
                 .loading-shimmer {
@@ -202,7 +153,7 @@ const TeamPage: React.FC = () => {
                                             />
                                         </div>
                                         <div className="p-6">
-                                            <h3 className="text-xl font-bold text-green-800 mb-2">
+                                            <h3 className="text-xl font-bold text-gray-900 mb-2">
                                                 {member.name}
                                             </h3>
                                             <p className="text-gray-700 font-medium mb-4">
@@ -231,78 +182,11 @@ const TeamPage: React.FC = () => {
                 </div>
 
                 {/* Modal */}
-                {isModalOpen && selectedMember && (
-                    <div className="modal-backdrop" onClick={handleBackdropClick}>
-                        <div className="modal-content">
-                            <div className="relative">
-                                <button
-                                    onClick={closeModal}
-                                    className="absolute top-4 right-4 z-10 bg-white/90 hover:bg-white text-gray-800 w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 shadow-lg"
-                                >
-                                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
-                                    </svg>
-                                </button>
-                                
-                                <div className="overflow-hidden rounded-t-16">
-                                    <img
-                                        src={selectedMember.imageUrl}
-                                        alt={selectedMember.name}
-                                        className="w-full h-80 object-cover"
-                                    />
-                                </div>
-                                
-                                <div className="p-8">
-                                    <h2 className="text-3xl font-bold text-green-800 mb-2">
-                                        {selectedMember.name}
-                                    </h2>
-                                    <p className="text-xl text-[#09a252] font-medium mb-6">
-                                        {selectedMember.position}
-                                    </p>
-                                    
-                                    <div className="space-y-6">
-                                        <div>
-                                            <h3 className="text-lg font-semibold text-[#09a252] mb-2">Despre</h3>
-                                            <p className="text-gray-700 leading-relaxed">
-                                                {selectedMember.description}
-                                            </p>
-                                        </div>
-                                        
-                                        {selectedMember.specializations && selectedMember.specializations.length > 0 && (
-                                            <div>
-                                                <h3 className="text-lg font-semibold text-[#09a252] mb-3">Specializări</h3>
-                                                <div className="flex flex-wrap gap-2">
-                                                    {selectedMember.specializations.map((spec, index) => (
-                                                        <span
-                                                            key={index}
-                                                            className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm"
-                                                        >
-                                                            {spec}
-                                                        </span>
-                                                    ))}
-                                                </div>
-                                            </div>
-                                        )}
-                                        
-                                        {selectedMember.education && (
-                                            <div>
-                                                <h3 className="text-lg font-semibold text-[#09a252] mb-2">Educație</h3>
-                                                <p className="text-gray-700">{selectedMember.education}</p>
-                                            </div>
-                                        )}
-                                        
-                                        {selectedMember.experience && (
-                                            <div>
-                                                <h3 className="text-lg font-semibold text-[#09a252] mb-2">Experiență</h3>
-                                                <p className="text-gray-700">{selectedMember.experience}</p>
-                                            </div>
-                                        )}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                )}
+                <VolunteerModal
+                    volunteer={selectedMember}
+                    isOpen={isModalOpen}
+                    onClose={closeModal}
+                />
             </div>
         </Layout>
     );

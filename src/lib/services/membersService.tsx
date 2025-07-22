@@ -7,7 +7,6 @@ export interface Member {
     description: string;
     specializations?: string[];
     education?: string;
-    experience?: string;
     email?: string;
     phone?: string;
 }
@@ -23,7 +22,6 @@ export class MembersService {
             description: 'Dr. Maria Popescu este fondatoarea și președinta Asociației pentru Promovarea Nutriției Sănătoase. Cu peste 15 ani de experiență în domeniul nutriției clinice, ea a dedicat cariera sa educării publicului despre importanța unei alimentații echilibrate. Maria a lucrat în cadrul mai multor spitale de top din România și a contribuit la dezvoltarea mai multor ghiduri naționale de nutriție.',
             specializations: ['Nutriție clinică', 'Diabet zaharat', 'Nutriție pediatrică', 'Obezitate'],
             education: 'Doctorat în Medicină - Universitatea de Medicină și Farmacie Carol Davila, București. Specializare în Nutriție Clinică - Spitalul Clinic de Nutriție și Boli Metabolice.',
-            experience: '15+ ani în nutriție clinică, fost șef de secție la Spitalul Clinic de Nutriție București.',
             email: 'maria.popescu@apns.ro',
             phone: '0727 590 656'
         },
@@ -35,7 +33,6 @@ export class MembersService {
             description: 'Dr. Alexandru Gheorghe aduce în echipa APNS expertiza sa în endocrinologie și managementul diabetului zaharat. Cu o abordare holistică a sănătății, el integrează tratamentul medical cu sfaturile nutriționale pentru a oferi pacienților o îngrijire completă. Alexandru este un vorbitor frecvent la conferințe medicale și un susținător activ al prevenirii bolilor metabolice prin nutriție.',
             specializations: ['Endocrinologie', 'Diabet zaharat', 'Sindrom metabolic', 'Tiroidă'],
             education: 'Doctor în Medicină - Universitatea de Medicină și Farmacie Carol Davila. Specializare în Endocrinologie la Institutul Nacional de Endocrinologie C.I. Parhon.',
-            experience: '12 ani de practică în endocrinologie, consultant la multiple clinici private și de stat.',
             email: 'alexandru.gheorghe@apns.ro'
         },
         {
@@ -46,7 +43,6 @@ export class MembersService {
             description: 'Elena Vasilescu se dedică nutriției pentru copii și adolescenți, un domeniu care necesită abordări specifice și sensibilitate deosebită. Ea lucrează cu părinții pentru a crea planuri alimentare care să susțină creșterea și dezvoltarea sănătoasă a copiilor, având în vedere și preferințele acestora. Elena este specializată în gestionarea problemelor alimentare la copii și în educația nutrițională adaptată vârstei.',
             specializations: ['Nutriție pediatrică', 'Diversificare', 'Alergie alimentare la copii', 'Educație nutrițională pentru familie'],
             education: 'Licență în Nutriție și Dietetică - Universitatea de Medicină și Farmacie Iuliu Hațieganu, Cluj-Napoca. Specializare în Nutriție Pediatrică.',
-            experience: '7 ani de experiență în nutriție pediatrică, colaborări cu clinici pediatrice și grădinițe.',
             email: 'elena.vasilescu@apns.ro'
         },
         {
@@ -57,7 +53,6 @@ export class MembersService {
             description: 'Elena Vasilescu se dedică nutriției pentru copii și adolescenți, un domeniu care necesită abordări specifice și sensibilitate deosebită. Ea lucrează cu părinții pentru a crea planuri alimentare care să susțină creșterea și dezvoltarea sănătoasă a copiilor, având în vedere și preferințele acestora. Elena este specializată în gestionarea problemelor alimentare la copii și în educația nutrițională adaptată vârstei.',
             specializations: ['Nutriție pediatrică', 'Diversificare', 'Alergie alimentare la copii', 'Educație nutrițională pentru familie'],
             education: 'Licență în Nutriție și Dietetică - Universitatea de Medicină și Farmacie Iuliu Hațieganu, Cluj-Napoca. Specializare în Nutriție Pediatrică.',
-            experience: '7 ani de experiență în nutriție pediatrică, colaborări cu clinici pediatrice și grădinițe.',
             email: 'elena.vasilescu@apns.ro'
         },
         {
@@ -68,7 +63,6 @@ export class MembersService {
             description: 'Elena Vasilescu se dedică nutriției pentru copii și adolescenți, un domeniu care necesită abordări specifice și sensibilitate deosebită. Ea lucrează cu părinții pentru a crea planuri alimentare care să susțină creșterea și dezvoltarea sănătoasă a copiilor, având în vedere și preferințele acestora. Elena este specializată în gestionarea problemelor alimentare la copii și în educația nutrițională adaptată vârstei.',
             specializations: ['Nutriție pediatrică', 'Diversificare', 'Alergie alimentare la copii', 'Educație nutrițională pentru familie'],
             education: 'Licență în Nutriție și Dietetică - Universitatea de Medicină și Farmacie Iuliu Hațieganu, Cluj-Napoca. Specializare în Nutriție Pediatrică.',
-            experience: '7 ani de experiență în nutriție pediatrică, colaborări cu clinici pediatrice și grădinițe.',
             email: 'elena.vasilescu@apns.ro'
         },
         {
@@ -79,7 +73,6 @@ export class MembersService {
             description: 'Elena Vasilescu se dedică nutriției pentru copii și adolescenți, un domeniu care necesită abordări specifice și sensibilitate deosebită. Ea lucrează cu părinții pentru a crea planuri alimentare care să susțină creșterea și dezvoltarea sănătoasă a copiilor, având în vedere și preferințele acestora. Elena este specializată în gestionarea problemelor alimentare la copii și în educația nutrițională adaptată vârstei.',
             specializations: ['Nutriție pediatrică', 'Diversificare', 'Alergie alimentare la copii', 'Educație nutrițională pentru familie'],
             education: 'Licență în Nutriție și Dietetică - Universitatea de Medicină și Farmacie Iuliu Hațieganu, Cluj-Napoca. Specializare în Nutriție Pediatrică.',
-            experience: '7 ani de experiență în nutriție pediatrică, colaborări cu clinici pediatrice și grădinițe.',
             email: 'elena.vasilescu@apns.ro'
         }
     ];

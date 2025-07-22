@@ -184,10 +184,10 @@ export default function Home() {
               <div className="items-center gap-8 xl:gap-16 md:grid md:grid-cols-2">
                 <Image
                   className="w-full rounded-lg shadow-lg hidden sm:block transition-transform duration-300"
-                  src="/images/image1.png"
+                  src="/images/group.jpeg"
                   alt="Workshop nutrițional"
-                  width={600}
-                  height={400}
+                  width={1200}
+                  height={1000}
                 />
                 <div className="mt-0">
                   <h2 className="mb-4 text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
@@ -196,7 +196,7 @@ export default function Home() {
                   <p className="mb-6 text-gray-500 md:text-lg">
                     Asociația pentru Promovarea Nutriției Sănătoase (APNS) este o organizație non-guvernamentală
                     înființată în anul 2021 de către o echipă de dieteticieni autorizați cu formare în cadrul Universității
-                    de Medicină și Farmacie „Grigore T. Popa” Iași. Are ca scop principal promovarea nutriției bazate pe dovezi științifice, informarea populației și susținerea politicilor de sănătate orientate către sustenabilitate, prevenție și educație nutrițională.
+                    de Medicină și Farmacie „Grigore T. Popa” Iași. Are cfa scop principal promovarea nutriției bazate pe dovezi științifice, informarea populației și susținerea politicilor de sănătate orientate către sustenabilitate, prevenție și educație nutrițională.
                   </p>
                   <div className="flex items-center gap-4">
                     <Link
@@ -275,10 +275,10 @@ export default function Home() {
         {/* Obesity Stats Section */}
         <section className="bg-gray-50 relative py-16">
           <div className="max-w-screen-xl mx-auto px-6">
-            <h2 className="text-3xl font-bold text-gray-900 mb-8">
+            <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">
               Obezitatea în România - date alarmante
             </h2>
-            <p className="text-lg text-gray-600 mb-10">
+            <p className="text-lg text-gray-600 mb-10 text-center">
               Conform ultimelor studii Ministerului Sănătății (2023)
             </p>
 
@@ -301,21 +301,21 @@ export default function Home() {
 
         {/* BMI Test Section */}
         <section className="w-full bg-[#09a252] text-white py-16">
-          <div className="max-w-screen-xl mx-auto px-6 text-center">
+          <div className="max-w-screen-xl mx-auto p-6 text-center  border-4 border-gray-200 rounded-lg shadow-2xl">
             <h2 className="text-3xl md:text-4xl font-bold mb-6">Vrei să afli dacă ești la risc?</h2>
-            <p className="text-lg mb-8">
+            <p className="text-xl mb-8">
               Fă testul IMC de mai jos și descoperă ce poți schimba pentru sănătatea ta!
             </p>
             <div className="flex flex-col md:flex-row justify-center gap-4">
               <Link
                 href="/test-imc-adulti"
-                className="bg-white text-[#09a252] font-medium px-6 py-3 rounded shadow-md hover:text-[#09a252] transition-colors duration-300"
+                className="bg-white text-black font-semibold px-8 py-4 rounded-lg shadow-lg hover:shadow-xl hover:text-[#09a252] hover:scale-105 transition-all duration-300 border-2 border-transparent hover:border-white"
               >
                 Test IMC Adulți
               </Link>
               <Link
                 href="/test-imc-copii"
-                className="bg-white text-[#09a252] font-medium px-6 py-3 rounded shadow-md hover:text-[#09a252] transition-colors duration-300"
+                className="bg-white text-black font-semibold px-8 py-4 rounded-lg shadow-lg hover:shadow-xl hover:text-[#09a252] hover:scale-105 transition-all duration-300 border-2 border-transparent hover:border-white"
               >
                 Test IMC Copii
               </Link>

@@ -57,15 +57,19 @@ const VolunteerCarousel: React.FC = () => {
 
   return (
     <>
-      <section className="bg-white py-16">
+      <section className="bg-green-50 py-16">
         <div className="max-w-screen-xl mx-auto px-6">
           <div className="mb-12">
-                        <h2 className="text-3xl font-bold text-gray-900 mb-8">
+            <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">
               Echipa Noastră de Specialiști
             </h2>
-            <p className="text-lg text-gray-600 mb-10">
-              Întâlnește profesioniștii dedicați care fac posibilă misiunea asociației noastre
-            </p>
+            <div className="max-w-3xl mx-auto text-center">
+              <div className="inline-flex items-center space-x-4">
+                <span className="h-px w-12 bg-green-300"></span>
+                <span className="text-[#09a252] font-medium">Oamenii din spatele misiunii</span>
+                <span className="h-px w-12 bg-green-300"></span>
+              </div>
+            </div>
           </div>
 
           {volunteersLoading ? (
@@ -113,9 +117,8 @@ const VolunteerCarousel: React.FC = () => {
                 <>
                   <button
                     onClick={prevVolunteer}
-                    className={`absolute top-1/2 -left-6 transform -translate-y-1/2 bg-white p-3 rounded-full shadow-lg hover:shadow-xl transition-all z-20 ${
-                      currentVolunteerIndex === 0 ? 'opacity-50 cursor-not-allowed' : 'hover:bg-white'
-                    }`}
+                    className={`absolute top-1/2 -left-6 transform -translate-y-1/2 bg-white p-3 rounded-full shadow-lg hover:shadow-xl transition-all z-20 ${currentVolunteerIndex === 0 ? 'opacity-50 cursor-not-allowed' : 'hover:bg-white'
+                      }`}
                     disabled={currentVolunteerIndex === 0}
                     style={{ marginTop: '-60px' }}
                   >
@@ -126,9 +129,8 @@ const VolunteerCarousel: React.FC = () => {
 
                   <button
                     onClick={nextVolunteer}
-                    className={`absolute top-1/2 -right-6 transform -translate-y-1/2 bg-white p-3 rounded-full shadow-lg hover:shadow-xl transition-all z-20 ${
-                      currentVolunteerIndex >= maxVolunteerIndex ? 'opacity-50 cursor-not-allowed' : 'hover:bg-white'
-                    }`}
+                    className={`absolute top-1/2 -right-6 transform -translate-y-1/2 bg-white p-3 rounded-full shadow-lg hover:shadow-xl transition-all z-20 ${currentVolunteerIndex >= maxVolunteerIndex ? 'opacity-50 cursor-not-allowed' : 'hover:bg-white'
+                      }`}
                     disabled={currentVolunteerIndex >= maxVolunteerIndex}
                     style={{ marginTop: '-60px' }}
                   >
@@ -142,48 +144,47 @@ const VolunteerCarousel: React.FC = () => {
               {/* Dots Indicator */}
               {volunteers.length > (isMobile ? 1 : 3) && (
                 <div className="flex justify-center mt-8 space-x-2">
-                  {Array.from({ 
-                    length: isMobile 
-                      ? volunteers.length 
+                  {Array.from({
+                    length: isMobile
+                      ? volunteers.length
                       : Math.ceil(volunteers.length / 3)
                   }).map((_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setCurrentVolunteerIndex(index)}
-                    className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                      index === currentVolunteerIndex 
-                        ? 'bg-[#09a252] w-6' 
+                    <button
+                      key={index}
+                      onClick={() => setCurrentVolunteerIndex(index)}
+                      className={`w-3 h-3 rounded-full transition-all duration-300 ${index === currentVolunteerIndex
+                        ? 'bg-[#09a252] w-6'
                         : 'bg-green-200 hover:bg-green-300'
-                    }`}
-                  />
-                ))}
+                        }`}
+                    />
+                  ))}
+                </div>
+              )}
+
+              {/* View All Team Button */}
+              <div className="text-center mt-12">
+                <Link
+                  href="/team"
+                  className="inline-flex items-center bg-[#09a252] text-white font-semibold px-8 py-3 rounded-lg hover:bg-[#09a252] transition-all duration-300 shadow-md hover:shadow-lg"
+                >
+                  Vezi toată echipa
+                  <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </Link>
               </div>
-            )}
-
-            {/* View All Team Button */}
-            <div className="text-center mt-12">
-              <Link
-                href="/team"
-                className="inline-flex items-center bg-[#09a252] text-white font-semibold px-8 py-3 rounded-lg hover:bg-[#09a252] transition-all duration-300 shadow-md hover:shadow-lg"
-              >
-                Vezi toată echipa
-                <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
-              </Link>
             </div>
-          </div>
-        )}
-      </div>
-    </section>
+          )}
+        </div>
+      </section>
 
-    {/* Volunteer Modal */}
-    <VolunteerModal
-      volunteer={selectedVolunteer}
-      isOpen={isModalOpen}
-      onClose={handleCloseModal}
-    />
-  </>
+      {/* Volunteer Modal */}
+      <VolunteerModal
+        volunteer={selectedVolunteer}
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+      />
+    </>
   );
 };
 

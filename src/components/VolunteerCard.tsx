@@ -32,7 +32,7 @@ const VolunteerCard: React.FC<VolunteerCardProps> = ({ volunteer, isMobile = fal
 
         {/* Content */}
         <div className="p-6">
-          <h3 className="text-xl font-bold text-green-800 mb-2">
+          <h3 className="text-xl font-bold text-gray-900 mb-2">
             {volunteer.name}
           </h3>
           <p className="text-gray-900 font-medium mb-4">
