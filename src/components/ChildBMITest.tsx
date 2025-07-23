@@ -8,11 +8,45 @@ import Navbar from './Navbar';
 export default function ChildBMITest() {
     const [weight, setWeight] = useState<string>('');
     const [height, setHeight] = useState<string>('');
-    const [age, setAge] = useState<string>('');
+    const [ageInputType, setAgeInputType] = useState<'years-months' | 'dates'>('years-months');
+
+    // Age in years and months
+    const [ageYears, setAgeYears] = useState<string>('');
+    const [ageMonths, setAgeMonths] = useState<string>('');
+
+    // Date inputs
+    const [birthDate, setBirthDate] = useState<string>('');
+    const [measurementDate, setMeasurementDate] = useState<string>(new Date().toISOString().split('T')[0]);
+
     const [gender, setGender] = useState<'male' | 'female'>('male');
     const [result, setResult] = useState<ChildBMIResult | null>(null);
     const [error, setError] = useState<string>('');
     const [isCalculating, setIsCalculating] = useState(false);
+
+    // Helper function to calculate age from dates
+    const calculateAgeFromDates = (birthDate: string, measurementDate: string) => {
+        const birth = new Date(birthDate);
+        const measurement = new Date(measurementDate);
+
+        let years = measurement.getFullYear() - birth.getFullYear();
+        let months = measurement.getMonth() - birth.getMonth();
+
+        if (months < 0) {
+            years--;
+            months += 12;
+        }
+
+        // If we haven't reached the birth day in the current month, subtract a month
+        if (measurement.getDate() < birth.getDate()) {
+            months--;
+            if (months < 0) {
+                years--;
+                months += 12;
+            }
+        }
+
+        return { years, months };
+    };
 
     const handleCalculate = async () => {
         setError('');
@@ -20,7 +54,21 @@ export default function ChildBMITest() {
 
         const weightNum = parseFloat(weight);
         const heightNum = parseFloat(height);
-        const ageNum = parseInt(age);
+
+        let ageNum: number;
+
+        if (ageInputType === 'years-months') {
+            const years = parseInt(ageYears) || 0;
+            const months = parseInt(ageMonths) || 0;
+            ageNum = years + (months / 12);
+        } else {
+            if (!birthDate || !measurementDate) {
+                setError('Vă rugăm să completați data nașterii și data măsurătorii.');
+                return;
+            }
+            const ageFromDates = calculateAgeFromDates(birthDate, measurementDate);
+            ageNum = ageFromDates.years + (ageFromDates.months / 12);
+        }
 
         const validationError = validateBMIInput(weightNum, heightNum, ageNum);
         if (validationError) {
@@ -41,7 +89,10 @@ export default function ChildBMITest() {
     const resetTest = () => {
         setWeight('');
         setHeight('');
-        setAge('');
+        setAgeYears('');
+        setAgeMonths('');
+        setBirthDate('');
+        setMeasurementDate(new Date().toISOString().split('T')[0]);
         setGender('male');
         setResult(null);
         setError('');
@@ -49,20 +100,38 @@ export default function ChildBMITest() {
 
     return (
         <>
-        <Navbar/>
-            <div className="min-h-screen bg-white py-12">
-                <div className="max-w-4xl mx-auto px-6">
+            <Navbar />
+            <div className="min-h-screen bg-gradient-to-br from-green-50 via-blue-50 to-purple-50 py-12 relative overflow-hidden">
+                {/* Playful background decorations */}
+                <div className="absolute inset-0 pointer-events-none">
+                    {/* Floating shapes */}
+                    <div className="absolute top-20 left-10 w-16 h-16 bg-yellow-200 rounded-full opacity-20 animate-bounce" style={{ animationDelay: '0s', animationDuration: '3s' }}></div>
+                    <div className="absolute top-40 right-20 w-12 h-12 bg-pink-200 rounded-full opacity-20 animate-bounce" style={{ animationDelay: '1s', animationDuration: '4s' }}></div>
+                    <div className="absolute bottom-40 left-20 w-20 h-20 bg-blue-200 rounded-full opacity-20 animate-bounce" style={{ animationDelay: '2s', animationDuration: '5s' }}></div>
+                    <div className="absolute bottom-20 right-10 w-14 h-14 bg-green-200 rounded-full opacity-20 animate-bounce" style={{ animationDelay: '0.5s', animationDuration: '3.5s' }}></div>
+
+                    {/* Cute stars */}
+                    <div className="absolute top-32 right-1/4 text-yellow-300 opacity-30 text-2xl animate-pulse">⭐</div>
+                    <div className="absolute top-60 left-1/4 text-pink-300 opacity-30 text-xl animate-pulse" style={{ animationDelay: '1s' }}>🌟</div>
+                    <div className="absolute bottom-60 right-1/3 text-blue-300 opacity-30 text-2xl animate-pulse" style={{ animationDelay: '2s' }}>✨</div>
+
+                    {/* Friendly emojis */}
+                    <div className="absolute top-1/4 left-5 text-4xl opacity-20 animate-pulse" style={{ animationDelay: '3s' }}>🦋</div>
+                    <div className="absolute bottom-1/3 right-5 text-4xl opacity-20 animate-pulse" style={{ animationDelay: '1.5s' }}>🌈</div>
+                </div>
+
+                <div className="max-w-4xl mx-auto px-6 relative z-10">
                     {/* Header */}
                     <motion.div
                         initial={{ opacity: 0, y: -20 }}
                         animate={{ opacity: 1, y: 0 }}
                         className="text-center mb-12"
                     >
-                        <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-                            IMC pentru <span className="text-[#09a252]">copii și adolescenți</span>
+                        <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4 mt-4 md:mt-8">
+                            IMC pentru <span className="text-[#09a252]">copii și adolescenți</span> 🌟
                         </h1>
                         <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-                            Evaluare specializată cu percentile adaptate vârstei și genului copilului tău.
+                            Să descoperim împreună dacă crești sănătos! Un test simplu și distractiv pentru părinți și copii. 🎈
                         </p>
                     </motion.div>
 
@@ -72,31 +141,111 @@ export default function ChildBMITest() {
                             initial={{ opacity: 0, x: -20 }}
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ delay: 0.1 }}
-                            className="bg-white p-8 rounded-xl shadow-lg"
+                            className="bg-white p-8 rounded-xl shadow-lg border-t-4 border-[#09a252]"
                         >
-                            <h2 className="text-2xl font-bold text-gray-900 mb-6">Datele copilului</h2>
+                            <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+                                Datele copilului
+                            </h2>
 
                             <div className="space-y-6">
-                                {/* Input vârstă */}
+                                {/* Age input type selector */}
                                 <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                                        Vârsta (ani)
+                                    <label className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-3">
+                                        Cum preferați să introduceți vârsta?
                                     </label>
-                                    <input
-                                        type="number"
-                                        value={age}
-                                        onChange={(e) => setAge(e.target.value)}
-                                        placeholder="Ex: 8"
-                                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#15c366] focus:border-transparent text-lg"
-                                        min="2"
-                                        max="18"
-                                    />
-                                    <p className="text-xs text-gray-500 mt-1">Între 2 și 18 ani</p>
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                        <button
+                                            type="button"
+                                            onClick={() => setAgeInputType('years-months')}
+                                            className={`p-4 rounded-lg border-2 transition-all duration-200 text-left ${ageInputType === 'years-months'
+                                                ? 'border-[#09a252] bg-green-50 text-gray-700'
+                                                : 'border-gray-200 bg-white text-gray-600 hover:border-gray-300'
+                                                }`}
+                                        >
+                                            <div className="text-lg font-medium mb-1">📅 Ani și luni</div>
+                                            <div className="text-sm text-gray-500">Ex: 8 ani și 6 luni</div>
+                                        </button>
+                                        <button
+                                            type="button"
+                                            onClick={() => setAgeInputType('dates')}
+                                            className={`p-4 rounded-lg border-2 transition-all duration-200 text-left ${ageInputType === 'dates'
+                                                ? 'border-[#09a252] bg-green-50 text-gray-700'
+                                                : 'border-gray-200 bg-white text-gray-600 hover:border-gray-300'
+                                                }`}
+                                        >
+                                            <div className="text-lg font-medium mb-1">🗓️ Date naștere</div>
+                                            <div className="text-sm text-gray-500">Calculare automată</div>
+                                        </button>
+                                    </div>
                                 </div>
+
+                                {/* Conditional age inputs */}
+                                {ageInputType === 'years-months' ? (
+                                    <div>
+                                        <label className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-2">
+                                            Vârsta copilului
+                                        </label>
+                                        <div className="grid grid-cols-2 gap-3">
+                                            <div>
+                                                <input
+                                                    type="number"
+                                                    value={ageYears}
+                                                    onChange={(e) => setAgeYears(e.target.value)}
+                                                    placeholder="8"
+                                                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#09a252] focus:border-transparent text-lg"
+                                                    min="2"
+                                                    max="18"
+                                                />
+                                                <p className="text-xs text-gray-500 mt-1">Ani (2-18)</p>
+                                            </div>
+                                            <div>
+                                                <input
+                                                    type="number"
+                                                    value={ageMonths}
+                                                    onChange={(e) => setAgeMonths(e.target.value)}
+                                                    placeholder="6"
+                                                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#09a252] focus:border-transparent text-lg"
+                                                    min="0"
+                                                    max="11"
+                                                />
+                                                <p className="text-xs text-gray-500 mt-1">Luni (0-11)</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                ) : (
+                                    <div className="space-y-4">
+                                        <div>
+                                            <label className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-2">
+                                                Data nașterii copilului
+                                            </label>
+                                            <input
+                                                type="date"
+                                                value={birthDate}
+                                                onChange={(e) => setBirthDate(e.target.value)}
+                                                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#09a252] focus:border-transparent text-lg"
+                                                max={measurementDate}
+                                            />
+                                        </div>
+                                        <div>
+                                            <label className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-2">
+                                                Data măsurătorii
+                                            </label>
+                                            <input
+                                                type="date"
+                                                value={measurementDate}
+                                                onChange={(e) => setMeasurementDate(e.target.value)}
+                                                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#09a252] focus:border-transparent text-lg"
+                                                min={birthDate}
+                                                max={new Date().toISOString().split('T')[0]}
+                                            />
+                                            <p className="text-xs text-gray-500 mt-1">Implicit: astăzi</p>
+                                        </div>
+                                    </div>
+                                )}
 
                                 {/* Selector gen */}
                                 <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-3">
+                                    <label className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-3">
                                         Genul copilului
                                     </label>
                                     <div className="grid grid-cols-2 gap-3">
@@ -104,8 +253,8 @@ export default function ChildBMITest() {
                                             type="button"
                                             onClick={() => setGender('male')}
                                             className={`p-4 rounded-lg border-2 transition-all duration-200 ${gender === 'male'
-                                                    ? 'border-[#15c366] bg-green-50 text-gray-700'
-                                                    : 'border-gray-200 bg-white text-gray-600 hover:border-gray-300'
+                                                ? 'border-[#09a252] bg-green-50 text-gray-700'
+                                                : 'border-gray-200 bg-white text-gray-600 hover:border-gray-300'
                                                 }`}
                                         >
                                             <div className="text-2xl mb-1">👦</div>
@@ -115,8 +264,8 @@ export default function ChildBMITest() {
                                             type="button"
                                             onClick={() => setGender('female')}
                                             className={`p-4 rounded-lg border-2 transition-all duration-200 ${gender === 'female'
-                                                    ? 'border-pink-500 bg-pink-50 text-pink-700'
-                                                    : 'border-gray-200 bg-white text-gray-600 hover:border-gray-300'
+                                                ? 'border-[#09a252] bg-green-50 text-gray-700'
+                                                : 'border-gray-200 bg-white text-gray-600 hover:border-gray-300'
                                                 }`}
                                         >
                                             <div className="text-2xl mb-1">👧</div>
@@ -127,7 +276,7 @@ export default function ChildBMITest() {
 
                                 {/* Input greutate */}
                                 <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                                    <label className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-2">
                                         Greutatea (kg)
                                     </label>
                                     <div className="relative">
@@ -136,7 +285,7 @@ export default function ChildBMITest() {
                                             value={weight}
                                             onChange={(e) => setWeight(e.target.value)}
                                             placeholder="Ex: 25"
-                                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#15c366] focus:border-transparent text-lg"
+                                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#09a252] focus:border-transparent text-lg"
                                             min="1"
                                             max="200"
                                             step="0.1"
@@ -147,7 +296,7 @@ export default function ChildBMITest() {
 
                                 {/* Input înălțime */}
                                 <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                                    <label className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-2">
                                         Înălțimea (cm)
                                     </label>
                                     <div className="relative">
@@ -156,7 +305,7 @@ export default function ChildBMITest() {
                                             value={height}
                                             onChange={(e) => setHeight(e.target.value)}
                                             placeholder="Ex: 120"
-                                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#15c366] focus:border-transparent text-lg"
+                                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#09a252] focus:border-transparent text-lg"
                                             min="50"
                                             max="200"
                                             step="0.1"
@@ -182,8 +331,10 @@ export default function ChildBMITest() {
                                 {/* Buton calculare */}
                                 <button
                                     onClick={handleCalculate}
-                                    disabled={!weight || !height || !age || isCalculating}
-                                    className="w-full bg-[#09a252] text-white font-semibold py-4 px-6 rounded-lg hover:bg-[#09a252] disabled:bg-gray-300 disabled:cursor-not-allowed transition-all duration-300 flex items-center justify-center gap-2"
+                                    disabled={!weight || !height ||
+                                        (ageInputType === 'years-months' ? !ageYears : (!birthDate || !measurementDate)) ||
+                                        isCalculating}
+                                    className="w-full bg-gradient-to-r from-[#09a252] to-green-600 text-white font-semibold py-4 px-6 rounded-lg hover:from-green-600 hover:to-green-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-all duration-300 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl transform hover:scale-105"
                                 >
                                     {isCalculating ? (
                                         <>
@@ -197,15 +348,6 @@ export default function ChildBMITest() {
                                     )}
                                 </button>
                             </div>
-
-                            {/* Info pentru părinți */}
-                            <div className="mt-6 p-4 bg-purple-50 rounded-lg">
-                                <h3 className="text-sm font-semibold text-purple-900 mb-2">👨‍👩‍👧‍👦 Pentru părinți</h3>
-                                <p className="text-sm text-purple-700">
-                                    IMC pentru copii folosește percentile care compară greutatea copilului cu
-                                    alți copii de aceeași vârstă și gen. Rezultatele sunt doar orientative.
-                                </p>
-                            </div>
                         </motion.div>
 
                         {/* Rezultate */}
@@ -213,9 +355,11 @@ export default function ChildBMITest() {
                             initial={{ opacity: 0, x: 20 }}
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ delay: 0.2 }}
-                            className="bg-white p-8 rounded-xl shadow-lg"
+                            className="bg-white p-8 rounded-xl shadow-lg border-t-4 border-blue-400"
                         >
-                            <h2 className="text-2xl font-bold text-gray-900 mb-6">Rezultatele evaluării</h2>
+                            <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+                                Rezultatele evaluării
+                            </h2>
 
                             <AnimatePresence mode="wait">
                                 {!result && !isCalculating && (
@@ -284,7 +428,7 @@ export default function ChildBMITest() {
                                         <div className="bg-gray-50 p-4 rounded-lg">
                                             <h3 className="text-sm font-semibold text-gray-700 mb-3">Poziția în percentile</h3>
                                             <div className="relative">
-                                                <div className="h-6 bg-gradient-to-r from-green-300 via-green-300 via-yellow-300 to-red-300 rounded-full"></div>
+                                                <div className="h-6 bg-gradient-to-r from-green-300 via-yellow-300 to-red-300 rounded-full"></div>
                                                 <div
                                                     className="absolute top-0 w-3 h-6 bg-gray-800 rounded-full transform -translate-x-1/2"
                                                     style={{ left: `${result.percentile}%` }}
@@ -305,25 +449,6 @@ export default function ChildBMITest() {
                                             </div>
                                         </div>
 
-                                        {/* Risk level */}
-                                        <div className={`p-4 rounded-lg ${result.riskLevel === 'low' ? 'bg-green-50 border border-green-200' :
-                                                result.riskLevel === 'moderate' ? 'bg-yellow-50 border border-yellow-200' :
-                                                    'bg-red-50 border border-red-200'
-                                            }`}>
-                                            <div className="flex items-center gap-2 mb-2">
-                                                <span className="text-lg">
-                                                    {result.riskLevel === 'low' ? '✅' :
-                                                        result.riskLevel === 'moderate' ? '⚠️' : '🚨'}
-                                                </span>
-                                                <span className="font-semibold">
-                                                    Nivel de atenție: {
-                                                        result.riskLevel === 'low' ? 'Normal' :
-                                                            result.riskLevel === 'moderate' ? 'Moderat' : 'Ridicat'
-                                                    }
-                                                </span>
-                                            </div>
-                                        </div>
-
                                         {/* Action buttons */}
                                         <div className="space-y-3">
                                             <button
@@ -332,9 +457,12 @@ export default function ChildBMITest() {
                                             >
                                                 Testează alt copil
                                             </button>
-                                            <button className="w-full bg-[#09a252] text-white font-semibold py-3 px-6 rounded-lg hover:bg-[#09a252] transition-colors duration-300">
+                                            <a
+                                                href="/team"
+                                                className="w-full bg-[#09a252] text-white font-semibold py-3 px-6 rounded-lg hover:bg-green-700 transition-colors duration-300 text-center block hover:cursor-pointer"
+                                            >
                                                 Consultă un specialist
-                                            </button>
+                                            </a>
                                         </div>
                                     </motion.div>
                                 )}
@@ -402,7 +530,7 @@ export default function ChildBMITest() {
                                 </ul>
 
                                 <div className="bg-green-50 p-4 rounded-lg">
-                                    <h4 className="font-semibold text-green-900 mb-2">💡 Sfat important</h4>
+                                    <h4 className="font-semibold text-green-900 mb-2">Sfat</h4>
                                     <p className="text-sm text-[#09a252]">
                                         Nu vă alarmați dacă copilul nu se află exact în "normal".
                                         Fiecare copil are ritmul său de creștere. Consultați pediatrul
@@ -411,36 +539,9 @@ export default function ChildBMITest() {
                                 </div>
                             </div>
                         </div>
-
-                        {/* Sfaturi pentru părinți */}
-                        <div className="mt-8 p-6 bg-green-50 rounded-lg">
-                            <h3 className="text-lg font-semibold text-green-900 mb-4">🏠 Sfaturi pentru acasă</h3>
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <div>
-                                    <h4 className="font-medium text-green-800 mb-2">Alimentația sănătoasă:</h4>
-                                    <ul className="text-sm text-gray-700 space-y-1">
-                                        <li>• Servește mese regulate</li>
-                                        <li>• Includeți fructe și legume zilnic</li>
-                                        <li>• Limitați dulciurile și băuturile zaharoase</li>
-                                        <li>• Beți multă apă</li>
-                                    </ul>
-                                </div>
-                                <div>
-                                    <h4 className="font-medium text-green-800 mb-2">Activitatea fizică:</h4>
-                                    <ul className="text-sm text-gray-700 space-y-1">
-                                        <li>• Cel puțin 60 min/zi de mișcare</li>
-                                        <li>• Jocuri active în aer liber</li>
-                                        <li>• Limitați timpul la ecrane</li>
-                                        <li>• Faceți sport împreună</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-
                         {/* Warning despre interpretare */}
                         <div className="mt-6 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
                             <div className="flex items-start gap-3">
-                                <div className="text-yellow-600 text-xl">⚠️</div>
                                 <div>
                                     <h4 className="font-semibold text-yellow-800 mb-1">Important de reținut</h4>
                                     <p className="text-sm text-yellow-700">

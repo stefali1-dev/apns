@@ -199,24 +199,26 @@ export default function EBooksPage() {
         <link rel="canonical" href="/ebooks" />
       </Head>
 
-      <div className="min-h-screen bg-gray-50">
-        {/* Banner Section */}
-        <div className="bg-white py-12 border-b border-green-100">
-          <div className="max-w-7xl mx-auto px-4 text-center">
-            <h1 className="text-4xl font-extrabold text-[#09a252] mb-4">E-Books & Resurse</h1>
-            <p className="text-gray-600 text-lg">
-              Informații și ghiduri de la experți pentru a vă ajuta să gestionați alimentația și să trăiți o viață mai sănătoasă.
-            </p>
+      <div className="min-h-screen bg-green-50">
+        {/* Hero Section */}
+        <div className="relative bg-[#09a252] text-white overflow-hidden">
+          <div className="container mx-auto px-4 pt-16 pb-12 relative z-10">
+            <div className="max-w-4xl mx-auto text-center">
+              <h1 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">E-Books & Resurse</h1>
+              <p className="text-xl mb-8 max-w-2xl mx-auto">
+                Informații și ghiduri de la experți pentru a vă ajuta să gestionați alimentația și să trăiți o viață mai sănătoasă.
+              </p>
+            </div>
           </div>
         </div>
 
         {/* Main Content */}
-        <div className="max-w-7xl mx-auto px-6 py-12">
+        <div className="container mx-auto px-4 py-8">
           <div className="flex flex-col lg:flex-row gap-8">
             {/* Sidebar with Filters */}
             <div className="w-full lg:w-1/4">
-              <div className="bg-white rounded-xl shadow-md border border-gray-200 p-6 sticky top-6">
-                <h2 className="text-xl font-bold mb-6 text-gray-800">Filtre</h2>
+              <div className="bg-white rounded-lg shadow-lg p-6 sticky top-6">
+                <h2 className="text-xl font-bold mb-6 text-[#09a252]">Filtre</h2>
 
                 {/* Search */}
                 <div className="mb-6">
@@ -230,7 +232,7 @@ export default function EBooksPage() {
                       value={filters.search}
                       onChange={(e) => updateFilters({ search: e.target.value })}
                       placeholder="Caută e-books..."
-                      className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all"
+                      className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-[#09a252] focus:border-[#09a252] transition-all"
                     />
                     <div className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400">
                       <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -255,7 +257,7 @@ export default function EBooksPage() {
                               : filters.categories.filter(id => id !== category.id);
                             updateFilters({ categories: newCategories });
                           }}
-                          className="h-4 w-4 text-[#09a252] focus:ring-green-500 border-gray-300 rounded"
+                          className="h-4 w-4 text-[#09a252] focus:ring-[#09a252] border-gray-300 rounded"
                         />
                         <span className="ml-3 text-sm text-gray-700 hover:text-[#09a252] transition-colors">
                           {category.name}
@@ -279,7 +281,7 @@ export default function EBooksPage() {
                             : filters.priceTypes.filter(type => type !== 'free');
                           updateFilters({ priceTypes: newPriceTypes });
                         }}
-                        className="h-4 w-4 text-[#09a252] focus:ring-green-500 border-gray-300 rounded"
+                        className="h-4 w-4 text-[#09a252] focus:ring-[#09a252] border-gray-300 rounded"
                       />
                       <span className="ml-3 text-sm text-gray-700 hover:text-[#09a252] transition-colors">Gratuit</span>
                     </label>
@@ -293,7 +295,7 @@ export default function EBooksPage() {
                             : filters.priceTypes.filter(type => type !== 'paid');
                           updateFilters({ priceTypes: newPriceTypes });
                         }}
-                        className="h-4 w-4 text-[#09a252] focus:ring-green-500 border-gray-300 rounded"
+                        className="h-4 w-4 text-[#09a252] focus:ring-[#09a252] border-gray-300 rounded"
                       />
                       <span className="ml-3 text-sm text-gray-700 hover:text-[#09a252] transition-colors">Cu plată</span>
                     </label>
@@ -314,7 +316,7 @@ export default function EBooksPage() {
                             : filters.formats.filter(format => format !== 'pdf');
                           updateFilters({ formats: newFormats });
                         }}
-                        className="h-4 w-4 text-[#09a252] focus:ring-green-500 border-gray-300 rounded"
+                        className="h-4 w-4 text-[#09a252] focus:ring-[#09a252] border-gray-300 rounded"
                       />
                       <span className="ml-3 text-sm text-gray-700 hover:text-[#09a252] transition-colors">PDF</span>
                     </label>
@@ -328,7 +330,7 @@ export default function EBooksPage() {
                             : filters.formats.filter(format => format !== 'epub');
                           updateFilters({ formats: newFormats });
                         }}
-                        className="h-4 w-4 text-[#09a252] focus:ring-green-500 border-gray-300 rounded"
+                        className="h-4 w-4 text-[#09a252] focus:ring-[#09a252] border-gray-300 rounded"
                       />
                       <span className="ml-3 text-sm text-gray-700 hover:text-[#09a252] transition-colors">EPUB</span>
                     </label>
@@ -366,7 +368,7 @@ export default function EBooksPage() {
                     id="sort"
                     value={filters.sort}
                     onChange={(e) => updateFilters({ sort: e.target.value as FilterState['sort'] })}
-                    className="border border-gray-300 rounded-lg px-4 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all"
+                    className="border border-gray-300 rounded-lg px-4 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#09a252] focus:border-[#09a252] transition-all"
                   >
                     <option value="newest">Cele mai noi</option>
                     <option value="title_asc">Titlu: A-Z</option>
@@ -382,7 +384,7 @@ export default function EBooksPage() {
                 <>
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
                     {currentEbooks.map((ebook) => (
-                      <div key={ebook.id} className="bg-white rounded-xl shadow-md border border-gray-200 overflow-hidden hover:shadow-lg transition-all duration-300 group">
+                      <div key={ebook.id} className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 group">
                         <Link href={`/ebooks/${ebook.slug}`}>
                           <div className="relative aspect-square overflow-hidden bg-gradient-to-br from-green-100 to-green-200">
                             {ebook.coverImage ? (
@@ -391,7 +393,7 @@ export default function EBooksPage() {
                                 alt={ebook.title}
                                 width={400}
                                 height={400}
-                                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                                className="w-full h-full object-cover"
                               />
                             ) : (
                               <div className="w-full h-full flex items-center justify-center">
@@ -406,7 +408,7 @@ export default function EBooksPage() {
                                 Gratuit
                               </span>
                             ) : (
-                              <span className="absolute top-3 right-3 bg-blue-600 text-white px-3 py-1 text-xs font-bold rounded-full shadow-lg">
+                              <span className="absolute top-3 right-3 bg-[#09a252] text-white px-3 py-1 text-xs font-bold rounded-full shadow-lg">
                                 {ebook.price} Lei
                               </span>
                             )}
@@ -414,7 +416,7 @@ export default function EBooksPage() {
 
                           <div className="p-6">
                             <div className="flex items-center justify-between mb-3">
-                              <span className="inline-block bg-green-100 text-green-800 text-xs px-3 py-1 rounded-full font-medium">
+                              <span className="inline-block bg-green-100 text-[#09a252] text-xs px-3 py-1 rounded-full font-medium">
                                 {ebook.category.name}
                               </span>
                               <span className="text-gray-500 text-xs font-medium">
@@ -440,7 +442,7 @@ export default function EBooksPage() {
                         <div className="px-6 pb-6">
                           <Link
                             href={`/ebooks/${ebook.slug}`}
-                            className="block w-full bg-[#09a252] text-white text-center py-3 rounded-lg hover:bg-[#09a252] transition-colors font-semibold"
+                            className="block w-full bg-[#09a252] text-white text-center py-3 rounded-lg hover:bg-green-700 transition-colors font-semibold"
                           >
                             {ebook.isFree ? 'Descarcă Acum' : 'Vezi Detalii'}
                           </Link>
@@ -503,7 +505,7 @@ export default function EBooksPage() {
                 </>
               ) : (
                 /* No Results */
-                <div className="bg-white rounded-xl shadow-md border border-gray-200 p-12 text-center">
+                <div className="bg-white rounded-lg shadow-lg p-12 text-center">
                   <svg className="mx-auto h-16 w-16 text-gray-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
@@ -513,7 +515,7 @@ export default function EBooksPage() {
                   </p>
                   <button
                     onClick={handleClearFilters}
-                    className="inline-flex items-center px-6 py-3 border border-transparent rounded-lg shadow-sm text-sm font-semibold text-white bg-[#09a252] hover:bg-[#09a252] transition-colors"
+                    className="inline-flex items-center px-6 py-3 rounded-lg shadow-sm text-sm font-semibold text-white bg-[#09a252] hover:bg-green-700 transition-colors"
                   >
                     Șterge filtrele
                   </button>
@@ -524,33 +526,38 @@ export default function EBooksPage() {
         </div>
 
         {/* Newsletter Subscription */}
-        <div className="bg-gradient-to-r from-green-50 to-green-100 py-16 border-t border-green-200">
-          <div className="max-w-4xl mx-auto px-6 text-center">
-            <h2 className="text-3xl font-bold text-green-800 mb-4">
+        <div className="bg-[#09a252] py-16">
+          <div className="container mx-auto px-4 text-center">
+            <h2 className="text-3xl font-bold text-white mb-4">
               Abonează-te la Newsletter
             </h2>
-            <p className="text-gray-600 mb-8 text-lg max-w-2xl mx-auto leading-relaxed">
+            <p className="text-white mb-8 text-lg max-w-2xl mx-auto leading-relaxed">
               Fii la curent cu cele mai noi e-books, resurse și sfaturi nutriționale direct în inbox-ul tău.
             </p>
 
-            <form onSubmit={handleSubscription} className="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto">
+            <form
+              onSubmit={handleSubscription}
+              className="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto"
+              autoComplete="off"
+            >
               <input
-                type="email"
-                value={emailSubscription}
-                onChange={(e) => setEmailSubscription(e.target.value)}
-                placeholder="Adresa ta de email"
-                className="px-6 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-green-500 flex-grow transition-all"
-                required
+          type="email"
+          value={emailSubscription}
+          onChange={(e) => setEmailSubscription(e.target.value)}
+          placeholder="Adresa ta de email"
+          className="px-6 py-3 border border-white rounded-lg focus:ring-2 focus:ring-white focus:border-white flex-grow transition-all placeholder-green-900 bg-white text-black font-medium"
+          required
+          aria-label="Adresa ta de email"
               />
               <button
-                type="submit"
-                className="bg-[#09a252] text-white px-8 py-3 rounded-xl hover:bg-[#09a252] hover:shadow-lg transform hover:scale-105 transition-all duration-300 font-semibold whitespace-nowrap"
+          type="submit"
+          className="bg-white text-[#09a252] px-8 py-3 rounded-lg hover:bg-green-100 hover:shadow-lg font-semibold whitespace-nowrap transition-all duration-300 border border-white"
               >
-                Abonează-te
+          Abonează-te
               </button>
             </form>
 
-            <p className="text-xs text-gray-500 mt-4">
+            <p className="text-sm text-green-100 mt-4">
               Ne respectăm abonații. Dezabonează-te oricând cu un singur click.
             </p>
           </div>

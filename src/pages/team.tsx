@@ -88,12 +88,7 @@ const TeamPage: React.FC = () => {
 
             <div className="bg-white min-h-screen">
                 {/* Hero Section */}
-                <section className="gradient-bg relative overflow-hidden">
-                    <div className="absolute inset-0">
-                        <div className="absolute top-0 left-0 w-64 h-64 bg-white/10 rounded-full -translate-x-32 -translate-y-32"></div>
-                        <div className="absolute bottom-0 right-0 w-96 h-96 bg-white/5 rounded-full translate-x-48 translate-y-48"></div>
-                    </div>
-
+                <section className="bg-[#09a252] relative overflow-hidden">
                     <div className="relative max-w-screen-xl mx-auto px-6 py-20">
                         <div className="text-center text-white">
                             <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
