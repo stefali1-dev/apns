@@ -79,7 +79,7 @@ export default function Footer() {
                                 </Link>
                             </li>
                             <li>
-                                <Link href="/webinars" className="text-gray-300 hover:text-[#09a252] transition-colors text-sm">
+                                <Link href="/coming-soon" className="text-gray-300 hover:text-[#09a252] transition-colors text-sm">
                                     Webinarii
                                 </Link>
                             </li>

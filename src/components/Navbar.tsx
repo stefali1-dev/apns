@@ -193,7 +193,7 @@ export default function Navbar() {
                         </li>
                         <li>
                           <Link
-                            href="#"
+                            href="/coming-soon"
                             className="block text-base text-gray-700 hover:text-[#09a252] transition-colors font-medium py-2 px-3 rounded-lg hover:bg-gray-100"
                           >
                             Proiecte
@@ -237,7 +237,7 @@ export default function Navbar() {
                             </svg>
                           </div>
                           <div>
-                            <Link href="#" className="block font-bold text-gray-900 hover:text-[#09a252] transition-colors">
+                            <Link href="/coming-soon" className="block font-bold text-gray-900 hover:text-[#09a252] transition-colors">
                               Rapoarte anuale
                             </Link>
                             <p className="text-sm text-gray-600 mt-1">Consultă rapoartele noastre de activitate și transparența financiară</p>
@@ -252,7 +252,7 @@ export default function Navbar() {
                             </svg>
                           </div>
                           <div>
-                            <Link href="#" className="block font-bold text-gray-900 hover:text-[#09a252] transition-colors">
+                            <Link href="/coming-soon" className="block font-bold text-gray-900 hover:text-[#09a252] transition-colors">
                               Parteneri
                             </Link>
                             <p className="text-sm text-gray-600 mt-1">Organizațiile și instituțiile cu care colaborăm</p>
@@ -347,7 +347,7 @@ export default function Navbar() {
                         </li>
                         <li>
                           <Link
-                            href="#"
+                            href="coming-soon"
                             className="block text-base text-gray-700 hover:text-[#09a252] transition-colors font-medium py-2 px-3 rounded-lg hover:bg-gray-100"
                           >
                             Toate articolele
@@ -383,7 +383,7 @@ export default function Navbar() {
                             </svg>
                           </div>
                           <div>
-                            <Link href="/webinars" className="block font-bold text-gray-900 hover:text-[#09a252] transition-colors">
+                            <Link href="/coming-soon" className="block font-bold text-gray-900 hover:text-[#09a252] transition-colors">
                               Webinarii live
                             </Link>
                             <p className="text-sm text-gray-600 mt-1">Participă la sesiunile noastre educaționale interactive</p>
@@ -438,7 +438,7 @@ export default function Navbar() {
           </li>
           <li className="px-12">
             <Link
-              href="/webinars"
+              href="/coming-soon"
               className="text-lg transition-colors duration-200 hover:text-[#09a252] hover:underline underline-offset-4"
             >
               Webinarii
@@ -526,8 +526,8 @@ export default function Navbar() {
               {mobileDespreNoiOpen && (
                 <div className="pl-4 space-y-1">
                   <Link href="/team" className="block px-3 py-2 text-gray-600 hover:bg-green-50 hover:text-[#09a252] rounded-lg transition-colors">Voluntari</Link>
-                  <Link href="#" className="block px-3 py-2 text-gray-600 hover:bg-green-50 hover:text-[#09a252] rounded-lg transition-colors">Proiecte</Link>
-                  <Link href="#" className="block px-3 py-2 text-gray-600 hover:bg-green-50 hover:text-[#09a252] rounded-lg transition-colors">Statut</Link>
+                  <Link href="/coming-soon" className="block px-3 py-2 text-gray-600 hover:bg-green-50 hover:text-[#09a252] rounded-lg transition-colors">Proiecte</Link>
+                  <Link href="/coming-soon" className="block px-3 py-2 text-gray-600 hover:bg-green-50 hover:text-[#09a252] rounded-lg transition-colors">Statut</Link>
                 </div>
               )}
             </div>
