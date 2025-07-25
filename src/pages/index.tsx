@@ -157,20 +157,30 @@ export default function Home() {
 
         {/* Cards Section */}
         <section className="max-w-screen-xl mx-auto py-10 px-4">
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-6 max-w-xl mx-auto">
+          {/* Section Header */}
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              Specialități Medicale
+            </h2>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-2xl mx-auto">
             {CARD_ITEMS.map(({ slug, label, Icon }) => (
               <Link
                 key={slug}
                 href={`/article/${slug}`}          // e.g. /article/diabetes
-                className="shadow-lg group relative flex flex-col items-center bg-white rounded-lg p-4 hover:shadow-lg transition-all duration-300 ease-in-out min-h-[160px] justify-center transform hover:-translate-y-2.5"
+                className="shadow-lg group relative flex flex-col bg-white rounded-lg p-6 hover:shadow-lg transition-all duration-300 ease-in-out min-h-[180px] transform hover:-translate-y-2.5"
               >
-                {/* icon */}
-                <Icon className="transition-colors duration-300 group-hover:scale-105" />
+                {/* icon - fixed position at top */}
+                <div className="flex justify-center items-center h-20 mb-4">
+                  <Icon className="transition-colors duration-300 group-hover:scale-105" />
+                </div>
 
-                {/* caption */}
-                <h3 className="text-xl py-2 font-semibold text-gray-700 text-center px-2 leading-tight">
-                  {label}
-                </h3>
+                {/* caption - positioned at bottom with proper spacing */}
+                <div className="flex-1 flex items-end justify-center">
+                  <h3 className="text-lg font-semibold text-gray-700 text-center leading-tight">
+                    {label}
+                  </h3>
+                </div>
               </Link>
             ))}
           </div>
@@ -328,16 +338,16 @@ export default function Home() {
           <div className="max-w-screen-xl mx-auto px-6">
             <div className="flex flex-col md:flex-row md:items-center gap-8">
               <div className="md:w-1/2">
-                <h2 className="text-3xl font-bold text-gray-900 mb-4">Susține educația nutrițională!</h2>
+                <h2 className="text-3xl font-bold text-gray-900 mb-4">Împărtășește povestea ta!</h2>
                 <p className="text-gray-700 mb-6">
-                  Poți redirecționa 3.5% din impozitul pe venit către APNS fără costuri suplimentare.
-                  Fondurile strânse susțin programele noastre în școli și crearea de resurse educaționale.
+                  Alătură-te echipei noastre de dieteticieni și profesioniști din domeniul sănătății.
+                  Împreună putem face diferența în comunitățile noastre și putem inspira schimbări pozitive în viețile oamenilor.
                 </p>
                 <Link
-                  href="/donate"
+                  href="/enroll"
                   className="inline-block bg-[#09a252] text-white px-6 py-3 rounded shadow hover:bg-[#09a252] transition-colors duration-300"
                 >
-                  Redirecționează 3.5% impozit
+                  Devino voluntar
                 </Link>
               </div>
 
