@@ -63,14 +63,7 @@ const TeamPage: React.FC = () => {
                     box-shadow: 0 20px 40px rgba(0,0,0,0.15);
                 }
 
-                .member-image {
-                    width: 100%;
-                    height: 280px;
-                    object-fit: cover;
-                    transition: transform 0.3s ease;
-                }
-
-                .member-card:hover .member-image {
+                .member-card:hover {
                     transform: scale(1.05);
                 }
 
@@ -144,7 +137,6 @@ const TeamPage: React.FC = () => {
                                             <img
                                                 src={member.imageUrl}
                                                 alt={member.name}
-                                                className="member-image"
                                             />
                                         </div>
                                         <div className="p-6">
