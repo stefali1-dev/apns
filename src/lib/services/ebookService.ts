@@ -59,123 +59,39 @@ const mockAuthors: Author[] = [
 ];
 
 const mockCategories: Category[] = [
-  { id: 1, name: 'Nutriție de bază' },
-  { id: 2, name: 'Diete speciale' },
-  { id: 3, name: 'Rețete sănătoase' },
-  { id: 4, name: 'Nutriție sportivă' },
-  { id: 5, name: 'Sănătate digestivă' },
-  { id: 6, name: 'Prevenție boli' }
+  { id: 1, name: 'Nutriție de bază' }
 ];
 
 export const mockEbooks: EBook[] = [
   {
     id: 1,
-    title: 'Ghidul complet al alimentației sănătoase',
-    slug: 'ghidul-complet-alimentatie-sanatoasa',
-    shortDescription: 'Totul despre nutriția echilibrată și beneficiile unei alimentații corecte pentru sănătate.',
+    title: 'Spring Restart',
+    slug: 'spring-restart',
+    shortDescription: 'Slăbește sănătos chiar și în perioadele ocupate cu strategii simple și eficiente.',
     fullDescription: `
-      <div class="space-y-6">
-        <p class="text-lg leading-relaxed text-gray-700">
-          Acest <strong class="text-[#09a252]">ghid complet</strong> vă oferă toate informațiile necesare pentru a adopta un stil de viață alimentar sănătos și echilibrat. Veți descoperi principiile fundamentale ale nutriției moderne, bazate pe cele mai recente cercetări științifice.
-        </p>
-        
-        <div class="bg-green-50 border-l-4 border-green-500 p-6 rounded-r-lg">
-          <h4 class="text-lg font-semibold text-green-800 mb-3">🎯 Ce veți învăța din acest e-book:</h4>
-          <ul class="space-y-2 text-gray-700">
-            <li class="flex items-start">
-              <span class="text-[#09a252] mr-2 mt-1">✓</span>
-              <span>Principiile de bază ale unei <em>alimentații echilibrate</em></span>
-            </li>
-            <li class="flex items-start">
-              <span class="text-[#09a252] mr-2 mt-1">✓</span>
-              <span>Rolul <strong>macronutrienților și micronutrienților</strong> în organism</span>
-            </li>
-            <li class="flex items-start">
-              <span class="text-[#09a252] mr-2 mt-1">✓</span>
-              <span>Cum să planificați mesele pentru o nutriție optimă</span>
-            </li>
-            <li class="flex items-start">
-              <span class="text-[#09a252] mr-2 mt-1">✓</span>
-              <span>Strategii pentru menținerea unei <strong class="text-blue-600">greutăți sănătoase</strong></span>
-            </li>
-            <li class="flex items-start">
-              <span class="text-[#09a252] mr-2 mt-1">✓</span>
-              <span>Alimente funcționale și beneficiile lor pentru sănătate</span>
-            </li>
-            <li class="flex items-start">
-              <span class="text-[#09a252] mr-2 mt-1">✓</span>
-              <span>Cum să citiți și să interpretați <em>etichetele alimentare</em></span>
-            </li>
-          </ul>
-        </div>
-        
-        
-        <p class="text-gray-700 leading-relaxed">
-          <strong class="text-[#09a252]">Ideal pentru:</strong> începători care doresc să își îmbunătățească alimentația, 
-          dar și pentru cei care vor să își aprofundeze cunoștințele în domeniul nutriției. Ghidul este structurat 
-          progresiv, de la concepte de bază la aplicații practice avansate.
-        </p>
-        
-      </div>
+      <p>Ghidul complet pentru persoanele ocupate care vor să slăbească sănătos și să își recapete energia. Descoperă cum să îți accelerezi metabolismul, să integrezi alimentele potrivite și să creezi obiceiuri sustenabile.</p>
+      
+      <p><strong>Ce vei descoperi:</strong></p>
+      <ul>
+        <li>Cum să îți accelerezi metabolismul cu strategii simple</li>
+        <li>Rețete rapide și hrănitoare în mai puțin de 15 minute</li>
+        <li>Cum să integrezi mișcarea în rutina zilnică, chiar dacă nu ajungi la sală</li>
+        <li>De ce somnul este aliatul tău în menținerea unei greutăți optime</li>
+        <li>7 alimente care susțin natural detoxifierea organismului</li>
+      </ul>
+      
+      <p>Un restart complet pentru corpul și mintea ta, perfect adaptat pentru persoanele cu un program încărcat.</p>
     `,
     toc: `
-      <ol class="space-y-3">
-        <li>
-          <div class="flex justify-between items-center py-3 border-b border-gray-100">
-            <span class="font-medium text-gray-800">1. Introducere în Nutriția Modernă</span>
-            <span class="text-gray-500 text-sm">Pagina 1</span>
-          </div>
-        </li>
-        <li>
-          <div class="flex justify-between items-center py-3 border-b border-gray-100">
-            <span class="font-medium text-gray-800">2. Macronutrienții - Combustibilul Corpului</span>
-            <span class="text-gray-500 text-sm">Pagina 15</span>
-          </div>
-          <ul class="ml-6 mt-3 space-y-2 text-gray-600 text-sm">
-            <li class="flex items-center">
-              <span class="w-2 h-2 bg-green-400 rounded-full mr-3"></span>
-              2.1. Carbohidrații - Energia de bază
-            </li>
-            <li class="flex items-center">
-              <span class="w-2 h-2 bg-green-400 rounded-full mr-3"></span>
-              2.2. Proteinele - Materialul de construcție
-            </li>
-            <li class="flex items-center">
-              <span class="w-2 h-2 bg-green-400 rounded-full mr-3"></span>
-              2.3. Lipidele - Energia de rezervă
-            </li>
-          </ul>
-        </li>
-        <li>
-          <div class="flex justify-between items-center py-3 border-b border-gray-100">
-            <span class="font-medium text-gray-800">3. Micronutrienții Esențiali</span>
-            <span class="text-gray-500 text-sm">Pagina 35</span>
-          </div>
-        </li>
-        <li>
-          <div class="flex justify-between items-center py-3 border-b border-gray-100">
-            <span class="font-medium text-gray-800">4. Planificarea Meselor Echilibrate</span>
-            <span class="text-gray-500 text-sm">Pagina 55</span>
-          </div>
-        </li>
-        <li>
-          <div class="flex justify-between items-center py-3 border-b border-gray-100">
-            <span class="font-medium text-gray-800">5. Alimente Funcționale și Superalimente</span>
-            <span class="text-gray-500 text-sm">Pagina 75</span>
-          </div>
-        </li>
-        <li>
-          <div class="flex justify-between items-center py-3 border-b border-gray-100">
-            <span class="font-medium text-gray-800">6. Ghid Practic pentru Cumpărături</span>
-            <span class="text-gray-500 text-sm">Pagina 95</span>
-          </div>
-        </li>
-        <li>
-          <div class="flex justify-between items-center py-3">
-            <span class="font-medium text-gray-800">7. Meniuri Model și Rețete</span>
-            <span class="text-gray-500 text-sm">Pagina 105</span>
-          </div>
-        </li>
+      <ol>
+        <li>Introducere - sănătatea începe din interior</li>
+        <li>Metabolismul - mit vs adevăr</li>
+        <li>7 superalimente</li>
+        <li>Rețete rapide și sănătoase pentru persoane ocupate</li>
+        <li>Suplimente și vitamine esențiale</li>
+        <li>Sportul & hidratarea - secretul unui corp sănătos</li>
+        <li>Somnul - Aliatul tău în regenerarea corpului</li>
+        <li>Încheiere - Sănătatea e în mâinile tale</li>
       </ol>
     `,
     category: mockCategories[0],
@@ -183,8 +99,8 @@ export const mockEbooks: EBook[] = [
     coverImage: '/images/ebook.png',
     isFree: true,
     format: 'pdf',
-    pageCount: 120,
-    publishedDate: '2024-01-15'
+    pageCount: 14,
+    publishedDate: '2024-03-15'
   }
 ];
 
@@ -238,7 +154,7 @@ class EBookService {
   }
 
   async sendEBookDownload(slug: string, email: string): Promise<{ success: boolean; error?: string }> {
-    await this.delay(1000); // Simulează procesarea email-ului
+    await this.delay(1000);
 
     // Validări simple
     if (!email || !email.includes('@')) {
@@ -254,10 +170,207 @@ class EBookService {
       return { success: false, error: 'Acest e-book nu este gratuit' };
     }
 
-    // Simulează trimiterea email-ului
-    console.log(`Sending ebook "${ebook.title}" to ${email}`);
+    try {
+      // Pentru moment, folosim întotdeauna spring-restart.pdf
+      const baseUrl = typeof window !== 'undefined' 
+        ? window.location.origin 
+        : process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
+      const ebookUrl = `${baseUrl}/ebooks/spring-restart.pdf`;
+      
+      // Creează corpul email-ului cu styling consistent
+      const htmlContent = this.createEbookEmailTemplate(ebook, ebookUrl);
+      
+      // Trimite email-ul folosind API-ul existent
+      const response = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          toEmail: email,
+          subject: `E-book-ul tău gratuit: ${ebook.title}`,
+          htmlContent: htmlContent,
+        }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        console.error('Eroare la trimiterea email-ului:', errorData);
+        return { success: false, error: 'Eroare la trimiterea email-ului' };
+      }
+
+      console.log(`E-book "${ebook.title}" trimis cu succes către ${email}`);
+      return { success: true };
+    } catch (error) {
+      console.error('Eroare la trimiterea email-ului:', error);
+      return { success: false, error: 'A apărut o eroare la trimiterea email-ului' };
+    }
+  }
+
+  private createEbookEmailTemplate(ebook: EBook, downloadUrl: string): string {
+    const currentYear = new Date().getFullYear();
     
-    return { success: true };
+    return `
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>E-book-ul tău: ${ebook.title}</title>
+  <!--[if mso]>
+  <noscript>
+    <xml>
+      <o:OfficeDocumentSettings>
+        <o:PixelsPerInch>96</o:PixelsPerInch>
+      </o:OfficeDocumentSettings>
+    </xml>
+  </noscript>
+  <![endif]-->
+  <style>
+    /* Reset styles */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; color: #333333; }
+    table { border-collapse: collapse; width: 100%; }
+    img { max-width: 100%; height: auto; display: block; }
+    
+    /* Layout styles */
+    .email-container { max-width: 600px; margin: 0 auto; background-color: #ffffff; }
+    .email-wrapper { background-color: #f8f9fa; padding: 20px 0; }
+    
+    /* Header styles */
+    .header { background-color: #ffffff; padding: 30px 40px; text-align: center; border-bottom: 1px solid #e9ecef; }
+    .logo { font-size: 24px; font-weight: bold; color: #09a252; margin-bottom: 10px; }
+    .header-subtitle { color: #6c757d; font-size: 14px; }
+    
+    /* Main content styles */
+    .main-content { padding: 40px 40px 30px; background-color: #ffffff; }
+    .hero-section { text-align: center; margin-bottom: 35px; }
+    .hero-title { font-size: 28px; font-weight: bold; color: #2d3748; margin-bottom: 15px; line-height: 1.3; }
+    .hero-subtitle { font-size: 16px; color: #4a5568; margin-bottom: 25px; }
+    
+    /* E-book card styles */
+    .ebook-card { background-color: #f8fffe; border: 1px solid #e6f7f3; border-radius: 12px; padding: 25px; margin-bottom: 30px; text-align: center; }
+    .ebook-title { font-size: 20px; font-weight: bold; color: #2d3748; margin-bottom: 10px; }
+    .ebook-description { color: #4a5568; font-size: 14px; margin-bottom: 20px; line-height: 1.5; }
+    .ebook-meta { display: inline-block; background-color: #09a252; color: #ffffff; padding: 6px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; margin-bottom: 25px; }
+    
+    /* Download button styles */
+    .download-button { 
+      display: inline-block; 
+      background-color: #09a252; 
+      color: #ffffff !important; 
+      padding: 14px 32px; 
+      text-decoration: none; 
+      border-radius: 8px; 
+      font-weight: 600; 
+      font-size: 16px; 
+      margin: 20px 0;
+      transition: background-color 0.3s ease;
+    }
+    .download-button:hover { background-color: #078043; color: #ffffff !important; }
+    .download-button:visited { color: #ffffff !important; }
+    .download-button:link { color: #ffffff !important; }
+    .download-button:active { color: #ffffff !important; }
+    
+    /* Benefits section */
+    .benefits { margin: 30px 0; }
+    .benefits-title { font-size: 18px; font-weight: bold; color: #2d3748; margin-bottom: 15px; text-align: center; }
+    .benefit-item { display: flex; align-items: flex-start; margin-bottom: 12px; }
+    .benefit-icon { color: #09a252; margin-right: 10px; flex-shrink: 0; width: 16px; height: 16px; }
+    .benefit-text { color: #4a5568; font-size: 14px; }
+    
+    /* Footer styles */
+    .footer { background-color: #f8f9fa; padding: 30px 40px; text-align: center; border-top: 1px solid #e9ecef; }
+    .footer-text { color: #6c757d; font-size: 12px; line-height: 1.5; margin-bottom: 15px; }
+    .footer-links { margin-bottom: 15px; }
+    .footer-link { color: #09a252; text-decoration: none; font-size: 12px; margin: 0 10px; }
+    .footer-link:hover { text-decoration: underline; }
+    .social-links { margin-top: 20px; }
+    .social-link { color: #6c757d; text-decoration: none; margin: 0 8px; font-size: 12px; }
+    
+    /* Responsive design */
+    @media only screen and (max-width: 480px) {
+      .email-wrapper { padding: 10px; }
+      .header, .main-content, .footer { padding: 20px; }
+      .hero-title { font-size: 24px; }
+      .download-button { padding: 12px 24px; font-size: 14px; }
+    }
+    
+    /* Dark mode support */
+    @media (prefers-color-scheme: dark) {
+      .email-container { background-color: #ffffff; }
+      .hero-title, .ebook-title, .benefits-title { color: #2d3748; }
+    }
+  </style>
+</head>
+<body>
+  <div class="email-wrapper">
+    <div class="email-container">
+      <!-- Header -->
+      <div class="header">
+        <div class="logo">APNS</div>
+        <div class="header-subtitle">Asociația pentru Promovarea Nutriției Sănătoase</div>
+      </div>
+      
+      <!-- Main Content -->
+      <div class="main-content">
+        <!-- Hero Section -->
+        <div class="hero-section">
+          <h1 class="hero-title">E-book-ul tău este gata pentru descărcare!</h1>
+          <p class="hero-subtitle">Mulțumim că ai ales să înveți alături de noi despre nutriția sănătoasă.</p>
+        </div>
+        
+        <!-- E-book Card -->
+        <div class="ebook-card">
+          <h2 class="ebook-title">${ebook.title}</h2>
+          <p class="ebook-description">${ebook.shortDescription}</p>
+          
+          <a href="${downloadUrl}" class="download-button" target="_blank" rel="noopener">
+            Descarcă E-book-ul
+          </a>
+
+        </div>
+        
+        <!-- Call to Action -->
+        <div style="text-align: center; padding: 20px; margin: 25px 0;">
+          <h4 style="color: #2d3748; font-size: 16px; margin-bottom: 10px;">Ai întrebări despre nutriție?</h4>
+          <p style="color: #4a5568; font-size: 14px; margin-bottom: 15px;">
+            Echipa noastră de specialiști în nutriție este aici să te ajute. Contactează-ne!
+          </p>
+          <a href="${typeof window !== 'undefined' ? window.location.origin : process.env.NEXT_PUBLIC_BASE_URL || 'https://apns.ro'}/contact" 
+             style="color: #09a252; text-decoration: none; font-weight: 600; font-size: 14px;">
+            Contactează specialiștii →
+          </a>
+        </div>
+      </div>
+      
+      <!-- Footer -->
+      <div class="footer">
+        <p class="footer-text">
+          Acest email a fost trimis deoarece ai solicitat descărcarea e-book-ului "${ebook.title}" de pe site-ul nostru.
+        </p>
+        
+        <div class="footer-links">
+          <a href="${typeof window !== 'undefined' ? window.location.origin : process.env.NEXT_PUBLIC_BASE_URL || 'https://apns.ro'}/confidentialitate" class="footer-link">Politica de confidențialitate</a>
+          <a href="${typeof window !== 'undefined' ? window.location.origin : process.env.NEXT_PUBLIC_BASE_URL || 'https://apns.ro'}/contact" class="footer-link">Contact</a>
+          <a href="${typeof window !== 'undefined' ? window.location.origin : process.env.NEXT_PUBLIC_BASE_URL || 'https://apns.ro'}/ebooks" class="footer-link">Mai multe e-books</a>
+        </div>
+        
+        <p class="footer-text">
+          <strong>APNS - Asociația pentru Promovarea Nutriției Sănătoase</strong><br>
+          © ${currentYear} APNS. Toate drepturile rezervate.
+        </p>
+        
+        <p style="color: #9ca3af; font-size: 11px; margin-top: 15px;">
+          Dacă nu dorești să mai primești emailuri de la noi, 
+          <a href="#" style="color: #9ca3af;">dezabonează-te aici</a>.
+        </p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>`;
   }
 
   async getAllCategories(): Promise<Category[]> {
