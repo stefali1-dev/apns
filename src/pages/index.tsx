@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
-import Image from 'next/image';
 import Layout from '@/layouts/NavbarLayout';
 import { CARD_ITEMS } from '@/components/CardsData';
 import SubscribeModal from '@/components/SubscribeModal';
 import { Member, membersService } from '@/lib/services/membersService';
 import VolunteerCarousel from '@/components/VolunteerCarousel';
+import OptimizedImage from '@/components/OptimizedImage';
 
 
 export default function Home() {
@@ -141,13 +141,15 @@ export default function Home() {
 
               {/* Image block */}
               <div className="relative flex-1 max-w-[600px] w-full -mt-4 lg:mt-0 lg:-ml-12">
-                <Image
-                  src="/images/apns.png"
+                <OptimizedImage
+                  src="/images/header.jpg"
                   alt="Four senior men and women out for a hike"
                   width={600}
                   height={450}
                   className="w-full h-auto object-cover rounded-lg shadow-lg"
                   priority
+                  quality={85}
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
                 />
               </div>
             </div>
@@ -189,12 +191,14 @@ export default function Home() {
             <div className="space-y-8 lg:space-y-20">
               {/* First Content Block */}
               <div className="items-center gap-8 xl:gap-16 md:grid md:grid-cols-2">
-                <Image
+                <OptimizedImage
                   className="w-full rounded-lg shadow-lg hidden sm:block transition-transform duration-300"
                   src="/images/group.jpeg"
                   alt="Workshop nutrițional"
                   width={1200}
                   height={1000}
+                  quality={80}
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
                 />
                 <div className="mt-0">
                   <h2 className="mb-4 text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
@@ -243,12 +247,14 @@ export default function Home() {
                     </Link>
                   </div>
                 </div>
-                <Image
+                <OptimizedImage
                   className="w-full rounded-lg shadow-lg hidden sm:block transition-transform duration-300"
                   src="/images/donate.png"
                   alt="Comunitate APNS"
                   width={600}
                   height={400}
+                  quality={80}
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
                 />
               </div>
             </div>
@@ -327,12 +333,14 @@ export default function Home() {
               </div>
 
               <div className="md:w-1/2">
-                <Image
+                <OptimizedImage
                   src="/images/donate2.png"
                   alt="Copii în clasă"
                   width={600}
                   height={400}
                   className="w-full rounded-lg shadow transition-transform duration-300"
+                  quality={80}
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
                 />
               </div>
             </div>

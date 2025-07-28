@@ -93,21 +93,23 @@ const VolunteerCarousel: React.FC = () => {
           ) : (
             <div className="relative">
               {/* Carousel Container */}
-              <div className="overflow-hidden">
+              <div className="overflow-hidden -mx-3">
                 <div
                   className="flex transition-transform duration-500 ease-out"
                   style={{
-                    transform: `translateX(-${currentVolunteerIndex * (isMobile ? 100 : (100 / 3 + 2))}%)`,
-                    gap: isMobile ? '0px' : '24px'
+                    transform: `translateX(-${currentVolunteerIndex * (isMobile ? 100 : 100/3)}%)`,
                   }}
                 >
                   {volunteers.map((volunteer) => (
-                    <VolunteerCard
+                    <div
                       key={volunteer.id}
-                      volunteer={volunteer}
-                      isMobile={isMobile}
-                      onCardClick={handleCardClick}
-                    />
+                      className={`flex-shrink-0 ${isMobile ? 'w-full' : 'w-1/3 px-3'}`}
+                    >
+                      <VolunteerCard
+                        member={volunteer}
+                        onClick={handleCardClick}
+                      />
+                    </div>
                   ))}
                 </div>
               </div>

@@ -3,6 +3,7 @@ import Head from 'next/head';
 import Layout from '@/layouts/NavbarLayout';
 import { membersService, Member } from '@/lib/services/membersService';
 import VolunteerModal from '@/components/VolunteerModal';
+import VolunteerCard from '@/components/VolunteerCard';
 
 const TeamPage: React.FC = () => {
     const [members, setMembers] = useState<Member[]>([]);
@@ -106,30 +107,11 @@ const TeamPage: React.FC = () => {
                             // Members grid
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                                 {members.map((member) => (
-                                    <div
+                                    <VolunteerCard
                                         key={member.id}
-                                        className="bg-white rounded-lg shadow-lg overflow-hidden cursor-pointer transform hover:-translate-y-1 transition-all duration-300 hover:shadow-xl"
-                                        onClick={() => openModal(member)}
-                                    >
-                                        <div className="overflow-hidden">
-                                            <img
-                                                src={member.imageUrl}
-                                                alt={member.name}
-                                                className="w-full h-80 object-cover"
-                                            />
-                                        </div>
-                                        <div className="p-8">
-                                            <h3 className="text-xl font-bold text-gray-900 mb-2">
-                                                {member.name}
-                                            </h3>
-                                            <p className="text-gray-700 font-medium mb-6">
-                                                {member.position}
-                                            </p>
-                                            <button className="cursor-pointer w-full bg-[#09a252] text-white py-3 px-6 rounded-lg hover:bg-green-700 transition-colors duration-200 font-medium">
-                                                Citește mai mult
-                                            </button>
-                                        </div>
-                                    </div>
+                                        member={member}
+                                        onClick={openModal}
+                                    />
                                 ))}
                             </div>
                         )}

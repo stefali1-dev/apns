@@ -50,8 +50,8 @@ const EnrollPage = () => {
         </div>
 
         {/* Main content */}
-        <div id="detalii" className="container mx-auto px-4 py-8">
-          <div className="max-w-3xl mx-auto bg-white rounded-lg shadow-lg p-8 mb-12">
+        <div id="detalii" className="mx-auto px-4 py-8">
+          <div className="max-w-3xl mx-auto bg-white rounded-lg shadow-lg p-8 mb-8">
             <h2 className="text-2xl font-bold text-[#09a252] mb-6">Cum te poți înscrie în asociația noastră</h2>
 
             <div className="mb-8">
@@ -108,16 +108,17 @@ const EnrollPage = () => {
                 <li>Primești certificat de voluntariat pentru activitatea prestată</li>
               </ol>
             </div>
+          </div>
 
-            <div className="bg-[#09a252] text-white p-6 rounded-lg mb-6 text-center">
-              <h3 className="text-xl font-bold mb-3">Pregătit să faci o diferență?</h3>
-              <p className="mb-4">
-                Alătură-te echipei noastre de voluntari și contribuie la educația nutrițională în comunitate!
-              </p>
-              <div className="flex flex-wrap justify-center gap-4">
-                <Button style="secondary" href="#" text="Contactează-ne" />
-                <Button style="secondary" href="#" text="Află mai multe" />
-              </div>
+          {/* Call to action section - moved outside main container */}
+          <div className="max-w-3xl mx-auto bg-[#09a252] text-white p-8 rounded-lg shadow-lg text-center">
+            <h3 className="text-2xl font-bold mb-4">Pregătit să faci o diferență?</h3>
+            <p className="text-lg mb-6 text-green-100">
+              Alătură-te echipei noastre de voluntari și contribuie la educația nutrițională în comunitate!
+            </p>
+            <div className="flex flex-wrap justify-center gap-4">
+              <Button style="secondary" href="#" text="Contactează-ne" />
+              <Button style="secondary" href="#" text="Află mai multe" />
             </div>
           </div>
         </div>

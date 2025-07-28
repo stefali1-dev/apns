@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { Member } from '@/lib/services/membersService';
+import OptimizedImage from './OptimizedImage';
 
 interface VolunteerModalProps {
   volunteer: Member | null;
@@ -92,12 +93,18 @@ const VolunteerModal: React.FC<VolunteerModalProps> = ({ volunteer, isOpen, onCl
               </svg>
             </button>
 
-            <div className="overflow-hidden rounded-t-lg">
-              <img
-                src={volunteer.imageUrl}
-                alt={volunteer.name}
-                className="w-full h-80 object-cover"
-              />
+            <div className="rounded-t-lg bg-green-50 flex items-center justify-center min-h-64 max-h-96 p-4">
+              <div className="relative w-full h-full flex items-center justify-center">
+                <OptimizedImage
+                  src={volunteer.imageUrl}
+                  alt={volunteer.name}
+                  width={250}
+                  objectPosition="center 20%"
+                  className="max-w-full max-h-full object-contain rounded"
+                  quality={85}
+                  priority
+                />
+              </div>
             </div>
 
             <div className="p-8">

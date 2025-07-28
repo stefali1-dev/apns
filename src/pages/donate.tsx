@@ -71,7 +71,7 @@ const DonatePage: React.FC<DonatePageProps> = ({
             <div className="relative bg-white rounded-xl shadow-2xl overflow-hidden">
               <img
                 className="w-full h-64 sm:h-72 md:h-80 object-cover rounded-lg"
-                src="/images/apns.png"
+                src="/images/header.jpg"
                 alt="Redirecționează impozitul"
                 style={{ objectPosition: '50% 65%' }}
               />
