@@ -159,9 +159,6 @@ export default function Home() {
         <section className="max-w-screen-xl mx-auto py-10 px-4">
           {/* Section Header */}
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Specialități Medicale
-            </h2>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-2xl mx-auto">
             {CARD_ITEMS.map(({ slug, label, Icon }) => (
@@ -206,29 +203,18 @@ export default function Home() {
                   <p className="mb-6 text-gray-500 md:text-lg">
                     Asociația pentru Promovarea Nutriției Sănătoase (APNS) este o organizație non-guvernamentală
                     înființată în anul 2021 de către o echipă de dieteticieni autorizați cu formare în cadrul Universității
-                    de Medicină și Farmacie „Grigore T. Popa” Iași. Are cfa scop principal promovarea nutriției bazate pe dovezi științifice, informarea populației și susținerea politicilor de sănătate orientate către sustenabilitate, prevenție și educație nutrițională.
+                    de Medicină și Farmacie „Grigore T. Popa” Iași. Are ca scop principal promovarea nutriției bazate pe dovezi științifice, informarea populației și susținerea politicilor de sănătate orientate către sustenabilitate, prevenție și educație nutrițională.
                   </p>
-                  <div className="flex items-center gap-4">
+                  <div className="flex flex-col sm:flex-row items-center gap-4">
                     <Link
                       href="/enroll"
-                      className="inline-flex bg-[#09a252] text-white font-semibold px-6 py-3 rounded shadow-md hover:bg-[#09a252] transition-colors duration-300"
+                      className="inline-block bg-[#09a252] text-white font-semibold px-6 py-3 rounded-lg shadow-md hover:bg-[#09a252] transition-colors duration-300"
                     >
                       Implică-te
-                      <svg
-                        className="w-4 h-4 ml-2 -mr-1"
-                        fill="currentColor"
-                        viewBox="0 0 20 20"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
                     </Link>
                     <Link
                       href="/contact"
-                      className="inline-block border-2 border-[#09a252] text-[#09a252] font-semibold px-6 py-3 rounded shadow-md hover:bg-[#09a252] hover:text-white transition-colors duration-300"
+                      className="inline-block border-2 border-[#09a252] text-[#09a252] font-semibold px-6 py-3 rounded-lg shadow-md hover:bg-[#09a252] hover:text-white transition-colors duration-300"
                     >
                       Află mai mult
                     </Link>
@@ -250,21 +236,10 @@ export default function Home() {
                   </p>
                   <div className="flex items-center gap-4">
                     <Link
-                      href="/projects"
-                      className="inline-flex bg-[#09a252] text-white font-semibold px-6 py-3 rounded shadow-md hover:bg-[#09a252] transition-colors duration-300"
+                      href="/dietetician"
+                      className="inline-block bg-[#09a252] text-white font-semibold px-6 py-3 rounded-lg shadow-md hover:bg-[#09a252] transition-colors duration-300"
                     >
                       Află mai mult
-                      <svg
-                        className="w-4 h-4 ml-2 -mr-1"
-                        fill="currentColor"
-                        viewBox="0 0 20 20"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
                     </Link>
                   </div>
                 </div>
@@ -319,13 +294,13 @@ export default function Home() {
             <div className="flex flex-col md:flex-row justify-center gap-4">
               <Link
                 href="/test-imc-adulti"
-                className="bg-white text-black font-semibold px-8 py-4 rounded-lg shadow-lg hover:shadow-xl hover:text-[#09a252] hover:scale-105 transition-all duration-300 border-2 border-transparent hover:border-white"
+                className="bg-white text-[#09a252] font-semibold px-8 py-4 rounded-lg shadow-md hover:bg-green-50 transition-colors duration-300"
               >
                 Test IMC Adulți
               </Link>
               <Link
                 href="/test-imc-copii"
-                className="bg-white text-black font-semibold px-8 py-4 rounded-lg shadow-lg hover:shadow-xl hover:text-[#09a252] hover:scale-105 transition-all duration-300 border-2 border-transparent hover:border-white"
+                className="bg-white text-[#09a252] font-semibold px-8 py-4 rounded-lg shadow-md hover:bg-green-50 transition-colors duration-300"
               >
                 Test IMC Copii
               </Link>
@@ -345,7 +320,7 @@ export default function Home() {
                 </p>
                 <Link
                   href="/enroll"
-                  className="inline-block bg-[#09a252] text-white px-6 py-3 rounded shadow hover:bg-[#09a252] transition-colors duration-300"
+                  className="inline-block bg-[#09a252] text-white font-semibold px-6 py-3 rounded-lg shadow-md hover:bg-[#09a252] transition-colors duration-300"
                 >
                   Devino voluntar
                 </Link>

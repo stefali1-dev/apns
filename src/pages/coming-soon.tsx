@@ -111,10 +111,10 @@ const ComingSoonPage: React.FC<ComingSoonPageProps> = ({
               <div className="bg-green-50 border border-green-200 rounded-lg p-6 mb-6">
                 <h3 className="text-xl font-semibold text-gray-800 mb-3">Între timp, puteți:</h3>
                 <ul className="list-disc pl-5 space-y-2">
-                  <li>Explora celelalte secțiuni ale site-ului nostru</li>
-                  <li>Afla mai multe despre serviciile noastre</li>
-                  <li>Ne contacta pentru întrebări specifice</li>
-                  <li>Urmări-ne pe rețelele sociale pentru actualizări</li>
+                  <li>Să explorați celelalte secțiuni ale site-ului nostru</li>
+                  <li>Să aflați mai multe despre serviciile noastre</li>
+                  <li>Să ne contactați pentru întrebări specifice</li>
+                  <li>Să ne urmăriți pe rețelele sociale pentru actualizări</li>
                 </ul>
               </div>
 

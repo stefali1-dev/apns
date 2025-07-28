@@ -61,7 +61,7 @@ const VolunteerCarousel: React.FC = () => {
         <div className="max-w-screen-xl mx-auto px-6">
           <div className="mb-12">
             <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">
-              Echipa Noastră de Specialiști
+              Echipa Noastră
             </h2>
             <div className="max-w-3xl mx-auto text-center">
               <div className="inline-flex items-center space-x-4">
@@ -77,12 +77,12 @@ const VolunteerCarousel: React.FC = () => {
             <div className="relative overflow-hidden">
               <div className="flex space-x-6">
                 {[...Array(3)].map((_, index) => (
-                  <div key={index} className="min-w-full md:min-w-[calc(33.333%-16px)] bg-white rounded-2xl shadow-lg overflow-hidden">
+                  <div key={index} className="min-w-full md:min-w-[calc(33.333%-16px)] bg-white rounded-lg shadow-lg overflow-hidden">
                     <div className="animate-pulse">
                       <div className="h-80 bg-gray-200"></div>
-                      <div className="p-6">
+                      <div className="p-8">
                         <div className="h-6 bg-gray-200 rounded mb-3"></div>
-                        <div className="h-4 bg-gray-200 rounded mb-4 w-3/4"></div>
+                        <div className="h-4 bg-gray-200 rounded mb-6 w-3/4"></div>
                         <div className="h-10 bg-gray-200 rounded"></div>
                       </div>
                     </div>
@@ -165,7 +165,7 @@ const VolunteerCarousel: React.FC = () => {
               <div className="text-center mt-12">
                 <Link
                   href="/team"
-                  className="inline-flex items-center bg-[#09a252] text-white font-semibold px-8 py-3 rounded-lg hover:bg-[#09a252] transition-all duration-300 shadow-md hover:shadow-lg"
+                  className="bg-[#09a252] text-white font-bold py-3 px-8 rounded-lg hover:bg-green-700 transition-colors duration-200 inline-flex items-center"
                 >
                   Vezi toată echipa
                   <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">

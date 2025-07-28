@@ -80,11 +80,11 @@ const VolunteerModal: React.FC<VolunteerModalProps> = ({ volunteer, isOpen, onCl
         className="modal-backdrop fixed inset-0 bg-black/60 flex items-center justify-center z-[9999] p-4"
         onClick={handleBackdropClick}
       >
-        <div className="modal-content bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+        <div className="modal-content bg-white rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-lg">
           <div className="relative">
             <button
               onClick={onClose}
-              className="absolute top-4 right-4 z-10 bg-white/90 hover:bg-white text-gray-800 w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 shadow-lg"
+              className="absolute top-4 right-4 z-10 bg-white/90 hover:bg-white text-gray-800 w-10 h-10 rounded-full flex items-center justify-center transition-colors duration-200 shadow-lg"
               aria-label="Închide modalul"
             >
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -92,7 +92,7 @@ const VolunteerModal: React.FC<VolunteerModalProps> = ({ volunteer, isOpen, onCl
               </svg>
             </button>
 
-            <div className="overflow-hidden rounded-t-2xl">
+            <div className="overflow-hidden rounded-t-lg">
               <img
                 src={volunteer.imageUrl}
                 alt={volunteer.name}
@@ -101,10 +101,10 @@ const VolunteerModal: React.FC<VolunteerModalProps> = ({ volunteer, isOpen, onCl
             </div>
 
             <div className="p-8">
-              <h2 className="text-3xl font-bold text-gray-900 mb-2">
+              <h2 className="text-2xl font-bold text-gray-900 mb-2">
                 {volunteer.name}
               </h2>
-              <p className="text-xl text-gray-900 font-medium mb-6">
+              <p className="text-lg text-gray-700 font-medium mb-6">
                 {volunteer.position}
               </p>
 
@@ -130,7 +130,7 @@ const VolunteerModal: React.FC<VolunteerModalProps> = ({ volunteer, isOpen, onCl
                       {volunteer.specializations.map((spec, index) => (
                         <span
                           key={index}
-                          className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm"
+                          className="bg-green-50 text-[#09a252] px-3 py-1 rounded-lg text-sm border border-green-200"
                         >
                           {spec}
                         </span>

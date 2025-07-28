@@ -17,7 +17,7 @@ const VolunteerCard: React.FC<VolunteerCardProps> = ({ volunteer, isMobile = fal
       className={`flex-shrink-0 ${isMobile ? 'w-full px-4' : 'w-1/3 px-3'}`}
     >
       <div
-        className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer transform hover:-translate-y-1 overflow-hidden group"
+        className="bg-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer transform hover:-translate-y-1 overflow-hidden"
         onClick={handleCardClick}
       >
         {/* Image */}
@@ -25,20 +25,19 @@ const VolunteerCard: React.FC<VolunteerCardProps> = ({ volunteer, isMobile = fal
           <img
             src={volunteer.imageUrl}
             alt={volunteer.name}
-            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+            className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
         </div>
 
         {/* Content */}
-        <div className="p-6">
+        <div className="p-8">
           <h3 className="text-xl font-bold text-gray-900 mb-2">
             {volunteer.name}
           </h3>
-          <p className="text-gray-900 font-medium mb-4">
+          <p className="text-gray-700 font-medium mb-6">
             {volunteer.position}
           </p>
-          <button className="w-full bg-[#09a252] text-white py-2 px-4 rounded-lg hover:bg-[#09a252] transition duration-300 font-medium">
+          <button className="w-full bg-[#09a252] text-white py-3 px-6 rounded-lg hover:bg-green-700 transition-colors duration-200 font-medium">
             Citește mai mult
           </button>
         </div>

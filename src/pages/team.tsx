@@ -45,28 +45,6 @@ const TeamPage: React.FC = () => {
             </Head>
 
             <style jsx>{`
-                .gradient-bg {
-                    background: linear-gradient(135deg, #10b968 0%, #059646 100%);
-                }
-                
-                .member-card {
-                    background: white;
-                    border-radius: 16px;
-                    overflow: hidden;
-                    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-                    transition: all 0.3s ease;
-                    cursor: pointer;
-                }
-
-                .member-card:hover {
-                    transform: translateY(-5px);
-                    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-                }
-
-                .member-card:hover {
-                    transform: scale(1.05);
-                }
-
                 .loading-shimmer {
                     background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
                     background-size: 200% 100%;
@@ -79,7 +57,7 @@ const TeamPage: React.FC = () => {
                 }
             `}</style>
 
-            <div className="bg-white min-h-screen">
+            <div className="bg-green-50 min-h-screen">
                 {/* Hero Section */}
                 <section className="bg-[#09a252] relative overflow-hidden">
                     <div className="relative max-w-screen-xl mx-auto px-6 py-20">
@@ -108,15 +86,15 @@ const TeamPage: React.FC = () => {
                 </div>
 
                 {/* Main content */}
-                <div className="container mx-auto px-4 py-12">
+                <div className="container mx-auto px-4 py-8">
                     <div className="max-w-6xl mx-auto">
                         {loading ? (
                             // Loading state
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                                 {[...Array(6)].map((_, index) => (
-                                    <div key={index} className="member-card">
-                                        <div className="loading-shimmer h-280px"></div>
-                                        <div className="p-6">
+                                    <div key={index} className="bg-white rounded-lg shadow-lg overflow-hidden">
+                                        <div className="loading-shimmer h-80"></div>
+                                        <div className="p-8">
                                             <div className="loading-shimmer h-6 mb-3 rounded"></div>
                                             <div className="loading-shimmer h-4 mb-4 rounded w-3/4"></div>
                                             <div className="loading-shimmer h-10 rounded w-full"></div>
@@ -130,23 +108,24 @@ const TeamPage: React.FC = () => {
                                 {members.map((member) => (
                                     <div
                                         key={member.id}
-                                        className="member-card"
+                                        className="bg-white rounded-lg shadow-lg overflow-hidden cursor-pointer transform hover:-translate-y-1 transition-all duration-300 hover:shadow-xl"
                                         onClick={() => openModal(member)}
                                     >
                                         <div className="overflow-hidden">
                                             <img
                                                 src={member.imageUrl}
                                                 alt={member.name}
+                                                className="w-full h-80 object-cover"
                                             />
                                         </div>
-                                        <div className="p-6">
+                                        <div className="p-8">
                                             <h3 className="text-xl font-bold text-gray-900 mb-2">
                                                 {member.name}
                                             </h3>
-                                            <p className="text-gray-700 font-medium mb-4">
+                                            <p className="text-gray-700 font-medium mb-6">
                                                 {member.position}
                                             </p>
-                                            <button className="w-full bg-[#09a252] text-white py-2 px-4 rounded-lg hover:bg-[#09a252] transition duration-300 font-medium">
+                                            <button className="cursor-pointer w-full bg-[#09a252] text-white py-3 px-6 rounded-lg hover:bg-green-700 transition-colors duration-200 font-medium">
                                                 Citește mai mult
                                             </button>
                                         </div>
@@ -156,12 +135,15 @@ const TeamPage: React.FC = () => {
                         )}
 
                         {/* Call to action */}
-                        <div className="mt-12 bg-gradient-to-r from-[#09a252] to-[#09a252] rounded-lg shadow-lg p-8 text-white text-center">
+                        <div className="mt-12 bg-[#09a252] rounded-lg shadow-lg p-8 text-white text-center">
                             <h2 className="text-3xl font-bold mb-4">Vrei să te alături echipei?</h2>
-                            <p className="text-lg mb-6 max-w-2xl mx-auto">
+                            <p className="text-lg mb-6 max-w-2xl mx-auto text-green-100">
                                 Căutăm mereu profesioniști pasionați de nutriție și sănătate pentru a ne extinde echipa și impactul pozitiv în comunitate.
                             </p>
-                            <a href="/contact" className="bg-white text-[#09a252] hover:bg-green-100 font-semibold py-3 px-8 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg inline-block">
+                            <a 
+                                href="/contact" 
+                                className="bg-white text-[#09a252] hover:bg-green-50 font-bold py-3 px-8 rounded-lg transition-colors duration-200 inline-block"
+                            >
                                 Contactează-ne
                             </a>
                         </div>

@@ -213,7 +213,7 @@ export default function Navbar() {
                     {/* Right section - Featured content */}
                     <div className="col-span-8 p-8">
                       <h3 className="text-lg font-bold text-gray-900 mb-6">Resurse importante</h3>
-                      <div className="grid grid-cols-2 gap-6">
+                      <div className="grid grid-cols-1 gap-4 max-w-2xl mx-auto">
                         {/* Featured item 1 */}
                         <div className="flex gap-4 p-4 rounded-lg hover:bg-gray-50 transition-colors">
                           <div className="bg-[#09a252] h-16 w-16 flex justify-center items-center rounded-lg flex-shrink-0">
@@ -222,7 +222,7 @@ export default function Navbar() {
                             </svg>
                           </div>
                           <div>
-                            <Link href="/team" className="block font-bold text-gray-900 hover:text-[#09a252] transition-colors">
+                            <Link href="/enroll" className="block font-bold text-gray-900 hover:text-[#09a252] transition-colors">
                               Voluntariatul APNS
                             </Link>
                             <p className="text-sm text-gray-600 mt-1">Alătură-te echipei noastre de voluntari și contribuie la promovarea nutriției sănătoase</p>
@@ -232,45 +232,15 @@ export default function Navbar() {
                         {/* Featured item 2 */}
                         <div className="flex gap-4 p-4 rounded-lg hover:bg-gray-50 transition-colors">
                           <div className="bg-[#09a252] h-16 w-16 flex justify-center items-center rounded-lg flex-shrink-0">
-                            <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                            </svg>
-                          </div>
-                          <div>
-                            <Link href="/coming-soon" className="block font-bold text-gray-900 hover:text-[#09a252] transition-colors">
-                              Rapoarte anuale
-                            </Link>
-                            <p className="text-sm text-gray-600 mt-1">Consultă rapoartele noastre de activitate și transparența financiară</p>
-                          </div>
-                        </div>
-
-                        {/* Featured item 3 */}
-                        <div className="flex gap-4 p-4 rounded-lg hover:bg-gray-50 transition-colors">
-                          <div className="bg-[#09a252] h-16 w-16 flex justify-center items-center rounded-lg flex-shrink-0">
-                            <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                            </svg>
-                          </div>
-                          <div>
-                            <Link href="/coming-soon" className="block font-bold text-gray-900 hover:text-[#09a252] transition-colors">
-                              Parteneri
-                            </Link>
-                            <p className="text-sm text-gray-600 mt-1">Organizațiile și instituțiile cu care colaborăm</p>
-                          </div>
-                        </div>
-
-                        {/* Featured item 4 */}
-                        <div className="flex gap-4 p-4 rounded-lg hover:bg-gray-50 transition-colors">
-                          <div className="bg-[#09a252] h-16 w-16 flex justify-center items-center rounded-lg flex-shrink-0">
-                            <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
+                            <svg className="w-9 h-9 text-white" fill="currentColor" viewBox="0 0 24 24">
+                              <path d="M4 21h9.62a3.995 3.995 0 0 0 3.037-1.397l5.102-5.952a1 1 0 0 0-.442-1.6l-1.968-.656a3.043 3.043 0 0 0-2.823.503l-3.185 2.547-.617-1.235A3.98 3.98 0 0 0 9.146 11H4c-1.103 0-2 .897-2 2v6c0 1.103.897 2 2 2zm0-8h5.146c.763 0 1.448.423 1.789 1.105l.447.895H7v2h6.014a.996.996 0 0 0 .442-.11l.003-.001.004-.002h.003l.002-.001h.004l.001-.001c.009.003.003-.001.003-.001.01 0 .002-.001.002-.001h.001l.002-.001.003-.001.002-.001.002-.001.003-.001.002-.001c.003 0 .001-.001.002-.001l.003-.002.002-.001.002-.001.003-.001.002-.001h.001l.002-.001h.001l.002-.001.002-.001c.009-.001.003-.001.003-.001l.002-.001a.915.915 0 0 0 .11-.078l4.146-3.317c.262-.208.623-.273.94-.167l.557.186-4.133 4.823a2.029 2.029 0 0 1-1.52.688H4v-6zM16 2h-.017c-.163.002-1.006.039-1.983.705-.951-.648-1.774-.7-1.968-.704L12.002 2h-.004c-.801 0-1.555.313-2.119.878C9.313 3.445 9 4.198 9 5s.313 1.555.861 2.104l3.414 3.586a1.006 1.006 0 0 0 1.45-.001l3.396-3.568C18.688 6.555 19 5.802 19 5s-.313-1.555-.878-2.121A2.978 2.978 0 0 0 16.002 2H16zm1 3c0 .267-.104.518-.311.725L14 8.55l-2.707-2.843C11.104 5.518 11 5.267 11 5s.104-.518.294-.708A.977.977 0 0 1 11.979 4c.025.001.502.032 1.067.485.081.065.163.139.247.222l.707.707.707-.707c.084-.083.166-.157.247-.222.529-.425.976-.478 1.052-.484a.987.987 0 0 1 .701.292c.189.189.293.44.293.707z"/>
                             </svg>
                           </div>
                           <div>
                             <Link href="/donate" className="block font-bold text-gray-900 hover:text-[#09a252] transition-colors">
                               Susține-ne
                             </Link>
-                            <p className="text-sm text-gray-600 mt-1">Donează pentru a sprijini activitățile noastre</p>
+                            <p className="text-sm text-gray-600 mt-1">Donează pentru a sprijini activitățile noastre și dezvoltarea programelor educaționale</p>
                           </div>
                         </div>
                       </div>
