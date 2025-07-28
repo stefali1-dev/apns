@@ -8,7 +8,6 @@ const VolunteerCarousel: React.FC = () => {
   const [volunteers, setVolunteers] = useState<Member[]>([]);
   const [currentVolunteerIndex, setCurrentVolunteerIndex] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
-  const [volunteersLoading, setVolunteersLoading] = useState(true);
   const [selectedVolunteer, setSelectedVolunteer] = useState<Member | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -16,12 +15,10 @@ const VolunteerCarousel: React.FC = () => {
     const fetchVolunteers = async () => {
       try {
         const data = await membersService.getMembers();
-        // Limităm la primii 6 membri pentru carousel
-        setVolunteers(data.slice(0, 6));
+        // Afișăm toți membrii în carousel
+        setVolunteers(data);
       } catch (error) {
         console.error('Eroare la încărcarea voluntarilor:', error);
-      } finally {
-        setVolunteersLoading(false);
       }
     };
 
@@ -33,9 +30,9 @@ const VolunteerCarousel: React.FC = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  const maxVolunteerIndex = isMobile
-    ? Math.max(volunteers.length - 1, 0)
-    : Math.max(Math.ceil(volunteers.length / 3) - 1, 0);
+  const volunteersPerPage = isMobile ? 1 : 3;
+  const totalPages = Math.ceil(volunteers.length / volunteersPerPage);
+  const maxVolunteerIndex = Math.max(totalPages - 1, 0);
 
   const nextVolunteer = () => {
     setCurrentVolunteerIndex(Math.min(currentVolunteerIndex + 1, maxVolunteerIndex));
@@ -72,50 +69,37 @@ const VolunteerCarousel: React.FC = () => {
             </div>
           </div>
 
-          {volunteersLoading ? (
-            // Loading State
-            <div className="relative overflow-hidden">
-              <div className="flex space-x-6">
-                {[...Array(3)].map((_, index) => (
-                  <div key={index} className="min-w-full md:min-w-[calc(33.333%-16px)] bg-white rounded-lg shadow-lg overflow-hidden">
-                    <div className="animate-pulse">
-                      <div className="h-80 bg-gray-200"></div>
-                      <div className="p-8">
-                        <div className="h-6 bg-gray-200 rounded mb-3"></div>
-                        <div className="h-4 bg-gray-200 rounded mb-6 w-3/4"></div>
-                        <div className="h-10 bg-gray-200 rounded"></div>
-                      </div>
-                    </div>
+          <div className="relative">
+            {/* Carousel Container */}
+            <div className="overflow-hidden -mx-3">
+              <div
+                className="flex transition-transform duration-500 ease-out"
+                style={{
+                  transform: `translateX(-${currentVolunteerIndex * 100}%)`,
+                }}
+              >
+                {Array.from({ length: totalPages }).map((_, pageIndex) => (
+                  <div key={pageIndex} className="w-full flex-shrink-0 flex">
+                    {volunteers
+                      .slice(pageIndex * volunteersPerPage, (pageIndex + 1) * volunteersPerPage)
+                      .map((volunteer) => (
+                        <div
+                          key={volunteer.id}
+                          className={`flex-shrink-0 ${isMobile ? 'w-full' : 'w-1/3 px-3'}`}
+                        >
+                          <VolunteerCard
+                            member={volunteer}
+                            onClick={handleCardClick}
+                          />
+                        </div>
+                      ))}
                   </div>
                 ))}
               </div>
             </div>
-          ) : (
-            <div className="relative">
-              {/* Carousel Container */}
-              <div className="overflow-hidden -mx-3">
-                <div
-                  className="flex transition-transform duration-500 ease-out"
-                  style={{
-                    transform: `translateX(-${currentVolunteerIndex * (isMobile ? 100 : 100/3)}%)`,
-                  }}
-                >
-                  {volunteers.map((volunteer) => (
-                    <div
-                      key={volunteer.id}
-                      className={`flex-shrink-0 ${isMobile ? 'w-full' : 'w-1/3 px-3'}`}
-                    >
-                      <VolunteerCard
-                        member={volunteer}
-                        onClick={handleCardClick}
-                      />
-                    </div>
-                  ))}
-                </div>
-              </div>
 
               {/* Navigation Arrows */}
-              {volunteers.length > (isMobile ? 1 : 3) && (
+              {volunteers.length > volunteersPerPage && (
                 <>
                   <button
                     onClick={prevVolunteer}
@@ -144,13 +128,9 @@ const VolunteerCarousel: React.FC = () => {
               )}
 
               {/* Dots Indicator */}
-              {volunteers.length > (isMobile ? 1 : 3) && (
+              {volunteers.length > volunteersPerPage && (
                 <div className="flex justify-center mt-8 space-x-2">
-                  {Array.from({
-                    length: isMobile
-                      ? volunteers.length
-                      : Math.ceil(volunteers.length / 3)
-                  }).map((_, index) => (
+                  {Array.from({ length: totalPages }).map((_, index) => (
                     <button
                       key={index}
                       onClick={() => setCurrentVolunteerIndex(index)}
@@ -176,7 +156,6 @@ const VolunteerCarousel: React.FC = () => {
                 </Link>
               </div>
             </div>
-          )}
         </div>
       </section>
 
