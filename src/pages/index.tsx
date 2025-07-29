@@ -217,7 +217,7 @@ export default function Home() {
                       Implică-te
                     </Link>
                     <Link
-                      href="/contact"
+                      href="/asociatie"
                       className="inline-block border-2 border-[#09a252] text-[#09a252] font-semibold px-6 py-3 rounded-lg shadow-md hover:bg-[#09a252] hover:text-white transition-colors duration-300"
                     >
                       Află mai mult

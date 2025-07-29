@@ -12,6 +12,31 @@ export default function AdultBMITest() {
   const [error, setError] = useState<string>('');
   const [isCalculating, setIsCalculating] = useState(false);
 
+  // Helper function to calculate dot position on the segmented BMI bar
+  const calculateDotPosition = (bmi: number) => {
+    // The bar has 4 equal sections (25% each):
+    // Section 1: <18.5 BMI (0-25% of bar)
+    // Section 2: 18.5-25 BMI (25-50% of bar)  
+    // Section 3: 25-30 BMI (50-75% of bar)
+    // Section 4: 30+ BMI (75-100% of bar)
+    
+    if (bmi < 18.5) {
+      // Map 15-18.5 BMI to 0-25% of bar
+      const clampedBmi = Math.max(bmi, 15);
+      return (clampedBmi - 15) / (18.5 - 15) * 25;
+    } else if (bmi < 25) {
+      // Map 18.5-25 BMI to 25-50% of bar
+      return 25 + ((bmi - 18.5) / (25 - 18.5)) * 25;
+    } else if (bmi < 30) {
+      // Map 25-30 BMI to 50-75% of bar
+      return 50 + ((bmi - 25) / (30 - 25)) * 25;
+    } else {
+      // Map 30-40 BMI to 75-100% of bar
+      const clampedBmi = Math.min(bmi, 40);
+      return 75 + ((clampedBmi - 30) / (40 - 30)) * 25;
+    }
+  };
+
   const handleCalculate = async () => {
     setError('');
     setResult(null);
@@ -44,7 +69,7 @@ export default function AdultBMITest() {
 
   return (
     <>
-    <Navbar/>
+      <Navbar />
       <div className="min-h-screen bg-white py-12">
         <div className="max-w-4xl mx-auto px-6">
           {/* Header */}
@@ -88,7 +113,6 @@ export default function AdultBMITest() {
                       max="500"
                       step="0.1"
                     />
-                    <div className="absolute right-3 top-3 text-gray-500">kg</div>
                   </div>
                 </div>
 
@@ -108,7 +132,6 @@ export default function AdultBMITest() {
                       max="250"
                       step="0.1"
                     />
-                    <div className="absolute right-3 top-3 text-gray-500">cm</div>
                   </div>
                 </div>
 
@@ -160,68 +183,79 @@ export default function AdultBMITest() {
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.2 }}
-              className="bg-white p-8 rounded-xl shadow-lg"
+              className="bg-white p-8 rounded-xl shadow-lg flex flex-col"
             >
               <h2 className="text-2xl font-bold text-gray-900 mb-6">Rezultatele tale</h2>
 
-              <AnimatePresence mode="wait">
-                {!result && !isCalculating && (
-                  <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    className="text-center py-12"
-                  >
-                    <div className="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4 text-4xl">
-                      📊
-                    </div>
-                    <p className="text-gray-500">
-                      Completează formularul pentru a vedea rezultatele
-                    </p>
-                  </motion.div>
-                )}
-
-                {isCalculating && (
-                  <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    className="text-center py-12"
-                  >
-                    <div className="w-24 h-24 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                      <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#09a252]"></div>
-                    </div>
-                    <p className="text-gray-600">Calculez rezultatul...</p>
-                  </motion.div>
-                )}
-
-                {result && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -20 }}
-                    className="space-y-6"
-                  >
-                    {/* IMC Score */}
-                    <div className="text-center">
-                      <div className="text-6xl font-bold text-gray-900 mb-2">
-                        {result.bmi}
+              <div className="flex-grow">
+                <AnimatePresence mode="wait">
+                  {!result && !isCalculating && (
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      className="text-center py-12"
+                    >
+                      <div className="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4 text-4xl">
+                        📊
                       </div>
-                      <div className={`text-2xl font-semibold ${result.categoryColor} mb-2`}>
-                        {result.category}
-                      </div>
-                      <p className="text-gray-600">{result.description}</p>
-                    </div>
+                      <p className="text-gray-500">
+                        Completează formularul pentru a vedea rezultatele
+                      </p>
+                    </motion.div>
+                  )}
 
-                    {/* Visual indicator */}
-                    <div className="relative">
-                      <div className="h-4 bg-gradient-to-r from-green-400 via-green-400 via-yellow-400 to-red-400 rounded-full"></div>
-                      <div
-                        className="absolute top-0 w-4 h-4 bg-white border-2 border-gray-800 rounded-full transform -translate-x-1/2"
-                        style={{
-                          left: `${Math.min(Math.max((result.bmi - 15) / 25 * 100, 0), 100)}%`
-                        }}
-                      ></div>
+                  {isCalculating && (
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      className="text-center py-12"
+                    >
+                      <div className="w-24 h-24 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#09a252]"></div>
+                      </div>
+                      <p className="text-gray-600">Calculez rezultatul...</p>
+                    </motion.div>
+                  )}
+
+                  {result && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -20 }}
+                      className="space-y-6"
+                    >
+                      {/* IMC Score */}
+                      <div className="text-center">
+                        <div className="text-6xl font-bold text-gray-900 mb-2">
+                          {result.bmi}
+                        </div>
+                        <div className={`text-2xl font-semibold ${result.categoryColor} mb-2`}>
+                          {result.category}
+                        </div>
+                        <p className="text-gray-600">{result.description}</p>
+                      </div>
+
+                      {/* Visual indicator */}
+                      <div className="relative mb-0">
+                        <div className="h-4 rounded-full overflow-hidden flex">
+                          {/* Subponderal: <18.5 */}
+                          <div className="flex-1 bg-yellow-500" style={{ width: '25%' }}></div>
+                          {/* Normal: 18.5-25 */}
+                          <div className="flex-1 bg-[#09a252]" style={{ width: '25%' }}></div>
+                          {/* Supraponderal: 25-30 */}
+                          <div className="flex-1 bg-yellow-500" style={{ width: '25%' }}></div>
+                          {/* Obezitate: 30+ */}
+                          <div className="flex-1 bg-red-600" style={{ width: '25%' }}></div>
+                        </div>
+                        <div
+                          className="absolute top-0 w-4 h-4 bg-white border-2 border-gray-800 rounded-full transform -translate-x-1/2 shadow-md"
+                          style={{
+                            left: `${calculateDotPosition(result.bmi)}%`
+                          }}
+                        ></div>
+                      </div>
                       <div className="flex justify-between text-xs text-gray-500 mt-2">
                         <span>15</span>
                         <span>18.5</span>
@@ -229,29 +263,21 @@ export default function AdultBMITest() {
                         <span>30</span>
                         <span>40+</span>
                       </div>
-                    </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
 
-                    {/* Risk level */}
-                    <div className={`p-4 rounded-lg ${result.riskLevel === 'low' ? 'bg-green-50 border border-green-200' :
-                        result.riskLevel === 'moderate' ? 'bg-yellow-50 border border-yellow-200' :
-                          'bg-red-50 border border-red-200'
-                      }`}>
-                      <div className="flex items-center gap-2 mb-2">
-                        <span className="text-lg">
-                          {result.riskLevel === 'low' ? '✅' :
-                            result.riskLevel === 'moderate' ? '⚠️' : '🚨'}
-                        </span>
-                        <span className="font-semibold">
-                          Nivel de risc: {
-                            result.riskLevel === 'low' ? 'Scăzut' :
-                              result.riskLevel === 'moderate' ? 'Moderat' : 'Ridicat'
-                          }
-                        </span>
-                      </div>
-                    </div>
-
-                    {/* Action buttons */}
-                    <div className="space-y-3">
+              {/* Action buttons - Always at bottom */}
+              <div className="mt-6">
+                <AnimatePresence>
+                  {result && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                      className="space-y-3"
+                    >
                       <button
                         onClick={resetTest}
                         className="w-full bg-gray-100 text-gray-700 font-semibold py-3 px-6 rounded-lg hover:bg-gray-200 transition-colors duration-300"
@@ -259,12 +285,12 @@ export default function AdultBMITest() {
                         Calculează din nou
                       </button>
                       <button className="w-full bg-[#09a252] text-white font-semibold py-3 px-6 rounded-lg hover:bg-[#09a252] transition-colors duration-300">
-                        Vorbește cu un specialist
+                        Vorbește cu un dietetician
                       </button>
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
             </motion.div>
           </div>
 
@@ -289,7 +315,7 @@ export default function AdultBMITest() {
                 <div className="space-y-2 text-sm">
                   <div className="flex justify-between">
                     <span>Sub 18.5:</span>
-                    <span className="text-green-600 font-medium">Subponderal</span>
+                    <span className="text-yellow-600 font-medium">Subponderal</span>
                   </div>
                   <div className="flex justify-between">
                     <span>18.5 - 24.9:</span>
@@ -330,7 +356,7 @@ export default function AdultBMITest() {
                 <div className="mt-4 p-3 bg-green-50 rounded-lg">
                   <p className="text-sm text-[#09a252]">
                     <strong>Recomandare:</strong> Folosește IMC ca punct de plecare,
-                    dar consultă întotdeauna un specialist pentru o evaluare completă.
+                    dar consultă întotdeauna un dietetician pentru o evaluare completă.
                   </p>
                 </div>
               </div>

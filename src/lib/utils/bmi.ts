@@ -64,7 +64,7 @@ export function calculateAdultBMI(weight: number, height: number): BMIResult {
     description = 'Greutatea ta prezintă riscuri pentru sănătate. Este important să acționezi acum.';
     riskLevel = 'high';
     recommendations = [
-      'Consultă urgent un medic specialist',
+      'Consultă urgent un dietetician',
       'Lucrează cu un nutriționist pentru un plan de slăbire',
       'Începe treptat cu exerciții fizice adaptate',
       'Monitorizează și alte indicatori de sănătate'
@@ -137,19 +137,12 @@ export function calculateChildBMI(
     percentile = 3;
     percentileCategory = 'Sub percentila 5';
     category = 'Subponderal';
-    categoryColor = 'text-blue-600';
+    categoryColor = 'text-yellow-500';
     description = 'Copilul tău are o greutate sub valorile normale pentru vârsta și înălțimea sa.';
     riskLevel = 'moderate';
-  } else if (bmi < percentiles.p15) {
-    percentile = 10;
-    percentileCategory = 'Percentila 5-15';
-    category = 'Greutate scăzută';
-    categoryColor = 'text-blue-500';
-    description = 'Greutatea copilului este ușor sub normalul pentru vârsta sa.';
-    riskLevel = 'low';
   } else if (bmi < percentiles.p85) {
     percentile = 50;
-    percentileCategory = 'Percentila 15-85';
+    percentileCategory = 'Percentila 5-85';
     category = 'Greutate normală';
     categoryColor = 'text-[#09a252]';
     description = 'Excelent! Copilul tău are o greutate normală și sănătoasă.';
@@ -157,8 +150,8 @@ export function calculateChildBMI(
   } else if (bmi < percentiles.p95) {
     percentile = 90;
     percentileCategory = 'Percentila 85-95';
-    category = 'Risc de suprapondere';
-    categoryColor = 'text-yellow-600';
+    category = 'Risc suprapondere';
+    categoryColor = 'text-yellow-500';
     description = 'Copilul tău prezintă risc de suprapondere. Este important să monitorizezi alimentația.';
     riskLevel = 'moderate';
   } else {
@@ -166,7 +159,7 @@ export function calculateChildBMI(
     percentileCategory = 'Peste percentila 95';
     category = 'Supraponderal';
     categoryColor = 'text-red-600';
-    description = 'Copilul tău are suprapondere. Recomandăm consultarea unui specialist.';
+    description = 'Copilul tău are suprapondere. Recomandăm consultarea unui dietetician.';
     riskLevel = 'high';
   }
   
