@@ -91,12 +91,12 @@ const TeamPage: React.FC = () => {
                     <div className="max-w-6xl mx-auto">
                         {loading ? (
                             // Loading state
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                                {[...Array(6)].map((_, index) => (
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                                {[...Array(8)].map((_, index) => (
                                     <div key={index} className="bg-white rounded-lg shadow-lg overflow-hidden">
-                                        <div className="loading-shimmer h-80"></div>
-                                        <div className="p-8">
-                                            <div className="loading-shimmer h-6 mb-3 rounded"></div>
+                                        <div className="loading-shimmer h-64"></div>
+                                        <div className="p-6">
+                                            <div className="loading-shimmer h-5 mb-2 rounded"></div>
                                             <div className="loading-shimmer h-4 mb-4 rounded w-3/4"></div>
                                             <div className="loading-shimmer h-10 rounded w-full"></div>
                                         </div>
@@ -105,7 +105,7 @@ const TeamPage: React.FC = () => {
                             </div>
                         ) : (
                             // Members grid
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                                 {members.map((member) => (
                                     <VolunteerCard
                                         key={member.id}

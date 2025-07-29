@@ -30,7 +30,7 @@ const VolunteerCarousel: React.FC = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  const volunteersPerPage = isMobile ? 1 : 3;
+  const volunteersPerPage = isMobile ? 1 : 4;
   const totalPages = Math.ceil(volunteers.length / volunteersPerPage);
   const maxVolunteerIndex = Math.max(totalPages - 1, 0);
 
@@ -85,7 +85,7 @@ const VolunteerCarousel: React.FC = () => {
                       .map((volunteer) => (
                         <div
                           key={volunteer.id}
-                          className={`flex-shrink-0 ${isMobile ? 'w-full' : 'w-1/3 px-3'}`}
+                          className={`flex-shrink-0 ${isMobile ? 'w-full' : 'w-1/4 px-2'}`}
                         >
                           <VolunteerCard
                             member={volunteer}
