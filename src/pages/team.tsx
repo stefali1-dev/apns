@@ -4,22 +4,24 @@ import Layout from '@/layouts/NavbarLayout';
 import { membersService, Member } from '@/lib/services/membersService';
 import VolunteerModal from '@/components/VolunteerModal';
 import VolunteerCard from '@/components/VolunteerCard';
+import VolunteerCardSkeleton from '@/components/VolunteerCardSkeleton';
 
 const TeamPage: React.FC = () => {
     const [members, setMembers] = useState<Member[]>([]);
     const [selectedMember, setSelectedMember] = useState<Member | null>(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [loading, setLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         const fetchMembers = async () => {
             try {
+                setIsLoading(true);
                 const data = await membersService.getMembers();
                 setMembers(data);
             } catch (error) {
                 console.error('Eroare la încărcarea membrilor:', error);
             } finally {
-                setLoading(false);
+                setIsLoading(false);
             }
         };
 
@@ -44,19 +46,6 @@ const TeamPage: React.FC = () => {
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-
-            <style jsx>{`
-                .loading-shimmer {
-                    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-                    background-size: 200% 100%;
-                    animation: shimmer 1.5s infinite;
-                }
-
-                @keyframes shimmer {
-                    0% { background-position: -200% 0; }
-                    100% { background-position: 200% 0; }
-                }
-            `}</style>
 
             <div className="bg-green-50 min-h-screen">
                 {/* Hero Section */}
@@ -89,33 +78,26 @@ const TeamPage: React.FC = () => {
                 {/* Main content */}
                 <div className="container mx-auto px-4 py-8">
                     <div className="max-w-6xl mx-auto">
-                        {loading ? (
-                            // Loading state
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                                {[...Array(8)].map((_, index) => (
-                                    <div key={index} className="bg-white rounded-lg shadow-lg overflow-hidden">
-                                        <div className="loading-shimmer h-64"></div>
-                                        <div className="p-6">
-                                            <div className="loading-shimmer h-5 mb-2 rounded"></div>
-                                            <div className="loading-shimmer h-4 mb-4 rounded w-3/4"></div>
-                                            <div className="loading-shimmer h-10 rounded w-full"></div>
-                                        </div>
+                        {/* Members grid */}
+                        <div className="flex flex-wrap justify-center gap-6">
+                            {isLoading ? (
+                                // Display 7 skeleton cards to match the expected number of team members
+                                Array.from({ length: 7 }, (_, index) => (
+                                    <div key={`skeleton-${index}`} className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 max-w-xs">
+                                        <VolunteerCardSkeleton />
                                     </div>
-                                ))}
-                            </div>
-                        ) : (
-                            // Members grid
-                            <div className="flex flex-wrap justify-center gap-6">
-                                {members.map((member) => (
+                                ))
+                            ) : (
+                                members.map((member) => (
                                     <div key={member.id} className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 max-w-xs">
                                         <VolunteerCard
                                             member={member}
                                             onClick={openModal}
                                         />
                                     </div>
-                                ))}
-                            </div>
-                        )}
+                                ))
+                            )}
+                        </div>
 
                         {/* Call to action */}
                         <div className="mt-12 bg-[#09a252] rounded-lg shadow-lg p-8 text-white text-center">

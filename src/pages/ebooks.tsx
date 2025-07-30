@@ -386,14 +386,14 @@ export default function EBooksPage() {
                     {currentEbooks.map((ebook) => (
                       <div key={ebook.id} className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 group">
                         <Link href={`/ebooks/${ebook.slug}`}>
-                          <div className="relative aspect-square overflow-hidden bg-gradient-to-br from-green-100 to-green-200">
+                          <div className="relative aspect-[4/3] overflow-hidden bg-gradient-to-br from-green-100 to-green-200">
                             {ebook.coverImage ? (
                               <Image
                                 src={ebook.coverImage}
                                 alt={ebook.title}
                                 width={400}
-                                height={400}
-                                className="w-full h-full object-cover"
+                                height={300}
+                                className="w-full h-full object-contain"
                               />
                             ) : (
                               <div className="w-full h-full flex items-center justify-center">

@@ -59,7 +59,7 @@ const mockAuthors: Author[] = [
 ];
 
 const mockCategories: Category[] = [
-  { id: 1, name: 'Nutriție de bază' }
+  { id: 1, name: '' }
 ];
 
 export const mockEbooks: EBook[] = [

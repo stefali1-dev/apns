@@ -3,6 +3,7 @@ export interface Member {
     id: string;
     name: string;
     position: string;
+    secondaryPosition?: string; // Poziția secundară (opțională)
     imageUrl: string;
     description: string;
     specializations?: string[];
@@ -21,7 +22,8 @@ export class MembersService {
         {
             id: '1',
             name: 'Drd. Corina Bogdănici',
-            position: 'Dietetician autorizat & Președinte APNS',
+            position: 'Președinte APNS',
+            secondaryPosition: 'Dietetician autorizat',
             imageUrl: '/images/volunteers/1.jpeg',
             description: 'Drd. Corina Bogdănici este președinta și fondatoarea Asociației pentru Promovarea Nutriției Sănătoase. Cu o pasiune profundă pentru educația nutrițională și promovarea unui stil de viață sănătos, Corina și-a dedicat cariera dezvoltării programelor de conștientizare despre importanța unei alimentații echilibrate. Ea coordonează echipa de specialiști și supervizează toate activitățile asociației, având o viziune clară asupra viitorului nutriției în România.',
             specializations: ['Dietetică clinică', 'Educație nutrițională', 'Management în sănătate', 'Promovarea sănătății publice'],
@@ -48,6 +50,7 @@ export class MembersService {
             id: '3',
             name: 'Gianina Mihalache',
             position: 'Dietetician autorizat',
+            secondaryPosition: 'Asistent medical',
             imageUrl: '/images/volunteers/3.jpeg',
             description: 'Gianina Mihalache se specializează în nutriția sportivă și optimizarea performanței prin alimentație. Cu experiență în lucrul cu atleți de performanță și persoane active, ea dezvoltă strategii nutriționale care susțin antrenamentul și recuperarea. Gianina este pasionată de cercetarea în domeniul nutriției sportive și aplică cele mai recente descoperiri științifice în practica sa clinică.',
             specializations: ['Nutriție sportivă', 'Optimizarea performanței', 'Planificare alimentară pentru atleți', 'Suplimentare sportivă'],
@@ -83,7 +86,8 @@ export class MembersService {
         {
             id: '6',
             name: 'Bianca Dascălu',
-            position: 'Licențiată în nutriție și dietetică',
+            position: 'Antrenor fitness',
+            secondaryPosition: 'Licențiată în nutriție și dietetică',
             imageUrl: '/images/volunteers/6.jpeg',
             description: 'Bianca Dascălu combină expertiza în fitness cu principiile unei alimentații sănătoase pentru a oferi o abordare holistică asupra sănătății. Ca antrenor fitness certificat, ea înțelege importanța sincronizării dintre exercițiul fizic și nutriție pentru atingerea obiectivelor de sănătate. Bianca dezvoltă programe integrate care includ atât antrenament, cât și consiliere nutrițională de bază.',
             specializations: ['Fitness și nutriție', 'Antrenament funcțional', 'Motivație și coaching', 'Stilul de viață activ'],
@@ -123,7 +127,7 @@ export class MembersService {
 
     async getMembersByPosition(position: string): Promise<Member[]> {
         await this.delay(500);
-        return this.mockMembers.filter(member => 
+        return this.mockMembers.filter(member =>
             member.position.toLowerCase().includes(position.toLowerCase())
         );
     }
@@ -134,7 +138,7 @@ export class MembersService {
         return this.mockMembers.filter(member =>
             member.name.toLowerCase().includes(lowercaseQuery) ||
             member.position.toLowerCase().includes(lowercaseQuery) ||
-            member.specializations?.some(spec => 
+            member.specializations?.some(spec =>
                 spec.toLowerCase().includes(lowercaseQuery)
             )
         );

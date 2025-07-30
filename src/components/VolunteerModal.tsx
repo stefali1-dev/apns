@@ -108,12 +108,28 @@ const VolunteerModal: React.FC<VolunteerModalProps> = ({ volunteer, isOpen, onCl
             </div>
 
             <div className="p-8">
-              <h2 className="text-2xl font-bold text-gray-900 mb-2">
+              <h2 className="text-2xl font-bold text-gray-900 mb-3">
                 {volunteer.name}
               </h2>
-              <p className="text-lg text-gray-700 font-medium mb-6">
-                {volunteer.position}
-              </p>
+              
+              {/* Poziții - Primary și Secondary în modal */}
+              <div className="mb-6 space-y-2">
+                <div className="flex items-center">
+                  <span className="inline-block w-3 h-3 bg-[#09a252] rounded-full mr-3 flex-shrink-0"></span>
+                  <p className="text-lg text-gray-900 font-semibold">
+                    {volunteer.position}
+                  </p>
+                </div>
+                
+                {volunteer.secondaryPosition && (
+                  <div className="flex items-center">
+                    <span className="inline-block w-3 h-3 bg-green-400 rounded-full mr-3 flex-shrink-0"></span>
+                    <p className="text-lg text-gray-700 font-medium">
+                      {volunteer.secondaryPosition}
+                    </p>
+                  </div>
+                )}
+              </div>
 
               <div className="space-y-6">
                 <div>
