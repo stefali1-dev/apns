@@ -39,8 +39,8 @@ const DonateButton: React.FC<{
 
 const DonatePage: React.FC<DonatePageProps> = ({
   orgName = "Asociația pentru Promovarea Nutriției Sănătoase",
-  orgCif = "12345678",
-  orgIban = "RO12RNCB0000000000001234",
+  orgCif = "46079240",
+  orgIban = "RO68BRDE240SV60062942400",
   contactEmail = "contact@appns.ro"
 }) => {
   return (
