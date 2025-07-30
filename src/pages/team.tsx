@@ -105,13 +105,14 @@ const TeamPage: React.FC = () => {
                             </div>
                         ) : (
                             // Members grid
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                            <div className="flex flex-wrap justify-center gap-6">
                                 {members.map((member) => (
-                                    <VolunteerCard
-                                        key={member.id}
-                                        member={member}
-                                        onClick={openModal}
-                                    />
+                                    <div key={member.id} className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 max-w-xs">
+                                        <VolunteerCard
+                                            member={member}
+                                            onClick={openModal}
+                                        />
+                                    </div>
                                 ))}
                             </div>
                         )}

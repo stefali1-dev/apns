@@ -166,7 +166,7 @@ export default function Home() {
             {CARD_ITEMS.map(({ slug, label, Icon }) => (
               <Link
                 key={slug}
-                href={`/article/${slug}`}          // e.g. /article/diabetes
+                href={slug === 'coming-soon' ? '/coming-soon' : `/article/${slug}`}
                 className="shadow-lg group relative flex flex-col bg-white rounded-lg p-6 hover:shadow-lg transition-all duration-300 ease-in-out min-h-[180px] transform hover:-translate-y-2.5"
               >
                 {/* icon - fixed position at top */}

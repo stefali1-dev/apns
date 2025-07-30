@@ -83,7 +83,7 @@ export class MembersService {
         {
             id: '6',
             name: 'Bianca Dascălu',
-            position: 'Antrenor fitness',
+            position: 'Licențiată în nutriție și dietetică',
             imageUrl: '/images/volunteers/6.jpeg',
             description: 'Bianca Dascălu combină expertiza în fitness cu principiile unei alimentații sănătoase pentru a oferi o abordare holistică asupra sănătății. Ca antrenor fitness certificat, ea înțelege importanța sincronizării dintre exercițiul fizic și nutriție pentru atingerea obiectivelor de sănătate. Bianca dezvoltă programe integrate care includ atât antrenament, cât și consiliere nutrițională de bază.',
             specializations: ['Fitness și nutriție', 'Antrenament funcțional', 'Motivație și coaching', 'Stilul de viață activ'],
