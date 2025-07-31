@@ -4,7 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import Layout from '@/layouts/NavbarLayout';
-import { mockEbooks } from '@/lib/services/ebookService';
+import { mockEbooks, ebookService } from '@/lib/services/ebookService';
 
 interface Category {
   id: number;
@@ -33,17 +33,13 @@ interface FilterState {
   sort: 'newest' | 'title_asc' | 'title_desc' | 'price_asc' | 'price_desc';
 }
 
-// Mock data - în aplicația reală, acestea ar veni din API
-const mockCategories: Category[] = [
-  { id: 1, name: 'Nutriție de bază' }
-];
-
 const ITEMS_PER_PAGE = 6;
 
 export default function EBooksPage() {
   const router = useRouter();
   const [currentPage, setCurrentPage] = useState(1);
   const [emailSubscription, setEmailSubscription] = useState('');
+  const [categories, setCategories] = useState<Category[]>([]);
   const [filters, setFilters] = useState<FilterState>({
     search: '',
     categories: [],
@@ -51,6 +47,22 @@ export default function EBooksPage() {
     formats: [],
     sort: 'newest'
   });
+
+  // Load categories from service
+  useEffect(() => {
+    const loadCategories = async () => {
+      try {
+        const allCategories = await ebookService.getAllCategories();
+        setCategories(allCategories);
+      } catch (error) {
+        console.error('Error loading categories:', error);
+      }
+    };
+    loadCategories();
+  }, []);
+
+  // Filter out categories with empty names for the filter UI
+  const filteredCategories = categories.filter(category => category.name.trim() !== '');
 
   // Sincronizarea cu URL query parameters
   useEffect(() => {
@@ -243,29 +255,31 @@ export default function EBooksPage() {
                 </div>
 
                 {/* Categories Filter */}
-                <div className="mb-6">
-                  <h3 className="text-sm font-semibold text-gray-700 mb-3">Categorii</h3>
-                  <div className="space-y-3">
-                    {mockCategories.map((category) => (
-                      <label key={category.id} className="flex items-center cursor-pointer">
-                        <input
-                          type="checkbox"
-                          checked={filters.categories.includes(category.id)}
-                          onChange={(e) => {
-                            const newCategories = e.target.checked
-                              ? [...filters.categories, category.id]
-                              : filters.categories.filter(id => id !== category.id);
-                            updateFilters({ categories: newCategories });
-                          }}
-                          className="h-4 w-4 text-[#09a252] focus:ring-[#09a252] border-gray-300 rounded"
-                        />
-                        <span className="ml-3 text-sm text-gray-700 hover:text-[#09a252] transition-colors">
-                          {category.name}
-                        </span>
-                      </label>
-                    ))}
+                {filteredCategories.length > 0 && (
+                  <div className="mb-6">
+                    <h3 className="text-sm font-semibold text-gray-700 mb-3">Categorii</h3>
+                    <div className="space-y-3">
+                      {filteredCategories.map((category) => (
+                        <label key={category.id} className="flex items-center cursor-pointer">
+                          <input
+                            type="checkbox"
+                            checked={filters.categories.includes(category.id)}
+                            onChange={(e) => {
+                              const newCategories = e.target.checked
+                                ? [...filters.categories, category.id]
+                                : filters.categories.filter(id => id !== category.id);
+                              updateFilters({ categories: newCategories });
+                            }}
+                            className="h-4 w-4 text-[#09a252] focus:ring-[#09a252] border-gray-300 rounded"
+                          />
+                          <span className="ml-3 text-sm text-gray-700 hover:text-[#09a252] transition-colors">
+                            {category.name}
+                          </span>
+                        </label>
+                      ))}
+                    </div>
                   </div>
-                </div>
+                )}
 
                 {/* Price Filter */}
                 <div className="mb-6">
@@ -298,41 +312,6 @@ export default function EBooksPage() {
                         className="h-4 w-4 text-[#09a252] focus:ring-[#09a252] border-gray-300 rounded"
                       />
                       <span className="ml-3 text-sm text-gray-700 hover:text-[#09a252] transition-colors">Cu plată</span>
-                    </label>
-                  </div>
-                </div>
-
-                {/* Format Filter */}
-                <div className="mb-6">
-                  <h3 className="text-sm font-semibold text-gray-700 mb-3">Format</h3>
-                  <div className="space-y-3">
-                    <label className="flex items-center cursor-pointer">
-                      <input
-                        type="checkbox"
-                        checked={filters.formats.includes('pdf')}
-                        onChange={(e) => {
-                          const newFormats = e.target.checked
-                            ? [...filters.formats, 'pdf' as const]
-                            : filters.formats.filter(format => format !== 'pdf');
-                          updateFilters({ formats: newFormats });
-                        }}
-                        className="h-4 w-4 text-[#09a252] focus:ring-[#09a252] border-gray-300 rounded"
-                      />
-                      <span className="ml-3 text-sm text-gray-700 hover:text-[#09a252] transition-colors">PDF</span>
-                    </label>
-                    <label className="flex items-center cursor-pointer">
-                      <input
-                        type="checkbox"
-                        checked={filters.formats.includes('epub')}
-                        onChange={(e) => {
-                          const newFormats = e.target.checked
-                            ? [...filters.formats, 'epub' as const]
-                            : filters.formats.filter(format => format !== 'epub');
-                          updateFilters({ formats: newFormats });
-                        }}
-                        className="h-4 w-4 text-[#09a252] focus:ring-[#09a252] border-gray-300 rounded"
-                      />
-                      <span className="ml-3 text-sm text-gray-700 hover:text-[#09a252] transition-colors">EPUB</span>
                     </label>
                   </div>
                 </div>
@@ -416,9 +395,11 @@ export default function EBooksPage() {
 
                           <div className="p-6">
                             <div className="flex items-center justify-between mb-3">
-                              <span className="inline-block bg-green-100 text-[#09a252] text-xs px-3 py-1 rounded-full font-medium">
-                                {ebook.category.name}
-                              </span>
+                              {ebook.category.name.trim() !== '' && (
+                                <span className="inline-block bg-green-100 text-[#09a252] text-xs px-3 py-1 rounded-full font-medium">
+                                  {ebook.category.name}
+                                </span>
+                              )}
                               <span className="text-gray-500 text-xs font-medium">
                                 {ebook.format.toUpperCase()}
                               </span>

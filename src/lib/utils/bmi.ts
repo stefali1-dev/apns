@@ -142,24 +142,24 @@ export function calculateChildBMI(
     riskLevel = 'moderate';
   } else if (bmi < percentiles.p85) {
     percentile = 50;
-    percentileCategory = 'Percentila 5-85';
-    category = 'Greutate normală';
+    percentileCategory = 'De la percentila 5 la sub percentila 85';
+    category = 'Greutate sănătoasă';
     categoryColor = 'text-[#09a252]';
-    description = 'Excelent! Copilul tău are o greutate normală și sănătoasă.';
+    description = 'Excelent! Copilul tău are o greutate sănătoasă și optimă.';
     riskLevel = 'low';
   } else if (bmi < percentiles.p95) {
     percentile = 90;
-    percentileCategory = 'Percentila 85-95';
-    category = 'Risc suprapondere';
+    percentileCategory = 'De la percentila 85 la sub percentila 95';
+    category = 'Supraponderal';
     categoryColor = 'text-yellow-500';
-    description = 'Copilul tău prezintă risc de suprapondere. Este important să monitorizezi alimentația.';
+    description = 'Copilul tău prezintă suprapondere. Este important să monitorizezi alimentația.';
     riskLevel = 'moderate';
   } else {
     percentile = 97;
-    percentileCategory = 'Peste percentila 95';
-    category = 'Supraponderal';
+    percentileCategory = 'Percentila 95 sau mai mare';
+    category = 'Obezitate';
     categoryColor = 'text-red-600';
-    description = 'Copilul tău are suprapondere. Recomandăm consultarea unui dietetician.';
+    description = 'Copilul tău prezintă obezitate. Recomandăm consultarea unui dietetician.';
     riskLevel = 'high';
   }
   
@@ -192,7 +192,7 @@ function getChildRecommendations(category: string, age: number): string[] {
       'Asigură-te că copilul consumă suficiente calorii',
       'Monitorizează creșterea și dezvoltarea'
     ];
-  } else if (category === 'Risc de suprapondere' || category === 'Supraponderal') {
+  } else if (category === 'Supraponderal' || category === 'Obezitate') {
     return [
       ...baseRecommendations,
       'Limitează alimentele procesate și băuturile dulci',

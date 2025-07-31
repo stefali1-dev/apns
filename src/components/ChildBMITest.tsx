@@ -131,10 +131,10 @@ export default function ChildBMITest() {
     // Helper function to calculate dot position on the segmented percentile bar
     const calculateDotPosition = (percentile: number) => {
         // The bar has 4 equal sections (25% each):
-        // Section 1: 0-5th percentile (0-25% of bar)
-        // Section 2: 5th-85th percentile (25-50% of bar)  
-        // Section 3: 85th-95th percentile (50-75% of bar)
-        // Section 4: 95th-100th percentile (75-100% of bar)
+        // Section 1: 0-5th percentile (Subponderal) - 0-25% of bar
+        // Section 2: 5th-85th percentile (Greutate sănătoasă) - 25-50% of bar  
+        // Section 3: 85th-95th percentile (Supraponderal) - 50-75% of bar
+        // Section 4: 95th-100th percentile (Obezitate) - 75-100% of bar
         
         if (percentile <= 5) {
             // Map 0-5th percentile to 0-25% of bar
@@ -568,13 +568,13 @@ export default function ChildBMITest() {
                                                 <h3 className="text-sm font-semibold text-gray-700 mb-3">Poziția în percentile</h3>
                                                 <div className="relative mb-0">
                                                     <div className="h-4 rounded-full overflow-hidden flex">
-                                                        {/* Sub percentila 5: yellow-500 */}
+                                                        {/* Sub percentila 5: Subponderal */}
                                                         <div className="flex-1 bg-yellow-500" style={{ width: '5%' }}></div>
-                                                        {/* Percentila 5-85: green (#09a252) */}
+                                                        {/* De la percentila 5 la sub percentila 85: Greutate sănătoasă */}
                                                         <div className="flex-1 bg-[#09a252]" style={{ width: '80%' }}></div>
-                                                        {/* Percentila 85-95: yellow-500 */}
+                                                        {/* De la percentila 85 la sub percentila 95: Supraponderal */}
                                                         <div className="flex-1 bg-yellow-500" style={{ width: '10%' }}></div>
-                                                        {/* Peste percentila 95: red-600 */}
+                                                        {/* Percentila 95 sau mai mare: Obezitate */}
                                                         <div className="flex-1 bg-red-600" style={{ width: '5%' }}></div>
                                                     </div>
                                                     <div
@@ -650,16 +650,16 @@ export default function ChildBMITest() {
                                         <span className="text-yellow-500 font-medium">Subponderal</span>
                                     </div>
                                     <div className="flex justify-between">
-                                        <span>Percentila 5-85:</span>
-                                        <span className="text-[#09a252] font-medium">Greutate normală</span>
+                                        <span>De la percentila 5 la sub percentila 85:</span>
+                                        <span className="text-[#09a252] font-medium">Greutate sănătoasă</span>
                                     </div>
                                     <div className="flex justify-between">
-                                        <span>Percentila 85-95:</span>
-                                        <span className="text-yellow-500 font-medium">Risc suprapondere</span>
+                                        <span>De la percentila 85 la sub percentila 95:</span>
+                                        <span className="text-yellow-500 font-medium">Supraponderal</span>
                                     </div>
                                     <div className="flex justify-between">
-                                        <span>Peste percentila 95:</span>
-                                        <span className="text-red-600 font-medium">Supraponderal</span>
+                                        <span>Percentila 95 sau mai mare:</span>
+                                        <span className="text-red-600 font-medium">Obezitate</span>
                                     </div>
                                 </div>
                             </div>

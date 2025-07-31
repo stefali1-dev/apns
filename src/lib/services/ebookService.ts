@@ -37,24 +37,10 @@ export interface EBook {
 const mockAuthors: Author[] = [
   {
     id: 1,
-    name: 'Dr. Maria Popescu',
-    title: 'Nutriționist specialist, PhD în Științe Medicale',
-    bio: 'Dr. Maria Popescu este nutriționist cu peste 15 ani de experiență în domeniul nutriției clinice și preventive. A lucrat în spitale de top din România și a publicat numeroase studii despre rolul alimentației în prevenirea bolilor cronice. Este membră a Societății Române de Nutriție și autoare a mai multor cărți de specialitate.',
-    profileImage: '/images/authors/maria-popescu.jpg'
-  },
-  {
-    id: 2,
-    name: 'Prof. Dr. Alexandru Ionescu',
-    title: 'Profesor universitrar, specialist în endocrinologie și nutriție',
-    bio: 'Profesor la Universitatea de Medicină din București, cu specializare în endocrinologie și boli metabolice. Are o vastă experiență în tratamentul diabetului și a publicat peste 100 de articole științifice în reviste internaționale. Este consultant pentru mai multe organizații de sănătate publică.',
-    profileImage: '/images/authors/alexandru-ionescu.jpg'
-  },
-  {
-    id: 3,
-    name: 'Elena Dumitrescu',
-    title: 'Nutriționist clinian, specialist în diete terapeutice',
-    bio: 'Nutriționist cu specializare în diete terapeutice pentru diverse afecțiuni. A dezvoltat planuri alimentare pentru peste 1000 de pacienți și colaborează cu echipe medicale multidisciplinare. Este certificată în consiliere nutrițională și educație pentru sănătate.',
-    profileImage: '/images/authors/elena-dumitrescu.jpg'
+    name: 'APNS',
+    title: '',
+    bio: 'Asociația pentru Promovarea Nutriției Sănătoase',
+    profileImage: '/images/logo.png'
   }
 ];
 
@@ -69,21 +55,23 @@ export const mockEbooks: EBook[] = [
     slug: 'spring-restart',
     shortDescription: 'Slăbește sănătos chiar și în perioadele ocupate cu strategii simple și eficiente.',
     fullDescription: `
-      <p>Ghidul complet pentru persoanele ocupate care vor să slăbească sănătos și să își recapete energia. Descoperă cum să îți accelerezi metabolismul, să integrezi alimentele potrivite și să creezi obiceiuri sustenabile.</p>
+      <p class="text-gray-700 leading-relaxed mb-6 text-lg">Ghidul complet pentru persoanele ocupate care vor să slăbească sănătos și să își recapete energia. Descoperă cum să îți accelerezi metabolismul, să integrezi alimentele potrivite și să creezi obiceiuri sustenabile.</p>
       
-      <p><strong>Ce vei descoperi:</strong></p>
-      <ul>
-        <li>Cum să îți accelerezi metabolismul cu strategii simple</li>
-        <li>Rețete rapide și hrănitoare în mai puțin de 15 minute</li>
-        <li>Cum să integrezi mișcarea în rutina zilnică, chiar dacă nu ajungi la sală</li>
-        <li>De ce somnul este aliatul tău în menținerea unei greutăți optime</li>
-        <li>7 alimente care susțin natural detoxifierea organismului</li>
-      </ul>
+      <div class="bg-green-50 border border-green-200 rounded-lg p-6 mb-6">
+        <p class="text-gray-900 leading-relaxed mb-4 font-semibold text-lg"><strong>Ce vei descoperi:</strong></p>
+        <ul class="space-y-3 list-disc list-inside text-gray-900 leading-relaxed">
+          <li><strong>Cum să îți accelerezi metabolismul</strong> cu strategii simple și eficiente</li>
+          <li><strong>Rețete rapide și hrănitoare</strong> în mai puțin de 15 minute</li>
+          <li><strong>Cum să integrezi mișcarea</strong> în rutina zilnică, chiar dacă nu ajungi la sală</li>
+          <li><strong>De ce somnul este aliatul tău</strong> în menținerea unei greutăți optime</li>
+          <li><strong>7 alimente care susțin natural</strong> detoxifierea organismului</li>
+        </ul>
+      </div>
       
-      <p>Un restart complet pentru corpul și mintea ta, perfect adaptat pentru persoanele cu un program încărcat.</p>
+      <p class="text-gray-700 leading-relaxed">Un restart complet pentru corpul și mintea ta, perfect adaptat pentru persoanele cu un program încărcat.</p>
     `,
     toc: `
-      <ol>
+      <ol class="space-y-3 list-decimal list-inside text-gray-700 leading-relaxed">
         <li>Introducere - sănătatea începe din interior</li>
         <li>Metabolismul - mit vs adevăr</li>
         <li>7 superalimente</li>
@@ -100,7 +88,7 @@ export const mockEbooks: EBook[] = [
     isFree: true,
     format: 'pdf',
     pageCount: 14,
-    publishedDate: '2024-03-15'
+    publishedDate: '2025-06-15'
   }
 ];
 
