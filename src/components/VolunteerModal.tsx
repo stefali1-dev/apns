@@ -116,14 +116,14 @@ const VolunteerModal: React.FC<VolunteerModalProps> = ({ volunteer, isOpen, onCl
               <div className="mb-6 space-y-2">
                 <div className="flex items-center">
                   <span className="inline-block w-3 h-3 bg-[#09a252] rounded-full mr-3 flex-shrink-0"></span>
-                  <p className="text-lg text-gray-900 font-semibold">
+                  <p className="text-lg text-gray-900 font-medium">
                     {volunteer.position}
                   </p>
                 </div>
                 
                 {volunteer.secondaryPosition && (
                   <div className="flex items-center">
-                    <span className="inline-block w-3 h-3 bg-green-400 rounded-full mr-3 flex-shrink-0"></span>
+                    <span className="inline-block w-3 h-3 bg-[#09a252] rounded-full mr-3 flex-shrink-0"></span>
                     <p className="text-lg text-gray-700 font-medium">
                       {volunteer.secondaryPosition}
                     </p>

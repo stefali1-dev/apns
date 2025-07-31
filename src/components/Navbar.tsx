@@ -193,7 +193,7 @@ export default function Navbar() {
                         </li>
                         <li>
                           <Link
-                            href="/coming-soon"
+                            href="/proiecte"
                             className="block text-base text-gray-700 hover:text-[#09a252] transition-colors font-medium py-2 px-3 rounded-lg hover:bg-gray-100"
                           >
                             Proiecte
@@ -496,7 +496,7 @@ export default function Navbar() {
               {mobileDespreNoiOpen && (
                 <div className="pl-4 space-y-1">
                   <Link href="/team" className="block px-3 py-2 text-gray-600 hover:bg-green-50 hover:text-[#09a252] rounded-lg transition-colors">Voluntari</Link>
-                  <Link href="/coming-soon" className="block px-3 py-2 text-gray-600 hover:bg-green-50 hover:text-[#09a252] rounded-lg transition-colors">Proiecte</Link>
+                  <Link href="/proiecte" className="block px-3 py-2 text-gray-600 hover:bg-green-50 hover:text-[#09a252] rounded-lg transition-colors">Proiecte</Link>
                   <Link href="/coming-soon" className="block px-3 py-2 text-gray-600 hover:bg-green-50 hover:text-[#09a252] rounded-lg transition-colors">Statut</Link>
                 </div>
               )}
