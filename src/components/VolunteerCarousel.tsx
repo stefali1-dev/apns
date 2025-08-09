@@ -103,24 +103,24 @@ const VolunteerCarousel: React.FC = () => {
                 <>
                   <button
                     onClick={prevVolunteer}
-                    className={`absolute top-1/2 -left-6 transform -translate-y-1/2 bg-white p-3 rounded-full shadow-lg hover:shadow-xl transition-all z-20 ${currentVolunteerIndex === 0 ? 'opacity-50 cursor-not-allowed' : 'hover:bg-white'
+                    className={`absolute top-1/2 -left-6 transform -translate-y-1/2 bg-[#09a252] p-3 rounded-full shadow-lg hover:shadow-xl transition-all z-20 ${currentVolunteerIndex === 0 ? 'opacity-50 cursor-not-allowed' : 'hover:bg-[#09a252]'
                       }`}
                     disabled={currentVolunteerIndex === 0}
                     style={{ marginTop: '-60px' }}
                   >
-                    <svg className="w-6 h-6 text-[#09a252]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
                     </svg>
                   </button>
 
                   <button
                     onClick={nextVolunteer}
-                    className={`absolute top-1/2 -right-6 transform -translate-y-1/2 bg-white p-3 rounded-full shadow-lg hover:shadow-xl transition-all z-20 ${currentVolunteerIndex >= maxVolunteerIndex ? 'opacity-50 cursor-not-allowed' : 'hover:bg-white'
+                    className={`absolute top-1/2 -right-6 transform -translate-y-1/2 bg-[#09a252] p-3 rounded-full shadow-lg hover:shadow-xl transition-all z-20 ${currentVolunteerIndex >= maxVolunteerIndex ? 'opacity-50 cursor-not-allowed' : 'hover:bg-[#09a252]'
                       }`}
                     disabled={currentVolunteerIndex >= maxVolunteerIndex}
                     style={{ marginTop: '-60px' }}
                   >
-                    <svg className="w-6 h-6 text-[#09a252]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
                     </svg>
                   </button>

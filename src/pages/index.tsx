@@ -136,7 +136,7 @@ export default function Home() {
                 </p>
                 <a
                   href="/donate"
-                  className="inline-block bg-[#09a252] text-white font-semibold text-base md:text-lg py-3 px-6 rounded-lg shadow hover:bg-[#09a252] transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-green-400"
+                  className="inline-block bg-[#09a252] text-white font-semibold text-base md:text-lg py-3 px-6 rounded-lg shadow hover:bg-green-700 hover:shadow-xl hover:-translate-y-1 hover:scale-105 transition-all duration-300 transform focus:outline-none focus:ring-2 focus:ring-green-400"
                 >
                   Dăruiește speranță
                 </a>
@@ -215,7 +215,7 @@ export default function Home() {
                   <div className="flex flex-col sm:flex-row items-center gap-4">
                     <Link
                       href="/enroll"
-                      className="inline-block bg-[#09a252] text-white font-semibold px-6 py-3 rounded-lg shadow-md hover:bg-[#09a252] transition-colors duration-300"
+                      className="inline-block bg-[#09a252]  hover:bg-green-700 text-white font-semibold px-6 py-3 rounded-lg shadow-md transition-colors duration-300"
                     >
                       Implică-te
                     </Link>
@@ -244,7 +244,7 @@ export default function Home() {
                   <div className="flex items-center gap-4">
                     <Link
                       href="/dietetician"
-                      className="inline-block bg-[#09a252] text-white font-semibold px-6 py-3 rounded-lg shadow-md hover:bg-[#09a252] transition-colors duration-300"
+                      className="inline-block bg-[#09a252] text-white font-semibold px-6 py-3 rounded-lg shadow-md hover:bg-green-700 transition-colors duration-300"
                     >
                       Află mai mult
                     </Link>
@@ -278,13 +278,13 @@ export default function Home() {
             <div className="flex flex-col md:flex-row justify-center gap-4">
               <Link
                 href="/test-imc-adulti"
-                className="bg-white text-[#09a252] font-semibold px-8 py-4 rounded-lg shadow-md hover:bg-green-50 transition-colors duration-300"
+                className="bg-white text-[#09a252] font-semibold px-8 py-4 rounded-lg shadow-md hover:bg-green-50 hover:shadow-xl hover:-translate-y-1 hover:scale-105 transition-all duration-300 transform"
               >
                 Test IMC Adulți
               </Link>
               <Link
                 href="/test-imc-copii"
-                className="bg-white text-[#09a252] font-semibold px-8 py-4 rounded-lg shadow-md hover:bg-green-50 transition-colors duration-300"
+                className="bg-white text-[#09a252] font-semibold px-8 py-4 rounded-lg shadow-md hover:bg-green-50 hover:shadow-xl hover:-translate-y-1 hover:scale-105 transition-all duration-300 transform"
               >
                 Test IMC Copii
               </Link>
@@ -304,7 +304,7 @@ export default function Home() {
                 </p>
                 <Link
                   href="/enroll"
-                  className="inline-block bg-[#09a252] text-white font-semibold px-6 py-3 rounded-lg shadow-md hover:bg-[#09a252] transition-colors duration-300"
+                  className="inline-block bg-[#09a252] text-white font-semibold px-6 py-3 rounded-lg shadow-md hover:bg-green-700 transition-colors duration-300"
                 >
                   Devino voluntar
                 </Link>
