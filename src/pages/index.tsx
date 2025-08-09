@@ -146,7 +146,7 @@ export default function Home() {
               <div className="relative flex-1 max-w-[600px] w-full -mt-4 lg:mt-0 lg:-ml-12">
                 <OptimizedImage
                   src="/images/header.jpg"
-                  alt="Four senior men and women out for a hike"
+                  alt="Poza de grup"
                   width={600}
                   height={450}
                   className="w-full h-auto object-cover rounded-lg shadow-lg"
@@ -194,15 +194,17 @@ export default function Home() {
             <div className="space-y-8 lg:space-y-20">
               {/* First Content Block */}
               <div className="items-center gap-8 xl:gap-16 md:grid md:grid-cols-2">
-                <OptimizedImage
-                  className="w-full border-4 p-6 border-gray-200 bg-gray-50 rounded-lg shadow-lg hidden sm:block transition-transform duration-300"
-                  src="/images/group.jpeg"
-                  alt="Workshop nutrițional"
-                  width={1200}
-                  height={1000}
-                  quality={80}
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
-                />
+                <div className="border-4 p-6 border-gray-200 bg-gray-50 rounded-lg shadow-lg">
+                  <OptimizedImage
+                    className="w-full rounded-lg shadow-lg hidden sm:block transition-transform duration-300"
+                    src="/images/group.jpeg"
+                    alt="Workshop nutrițional"
+                    width={1200}
+                    height={1000}
+                    quality={80}
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
+                  />
+                </div>
                 <div className="mt-0">
                   <h2 className="mb-4 text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
                     Despre asociație
@@ -250,15 +252,17 @@ export default function Home() {
                     </Link>
                   </div>
                 </div>
-                <OptimizedImage
-                  className="w-full border-4 p-6 border-gray-200 bg-gray-50 rounded-lg shadow-lg hidden sm:block transition-transform duration-300"
-                  src="/images/group2.jpg"
-                  alt="Comunitate APNS"
-                  width={600}
-                  height={400}
-                  quality={80}
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
-                />
+                <div className="border-4 p-6 border-gray-200 bg-gray-50 rounded-lg shadow-lg">
+                  <OptimizedImage
+                    className="w-full rounded-lg shadow-lg hidden sm:block transition-transform duration-300"
+                    src="/images/group2.jpg"
+                    alt="Comunitate APNS"
+                    width={600}
+                    height={400}
+                    quality={80}
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
+                  />
+                </div>
               </div>
             </div>
           </div>
@@ -311,15 +315,17 @@ export default function Home() {
               </div>
 
               <div className="md:w-1/2">
-                <OptimizedImage
-                  src="/images/donate.jpg"
-                  alt="Copii în clasă"
-                  width={600}
-                  height={400}
-                  className="w-full border-4 p-6 border-gray-200 bg-gray-50 rounded-lg shadow transition-transform duration-300"
-                  quality={80}
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
-                />
+                <div className="border-4 p-6 border-gray-200 bg-gray-50 rounded-lg shadow-lg">
+                  <OptimizedImage
+                    src="/images/donate.jpg"
+                    alt="Copii în clasă"
+                    width={600}
+                    height={400}
+                    className="w-full rounded-lg shadow-lg transition-transform duration-300"
+                    quality={80}
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
+                  />
+                </div>
               </div>
             </div>
           </div>
