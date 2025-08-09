@@ -25,7 +25,7 @@ const ArticleCard: React.FC<ArticleCardProps> = ({
     };
 
     const content = (
-        <div className={`bg-white rounded-lg shadow-lg overflow-hidden cursor-pointer transform hover:-translate-y-1 transition-all duration-300 hover:shadow-xl h-full flex flex-col ${className}`}>
+        <div className={`bg-green-50 border border-gray-300 rounded-lg shadow-lg overflow-hidden cursor-pointer transform hover:-translate-y-1 transition-all duration-300 hover:shadow-xl h-full flex flex-col ${className}`}>
             <div className="relative overflow-hidden h-56 flex-shrink-0">
                 <OptimizedImage
                     src={article.imageUrl || '/images/placeholder-article.jpg'}

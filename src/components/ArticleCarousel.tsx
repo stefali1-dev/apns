@@ -40,7 +40,7 @@ const ArticleCarousel: React.FC = () => {
   };
 
   return (
-    <section className="bg-blue-50 py-16">
+    <section className="bg-white py-16">
       <div className="max-w-screen-xl mx-auto px-6">
         <div className="mb-12">
           <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">
