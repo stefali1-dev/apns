@@ -172,7 +172,7 @@ export default function Navbar() {
                 <div className="bg-white shadow-2xl border border-gray-100 rounded-lg overflow-hidden">
                   <div className="grid grid-cols-12 gap-0">
                     {/* Left section - Main menu items */}
-                    <div className="col-span-4 bg-gray-50 p-8">
+                    <div className="col-span-6 bg-gray-50 p-8">
                       <h3 className="text-lg font-bold text-gray-900 mb-6">Despre organizația noastră</h3>
                       <ul className="space-y-3">
                         <li>
@@ -211,18 +211,18 @@ export default function Navbar() {
                     </div>
 
                     {/* Right section - Featured content */}
-                    <div className="col-span-8 p-8">
-                      <h3 className="text-lg font-bold text-gray-900 mb-6">Resurse importante</h3>
-                      <div className="grid grid-cols-1 gap-4 max-w-2xl mx-auto">
+                    <div className="col-span-6 p-8">
+                      <h3 className="text-lg font-bold text-gray-900 mb-6">Resurse</h3>
+                      <div className="grid grid-cols-1 gap-4 max-w-lg mx-auto">
                         {/* Featured item 1 */}
                         <div className="flex gap-4 p-4 rounded-lg hover:bg-gray-50 transition-colors">
-                          <div className="bg-[#09a252] h-16 w-16 flex justify-center items-center rounded-lg flex-shrink-0">
-                            <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <div className="bg-[#09a252] h-12 w-12 flex justify-center items-center rounded-lg flex-shrink-0">
+                            <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
                             </svg>
                           </div>
                           <div>
-                            <Link href="/enroll" className="block font-bold text-gray-900 hover:text-[#09a252] transition-colors">
+                            <Link href="/enroll" className="block font-bold text-gray-900 hover:text-[#09a252] transition-colors text-base">
                               Voluntariatul APNS
                             </Link>
                             <p className="text-sm text-gray-600 mt-1">Alătură-te echipei noastre de voluntari și contribuie la promovarea nutriției sănătoase</p>
@@ -231,13 +231,13 @@ export default function Navbar() {
 
                         {/* Featured item 2 */}
                         <div className="flex gap-4 p-4 rounded-lg hover:bg-gray-50 transition-colors">
-                          <div className="bg-[#09a252] h-16 w-16 flex justify-center items-center rounded-lg flex-shrink-0">
-                            <svg className="w-9 h-9 text-white" fill="currentColor" viewBox="0 0 24 24">
+                          <div className="bg-[#09a252] h-12 w-12 flex justify-center items-center rounded-lg flex-shrink-0">
+                            <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
                               <path d="M4 21h9.62a3.995 3.995 0 0 0 3.037-1.397l5.102-5.952a1 1 0 0 0-.442-1.6l-1.968-.656a3.043 3.043 0 0 0-2.823.503l-3.185 2.547-.617-1.235A3.98 3.98 0 0 0 9.146 11H4c-1.103 0-2 .897-2 2v6c0 1.103.897 2 2 2zm0-8h5.146c.763 0 1.448.423 1.789 1.105l.447.895H7v2h6.014a.996.996 0 0 0 .442-.11l.003-.001.004-.002h.003l.002-.001h.004l.001-.001c.009.003.003-.001.003-.001.01 0 .002-.001.002-.001h.001l.002-.001.003-.001.002-.001.002-.001.003-.001.002-.001c.003 0 .001-.001.002-.001l.003-.002.002-.001.002-.001.003-.001.002-.001h.001l.002-.001h.001l.002-.001.002-.001c.009-.001.003-.001.003-.001l.002-.001a.915.915 0 0 0 .11-.078l4.146-3.317c.262-.208.623-.273.94-.167l.557.186-4.133 4.823a2.029 2.029 0 0 1-1.52.688H4v-6zM16 2h-.017c-.163.002-1.006.039-1.983.705-.951-.648-1.774-.7-1.968-.704L12.002 2h-.004c-.801 0-1.555.313-2.119.878C9.313 3.445 9 4.198 9 5s.313 1.555.861 2.104l3.414 3.586a1.006 1.006 0 0 0 1.45-.001l3.396-3.568C18.688 6.555 19 5.802 19 5s-.313-1.555-.878-2.121A2.978 2.978 0 0 0 16.002 2H16zm1 3c0 .267-.104.518-.311.725L14 8.55l-2.707-2.843C11.104 5.518 11 5.267 11 5s.104-.518.294-.708A.977.977 0 0 1 11.979 4c.025.001.502.032 1.067.485.081.065.163.139.247.222l.707.707.707-.707c.084-.083.166-.157.247-.222.529-.425.976-.478 1.052-.484a.987.987 0 0 1 .701.292c.189.189.293.44.293.707z"/>
                             </svg>
                           </div>
                           <div>
-                            <Link href="/donate" className="block font-bold text-gray-900 hover:text-[#09a252] transition-colors">
+                            <Link href="/donate" className="block font-bold text-gray-900 hover:text-[#09a252] transition-colors text-base">
                               Susține-ne
                             </Link>
                             <p className="text-sm text-gray-600 mt-1">Donează pentru a sprijini activitățile noastre și dezvoltarea programelor educaționale</p>
@@ -287,58 +287,88 @@ export default function Navbar() {
               >
                 <div className="bg-white shadow-2xl border border-gray-100 rounded-lg overflow-hidden">
                   <div className="grid grid-cols-12 gap-0">
-                    {/* Left section - Main articles */}
-                    <div className="col-span-4 bg-gray-50 p-8">
-                      <h3 className="text-lg font-bold text-gray-900 mb-6">Articole</h3>
-                      <ul className="space-y-3">
-                        <li>
-                          <Link
-                            href="/article/diabetes"
-                            className="block text-base text-gray-700 hover:text-[#09a252] transition-colors font-medium py-2 px-3 rounded-lg hover:bg-gray-100"
-                          >
-                            Diabet
-                          </Link>
-                        </li>
-                        <li>
+                    {/* Left section - Main articles organized in two columns */}
+                    <div className="col-span-6 bg-gray-50 p-8">
+                      <h3 className="text-lg font-bold text-gray-900 mb-6">Articole de specialitate</h3>
+                      <div className="grid grid-cols-2 gap-x-6 gap-y-1">
+                        <div className="space-y-1">
                           <Link
                             href="/article/obesity"
                             className="block text-base text-gray-700 hover:text-[#09a252] transition-colors font-medium py-2 px-3 rounded-lg hover:bg-gray-100"
                           >
                             Obezitate
                           </Link>
-                        </li>
-                        <li>
                           <Link
-                            href="/article/gout"
+                            href="/article/diabetes"
                             className="block text-base text-gray-700 hover:text-[#09a252] transition-colors font-medium py-2 px-3 rounded-lg hover:bg-gray-100"
                           >
-                            Guta
+                            Diabet zaharat
                           </Link>
-                        </li>
-                        <li>
                           <Link
-                            href="coming-soon"
+                            href="/coming-soon"
                             className="block text-base text-gray-700 hover:text-[#09a252] transition-colors font-medium py-2 px-3 rounded-lg hover:bg-gray-100"
                           >
-                            Toate articolele
+                            Boli cardiovasculare
                           </Link>
-                        </li>
-                      </ul>
+                          <Link
+                            href="/coming-soon"
+                            className="block text-base text-gray-700 hover:text-[#09a252] transition-colors font-medium py-2 px-3 rounded-lg hover:bg-gray-100"
+                          >
+                            Boli digestive
+                          </Link>
+                        </div>
+                        <div className="space-y-1">
+                          <Link
+                            href="/coming-soon"
+                            className="block text-base text-gray-700 hover:text-[#09a252] transition-colors font-medium py-2 px-3 rounded-lg hover:bg-gray-100"
+                          >
+                            Boli autoimune
+                          </Link>
+                          <Link
+                            href="/coming-soon"
+                            className="block text-base text-gray-700 hover:text-[#09a252] transition-colors font-medium py-2 px-3 rounded-lg hover:bg-gray-100"
+                          >
+                            Oncologie
+                          </Link>
+                          <Link
+                            href="/coming-soon"
+                            className="block text-base text-gray-700 hover:text-[#09a252] transition-colors font-medium py-2 px-3 rounded-lg hover:bg-gray-100"
+                          >
+                            Pediatrie
+                          </Link>
+                          <Link
+                            href="/coming-soon"
+                            className="block text-base text-gray-700 hover:text-[#09a252] transition-colors font-medium py-2 px-3 rounded-lg hover:bg-gray-100"
+                          >
+                            Sport / Fitness
+                          </Link>
+                        </div>
+                      </div>
+                      
+                      {/* Call to action button */}
+                      <div className="mt-6 pt-4 border-t border-gray-200">
+                        <Link
+                          href="/coming-soon"
+                          className="block w-full text-center bg-[#09a252] text-white font-semibold py-3 px-4 rounded-lg hover:bg-green-700 transition-colors duration-200"
+                        >
+                          Vezi toate articolele
+                        </Link>
+                      </div>
                     </div>
 
                     {/* Right section - Featured content */}
-                    <div className="col-span-8 p-8">
+                    <div className="col-span-6 p-8">
                       <h3 className="text-lg font-bold text-gray-900 mb-6">Resurse educaționale</h3>
-                      <div className="grid grid-cols-2 gap-6">
+                      <div className="grid grid-cols-1 gap-4 max-w-lg mx-auto">
                         {/* Featured item 1 */}
                         <div className="flex gap-4 p-4 rounded-lg hover:bg-gray-50 transition-colors">
-                          <div className="bg-[#09a252] h-16 w-16 flex justify-center items-center rounded-lg flex-shrink-0">
-                            <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <div className="bg-[#09a252] h-12 w-12 flex justify-center items-center rounded-lg flex-shrink-0">
+                            <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                             </svg>
                           </div>
                           <div>
-                            <Link href="/ebooks" className="block font-bold text-gray-900 hover:text-[#09a252] transition-colors">
+                            <Link href="/ebooks" className="block font-bold text-gray-900 hover:text-[#09a252] transition-colors text-base">
                               eBooks
                             </Link>
                             <p className="text-sm text-gray-600 mt-1">Descarcă ghidurile noastre de nutriție în format digital</p>
@@ -347,46 +377,16 @@ export default function Navbar() {
 
                         {/* Featured item 2 */}
                         <div className="flex gap-4 p-4 rounded-lg hover:bg-gray-50 transition-colors">
-                          <div className="bg-[#09a252] h-16 w-16 flex justify-center items-center rounded-lg flex-shrink-0">
-                            <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                            </svg>
-                          </div>
-                          <div>
-                            <Link href="/coming-soon" className="block font-bold text-gray-900 hover:text-[#09a252] transition-colors">
-                              Webinarii live
-                            </Link>
-                            <p className="text-sm text-gray-600 mt-1">Participă la sesiunile noastre educaționale interactive</p>
-                          </div>
-                        </div>
-
-                        {/* Featured item 3 */}
-                        <div className="flex gap-4 p-4 rounded-lg hover:bg-gray-50 transition-colors">
-                          <div className="bg-[#09a252] h-16 w-16 flex justify-center items-center rounded-lg flex-shrink-0">
-                            <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <div className="bg-[#09a252] h-12 w-12 flex justify-center items-center rounded-lg flex-shrink-0">
+                            <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
                             </svg>
                           </div>
                           <div>
-                            <Link href="/test-imc-adulti" className="block font-bold text-gray-900 hover:text-[#09a252] transition-colors">
+                            <Link href="/test-imc-adulti" className="block font-bold text-gray-900 hover:text-[#09a252] transition-colors text-base">
                               Test IMC
                             </Link>
                             <p className="text-sm text-gray-600 mt-1">Calculează-ți indicele de masă corporală cu instrumentul nostru</p>
-                          </div>
-                        </div>
-
-                        {/* Featured item 4 */}
-                        <div className="flex gap-4 p-4 rounded-lg hover:bg-gray-50 transition-colors">
-                          <div className="bg-[#09a252] h-16 w-16 flex justify-center items-center rounded-lg flex-shrink-0">
-                            <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
-                          </div>
-                          <div>
-                            <Link href="/contact" className="block font-bold text-gray-900 hover:text-[#09a252] transition-colors">
-                              Întrebări frecvente
-                            </Link>
-                            <p className="text-sm text-gray-600 mt-1">Răspunsuri la cele mai comune întrebări despre nutriție</p>
                           </div>
                         </div>
                       </div>
@@ -520,9 +520,17 @@ export default function Navbar() {
               </button>
               {mobileArticoleOpen && (
                 <div className="pl-4 space-y-1">
-                  <Link href="/article/diabetes" className="block px-3 py-2 text-gray-600 hover:bg-green-50 hover:text-[#09a252] rounded-lg transition-colors">Diabet</Link>
                   <Link href="/article/obesity" className="block px-3 py-2 text-gray-600 hover:bg-green-50 hover:text-[#09a252] rounded-lg transition-colors">Obezitate</Link>
-                  <Link href="/article/gout" className="block px-3 py-2 text-gray-600 hover:bg-green-50 hover:text-[#09a252] rounded-lg transition-colors">Guta</Link>
+                  <Link href="/article/diabetes" className="block px-3 py-2 text-gray-600 hover:bg-green-50 hover:text-[#09a252] rounded-lg transition-colors">Diabet zaharat</Link>
+                  <Link href="/coming-soon" className="block px-3 py-2 text-gray-600 hover:bg-green-50 hover:text-[#09a252] rounded-lg transition-colors">Boli cardiovasculare</Link>
+                  <Link href="/coming-soon" className="block px-3 py-2 text-gray-600 hover:bg-green-50 hover:text-[#09a252] rounded-lg transition-colors">Boli digestive</Link>
+                  <Link href="/coming-soon" className="block px-3 py-2 text-gray-600 hover:bg-green-50 hover:text-[#09a252] rounded-lg transition-colors">Boli autoimune</Link>
+                  <Link href="/coming-soon" className="block px-3 py-2 text-gray-600 hover:bg-green-50 hover:text-[#09a252] rounded-lg transition-colors">Oncologie</Link>
+                  <Link href="/coming-soon" className="block px-3 py-2 text-gray-600 hover:bg-green-50 hover:text-[#09a252] rounded-lg transition-colors">Pediatrie</Link>
+                  <Link href="/coming-soon" className="block px-3 py-2 text-gray-600 hover:bg-green-50 hover:text-[#09a252] rounded-lg transition-colors">Sport / Fitness</Link>
+                  <div className="pt-2 mt-2 border-t border-gray-200">
+                    <Link href="/coming-soon" className="block px-3 py-2 text-[#09a252] font-semibold hover:bg-green-50 rounded-lg transition-colors">Vezi toate articolele</Link>
+                  </div>
                 </div>
               )}
             </div>
