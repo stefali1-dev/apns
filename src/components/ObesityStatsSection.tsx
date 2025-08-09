@@ -108,7 +108,7 @@ const ObesityStatsSection = () => {
   }, []);
 
   return (
-    <section id="test-imc" className="bg-gray-50 relative pt-16">
+    <section id="test-imc" className="bg-white relative pt-16">
       <div className="max-w-screen-xl mx-auto px-6">
         <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">
           Provocările de sănătate din România

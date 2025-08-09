@@ -162,30 +162,32 @@ export default function Home() {
 
 
         {/* Cards Section */}
-        <section className="max-w-screen-xl mx-auto py-10 px-4">
-          {/* Section Header */}
-          <div className="text-center mb-12">
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-2xl mx-auto">
-            {CARD_ITEMS.map(({ slug, label, Icon }) => (
-              <Link
-                key={slug}
-                href={slug === 'coming-soon' ? '/coming-soon' : `/article/${slug}`}
-                className="shadow-lg group relative flex flex-col bg-white rounded-lg p-6 hover:shadow-lg transition-all duration-300 ease-in-out min-h-[180px] transform hover:-translate-y-2.5"
-              >
-                {/* icon - fixed position at top */}
-                <div className="flex justify-center items-center h-20 mb-4">
-                  <Icon className="transition-colors duration-300 group-hover:scale-105" />
-                </div>
+        <section className="bg-green-50 py-16">
+          <div className="max-w-screen-xl mx-auto px-4">
+            {/* Section Header */}
+            <div className="text-center mb-12">
+            </div>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-2xl mx-auto">
+              {CARD_ITEMS.map(({ slug, label, Icon }) => (
+                <Link
+                  key={slug}
+                  href={slug === 'coming-soon' ? '/coming-soon' : `/article/${slug}`}
+                  className="shadow-lg group relative flex flex-col bg-white rounded-lg p-6 hover:shadow-lg transition-all duration-300 ease-in-out min-h-[180px] transform hover:-translate-y-2.5"
+                >
+                  {/* icon - fixed position at top */}
+                  <div className="flex justify-center items-center h-20 mb-4">
+                    <Icon className="transition-colors duration-300 group-hover:scale-105" />
+                  </div>
 
-                {/* caption - positioned at bottom with proper spacing */}
-                <div className="flex-1 flex items-end justify-center">
-                  <h3 className="text-lg font-semibold text-gray-700 text-center leading-tight">
-                    {label}
-                  </h3>
-                </div>
-              </Link>
-            ))}
+                  {/* caption - positioned at bottom with proper spacing */}
+                  <div className="flex-1 flex items-end justify-center">
+                    <h3 className="text-lg font-semibold text-gray-700 text-center leading-tight">
+                      {label}
+                    </h3>
+                  </div>
+                </Link>
+              ))}
+            </div>
           </div>
         </section>
 
@@ -300,7 +302,7 @@ export default function Home() {
         </section>
 
         {/* donates Section */}
-        <section className="py-16 bg-white">
+        <section className="py-16 bg-green-50">
           <div className="max-w-screen-xl mx-auto px-6">
             <div className="flex flex-col md:flex-row md:items-center gap-8">
               <div className="md:w-1/2">
