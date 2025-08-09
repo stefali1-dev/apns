@@ -7,7 +7,6 @@ import { projectService, Project } from '@/lib/services/projectService';
 
 const ProiectePage: React.FC = () => {
     const [projects, setProjects] = useState<Project[]>([]);
-    const [selectedProject, setSelectedProject] = useState<Project | null>(null);
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
@@ -26,10 +25,17 @@ const ProiectePage: React.FC = () => {
         fetchProjects();
     }, []);
 
-    const handleProjectClick = (project: Project) => {
-        setSelectedProject(project);
-        // Pentru acum, doar log - poți adăuga modal sau redirect către pagină detaliată
-        console.log('Proiect selectat:', project);
+    const getProjectHref = (projectId: string): string => {
+        switch (projectId) {
+            case '1':
+                return '/proiecte/sanatate-inainte-de-toate';
+            case '2':
+                return '/proiecte/educatie-nutritionala-in-scoli';
+            case '3':
+                return '/proiecte/campanii-de-promovare-online-si-offline';
+            default:
+                return '#';
+        }
     };
 
     return (
@@ -96,7 +102,7 @@ const ProiectePage: React.FC = () => {
                                     <ProjectCard
                                         key={project.id}
                                         project={project}
-                                        onClick={handleProjectClick}
+                                        href={getProjectHref(project.id)}
                                     />
                                 ))
                             )}

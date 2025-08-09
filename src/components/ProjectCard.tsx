@@ -1,29 +1,21 @@
 import React from 'react';
+import Link from 'next/link';
 import OptimizedImage from '@/components/OptimizedImage';
 import { Project } from '@/lib/services/projectService';
 
 interface ProjectCardProps {
     project: Project;
-    onClick?: (project: Project) => void;
+    href?: string;
     className?: string;
 }
 
 const ProjectCard: React.FC<ProjectCardProps> = ({ 
     project, 
-    onClick, 
+    href,
     className = "" 
 }) => {
-    const handleClick = () => {
-        if (onClick) {
-            onClick(project);
-        }
-    };
-
-    return (
-        <div
-            className={`bg-white rounded-lg shadow-lg overflow-hidden cursor-pointer transform hover:-translate-y-1 transition-all duration-300 hover:shadow-xl h-full flex flex-col ${className}`}
-            onClick={handleClick}
-        >
+    const content = (
+        <div className={`bg-white rounded-lg shadow-lg overflow-hidden cursor-pointer transform hover:-translate-y-1 transition-all duration-300 hover:shadow-xl h-full flex flex-col ${className}`}>
             <div className="relative overflow-hidden h-64 flex-shrink-0">
                 <OptimizedImage
                     src={project.imageUrl || '/images/placeholder-project.jpg'}
@@ -64,6 +56,16 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
             </div>
         </div>
     );
+
+    if (href) {
+        return (
+            <Link href={href} className="block">
+                {content}
+            </Link>
+        );
+    }
+
+    return content;
 };
 
 export default ProjectCard;
