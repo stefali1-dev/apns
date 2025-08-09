@@ -289,7 +289,7 @@ export default function Navbar() {
                   <div className="grid grid-cols-12 gap-0">
                     {/* Left section - Main articles organized in two columns */}
                     <div className="col-span-6 bg-gray-50 p-8">
-                      <h3 className="text-lg font-bold text-gray-900 mb-6">Articole de specialitate</h3>
+                      <h3 className="text-lg font-bold text-gray-900 mb-6">Articole</h3>
                       <div className="grid grid-cols-2 gap-x-6 gap-y-1">
                         <div className="space-y-1">
                           <Link
@@ -348,7 +348,7 @@ export default function Navbar() {
                       {/* Call to action button */}
                       <div className="mt-6 pt-4 border-t border-gray-200">
                         <Link
-                          href="/coming-soon"
+                          href="/articole"
                           className="block w-full text-center bg-[#09a252] text-white font-semibold py-3 px-4 rounded-lg hover:bg-green-700 transition-colors duration-200"
                         >
                           Vezi toate articolele
@@ -529,7 +529,7 @@ export default function Navbar() {
                   <Link href="/coming-soon" className="block px-3 py-2 text-gray-600 hover:bg-green-50 hover:text-[#09a252] rounded-lg transition-colors">Pediatrie</Link>
                   <Link href="/coming-soon" className="block px-3 py-2 text-gray-600 hover:bg-green-50 hover:text-[#09a252] rounded-lg transition-colors">Sport / Fitness</Link>
                   <div className="pt-2 mt-2 border-t border-gray-200">
-                    <Link href="/coming-soon" className="block px-3 py-2 text-[#09a252] font-semibold hover:bg-green-50 rounded-lg transition-colors">Vezi toate articolele</Link>
+                    <Link href="/articole" className="block px-3 py-2 text-[#09a252] font-semibold hover:bg-green-50 rounded-lg transition-colors">Vezi toate articolele</Link>
                   </div>
                 </div>
               )}

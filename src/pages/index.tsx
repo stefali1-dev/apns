@@ -6,6 +6,7 @@ import { CARD_ITEMS } from '@/components/CardsData';
 import SubscribeModal from '@/components/SubscribeModal';
 import { Member, membersService } from '@/lib/services/membersService';
 import VolunteerCarousel from '@/components/VolunteerCarousel';
+import ArticleCarousel from '@/components/ArticleCarousel';
 import OptimizedImage from '@/components/OptimizedImage';
 import ObesityStatsSection from '@/components/ObesityStatsSection';
 
@@ -267,6 +268,8 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+        <ArticleCarousel />
 
         <VolunteerCarousel />
 
