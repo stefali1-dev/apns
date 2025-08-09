@@ -89,7 +89,7 @@ export default function Footer() {
                                 </Link>
                             </li>
                             <li>
-                                <Link href="/test-imc-adulti" className="text-gray-600 hover:text-[#09a252] transition-colors text-sm">
+                                <Link href="/#test-imc" className="text-gray-600 hover:text-[#09a252] transition-colors text-sm">
                                     Test IMC
                                 </Link>
                             </li>

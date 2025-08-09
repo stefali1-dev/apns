@@ -126,6 +126,6 @@ export const CARD_ITEMS: CardItem[] = [
     { slug: "coming-soon", label: "Boli digestive", Icon: DigestiveIcon },
     { slug: "coming-soon", label: "Boli autoimune", Icon: AutoimmuneIcon },
     { slug: "coming-soon", label: "Boli oncologie", Icon: OncologyIcon },
+    { slug: "coming-soon", label: "Pediatrie", Icon: PediatryIcon },
     { slug: "coming-soon", label: "Sport/ Fitness", Icon: FitnessIcon },
-    { slug: "coming-soon", label: "Pediatrie", Icon: PediatryIcon }
 ];

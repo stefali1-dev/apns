@@ -7,15 +7,15 @@ import SubscribeModal from '@/components/SubscribeModal';
 import { Member, membersService } from '@/lib/services/membersService';
 import VolunteerCarousel from '@/components/VolunteerCarousel';
 import OptimizedImage from '@/components/OptimizedImage';
+import ObesityStatsSection from '@/components/ObesityStatsSection';
 
 
 export default function Home() {
   const [showModal, setShowModal] = useState(false);
-
   const [isMobile, setIsMobile] = useState(false);
 
   /* ----------------------------------------
-     visit-count + responsive logic unchanged
+     visit-count + responsive logic
   ---------------------------------------- */
   useEffect(() => {
 
@@ -31,7 +31,10 @@ export default function Home() {
     const handleResize = () => setIsMobile(window.innerWidth < 768);
     handleResize();
     window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
   }, []);
 
   const setModalClosedCookie = () => {
@@ -126,7 +129,7 @@ export default function Home() {
               {/* Text block */}
               <div className="max-w-xl text-black flex-1 shrink-0">
                 <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 leading-tight">
-                  Împreună Schimbăm <span className="text-[#09a252]">Vieți</span>
+                  Împreună Schimbăm Vieți
                 </h1>
                 <p className="text-base md:text-lg mb-6">
                   APNS susține educația, oferă servicii personalizate de nutriție și sprijin real pentru copii și adulți afectați de boli cronice netransmisibile. Împreună, construim nu doar vieți mai sănătoase, ci o comunitate în care nimeni nu este lăsat singur în fața bolii.
@@ -192,7 +195,7 @@ export default function Home() {
               {/* First Content Block */}
               <div className="items-center gap-8 xl:gap-16 md:grid md:grid-cols-2">
                 <OptimizedImage
-                  className="w-full rounded-lg shadow-lg hidden sm:block transition-transform duration-300"
+                  className="w-full border-4 p-6 border-gray-200 bg-gray-50 rounded-lg shadow-lg hidden sm:block transition-transform duration-300"
                   src="/images/group.jpeg"
                   alt="Workshop nutrițional"
                   width={1200}
@@ -248,8 +251,8 @@ export default function Home() {
                   </div>
                 </div>
                 <OptimizedImage
-                  className="w-full rounded-lg shadow-lg hidden sm:block transition-transform duration-300"
-                  src="/images/donate.png"
+                  className="w-full border-4 p-6 border-gray-200 bg-gray-50 rounded-lg shadow-lg hidden sm:block transition-transform duration-300"
+                  src="/images/group2.jpg"
                   alt="Comunitate APNS"
                   width={600}
                   height={400}
@@ -263,32 +266,7 @@ export default function Home() {
 
         <VolunteerCarousel />
 
-        {/* Obesity Stats Section */}
-        <section className="bg-gray-50 relative py-16">
-          <div className="max-w-screen-xl mx-auto px-6">
-            <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">
-              Obezitatea în România - date alarmante
-            </h2>
-            <p className="text-lg text-gray-600 mb-10 text-center">
-              Conform ultimelor studii Ministerului Sănătății (2023)
-            </p>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="p-6 bg-green-50 rounded shadow-sm flex flex-col items-center">
-                <div className="text-5xl font-bold text-[#09a252] mb-2">34%</div>
-                <p className="text-center text-gray-700">dintre români au exces de greutate</p>
-              </div>
-              <div className="p-6 bg-green-50 rounded shadow-sm flex flex-col items-center">
-                <div className="text-5xl font-bold text-[#09a252] mb-2">1 din 5</div>
-                <p className="text-center text-gray-700">copii de vârstă școlară este supraponderal</p>
-              </div>
-              <div className="p-6 bg-green-50 rounded shadow-sm flex flex-col items-center">
-                <div className="text-5xl font-bold text-[#09a252] mb-2">62%</div>
-                <p className="text-center text-gray-700">dintre adulți nu consumă suficiente legume</p>
-              </div>
-            </div>
-          </div>
-        </section>
+        <ObesityStatsSection />
 
         {/* BMI Test Section */}
         <section className="w-full bg-[#09a252] text-white py-16">
@@ -334,11 +312,11 @@ export default function Home() {
 
               <div className="md:w-1/2">
                 <OptimizedImage
-                  src="/images/donate2.png"
+                  src="/images/donate.jpg"
                   alt="Copii în clasă"
                   width={600}
                   height={400}
-                  className="w-full rounded-lg shadow transition-transform duration-300"
+                  className="w-full border-4 p-6 border-gray-200 bg-gray-50 rounded-lg shadow transition-transform duration-300"
                   quality={80}
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
                 />
