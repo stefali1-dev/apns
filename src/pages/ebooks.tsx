@@ -6,17 +6,12 @@ import { useRouter } from 'next/router';
 import Layout from '@/layouts/NavbarLayout';
 import { mockEbooks, ebookService } from '@/lib/services/ebookService';
 
-interface Category {
-  id: number;
-  name: string;
-}
-
 interface EBook {
   id: number;
   title: string;
   slug: string;
   shortDescription: string;
-  category: Category;
+  category: string;
   coverImage?: string;
   isFree: boolean;
   price?: number;
@@ -27,9 +22,7 @@ interface EBook {
 
 interface FilterState {
   search: string;
-  categories: number[];
   priceTypes: ('free' | 'paid')[];
-  formats: ('pdf' | 'epub')[];
   sort: 'newest' | 'title_asc' | 'title_desc' | 'price_asc' | 'price_desc';
 }
 
@@ -39,30 +32,11 @@ export default function EBooksPage() {
   const router = useRouter();
   const [currentPage, setCurrentPage] = useState(1);
   const [emailSubscription, setEmailSubscription] = useState('');
-  const [categories, setCategories] = useState<Category[]>([]);
   const [filters, setFilters] = useState<FilterState>({
     search: '',
-    categories: [],
     priceTypes: [],
-    formats: [],
     sort: 'newest'
   });
-
-  // Load categories from service
-  useEffect(() => {
-    const loadCategories = async () => {
-      try {
-        const allCategories = await ebookService.getAllCategories();
-        setCategories(allCategories);
-      } catch (error) {
-        console.error('Error loading categories:', error);
-      }
-    };
-    loadCategories();
-  }, []);
-
-  // Filter out categories with empty names for the filter UI
-  const filteredCategories = categories.filter(category => category.name.trim() !== '');
 
   // Sincronizarea cu URL query parameters
   useEffect(() => {
@@ -70,14 +44,8 @@ export default function EBooksPage() {
 
     setFilters({
       search: (query.search as string) || '',
-      categories: query.category ?
-        (Array.isArray(query.category) ? query.category.map(Number) : [Number(query.category)]) :
-        [],
       priceTypes: query.price ?
         (Array.isArray(query.price) ? query.price as ('free' | 'paid')[] : [query.price as ('free' | 'paid')]) :
-        [],
-      formats: query.format ?
-        (Array.isArray(query.format) ? query.format as ('pdf' | 'epub')[] : [query.format as ('pdf' | 'epub')]) :
         [],
       sort: (query.sort as FilterState['sort']) || 'newest'
     });
@@ -93,9 +61,7 @@ export default function EBooksPage() {
 
     const queryParams: any = {};
     if (updatedFilters.search) queryParams.search = updatedFilters.search;
-    if (updatedFilters.categories.length > 0) queryParams.category = updatedFilters.categories;
     if (updatedFilters.priceTypes.length > 0) queryParams.price = updatedFilters.priceTypes;
-    if (updatedFilters.formats.length > 0) queryParams.format = updatedFilters.formats;
     if (updatedFilters.sort !== 'newest') queryParams.sort = updatedFilters.sort;
 
     router.push({
@@ -104,8 +70,8 @@ export default function EBooksPage() {
     }, undefined, { shallow: true });
   };
 
-  // Filtrarea și sortarea eBooks-urilor
-  const filteredAndSortedEbooks = useMemo(() => {
+  // Filtrarea și paginarea e-book-urilor
+  const filteredAndPaginatedEBooks = useMemo(() => {
     let filtered = mockEbooks.filter(ebook => {
       // Filtrare după search
       if (filters.search) {
@@ -114,11 +80,6 @@ export default function EBooksPage() {
           !ebook.shortDescription.toLowerCase().includes(searchLower)) {
           return false;
         }
-      }
-
-      // Filtrare după categorii
-      if (filters.categories.length > 0 && !filters.categories.includes(ebook.category.id)) {
-        return false;
       }
 
       // Filtrare după tip preț
@@ -130,15 +91,8 @@ export default function EBooksPage() {
         if (!isFreeSelected && !isPaidSelected) return false;
       }
 
-      // Filtrare după format
-      if (filters.formats.length > 0 && !filters.formats.includes(ebook.format)) {
-        return false;
-      }
-
       return true;
-    });
-
-    // Sortare
+    });    // Sortare
     filtered.sort((a, b) => {
       switch (filters.sort) {
         case 'title_asc':
@@ -163,10 +117,10 @@ export default function EBooksPage() {
   }, [filters]);
 
   // Paginare
-  const totalPages = Math.ceil(filteredAndSortedEbooks.length / ITEMS_PER_PAGE);
+  const totalPages = Math.ceil(filteredAndPaginatedEBooks.length / ITEMS_PER_PAGE);
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
   const endIndex = startIndex + ITEMS_PER_PAGE;
-  const currentEbooks = filteredAndSortedEbooks.slice(startIndex, endIndex);
+  const currentEbooks = filteredAndPaginatedEBooks.slice(startIndex, endIndex);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
@@ -177,9 +131,7 @@ export default function EBooksPage() {
   const handleClearFilters = () => {
     setFilters({
       search: '',
-      categories: [],
       priceTypes: [],
-      formats: [],
       sort: 'newest'
     });
     setCurrentPage(1);
@@ -254,33 +206,6 @@ export default function EBooksPage() {
                   </div>
                 </div>
 
-                {/* Categories Filter */}
-                {filteredCategories.length > 0 && (
-                  <div className="mb-6">
-                    <h3 className="text-sm font-semibold text-gray-700 mb-3">Categorii</h3>
-                    <div className="space-y-3">
-                      {filteredCategories.map((category) => (
-                        <label key={category.id} className="flex items-center cursor-pointer">
-                          <input
-                            type="checkbox"
-                            checked={filters.categories.includes(category.id)}
-                            onChange={(e) => {
-                              const newCategories = e.target.checked
-                                ? [...filters.categories, category.id]
-                                : filters.categories.filter(id => id !== category.id);
-                              updateFilters({ categories: newCategories });
-                            }}
-                            className="h-4 w-4 text-[#09a252] focus:ring-[#09a252] border-gray-300 rounded"
-                          />
-                          <span className="ml-3 text-sm text-gray-700 hover:text-[#09a252] transition-colors">
-                            {category.name}
-                          </span>
-                        </label>
-                      ))}
-                    </div>
-                  </div>
-                )}
-
                 {/* Price Filter */}
                 <div className="mb-6">
                   <h3 className="text-sm font-semibold text-gray-700 mb-3">Preț</h3>
@@ -335,8 +260,8 @@ export default function EBooksPage() {
                 <div>
                   <p className="text-gray-600">
                     Se afișează <span className="font-semibold">{startIndex + 1}</span> până la{' '}
-                    <span className="font-semibold">{Math.min(endIndex, filteredAndSortedEbooks.length)}</span> din{' '}
-                    <span className="font-semibold">{filteredAndSortedEbooks.length}</span> e-books
+                    <span className="font-semibold">{Math.min(endIndex, filteredAndPaginatedEBooks.length)}</span> din{' '}
+                    <span className="font-semibold">{filteredAndPaginatedEBooks.length}</span> e-books
                   </p>
                 </div>
                 <div className="flex items-center gap-3">
@@ -395,13 +320,13 @@ export default function EBooksPage() {
 
                           <div className="p-6">
                             <div className="flex items-center justify-between mb-3">
-                              {ebook.category.name.trim() !== '' && (
+                              {ebook.category.trim() !== '' && (
                                 <span className="inline-block bg-green-100 text-[#09a252] text-xs px-3 py-1 rounded-full font-medium">
-                                  {ebook.category.name}
+                                  {ebook.category}
                                 </span>
                               )}
                               <span className="text-gray-500 text-xs font-medium">
-                                {ebook.format.toUpperCase()}
+                                PDF
                               </span>
                             </div>
 

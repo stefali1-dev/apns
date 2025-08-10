@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { articleService, Article } from '@/lib/services/articleService';
+import { articleService } from '@/lib/services/articleService';
 import ArticleCard from './ArticleCard';
+import { Article } from '@/lib/types/article';
 
 const ArticleCarousel: React.FC = () => {
   const [articles, setArticles] = useState<Article[]>([]);

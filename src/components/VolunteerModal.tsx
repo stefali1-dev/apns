@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { createPortal } from 'react-dom';
-import { Member } from '@/lib/services/membersService';
 import OptimizedImage from './OptimizedImage';
+import { Member } from '@/lib/types/member';
 
 interface VolunteerModalProps {
   volunteer: Member | null;

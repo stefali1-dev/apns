@@ -3,7 +3,8 @@ import Head from 'next/head';
 import Layout from '@/layouts/NavbarLayout';
 import ArticleCard from '@/components/ArticleCard';
 import ArticleCardSkeleton from '@/components/ArticleCardSkeleton';
-import { articleService, Article } from '@/lib/services/articleService';
+import { articleService } from '@/lib/services/articleService';
+import { Article } from '@/lib/types/article';
 
 const ArticolePage: React.FC = () => {
     const [articles, setArticles] = useState<Article[]>([]);

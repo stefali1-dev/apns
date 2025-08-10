@@ -4,8 +4,9 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { GetStaticProps, GetStaticPaths } from 'next';
-import { EBook, ebookService } from '@/lib/services/ebookService';
 import Layout from '@/layouts/NavbarLayout';
+import { EBook } from '@/lib/types/ebook';
+import { ebookService } from '@/lib/services/ebookService';
 
 interface EBookDetailProps {
   ebook: EBook | null;
@@ -118,7 +119,7 @@ export default function EBookDetail({ ebook, relatedEbooks }: EBookDetailProps) 
       <Head>
         <title>{ebook.title} | APNS - Asociația pentru Promovarea Nutriției Sănătoase</title>
         <meta name="description" content={ebook.shortDescription} />
-        <meta name="keywords" content={`${ebook.title}, ${ebook.category.name}, e-book nutriție, APNS`} />
+        <meta name="keywords" content={`${ebook.title}, ${ebook.category}, e-book nutriție, APNS`} />
         <meta property="og:title" content={ebook.title} />
         <meta property="og:description" content={ebook.shortDescription} />
         <meta property="og:image" content={ebook.coverImage} />
@@ -187,13 +188,13 @@ export default function EBookDetail({ ebook, relatedEbooks }: EBookDetailProps) 
                 <div className="p-6">
                   <div className="mb-6">
                     <div className="flex items-center gap-3 mb-4">
-                      {ebook.category.name.trim() !== '' && (
+                      {ebook.category.trim() !== '' && (
                         <span className="inline-block bg-green-100 text-[#09a252] text-sm px-3 py-1 rounded-full font-medium">
-                          {ebook.category.name}
+                          {ebook.category}
                         </span>
                       )}
                       <span className="text-gray-500 text-sm font-medium">
-                        {ebook.format.toUpperCase()}
+                        PDF
                       </span>
                     </div>
                     

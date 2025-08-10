@@ -1,6 +1,6 @@
 import React from 'react';
-import { Member } from '@/lib/services/membersService';
 import OptimizedImage from '@/components/OptimizedImage';
+import { Member } from '@/lib/types/member';
 
 interface VolunteerCardProps {
     member: Member | null | undefined;

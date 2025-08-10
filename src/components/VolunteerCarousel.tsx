@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { membersService, Member } from '@/lib/services/membersService';
+import { membersService } from '@/lib/services/membersService';
 import VolunteerCard from './VolunteerCard';
 import VolunteerModal from './VolunteerModal';
+import { Member } from '@/lib/types/member';
 
 const VolunteerCarousel: React.FC = () => {
   const [volunteers, setVolunteers] = useState<Member[]>([]);

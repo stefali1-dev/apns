@@ -4,7 +4,8 @@ import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image';
 import ArticleLayout from '@/layouts/ArticleLayout';
-import { articleService, Article } from '@/lib/services/articleService';
+import { articleService } from '@/lib/services/articleService';
+import { Article } from '@/lib/types/article';
 
 export default function ArticlePage() {
     const router = useRouter();

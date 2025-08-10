@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
 import Layout from '@/layouts/NavbarLayout';
-import { membersService, Member } from '@/lib/services/membersService';
+import { membersService } from '@/lib/services/membersService';
 import VolunteerModal from '@/components/VolunteerModal';
 import VolunteerCard from '@/components/VolunteerCard';
 import VolunteerCardSkeleton from '@/components/VolunteerCardSkeleton';
+import { Member } from '@/lib/types/member';
 
 const TeamPage: React.FC = () => {
     const [members, setMembers] = useState<Member[]>([]);

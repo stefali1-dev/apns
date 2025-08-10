@@ -3,35 +3,7 @@
 // LOCATION: src/services/ebookService.ts
 // ==============================================
 
-export interface Author {
-  id: number;
-  name: string;
-  title: string;
-  bio: string;
-  profileImage?: string;
-}
-
-export interface Category {
-  id: number;
-  name: string;
-}
-
-export interface EBook {
-  id: number;
-  title: string;
-  slug: string;
-  shortDescription: string;
-  fullDescription: string;
-  toc: string; // Table of Contents HTML
-  category: Category;
-  authors: Author[];
-  coverImage?: string;
-  isFree: boolean;
-  price?: number;
-  format: 'pdf' | 'epub';
-  pageCount: number;
-  publishedDate: string;
-}
+import { Author, EBook } from "@/lib/types/ebook";
 
 // Mock data
 const mockAuthors: Author[] = [
@@ -42,10 +14,6 @@ const mockAuthors: Author[] = [
     bio: 'Asociația pentru Promovarea Nutriției Sănătoase',
     profileImage: '/images/logo.png'
   }
-];
-
-const mockCategories: Category[] = [
-  { id: 1, name: '' }
 ];
 
 export const mockEbooks: EBook[] = [
@@ -82,11 +50,10 @@ export const mockEbooks: EBook[] = [
         <li>Încheiere - Sănătatea e în mâinile tale</li>
       </ol>
     `,
-    category: mockCategories[0],
+    category: 'Sanatate',
     authors: [mockAuthors[0]],
     coverImage: '/images/ebook.png',
     isFree: true,
-    format: 'pdf',
     pageCount: 14,
     publishedDate: '2025-06-15'
   }
@@ -118,25 +85,10 @@ class EBookService {
     const currentEBook = mockEbooks.find(ebook => ebook.id === ebookId);
     if (!currentEBook) return [];
 
-    // Găsește eBooks din aceeași categorie
+    // Returnează primele eBooks care nu sunt cel curent
     const related = mockEbooks
-      .filter(ebook => 
-        ebook.id !== ebookId && 
-        ebook.category.id === currentEBook.category.id
-      )
+      .filter(ebook => ebook.id !== ebookId)
       .slice(0, limit);
-
-    // Dacă nu sunt suficiente din aceeași categorie, completează cu altele
-    if (related.length < limit) {
-      const remaining = mockEbooks
-        .filter(ebook => 
-          ebook.id !== ebookId && 
-          !related.find(r => r.id === ebook.id)
-        )
-        .slice(0, limit - related.length);
-      
-      related.push(...remaining);
-    }
 
     return related;
   }
@@ -359,11 +311,6 @@ class EBookService {
   </div>
 </body>
 </html>`;
-  }
-
-  async getAllCategories(): Promise<Category[]> {
-    await this.delay(100);
-    return [...mockCategories];
   }
 
   async getAllAuthors(): Promise<Author[]> {
