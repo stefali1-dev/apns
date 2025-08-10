@@ -10,6 +10,7 @@ export interface Member {
     education?: string;
     email?: string;
     phone?: string;
+    priority: number; // Display order priority (1 = first, 2 = second, etc.)
     // Image optimization metadata
     imageWidth?: number;
     imageHeight?: number;

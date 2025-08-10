@@ -4,21 +4,8 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import Layout from '@/layouts/NavbarLayout';
-import { mockEbooks, ebookService } from '@/lib/services/ebookService';
-
-interface EBook {
-  id: number;
-  title: string;
-  slug: string;
-  shortDescription: string;
-  category: string;
-  coverImage?: string;
-  isFree: boolean;
-  price?: number;
-  format: 'pdf' | 'epub';
-  pageCount: number;
-  publishedDate: string;
-}
+import { ebookService } from '@/lib/services/ebookService';
+import { EBook } from '@/lib/types/ebook';
 
 interface FilterState {
   search: string;
@@ -32,11 +19,30 @@ export default function EBooksPage() {
   const router = useRouter();
   const [currentPage, setCurrentPage] = useState(1);
   const [emailSubscription, setEmailSubscription] = useState('');
+  const [ebooks, setEbooks] = useState<EBook[]>([]);
+  const [loading, setLoading] = useState(true);
   const [filters, setFilters] = useState<FilterState>({
     search: '',
     priceTypes: [],
     sort: 'newest'
   });
+
+  // Load ebooks from service
+  useEffect(() => {
+    const loadEbooks = async () => {
+      try {
+        setLoading(true);
+        const data = await ebookService.getEBooks();
+        setEbooks(data);
+      } catch (error) {
+        console.error('Error loading ebooks:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    
+    loadEbooks();
+  }, []);
 
   // Sincronizarea cu URL query parameters
   useEffect(() => {
@@ -72,7 +78,7 @@ export default function EBooksPage() {
 
   // Filtrarea și paginarea e-book-urilor
   const filteredAndPaginatedEBooks = useMemo(() => {
-    let filtered = mockEbooks.filter(ebook => {
+    let filtered = ebooks.filter((ebook: EBook) => {
       // Filtrare după search
       if (filters.search) {
         const searchLower = filters.search.toLowerCase();
@@ -92,8 +98,10 @@ export default function EBooksPage() {
       }
 
       return true;
-    });    // Sortare
-    filtered.sort((a, b) => {
+    });
+    
+    // Sortare
+    filtered.sort((a: EBook, b: EBook) => {
       switch (filters.sort) {
         case 'title_asc':
           return a.title.localeCompare(b.title);
@@ -114,7 +122,7 @@ export default function EBooksPage() {
     });
 
     return filtered;
-  }, [filters]);
+  }, [ebooks, filters]);
 
   // Paginare
   const totalPages = Math.ceil(filteredAndPaginatedEBooks.length / ITEMS_PER_PAGE);
@@ -284,10 +292,24 @@ export default function EBooksPage() {
               </div>
 
               {/* E-Books Grid */}
-              {currentEbooks.length > 0 ? (
+              {loading ? (
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+                  {Array.from({ length: 6 }).map((_, index) => (
+                    <div key={index} className="bg-white rounded-lg shadow-lg overflow-hidden animate-pulse">
+                      <div className="aspect-[4/3] bg-gray-200"></div>
+                      <div className="p-6">
+                        <div className="h-4 bg-gray-200 rounded mb-2"></div>
+                        <div className="h-6 bg-gray-200 rounded mb-2"></div>
+                        <div className="h-4 bg-gray-200 rounded mb-4"></div>
+                        <div className="h-10 bg-gray-200 rounded"></div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : currentEbooks.length > 0 ? (
                 <>
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-                    {currentEbooks.map((ebook) => (
+                    {currentEbooks.map((ebook: EBook) => (
                       <div key={ebook.id} className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 group">
                         <Link href={`/ebooks/${ebook.slug}`}>
                           <div className="relative aspect-[4/3] overflow-hidden bg-gradient-to-br from-green-100 to-green-200">

@@ -69,14 +69,11 @@ export default function EBookDetail({ ebook, relatedEbooks }: EBookDetailProps) 
     setLoading(true);
 
     try {
-      const result = await ebookService.sendEBookDownload(ebook.slug, email);
-      
-      if (result.success) {
-        setSuccess(true);
-        setEmail('');
-      } else {
-        alert(result.error || 'A apărut o eroare');
-      }
+      // Since we removed the download functionality from the service,
+      // we'll just show a success message for now
+      // This can be replaced with actual download logic later
+      setSuccess(true);
+      setEmail('');
     } catch (error) {
       alert('A apărut o eroare');
     } finally {
@@ -537,8 +534,8 @@ export default function EBookDetail({ ebook, relatedEbooks }: EBookDetailProps) 
 
 export const getStaticPaths: GetStaticPaths = async () => {
   try {
-    const ebooks = await ebookService.getAllEBooks();
-    const paths = ebooks.map((ebook) => ({
+    const ebooks = await ebookService.getEBooks();
+    const paths = ebooks.map((ebook: EBook) => ({
       params: { slug: ebook.slug },
     }));
 
@@ -565,7 +562,11 @@ export const getStaticProps: GetStaticProps<EBookDetailProps> = async ({ params 
       };
     }
 
-    const relatedEbooks = await ebookService.getRelatedEBooks(ebook.id, 4);
+    // Get related ebooks from the same category, excluding current ebook
+    const allEbooks = await ebookService.getEBooks();
+    const relatedEbooks = allEbooks
+      .filter((e: EBook) => e.id !== ebook.id && e.category === ebook.category)
+      .slice(0, 4);
 
     return {
       props: {

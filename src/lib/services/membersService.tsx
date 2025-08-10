@@ -1,132 +1,238 @@
 import { Member } from "@/lib/types/member";
-
+import { supabase } from "@/lib/supabaseClient";
 
 // services/membersService.ts
 export class MembersService {
-    private mockMembers: Member[] = [
-        {
-            id: '1',
-            name: 'Drd. Corina Bogdănici',
-            position: 'Președinte APNS',
-            secondaryPosition: 'Dietetician autorizat',
-            imageUrl: '/images/volunteers/1.jpeg',
-            description: 'Drd. Corina Bogdănici este președinta și fondatoarea Asociației pentru Promovarea Nutriției Sănătoase. Cu o pasiune profundă pentru educația nutrițională și promovarea unui stil de viață sănătos, Corina și-a dedicat cariera dezvoltării programelor de conștientizare despre importanța unei alimentații echilibrate. Ea coordonează echipa de specialiști și supervizează toate activitățile asociației, având o viziune clară asupra viitorului nutriției în România.',
-            specializations: ['Dietetică clinică', 'Educație nutrițională', 'Management în sănătate', 'Promovarea sănătății publice'],
-            education: 'Doctorand în Nutriție și Dietetică - Universitatea de Medicină și Farmacie „Grigore T. Popa", Iași. Licență în Nutriție și Dietetică.',
-            email: 'corina.bogdanici@apns.ro',
-            phone: '0727 590 656',
-            imageWidth: 400,
-            imageHeight: 400,
-            imagePriority: true
-        },
-        {
-            id: '2',
-            name: 'Alexandra Dobârcianu',
-            position: 'Dietetician autorizat',
-            imageUrl: '/images/volunteers/2.jpeg',
-            description: 'Alexandra Dobârcianu este un dietetician experimentat, specializat în nutriția terapeutică și managementul greutății. Cu o abordare personalizată pentru fiecare pacient, Alexandra dezvoltă planuri alimentare adaptate nevoilor individuale și condițiilor medicale specifice. Ea este recunoscută pentru capacitatea sa de a motiva pacienții și de a-i ajuta să adopte schimbări sustenabile în stilul de viață.',
-            specializations: ['Nutriție terapeutică', 'Management al greutății', 'Planificare alimentară personalizată', 'Sindrom metabolic'],
-            education: 'Licență în Nutriție și Dietetică - Universitatea de Medicină și Farmacie „Grigore T. Popa", Iași. Certificare în Dietetică Clinică.',
-            email: 'alexandra.dobarcianu@apns.ro',
-            imageWidth: 400,
-            imageHeight: 400
-        },
-        {
-            id: '3',
-            name: 'Gianina Mihalache',
-            position: 'Dietetician autorizat',
-            secondaryPosition: 'Asistent medical',
-            imageUrl: '/images/volunteers/3.jpeg',
-            description: 'Gianina Mihalache se specializează în nutriția sportivă și optimizarea performanței prin alimentație. Cu experiență în lucrul cu atleți de performanță și persoane active, ea dezvoltă strategii nutriționale care susțin antrenamentul și recuperarea. Gianina este pasionată de cercetarea în domeniul nutriției sportive și aplică cele mai recente descoperiri științifice în practica sa clinică.',
-            specializations: ['Nutriție sportivă', 'Optimizarea performanței', 'Planificare alimentară pentru atleți', 'Suplimentare sportivă'],
-            education: 'Licență în Nutriție și Dietetică - Universitatea Ștefan cel Mare, Suceava. Specializare în Nutriție Sportivă.',
-            email: 'gianina.mihalache@apns.ro',
-            imageWidth: 400,
-            imageHeight: 400
-        },
-        {
-            id: '4',
-            name: 'Andra Palade',
-            position: 'Dietetician autorizat',
-            imageUrl: '/images/volunteers/4.jpeg',
-            description: 'Andra Palade este specializată în nutriția pediatrică și promovarea obiceiurilor alimentare sănătoase la copii și adolescenți. Cu o sensibilitate deosebită pentru nevoile familiilor, ea lucrează îndeaproape cu părinții pentru a crea medii alimentare pozitive și de susținere. Andra este expertă în gestionarea problemelor alimentare specifice vârstei de dezvoltare și în educația nutrițională adaptată copiilor.',
-            specializations: ['Nutriție pediatrică', 'Alimentația copilului', 'Educație nutrițională pentru familie', 'Prevenirea obezității infantile'],
-            education: 'Licență în Nutriție și Dietetică - Universitatea de Medicină și Farmacie Grigore T. Popa, Iași. Specializare în Nutriție Pediatrică.',
-            email: 'andra.palade@apns.ro',
-            imageWidth: 400,
-            imageHeight: 400
-        },
-        {
-            id: '5',
-            name: 'Mădălina Tărăbuță',
-            position: 'Licențiată în nutriție și dietetică',
-            imageUrl: '/images/volunteers/5.jpeg',
-            description: 'Mădălina Tărăbuță este o tânără specialistă în nutriție, pasionată de educația nutrițională și promovarea stilului de viață sănătos în comunitate. Ea se concentrează pe dezvoltarea programelor educaționale pentru tineri și pe utilizarea tehnologiei moderne pentru a face informația nutrițională mai accesibilă. Mădălina aduce o perspectivă fresh și inovatoare în echipa APNS.',
-            specializations: ['Educație nutrițională', 'Nutriție pentru tineri', 'Tehnologie în nutriție', 'Comunicare în sănătate'],
-            education: 'Licență în Nutriție și Dietetică - Universitatea de Medicină și Farmacie „Grigore T. Popa", Iași.',
-            email: 'madalina.tarabuta@apns.ro',
-            imageWidth: 400,
-            imageHeight: 400
-        },
-        {
-            id: '6',
-            name: 'Bianca Dascălu',
-            position: 'Antrenor fitness',
-            secondaryPosition: 'Licențiată în nutriție și dietetică',
-            imageUrl: '/images/volunteers/6.jpeg',
-            description: 'Bianca Dascălu combină expertiza în fitness cu principiile unei alimentații sănătoase pentru a oferi o abordare holistică asupra sănătății. Ca antrenor fitness certificat, ea înțelege importanța sincronizării dintre exercițiul fizic și nutriție pentru atingerea obiectivelor de sănătate. Bianca dezvoltă programe integrate care includ atât antrenament, cât și consiliere nutrițională de bază.',
-            specializations: ['Fitness și nutriție', 'Antrenament funcțional', 'Motivație și coaching', 'Stilul de viață activ'],
-            education: 'Licență în Nutriție și Dietetică - Universitatea de Medicină și Farmacie „Grigore T. Popa", Iași. Certificare Antrenor Fitness - Federația Română de Fitness. Cursuri de specializare în Nutriția Sportivă.',
-            email: 'bianca.dascalu@apns.ro',
-            imageWidth: 400,
-            imageHeight: 400
-        },
-        {
-            id: '7',
-            name: 'Eni Victoria',
-            position: 'Licențiată în nutriție și dietetică',
-            imageUrl: '/images/volunteers/7.jpeg',
-            description: 'Eni Victoria este specializată în nutriția clinică și managementul condițiilor cronice prin intervenții nutriționale. Cu o abordare bazată pe evidențe științifice, ea lucrează cu pacienții pentru a dezvolta strategii alimentare care să susțină tratamentul medical și să îmbunătățească calitatea vieții. Eni este dedicată cercetării și implementării celor mai noi terapii nutriționale.',
-            specializations: ['Nutriție clinică', 'Boli cronice', 'Terapie nutrițională', 'Cercetare în nutriție'],
-            education: 'Licență în Nutriție și Dietetică - Universitatea de Medicină și Farmacie „Grigore T. Popa", Iași. Cursuri de perfecționare în Nutriție Clinică.',
-            email: 'eni.victoria@apns.ro',
-            imageWidth: 400,
-            imageHeight: 400
-        }
-    ];
+    private readonly tableName = 'members';
 
-    // Simulează un delay de network pentru experiență realistă
-    private delay(ms: number): Promise<void> {
-        return new Promise(resolve => setTimeout(resolve, ms));
+    // Map database columns (snake_case) to Member interface (camelCase)
+    private mapDatabaseToMember(dbMember: any): Member {
+        return {
+            id: dbMember.id,
+            name: dbMember.name,
+            position: dbMember.position,
+            secondaryPosition: dbMember.secondary_position,
+            imageUrl: dbMember.image_url,
+            description: dbMember.description,
+            specializations: dbMember.specializations,
+            education: dbMember.education,
+            email: dbMember.email,
+            phone: dbMember.phone,
+            priority: dbMember.priority,
+            imageWidth: dbMember.image_width,
+            imageHeight: dbMember.image_height,
+            imagePriority: dbMember.image_priority
+        };
+    }
+
+    // Map Member interface (camelCase) to database columns (snake_case)
+    private mapMemberToDatabase(member: Partial<Member>): any {
+        const dbMember: any = {};
+        if (member.id !== undefined) dbMember.id = member.id;
+        if (member.name !== undefined) dbMember.name = member.name;
+        if (member.position !== undefined) dbMember.position = member.position;
+        if (member.secondaryPosition !== undefined) dbMember.secondary_position = member.secondaryPosition;
+        if (member.imageUrl !== undefined) dbMember.image_url = member.imageUrl;
+        if (member.description !== undefined) dbMember.description = member.description;
+        if (member.specializations !== undefined) dbMember.specializations = member.specializations;
+        if (member.education !== undefined) dbMember.education = member.education;
+        if (member.email !== undefined) dbMember.email = member.email;
+        if (member.phone !== undefined) dbMember.phone = member.phone;
+        if (member.priority !== undefined) dbMember.priority = member.priority;
+        if (member.imageWidth !== undefined) dbMember.image_width = member.imageWidth;
+        if (member.imageHeight !== undefined) dbMember.image_height = member.imageHeight;
+        if (member.imagePriority !== undefined) dbMember.image_priority = member.imagePriority;
+        return dbMember;
     }
 
     async getMembers(): Promise<Member[]> {
-        await this.delay(800); // Simulează loading time
-        return [...this.mockMembers];
+        try {
+            const { data, error } = await supabase
+                .from(this.tableName)
+                .select('*')
+                .order('priority', { ascending: true });
+
+            if (error) {
+                console.error('Error fetching members:', error);
+                return [];
+            }
+
+            return (data || []).map(item => this.mapDatabaseToMember(item));
+        } catch (error) {
+            console.error('Error in getMembers:', error);
+            return [];
+        }
     }
 
     async getMemberById(id: string): Promise<Member | null> {
-        await this.delay(300);
-        return this.mockMembers.find(member => member.id === id) || null;
+        try {
+            const { data, error } = await supabase
+                .from(this.tableName)
+                .select('*')
+                .eq('id', id)
+                .single();
+
+            if (error) {
+                console.error('Error fetching member by id:', error);
+                return null;
+            }
+
+            return data ? this.mapDatabaseToMember(data) : null;
+        } catch (error) {
+            console.error('Error in getMemberById:', error);
+            return null;
+        }
     }
 
     async getMembersByPosition(position: string): Promise<Member[]> {
-        await this.delay(500);
-        return this.mockMembers.filter(member =>
-            member.position.toLowerCase().includes(position.toLowerCase())
-        );
+        try {
+            const { data, error } = await supabase
+                .from(this.tableName)
+                .select('*')
+                .ilike('position', `%${position}%`)
+                .order('name');
+
+            if (error) {
+                console.error('Error fetching members by position:', error);
+                return [];
+            }
+
+            return (data || []).map(item => this.mapDatabaseToMember(item));
+        } catch (error) {
+            console.error('Error in getMembersByPosition:', error);
+            return [];
+        }
     }
 
     async searchMembers(query: string): Promise<Member[]> {
-        await this.delay(400);
-        const lowercaseQuery = query.toLowerCase();
-        return this.mockMembers.filter(member =>
-            member.name.toLowerCase().includes(lowercaseQuery) ||
-            member.position.toLowerCase().includes(lowercaseQuery) ||
-            member.specializations?.some(spec =>
-                spec.toLowerCase().includes(lowercaseQuery)
-            )
-        );
+        try {
+            const { data, error } = await supabase
+                .from(this.tableName)
+                .select('*')
+                .or(`name.ilike.%${query}%,position.ilike.%${query}%,specializations.cs.{${query}}`)
+                .order('name');
+
+            if (error) {
+                console.error('Error searching members:', error);
+                return [];
+            }
+
+            return (data || []).map(item => this.mapDatabaseToMember(item));
+        } catch (error) {
+            console.error('Error in searchMembers:', error);
+            return [];
+        }
+    }
+
+    // Admin methods for managing members
+    async createMember(member: Omit<Member, 'id'>): Promise<Member | null> {
+        try {
+            const dbMember = this.mapMemberToDatabase(member);
+            const { data, error } = await supabase
+                .from(this.tableName)
+                .insert([dbMember])
+                .select()
+                .single();
+
+            if (error) {
+                console.error('Error creating member:', error);
+                return null;
+            }
+
+            return data ? this.mapDatabaseToMember(data) : null;
+        } catch (error) {
+            console.error('Error in createMember:', error);
+            return null;
+        }
+    }
+
+    async updateMember(id: string, updates: Partial<Member>): Promise<Member | null> {
+        try {
+            const dbUpdates = this.mapMemberToDatabase(updates);
+            const { data, error } = await supabase
+                .from(this.tableName)
+                .update(dbUpdates)
+                .eq('id', id)
+                .select()
+                .single();
+
+            if (error) {
+                console.error('Error updating member:', error);
+                return null;
+            }
+
+            return data ? this.mapDatabaseToMember(data) : null;
+        } catch (error) {
+            console.error('Error in updateMember:', error);
+            return null;
+        }
+    }
+
+    async deleteMember(id: string): Promise<boolean> {
+        try {
+            const { error } = await supabase
+                .from(this.tableName)
+                .delete()
+                .eq('id', id);
+
+            if (error) {
+                console.error('Error deleting member:', error);
+                return false;
+            }
+
+            return true;
+        } catch (error) {
+            console.error('Error in deleteMember:', error);
+            return false;
+        }
+    }
+
+    // Update member priorities for reordering
+    async updateMemberPriorities(memberPriorities: { id: string, priority: number }[]): Promise<boolean> {
+        try {
+            // Update all member priorities in a transaction-like manner
+            const updatePromises = memberPriorities.map(({ id, priority }) =>
+                supabase
+                    .from(this.tableName)
+                    .update({ priority })
+                    .eq('id', id)
+            );
+
+            const results = await Promise.all(updatePromises);
+            
+            // Check if any updates failed
+            const hasError = results.some(result => result.error);
+            if (hasError) {
+                console.error('Error updating member priorities:', results.find(r => r.error)?.error);
+                return false;
+            }
+
+            return true;
+        } catch (error) {
+            console.error('Error in updateMemberPriorities:', error);
+            return false;
+        }
+    }
+
+    // Get the next available priority for new members
+    async getNextPriority(): Promise<number> {
+        try {
+            const { data, error } = await supabase
+                .from(this.tableName)
+                .select('priority')
+                .order('priority', { ascending: false })
+                .limit(1);
+
+            if (error) {
+                console.error('Error getting next priority:', error);
+                return 1;
+            }
+
+            return data && data.length > 0 ? data[0].priority + 1 : 1;
+        } catch (error) {
+            console.error('Error in getNextPriority:', error);
+            return 1;
+        }
     }
 }
 
