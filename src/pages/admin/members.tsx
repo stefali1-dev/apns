@@ -1,37 +1,41 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import AdminLayout from '@/layouts/AdminLayout';
-import { useArticles } from '@/lib/hooks/useArticles';
-import ArticleList from '@/components/admin/ArticleList';
-import ArticleForm from '@/components/admin/ArticleForm';
+import { useMembers } from '@/lib/hooks/useMembers';
+import MemberList from '@/components/admin/MemberList';
+import MemberForm from '@/components/admin/MemberForm';
 import Modal from '@/components/ui/Modal';
 import Button from '@/components/ui/Button';
 import Alert from '@/components/ui/Alert';
-import { Article } from '@/lib/types/article';
+import { Member } from '@/lib/types/member';
 import { storageService } from '@/lib/services/storageService';
 
-const ArticlesAdmin: React.FC = () => {
+const MembersAdmin: React.FC = () => {
   const router = useRouter();
   const {
-    articles,
+    members,
     loading,
     error,
-    fetchArticles,
-    createArticle,
-    updateArticle,
-    deleteArticle,
-    searchArticles,
-    generateSlug,
-    validateArticle,
-  } = useArticles();
+    fetchMembers,
+    createMember,
+    updateMember,
+    deleteMember,
+    searchMembers,
+    parseSpecializations,
+    validateMember,
+  } = useMembers();
 
   const [showCreateModal, setShowCreateModal] = useState(false);
-  const [editingArticle, setEditingArticle] = useState<Article | null>(null);
-  const [deleteConfirm, setDeleteConfirm] = useState<Article | null>(null);
+  const [editingMember, setEditingMember] = useState<Member | null>(null);
+  const [deleteConfirm, setDeleteConfirm] = useState<Member | null>(null);
   const [actionLoading, setActionLoading] = useState(false);
   const [actionError, setActionError] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
-  const [tempImageUrl, setTempImageUrl] = useState<string | null>(null); // Track temp images
+  const [tempImageUrl, setTempImageUrl] = useState<string | null>(null);
+
+  useEffect(() => {
+    fetchMembers();
+  }, [fetchMembers]);
 
   // Clear messages after 5 seconds
   useEffect(() => {
@@ -48,19 +52,18 @@ const ArticlesAdmin: React.FC = () => {
     }
   }, [actionError]);
 
-  const handleCreateArticle = async (formData: any) => {
+  const handleCreateMember = async (formData: any) => {
     setActionLoading(true);
     setActionError(null);
     
     try {
-      const success = await createArticle(formData);
+      const success = await createMember(formData);
       if (success) {
         setShowCreateModal(false);
-        setSuccessMessage('Articolul a fost creat cu succes!');
-        // Don't call fetchArticles() since the hook already updates the state
+        setSuccessMessage('Membrul a fost creat cu succes!');
         return true;
       } else {
-        setActionError('A apărut o eroare la crearea articolului');
+        setActionError('A apărut o eroare la crearea membrului');
         return false;
       }
     } catch (err) {
@@ -71,21 +74,20 @@ const ArticlesAdmin: React.FC = () => {
     }
   };
 
-  const handleUpdateArticle = async (formData: any) => {
-    if (!editingArticle) return false;
+  const handleUpdateMember = async (formData: any) => {
+    if (!editingMember) return false;
     
     setActionLoading(true);
     setActionError(null);
     
     try {
-      const success = await updateArticle(editingArticle.id, formData);
+      const success = await updateMember(editingMember.id, formData);
       if (success) {
-        setEditingArticle(null);
-        setSuccessMessage('Articolul a fost actualizat cu succes!');
-        // Don't call fetchArticles() since the hook already updates the state
+        setEditingMember(null);
+        setSuccessMessage('Membrul a fost actualizat cu succes!');
         return true;
       } else {
-        setActionError('A apărut o eroare la actualizarea articolului');
+        setActionError('A apărut o eroare la actualizarea membrului');
         return false;
       }
     } catch (err) {
@@ -96,20 +98,19 @@ const ArticlesAdmin: React.FC = () => {
     }
   };
 
-  const handleDeleteArticle = async () => {
+  const handleDeleteMember = async () => {
     if (!deleteConfirm) return;
     
     setActionLoading(true);
     setActionError(null);
     
     try {
-      const success = await deleteArticle(deleteConfirm.id);
+      const success = await deleteMember(deleteConfirm.id);
       if (success) {
         setDeleteConfirm(null);
-        setSuccessMessage('Articolul a fost șters cu succes!');
-        // Don't call fetchArticles() since the hook already updates the state
+        setSuccessMessage('Membrul a fost șters cu succes!');
       } else {
-        setActionError('A apărut o eroare la ștergerea articolului');
+        setActionError('A apărut o eroare la ștergerea membrului');
       }
     } catch (err) {
       setActionError('A apărut o eroare neașteptată');
@@ -118,16 +119,16 @@ const ArticlesAdmin: React.FC = () => {
     }
   };
 
-  const handleEditClick = (article: Article) => {
-    setEditingArticle(article);
+  const handleEditClick = (member: Member) => {
+    setEditingMember(member);
   };
 
-  const handleDeleteClick = (article: Article) => {
-    setDeleteConfirm(article);
+  const handleDeleteClick = (member: Member) => {
+    setDeleteConfirm(member);
   };
 
   const handleCancelEdit = () => {
-    setEditingArticle(null);
+    setEditingMember(null);
   };
 
   const handleCancelCreate = async () => {
@@ -136,7 +137,7 @@ const ArticlesAdmin: React.FC = () => {
       try {
         const urlParts = tempImageUrl.split('/');
         const filename = urlParts[urlParts.length - 1];
-        await storageService.deleteImage('articles', filename);
+        await storageService.deleteImage('members', filename);
       } catch (err) {
         console.error('Error cleaning up temporary image:', err);
       }
@@ -147,9 +148,9 @@ const ArticlesAdmin: React.FC = () => {
 
   const handleSearch = async (query: string) => {
     if (query.trim()) {
-      await searchArticles(query);
+      await searchMembers(query);
     } else {
-      await fetchArticles();
+      await fetchMembers();
     }
   };
 
@@ -160,10 +161,10 @@ const ArticlesAdmin: React.FC = () => {
         <div className="flex justify-between items-center">
           <div>
             <h1 className="text-3xl font-bold text-green-800">
-              Management Articole
+              Management Membri
             </h1>
             <p className="text-green-600 mt-1">
-              Administrează articolele din secțiunea de conținut
+              Administrează membrii echipei APNS
             </p>
           </div>
           
@@ -171,7 +172,7 @@ const ArticlesAdmin: React.FC = () => {
             onClick={() => setShowCreateModal(true)}
             size="lg"
           >
-            + Articol Nou
+            + Membru Nou
           </Button>
         </div>
 
@@ -195,14 +196,14 @@ const ArticlesAdmin: React.FC = () => {
         {error && (
           <Alert
             type="error"
-            message={`Eroare la încărcarea articolelor: ${error}`}
+            message={`Eroare la încărcarea membrilor: ${error}`}
           />
         )}
 
-        {/* Articles List */}
+        {/* Members List */}
         <div className="bg-white rounded-lg shadow-sm border border-green-100 p-6">
-          <ArticleList
-            articles={articles}
+          <MemberList
+            members={members}
             loading={loading}
             onEdit={handleEditClick}
             onDelete={handleDeleteClick}
@@ -210,37 +211,37 @@ const ArticlesAdmin: React.FC = () => {
           />
         </div>
 
-        {/* Create Article Modal */}
+        {/* Create Member Modal */}
         <Modal
           isOpen={showCreateModal}
           onClose={handleCancelCreate}
-          title="Creează Articol Nou"
+          title="Creează Membru Nou"
           size="xl"
         >
-          <ArticleForm
-            onSubmit={handleCreateArticle}
+          <MemberForm
+            onSubmit={handleCreateMember}
             onCancel={handleCancelCreate}
             loading={actionLoading}
-            generateSlug={generateSlug}
-            validateArticle={validateArticle}
+            validateMember={validateMember}
+            parseSpecializations={parseSpecializations}
           />
         </Modal>
 
-        {/* Edit Article Modal */}
+        {/* Edit Member Modal */}
         <Modal
-          isOpen={!!editingArticle}
+          isOpen={!!editingMember}
           onClose={handleCancelEdit}
-          title="Editează Articol"
+          title="Editează Membru"
           size="xl"
         >
-          {editingArticle && (
-            <ArticleForm
-              article={editingArticle}
-              onSubmit={handleUpdateArticle}
+          {editingMember && (
+            <MemberForm
+              member={editingMember}
+              onSubmit={handleUpdateMember}
               onCancel={handleCancelEdit}
               loading={actionLoading}
-              generateSlug={generateSlug}
-              validateArticle={validateArticle}
+              validateMember={validateMember}
+              parseSpecializations={parseSpecializations}
             />
           )}
         </Modal>
@@ -255,8 +256,8 @@ const ArticlesAdmin: React.FC = () => {
           {deleteConfirm && (
             <div className="space-y-4">
               <p className="text-gray-700">
-                Ești sigur că vrei să ștergi articolul{' '}
-                <span className="font-semibold">"{deleteConfirm.title}"</span>?
+                Ești sigur că vrei să ștergi membrul{' '}
+                <span className="font-semibold">"{deleteConfirm.name}"</span>?
               </p>
               <p className="text-sm text-red-600">
                 Această acțiune nu poate fi anulată.
@@ -272,11 +273,11 @@ const ArticlesAdmin: React.FC = () => {
                 </Button>
                 <Button
                   variant="danger"
-                  onClick={handleDeleteArticle}
+                  onClick={handleDeleteMember}
                   loading={actionLoading}
                   disabled={actionLoading}
                 >
-                  Șterge Articol
+                  Șterge Membru
                 </Button>
               </div>
             </div>
@@ -287,4 +288,4 @@ const ArticlesAdmin: React.FC = () => {
   );
 };
 
-export default ArticlesAdmin;
+export default MembersAdmin;

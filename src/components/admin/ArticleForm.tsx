@@ -5,6 +5,7 @@ import Button from '@/components/ui/Button';
 import Input from '@/components/ui/Input';
 import Textarea from '@/components/ui/Textarea';
 import Alert from '@/components/ui/Alert';
+import ImageUpload from '@/components/admin/ImageUpload';
 
 interface ArticleFormProps {
   article?: Article | null;
@@ -197,14 +198,16 @@ const ArticleForm: React.FC<ArticleFormProps> = ({
         </div>
       </div>
 
-      <Input
-        label="URL Imagine"
-        name="imageUrl"
-        type="url"
-        value={formData.imageUrl}
-        onChange={handleChange}
-        placeholder="https://example.com/image.jpg"
-      />
+      <div>
+        <label className="block text-sm font-medium text-green-800 mb-2">
+          Imagine Articol
+        </label>
+        <ImageUpload
+          currentImage={formData.imageUrl}
+          onImageChange={(url) => setFormData(prev => ({ ...prev, imageUrl: url }))}
+          loading={loading}
+        />
+      </div>
 
       <Textarea
         label="Excerpt (Descriere scurtă)"

@@ -1,5 +1,6 @@
 import { Member } from "@/lib/types/member";
 import { supabase } from "@/lib/supabaseClient";
+import { storageService } from "@/lib/services/storageService";
 
 // services/membersService.ts
 export class MembersService {
@@ -170,6 +171,24 @@ export class MembersService {
 
     async deleteMember(id: string): Promise<boolean> {
         try {
+            // First, get the member to check if they have an image
+            const member = await this.getMemberById(id);
+            if (!member) {
+                console.error('Member not found for deletion');
+                return false;
+            }
+
+            // If the member has an image, delete it from storage first
+            if (member.imageUrl) {
+                try {
+                    await storageService.deleteImage('members', member.imageUrl);
+                } catch (imageError) {
+                    console.warn('Failed to delete member image from storage:', imageError);
+                    // Continue with member deletion even if image deletion fails
+                }
+            }
+
+            // Delete the member from the database
             const { error } = await supabase
                 .from(this.tableName)
                 .delete()

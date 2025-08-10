@@ -1,5 +1,6 @@
 import { Article } from "@/lib/types/article";
 import { supabase } from "@/lib/supabaseClient";
+import { storageService } from "@/lib/services/storageService";
 
 // services/articleService.ts
 export class ArticleService {
@@ -199,19 +200,24 @@ export class ArticleService {
     async updateArticle(id: string, updates: Partial<Article>): Promise<Article | null> {
         try {
             const dbUpdates = this.mapArticleToDatabase(updates);
+            
             const { data, error } = await supabase
                 .from(this.tableName)
                 .update(dbUpdates)
                 .eq('id', id)
-                .select()
-                .single();
+                .select();
 
             if (error) {
                 console.error('Error updating article:', error);
                 return null;
             }
+            
+            if (!data || data.length === 0) {
+                console.error('No article found with ID:', id);
+                return null;
+            }
 
-            return data ? this.mapDatabaseToArticle(data) : null;
+            return this.mapDatabaseToArticle(data[0]);
         } catch (error) {
             console.error('Error in updateArticle:', error);
             return null;
@@ -220,6 +226,10 @@ export class ArticleService {
 
     async deleteArticle(id: string): Promise<boolean> {
         try {
+            // First, get the article to check if it has an image
+            const article = await this.getArticleById(id);
+            
+            // Delete the article from database
             const { error } = await supabase
                 .from(this.tableName)
                 .delete()
@@ -228,6 +238,19 @@ export class ArticleService {
             if (error) {
                 console.error('Error deleting article:', error);
                 return false;
+            }
+
+            // If article had an image, delete it from storage
+            if (article && article.imageUrl) {
+                try {
+                    const urlParts = article.imageUrl.split('/');
+                    const filename = urlParts[urlParts.length - 1];
+                    
+                    await storageService.deleteImage('articles', filename);
+                } catch (imageError) {
+                    console.error('Error deleting article image:', imageError);
+                    // Don't fail the entire operation if image deletion fails
+                }
             }
 
             return true;

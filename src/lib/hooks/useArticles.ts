@@ -154,6 +154,11 @@ export const useArticles = () => {
     if (!data.slug.trim()) errors.push('Slug-ul este obligatoriu');
     if (!data.excerpt.trim()) errors.push('Excerptul este obligatoriu');
     
+    // Check for invalid characters in slug
+    if (data.slug && !/^[a-z0-9-]+$/.test(data.slug)) {
+      errors.push('Slug-ul poate conține doar litere mici, cifre și liniuțe');
+    }
+    
     return errors;
   }, []);
 

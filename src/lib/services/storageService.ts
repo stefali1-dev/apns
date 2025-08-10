@@ -1,6 +1,6 @@
 import { supabase } from '@/lib/supabaseClient';
 
-export type StorageBucket = 'articles' | 'members' | 'ebooks' | 'authors' | 'ebook-files';
+export type StorageBucket = 'images' | 'articles' | 'members' | 'ebooks' | 'authors' | 'ebook-files';
 
 export interface UploadResult {
   success: boolean;

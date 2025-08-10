@@ -7,7 +7,7 @@ const nextConfig: NextConfig = {
     formats: ['image/webp', 'image/avif'],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-    domains: [], // Add external domains if needed
+    domains: ['auhtbxmkahadeyksqcdi.supabase.co'], // Add external domains if needed
     minimumCacheTTL: 60,
     // Vercel-optimized settings
     dangerouslyAllowSVG: true,
@@ -17,7 +17,13 @@ const nextConfig: NextConfig = {
     unoptimized: false, // Ensure optimization is enabled
     // Set reasonable limits for Vercel
     remotePatterns: [
-      // Add any external image domains here if needed
+      // Supabase storage
+      {
+        protocol: 'https',
+        hostname: 'auhtbxmkahadeyksqcdi.supabase.co',
+        port: '',
+        pathname: '/storage/v1/object/public/**',
+      },
     ],
   },
 };
