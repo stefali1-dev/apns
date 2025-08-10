@@ -17,7 +17,7 @@ export class EBookService {
             toc: dbEBook.toc,
             category: dbEBook.category,
             authors: dbEBook.ebook_authors?.map((ea: any) => this.mapDatabaseToAuthor(ea.authors)) || [],
-            coverImage: dbEBook.cover_image,
+            imageUrl: dbEBook.image_url,
             isFree: dbEBook.is_free,
             price: dbEBook.price,
             pageCount: dbEBook.page_count,
@@ -32,7 +32,7 @@ export class EBookService {
             name: dbAuthor.name,
             title: dbAuthor.title,
             bio: dbAuthor.bio,
-            profileImage: dbAuthor.profile_image
+            imageUrl: dbAuthor.image_url
         };
     }
 
@@ -46,7 +46,7 @@ export class EBookService {
         if (ebook.fullDescription !== undefined) dbEBook.full_description = ebook.fullDescription;
         if (ebook.toc !== undefined) dbEBook.toc = ebook.toc;
         if (ebook.category !== undefined) dbEBook.category = ebook.category;
-        if (ebook.coverImage !== undefined) dbEBook.cover_image = ebook.coverImage;
+        if (ebook.imageUrl !== undefined) dbEBook.image_url = ebook.imageUrl;
         if (ebook.isFree !== undefined) dbEBook.is_free = ebook.isFree;
         if (ebook.price !== undefined) dbEBook.price = ebook.price;
         if (ebook.pageCount !== undefined) dbEBook.page_count = ebook.pageCount;
@@ -61,7 +61,7 @@ export class EBookService {
         if (author.name !== undefined) dbAuthor.name = author.name;
         if (author.title !== undefined) dbAuthor.title = author.title;
         if (author.bio !== undefined) dbAuthor.bio = author.bio;
-        if (author.profileImage !== undefined) dbAuthor.profile_image = author.profileImage;
+        if (author.imageUrl !== undefined) dbAuthor.image_url = author.imageUrl;
         return dbAuthor;
     }
 
@@ -361,6 +361,46 @@ export class EBookService {
             return true;
         } catch (error) {
             console.error('Error in deleteEBook:', error);
+            return false;
+        }
+    }
+
+    // Update just the image URL for an ebook
+    async updateEBookImage(id: number, imageUrl: string): Promise<boolean> {
+        try {
+            const { error } = await supabase
+                .from(this.tableName)
+                .update({ image_url: imageUrl })
+                .eq('id', id);
+
+            if (error) {
+                console.error('Error updating ebook image:', error);
+                return false;
+            }
+
+            return true;
+        } catch (error) {
+            console.error('Error in updateEBookImage:', error);
+            return false;
+        }
+    }
+
+    // Update just the image URL for an author
+    async updateAuthorImage(id: number, imageUrl: string): Promise<boolean> {
+        try {
+            const { error } = await supabase
+                .from(this.authorsTableName)
+                .update({ image_url: imageUrl })
+                .eq('id', id);
+
+            if (error) {
+                console.error('Error updating author image:', error);
+                return false;
+            }
+
+            return true;
+        } catch (error) {
+            console.error('Error in updateAuthorImage:', error);
             return false;
         }
     }

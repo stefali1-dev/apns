@@ -3,7 +3,7 @@ export interface Author {
   name: string;
   title: string;
   bio: string;
-  profileImage?: string;
+  imageUrl: string;
 }
 
 export interface EBook {
@@ -15,7 +15,7 @@ export interface EBook {
   toc: string; // Table of Contents HTML
   category: string;
   authors: Author[];
-  coverImage?: string;
+  imageUrl: string;
   isFree: boolean;
   price?: number;
   pageCount: number;

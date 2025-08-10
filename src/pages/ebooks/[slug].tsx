@@ -119,7 +119,7 @@ export default function EBookDetail({ ebook, relatedEbooks }: EBookDetailProps) 
         <meta name="keywords" content={`${ebook.title}, ${ebook.category}, e-book nutriție, APNS`} />
         <meta property="og:title" content={ebook.title} />
         <meta property="og:description" content={ebook.shortDescription} />
-        <meta property="og:image" content={ebook.coverImage} />
+        <meta property="og:image" content={ebook.imageUrl} />
         <meta property="og:type" content="book" />
         <link rel="canonical" href={`/ebooks/${ebook.slug}`} />
       </Head>
@@ -153,9 +153,9 @@ export default function EBookDetail({ ebook, relatedEbooks }: EBookDetailProps) 
               <div className="bg-white rounded-xl shadow-md border border-gray-200 overflow-hidden sticky top-6">
                 {/* Cover Image */}
                 <div className="aspect-[3/4] relative overflow-hidden bg-gradient-to-br from-green-100 to-green-200">
-                  {ebook.coverImage ? (
+                  {ebook.imageUrl ? (
                     <Image 
-                      src={ebook.coverImage} 
+                      src={ebook.imageUrl} 
                       alt={ebook.title} 
                       width={400}
                       height={533}
@@ -312,9 +312,9 @@ export default function EBookDetail({ ebook, relatedEbooks }: EBookDetailProps) 
                         }`}
                       >
                         <div className="w-24 h-24 flex-shrink-0 bg-gradient-to-br from-green-100 to-green-200 rounded-full overflow-hidden">
-                          {author.profileImage ? (
+                          {author.imageUrl ? (
                             <Image 
-                              src={author.profileImage} 
+                              src={author.imageUrl} 
                               alt={author.name} 
                               width={96}
                               height={96}
@@ -367,9 +367,9 @@ export default function EBookDetail({ ebook, relatedEbooks }: EBookDetailProps) 
                   <div key={relatedEbook.id} className="bg-white rounded-xl shadow-md border border-gray-200 overflow-hidden hover:shadow-lg transition-all duration-300 group">
                     <Link href={`/ebooks/${relatedEbook.slug}`}>
                       <div className="relative aspect-square overflow-hidden bg-gradient-to-br from-green-100 to-green-200">
-                        {relatedEbook.coverImage ? (
+                        {relatedEbook.imageUrl ? (
                           <Image 
-                            src={relatedEbook.coverImage} 
+                            src={relatedEbook.imageUrl} 
                             alt={relatedEbook.title} 
                             width={300}
                             height={300}

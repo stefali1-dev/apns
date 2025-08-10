@@ -313,9 +313,9 @@ export default function EBooksPage() {
                       <div key={ebook.id} className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 group">
                         <Link href={`/ebooks/${ebook.slug}`}>
                           <div className="relative aspect-[4/3] overflow-hidden bg-gradient-to-br from-green-100 to-green-200">
-                            {ebook.coverImage ? (
+                            {ebook.imageUrl ? (
                               <Image
-                                src={ebook.coverImage}
+                                src={ebook.imageUrl}
                                 alt={ebook.title}
                                 width={400}
                                 height={300}

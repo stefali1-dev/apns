@@ -234,6 +234,26 @@ export class MembersService {
             return 1;
         }
     }
+
+    // Update just the image URL for a member
+    async updateMemberImage(id: string, imageUrl: string): Promise<boolean> {
+        try {
+            const { error } = await supabase
+                .from(this.tableName)
+                .update({ image_url: imageUrl })
+                .eq('id', id);
+
+            if (error) {
+                console.error('Error updating member image:', error);
+                return false;
+            }
+
+            return true;
+        } catch (error) {
+            console.error('Error in updateMemberImage:', error);
+            return false;
+        }
+    }
 }
 
 export const membersService = new MembersService();
