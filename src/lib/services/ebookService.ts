@@ -18,6 +18,7 @@ export class EBookService {
             category: dbEBook.category,
             authors: dbEBook.ebook_authors?.map((ea: any) => this.mapDatabaseToAuthor(ea.authors)) || [],
             imageUrl: dbEBook.image_url,
+            fileUrl: dbEBook.file_url,
             isFree: dbEBook.is_free,
             price: dbEBook.price,
             pageCount: dbEBook.page_count,
@@ -47,6 +48,7 @@ export class EBookService {
         if (ebook.toc !== undefined) dbEBook.toc = ebook.toc;
         if (ebook.category !== undefined) dbEBook.category = ebook.category;
         if (ebook.imageUrl !== undefined) dbEBook.image_url = ebook.imageUrl;
+        if (ebook.fileUrl !== undefined) dbEBook.file_url = ebook.fileUrl;
         if (ebook.isFree !== undefined) dbEBook.is_free = ebook.isFree;
         if (ebook.price !== undefined) dbEBook.price = ebook.price;
         if (ebook.pageCount !== undefined) dbEBook.page_count = ebook.pageCount;
@@ -401,6 +403,26 @@ export class EBookService {
             return true;
         } catch (error) {
             console.error('Error in updateAuthorImage:', error);
+            return false;
+        }
+    }
+
+    // Update just the file URL for an ebook
+    async updateEBookFile(id: number, fileUrl: string): Promise<boolean> {
+        try {
+            const { error } = await supabase
+                .from(this.tableName)
+                .update({ file_url: fileUrl })
+                .eq('id', id);
+
+            if (error) {
+                console.error('Error updating ebook file:', error);
+                return false;
+            }
+
+            return true;
+        } catch (error) {
+            console.error('Error in updateEBookFile:', error);
             return false;
         }
     }

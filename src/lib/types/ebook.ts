@@ -16,6 +16,7 @@ export interface EBook {
   category: string;
   authors: Author[];
   imageUrl: string;
+  fileUrl?: string; // URL to the ebook PDF file
   isFree: boolean;
   price?: number;
   pageCount: number;

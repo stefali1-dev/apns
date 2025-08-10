@@ -1,6 +1,6 @@
 import { supabase } from '@/lib/supabaseClient';
 
-export type StorageBucket = 'articles' | 'members' | 'ebooks' | 'authors';
+export type StorageBucket = 'articles' | 'members' | 'ebooks' | 'authors' | 'ebook-files';
 
 export interface UploadResult {
   success: boolean;
@@ -165,6 +165,93 @@ export class StorageService {
     }
 
     return { valid: true };
+  }
+
+  /**
+   * Upload a PDF file to ebook-files bucket
+   */
+  async uploadPDF(
+    file: File,
+    fileName?: string
+  ): Promise<UploadResult> {
+    try {
+      // Validate PDF file
+      const validation = this.validatePDFFile(file);
+      if (!validation.valid) {
+        return { success: false, error: validation.error };
+      }
+
+      // Generate unique filename if not provided
+      const fileExtension = file.name.split('.').pop();
+      const uniqueFileName = fileName || `${Date.now()}-${Math.random().toString(36).substring(2)}.${fileExtension}`;
+
+      const { data, error } = await supabase.storage
+        .from('ebook-files')
+        .upload(uniqueFileName, file, {
+          cacheControl: '3600',
+          upsert: false
+        });
+
+      if (error) {
+        console.error('PDF upload error:', error);
+        return { success: false, error: error.message };
+      }
+
+      const url = this.getPublicUrl('ebook-files', data.path);
+      return { success: true, url };
+    } catch (error) {
+      console.error('PDF upload error:', error);
+      return { success: false, error: 'Failed to upload PDF file' };
+    }
+  }
+
+  /**
+   * Validate PDF file
+   */
+  validatePDFFile(file: File): { valid: boolean; error?: string } {
+    const maxSize = 50 * 1024 * 1024; // 50MB
+    const allowedTypes = ['application/pdf'];
+
+    if (!allowedTypes.includes(file.type)) {
+      return { valid: false, error: 'Please select a valid PDF file' };
+    }
+
+    if (file.size > maxSize) {
+      return { valid: false, error: 'PDF file size must be less than 50MB' };
+    }
+
+    return { valid: true };
+  }
+
+  /**
+   * Replace an existing PDF file with a new one
+   */
+  async replacePDF(
+    oldFileUrl: string,
+    newFile: File,
+    newFileName?: string
+  ): Promise<UploadResult> {
+    try {
+      // Upload new PDF first
+      const uploadResult = await this.uploadPDF(newFile, newFileName);
+      
+      if (!uploadResult.success) {
+        return uploadResult;
+      }
+
+      // Delete old PDF (only if it's from our storage, not external URLs)
+      if (oldFileUrl.includes(this.baseUrl || '')) {
+        const oldFileName = this.extractFileNameFromUrl(oldFileUrl);
+        if (oldFileName) {
+          await this.deleteImage('ebook-files', oldFileName);
+        }
+      }
+
+      return uploadResult;
+    } catch (error) {
+      console.error('Replace PDF error:', error);
+      return { success: false, error: 'Failed to replace PDF file' };
+    }
   }
 }
 
