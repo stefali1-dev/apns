@@ -112,13 +112,13 @@ const EducatieNutritionalaInScoliPage: React.FC = () => {
                         <div className="bg-white rounded-lg shadow-lg p-8 mb-8">
                             <div className="text-center mb-6">
                                 <Image
-                                    src="/images/group2.jpg"
+                                    src="/images/projects/4.jpg"
                                     alt="Workshop de educație nutrițională în școli"
                                     width={600}
                                     height={400}
                                     className="rounded-lg mx-auto"
                                 />
-                                <p className="text-sm text-gray-600 mt-2 italic">Workshopuri și ateliere de gătit sănătos cu elevii</p>
+                                <p className="text-sm text-gray-600 mt-2 italic">Workshopuri cu elevii</p>
                             </div>
                         </div>
 

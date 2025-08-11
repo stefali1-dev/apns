@@ -156,7 +156,7 @@ export default function ChildBMITest() {
             <Navbar />
             <div className="min-h-screen bg-gradient-to-br from-green-50 via-blue-50 to-purple-50 py-12 relative overflow-hidden">
                 {/* Playful background decorations */}
-                <div className="absolute inset-0 pointer-events-none">
+                <div className="absolute inset-0 pointer-events-none hidden lg:block">
                     {/* Floating shapes - Positioned symmetrically */}
                     {/* Left side */}
                     <div className="absolute top-20 left-10 w-16 h-16 bg-yellow-200 rounded-full opacity-20 animate-bounce" style={{ animationDelay: '0s', animationDuration: '3s' }}></div>

@@ -57,13 +57,13 @@ const SanatateInainteDeTotePage: React.FC = () => {
                         <div className="bg-white rounded-lg shadow-lg p-8 mb-8">
                             <div className="text-center mb-6">
                                 <Image
-                                    src="/images/group.jpeg"
+                                    src="/images/projects/2.jpg"
                                     alt="Activitate educațională în școală"
                                     width={600}
                                     height={400}
                                     className="rounded-lg mx-auto"
                                 />
-                                <p className="text-sm text-gray-600 mt-2 italic">Activități educaționale în școli</p>
+                                <p className="text-sm text-gray-600 mt-2 italic">Activități educaționale în școli și grădinițe</p>
                             </div>
                         </div>
 
@@ -109,7 +109,7 @@ const SanatateInainteDeTotePage: React.FC = () => {
                         <div className="bg-white rounded-lg shadow-lg p-8 mb-8">
                             <div className="text-center mb-6">
                                 <Image
-                                    src="/images/group.jpeg"
+                                    src="/images/projects/3.jpg"
                                     alt="Screening medical pentru copii"
                                     width={600}
                                     height={400}

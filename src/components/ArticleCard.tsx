@@ -36,23 +36,26 @@ const ArticleCard: React.FC<ArticleCardProps> = ({
                     sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     quality={80}
                 />
-                <div className="absolute inset-0 bg-black bg-opacity-20 hover:bg-opacity-10 transition-all duration-300"></div>
             </div>
             
             <div className="p-6 flex flex-col flex-grow">
                 {/* Date and author */}
                 <div className="flex items-center justify-between mb-3 text-sm text-gray-500">
-                    <span className="flex items-center">
-                        <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <span className="flex items-center min-w-0 flex-shrink">
+                        <svg className="w-4 h-4 mr-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                         </svg>
-                        {formatDate(article.publishDate)}
+                        <span className="truncate">
+                            {formatDate(article.publishDate)}
+                        </span>
                     </span>
-                    <span className="flex items-center">
-                        <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <span className="flex items-center min-w-0 flex-shrink ml-2" title={article.author}>
+                        <svg className="w-4 h-4 mr-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                         </svg>
-                        {article.author}
+                        <span className="truncate max-w-[160px]">
+                            {article.author}
+                        </span>
                     </span>
                 </div>
                 

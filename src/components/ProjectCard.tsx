@@ -18,7 +18,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         <div className={`bg-white rounded-lg shadow-lg overflow-hidden cursor-pointer transform hover:-translate-y-1 transition-all duration-300 hover:shadow-xl h-full flex flex-col ${className}`}>
             <div className="relative overflow-hidden h-64 flex-shrink-0">
                 <OptimizedImage
-                    src={project.imageUrl || '/images/placeholder-project.jpg'}
+                    src={project.imageUrl}
                     alt={project.title}
                     fill
                     className="object-cover hover:scale-105 transition-transform duration-300"
@@ -26,7 +26,6 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
                     sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     quality={80}
                 />
-                <div className="absolute inset-0 bg-black bg-opacity-20 hover:bg-opacity-10 transition-all duration-300"></div>
             </div>
             
             <div className="p-6 flex flex-col flex-grow">

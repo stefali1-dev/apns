@@ -284,9 +284,12 @@ export default function AdultBMITest() {
                       >
                         Calculează din nou
                       </button>
-                      <button className="w-full bg-[#09a252] text-white font-semibold py-3 px-6 rounded-lg hover:bg-[#09a252] transition-colors duration-300">
+                        <button
+                        className="w-full bg-[#09a252] text-white font-semibold py-3 px-6 rounded-lg hover:bg-[#09a252] transition-colors duration-300"
+                        onClick={() => window.location.assign('/team')}
+                        >
                         Vorbește cu un dietetician
-                      </button>
+                        </button>
                     </motion.div>
                   )}
                 </AnimatePresence>

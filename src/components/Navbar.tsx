@@ -1,6 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { membersService } from '@/lib/services/membersService';
+import { Member } from '@/lib/types/member';
 
 export default function Navbar() {
   // State for mobile menu and dropdowns
@@ -9,6 +11,13 @@ export default function Navbar() {
   const [articoleOpen, setArticoleOpen] = useState(false);
   const [mobileDespreNoiOpen, setMobileDespreNoiOpen] = useState(false);
   const [mobileArticoleOpen, setMobileArticoleOpen] = useState(false);
+
+  // Search state
+  const [searchQuery, setSearchQuery] = useState('');
+  const [searchResults, setSearchResults] = useState<Member[]>([]);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [isSearching, setIsSearching] = useState(false);
+  const searchRef = useRef<HTMLDivElement>(null);
 
   // Close dropdowns when user scrolls
   useEffect(() => {
@@ -19,6 +28,9 @@ export default function Navbar() {
       if (articoleOpen) {
         setArticoleOpen(false);
       }
+      if (isSearchOpen) {
+        setIsSearchOpen(false);
+      }
     };
 
     // Add scroll event listener
@@ -28,7 +40,85 @@ export default function Navbar() {
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, [despreNoiOpen, articoleOpen]);
+  }, [despreNoiOpen, articoleOpen, isSearchOpen]);
+
+  // Handle click outside search dropdown
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (searchRef.current && !searchRef.current.contains(event.target as Node)) {
+        setIsSearchOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
+  // Search functionality
+  const handleSearch = async (query: string) => {
+    setSearchQuery(query);
+    
+    if (query.trim().length === 0) {
+      // Show all members when search is empty but focused
+      setIsSearching(true);
+      try {
+        const allMembers = await membersService.getMembers();
+        setSearchResults(allMembers);
+        setIsSearchOpen(true);
+      } catch (error) {
+        console.error('Error fetching all members:', error);
+        setSearchResults([]);
+      } finally {
+        setIsSearching(false);
+      }
+      return;
+    }
+
+    setIsSearching(true);
+    try {
+      const results = await membersService.searchMembers(query.trim());
+      setSearchResults(results);
+      setIsSearchOpen(true);
+    } catch (error) {
+      console.error('Error searching members:', error);
+      setSearchResults([]);
+    } finally {
+      setIsSearching(false);
+    }
+  };
+
+  const handleSearchInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    handleSearch(value);
+  };
+
+  const handleSearchInputFocus = async () => {
+    // Show all members when input is focused, even if empty
+    if (searchQuery.trim().length === 0) {
+      setIsSearching(true);
+      try {
+        const allMembers = await membersService.getMembers();
+        setSearchResults(allMembers);
+        setIsSearchOpen(true);
+      } catch (error) {
+        console.error('Error fetching all members:', error);
+        setSearchResults([]);
+      } finally {
+        setIsSearching(false);
+      }
+    } else if (searchResults.length > 0) {
+      setIsSearchOpen(true);
+    }
+  };
+
+  const handleSearchResultClick = () => {
+    // Clear search and close dropdown
+    setSearchQuery('');
+    setSearchResults([]);
+    setIsSearchOpen(false);
+  };
 
   return (
     <nav className="bg-white border-b border-gray-200">
@@ -59,32 +149,71 @@ export default function Navbar() {
         {/* Search + Donate */}
         <div className="hidden md:flex items-center space-x-4">
           {/* Search form */}
-          <form action="#" method="GET" className="relative">
+          <div className="relative" ref={searchRef}>
             <input
               type="search"
-              name="q"
+              value={searchQuery}
+              onChange={handleSearchInputChange}
+              onFocus={handleSearchInputFocus}
               placeholder="Caută nutriționiști..."
               className="border border-gray-300 rounded-lg pl-4 pr-10 py-1 focus:outline-none
-                      focus:ring-2 focus:ring-[#09a252] focus:border-transparent transition-all duration-200"
+                      focus:ring-2 focus:ring-[#09a252] focus:border-transparent transition-all duration-200 w-64"
             />
-            <button
-              type="submit"
-              className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-[#09a252] transition-colors"
-            >
-              <svg
-                className="h-4 w-4"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                viewBox="0 0 24 24"
-              >
-                <circle cx="11" cy="11" r="8" />
-                <line x1="21" y1="21" x2="16.65" y2="16.65" />
-              </svg>
-            </button>
-          </form>
+            <div className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-500">
+              {isSearching ? (
+                <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-[#09a252]"></div>
+              ) : (
+                <svg
+                  className="h-4 w-4"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  viewBox="0 0 24 24"
+                >
+                  <circle cx="11" cy="11" r="8" />
+                  <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                </svg>
+              )}
+            </div>
+
+            {/* Search Results Dropdown */}
+            {isSearchOpen && searchResults.length > 0 && (
+              <div className="absolute top-full left-0 right-0 mt-1 bg-white border border-gray-200 rounded-lg shadow-lg z-50 max-h-64 overflow-y-auto">
+                {searchResults.map((member) => (
+                  <Link
+                    key={member.id}
+                    href="/team"
+                    onClick={handleSearchResultClick}
+                    className="flex items-center px-4 py-3 hover:bg-gray-50 transition-colors border-b border-gray-100 last:border-b-0"
+                  >
+                    {member.imageUrl && (
+                      <div className="w-10 h-10 rounded-full overflow-hidden mr-3 flex-shrink-0 bg-gray-100">
+                        <Image
+                          src={member.imageUrl}
+                          alt={member.name}
+                          width={40}
+                          height={40}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                    )}
+                    <div className="flex-grow min-w-0">
+                      <div className="font-medium text-gray-900 truncate">{member.name}</div>
+                      <div className="text-sm text-gray-500 truncate">{member.position}</div>
+                    </div>
+                  </Link>
+                ))}
+                
+                {searchQuery.trim().length >= 2 && searchResults.length === 0 && !isSearching && (
+                  <div className="px-4 py-3 text-gray-500 text-sm">
+                    Nu am găsit nutriționiști pentru "{searchQuery}"
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
 
           {/* Donate button */}
           <Link

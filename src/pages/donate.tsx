@@ -2,6 +2,7 @@ import React from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import Layout from '@/layouts/NavbarLayout';
+import OptimizedImage from '@/components/OptimizedImage';
 
 interface DonatePageProps {
   orgName?: string;
@@ -69,12 +70,18 @@ const DonatePage: React.FC<DonatePageProps> = ({
           {/* Imagine ilustrativă */}
           <div className="relative mx-auto max-w-4xl px-4 pb-16">
             <div className="relative bg-white rounded-xl shadow-2xl overflow-hidden">
-              <img
-                className="w-full h-64 sm:h-72 md:h-80 object-cover rounded-lg"
-                src="/images/header.jpg"
-                alt="Redirecționează impozitul"
-                style={{ objectPosition: '50% 65%' }}
-              />
+              <div className="w-full h-64 sm:h-72 md:h-80 relative rounded-lg overflow-hidden">
+                <OptimizedImage
+                  src="/images/group3.jpg"
+                  alt="Redirecționează impozitul pentru susținerea programelor nutriționale APNS"
+                  fill
+                  className="object-cover"
+                  objectPosition="50% 85%"
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 80vw, 896px"
+                  quality={85}
+                  priority
+                />
+              </div>
             </div>
           </div>
         </div>

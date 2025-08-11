@@ -126,7 +126,7 @@ const CampaniiDePromovareOnlineOfflinePage: React.FC = () => {
                         <div className="bg-white rounded-lg shadow-lg p-8 mb-8">
                             <div className="text-center mb-6">
                                 <Image
-                                    src="/images/header.jpg"
+                                    src="/images/projects/5.jpg"
                                     alt="Campanii de promovare APNS"
                                     width={600}
                                     height={400}

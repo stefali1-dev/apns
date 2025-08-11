@@ -175,7 +175,7 @@ export default function Home() {
               {/* Image block */}
               <div className="relative flex-1 max-w-[600px] w-full mt-2 lg:mt-0 lg:-ml-12">
                 <OptimizedImage
-                  src="/images/header.jpg"
+                  src="/images/group3.jpg"
                   alt="Poza de grup"
                   width={600}
                   height={450}
