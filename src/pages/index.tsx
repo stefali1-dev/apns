@@ -107,6 +107,36 @@ export default function Home() {
             transform: translateY(0) scale(1);
           }
         }
+
+        /* Improved mobile touch interactions */
+        @media (max-width: 768px) {
+          .touch-manipulation {
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+          }
+          
+          /* Ensure minimum touch target size */
+          a, button {
+            min-height: 44px;
+            min-width: 44px;
+          }
+          
+          /* Improve readability on mobile */
+          p {
+            line-height: 1.6;
+          }
+          
+          /* Better spacing on mobile */
+          .mobile-spacing {
+            padding-left: 1rem;
+            padding-right: 1rem;
+          }
+        }
+
+        /* Smooth scrolling */
+        html {
+          scroll-behavior: smooth;
+        }
       `}</style>
 
       <div className="relative">
@@ -116,7 +146,7 @@ export default function Home() {
           onSubscribe={handleSubscribe}
         />
 
-        <section className="relative w-full h-[660px] overflow-visible bg-white lg:bg-transparent">
+        <section className="relative w-full min-h-[500px] lg:h-[660px] overflow-visible bg-white lg:bg-transparent">
           {/* Background Split - only visible on large screens */}
           <div className="hidden lg:flex absolute inset-0 w-full h-full">
             <div className="w-[55%] bg-white" />
@@ -124,26 +154,26 @@ export default function Home() {
           </div>
 
           {/* Content Layer */}
-          <div className="relative z-10 flex justify-center items-center h-full px-6 md:px-10 lg:px-12">
-            <div className="flex flex-col lg:flex-row items-center justify-between gap-8 border-4 border-gray-200 rounded-lg p-6 md:p-10 max-w-screen-xl w-full shadow-xl">
+          <div className="relative z-10 flex justify-center items-center min-h-[500px] lg:h-full px-4 sm:px-6 md:px-10 lg:px-12 py-8 lg:py-0">
+            <div className="flex flex-col lg:flex-row items-center justify-between gap-6 lg:gap-8 border-4 border-gray-200 rounded-lg p-4 sm:p-6 md:p-10 max-w-screen-xl w-full shadow-xl">
               {/* Text block */}
-              <div className="max-w-xl text-black flex-1 shrink-0">
-                <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 leading-tight">
+              <div className="max-w-xl text-black flex-1 shrink-0 text-center lg:text-left">
+                <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 leading-tight">
                   Împreună Schimbăm Vieți
                 </h1>
-                <p className="text-base md:text-lg mb-6">
+                <p className="text-sm sm:text-base md:text-lg mb-6 leading-relaxed">
                   APNS susține educația, oferă servicii personalizate de nutriție și sprijin real pentru copii și adulți afectați de boli cronice netransmisibile. Împreună, construim nu doar vieți mai sănătoase, ci o comunitate în care nimeni nu este lăsat singur în fața bolii.
                 </p>
                 <a
                   href="/donate"
-                  className="inline-block bg-[#09a252] text-white font-semibold text-base md:text-lg py-3 px-6 rounded-lg shadow hover:bg-green-700 hover:shadow-xl hover:-translate-y-1 hover:scale-105 transition-all duration-300 transform focus:outline-none focus:ring-2 focus:ring-green-400"
+                  className="inline-block bg-[#09a252] text-white font-semibold text-sm sm:text-base md:text-lg py-3 sm:py-4 px-6 sm:px-8 rounded-lg shadow hover:bg-green-700 hover:shadow-xl hover:-translate-y-1 hover:scale-105 transition-all duration-300 transform focus:outline-none focus:ring-2 focus:ring-green-400 min-h-[44px] touch-manipulation"
                 >
                   Dăruiește speranță
                 </a>
               </div>
 
               {/* Image block */}
-              <div className="relative flex-1 max-w-[600px] w-full -mt-4 lg:mt-0 lg:-ml-12">
+              <div className="relative flex-1 max-w-[600px] w-full mt-2 lg:mt-0 lg:-ml-12">
                 <OptimizedImage
                   src="/images/header.jpg"
                   alt="Poza de grup"
@@ -191,14 +221,14 @@ export default function Home() {
         </section>
 
         {/* Main Content Sections */}
-        <section className="bg-white mt-20">
-          <div className="max-w-screen-xl px-4 pb-8 mx-auto sm:pb-16 lg:pb-24">
-            <div className="space-y-8 lg:space-y-20">
+        <section className="bg-white mt-12 sm:mt-20">
+          <div className="max-w-screen-xl px-4 sm:px-6 pb-8 mx-auto sm:pb-16 lg:pb-24">
+            <div className="space-y-12 sm:space-y-16 lg:space-y-20">
               {/* First Content Block */}
-              <div className="items-center gap-8 xl:gap-16 md:grid md:grid-cols-2">
-                <div className="border-4 p-6 border-gray-200 bg-gray-50 rounded-lg shadow-lg">
+              <div className="items-center gap-6 sm:gap-8 xl:gap-16 md:grid md:grid-cols-2">
+                <div className="border-4 p-4 sm:p-6 border-gray-200 bg-gray-50 rounded-lg shadow-lg mb-6 md:mb-0">
                   <OptimizedImage
-                    className="w-full rounded-lg shadow-lg hidden sm:block transition-transform duration-300"
+                    className="w-full rounded-lg shadow-lg transition-transform duration-300"
                     src="/images/group.jpeg"
                     alt="Workshop nutrițional"
                     width={1200}
@@ -208,24 +238,24 @@ export default function Home() {
                   />
                 </div>
                 <div className="mt-0">
-                  <h2 className="mb-4 text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+                  <h2 className="mb-4 text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-gray-900">
                     Despre asociație
                   </h2>
-                  <p className="mb-6 text-gray-500 md:text-lg">
+                  <p className="mb-6 text-gray-500 text-sm sm:text-base md:text-lg leading-relaxed">
                     Asociația pentru Promovarea Nutriției Sănătoase (APNS) este o organizație non-guvernamentală
                     înființată în anul 2021 de către o echipă de dieteticieni autorizați cu formare în cadrul Universității
-                    de Medicină și Farmacie „Grigore T. Popa” Iași. Are ca scop principal promovarea nutriției bazate pe dovezi științifice, informarea populației și susținerea politicilor de sănătate orientate către sustenabilitate, prevenție și educație nutrițională.
+                    de Medicină și Farmacie „Grigore T. Popa" Iași. Are ca scop principal promovarea nutriției bazate pe dovezi științifice, informarea populației și susținerea politicilor de sănătate orientate către sustenabilitate, prevenție și educație nutrițională.
                   </p>
-                  <div className="flex flex-col sm:flex-row items-center gap-4">
+                  <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4">
                     <Link
                       href="/enroll"
-                      className="inline-block bg-[#09a252]  hover:bg-green-700 text-white font-semibold px-6 py-3 rounded-lg shadow-md transition-colors duration-300"
+                      className="w-full sm:w-auto text-center inline-block bg-[#09a252] hover:bg-green-700 text-white font-semibold px-6 py-3 sm:py-4 rounded-lg shadow-md transition-colors duration-300 min-h-[44px] touch-manipulation"
                     >
                       Implică-te
                     </Link>
                     <Link
                       href="/asociatie"
-                      className="inline-block border-2 border-[#09a252] text-[#09a252] font-semibold px-6 py-3 rounded-lg shadow-md hover:bg-[#09a252] hover:text-white transition-colors duration-300"
+                      className="w-full sm:w-auto text-center inline-block border-2 border-[#09a252] text-[#09a252] font-semibold px-6 py-3 sm:py-4 rounded-lg shadow-md hover:bg-[#09a252] hover:text-white transition-colors duration-300 min-h-[44px] touch-manipulation"
                     >
                       Află mai mult
                     </Link>
@@ -234,12 +264,25 @@ export default function Home() {
               </div>
 
               {/* Second Content Block */}
-              <div className="items-center gap-8 xl:gap-16 md:grid md:grid-cols-2">
-                <div className="mb-4 md:mb-0">
-                  <h2 className="mb-4 text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+              <div className="items-center gap-6 sm:gap-8 xl:gap-16 md:grid md:grid-cols-2">
+                <div className="mb-6 md:mb-0 md:order-2">
+                  <div className="border-4 p-4 sm:p-6 border-gray-200 bg-gray-50 rounded-lg shadow-lg">
+                    <OptimizedImage
+                      className="w-full rounded-lg shadow-lg transition-transform duration-300"
+                      src="/images/group2.jpg"
+                      alt="Comunitate APNS"
+                      width={600}
+                      height={400}
+                      quality={80}
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
+                    />
+                  </div>
+                </div>
+                <div className="md:order-1">
+                  <h2 className="mb-4 text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-gray-900">
                     Ce este un dietetician?
                   </h2>
-                  <p className="mb-6 text-gray-500 md:text-lg">
+                  <p className="mb-6 text-gray-500 text-sm sm:text-base md:text-lg leading-relaxed">
                     Dieteticianul este un profesionist din domeniul sănătății, specializat în nutriție și dietetică,
                     cu studii universitare de licență în cadrul Universităților de Medicină și Farmacie. Rolul său este esențial
                     în prevenția bolilor, susținerea tratamentelor medicale prin terapie nutrițională, educația alimentară a populației
@@ -248,22 +291,11 @@ export default function Home() {
                   <div className="flex items-center gap-4">
                     <Link
                       href="/dietetician"
-                      className="inline-block bg-[#09a252] text-white font-semibold px-6 py-3 rounded-lg shadow-md hover:bg-green-700 transition-colors duration-300"
+                      className="w-full sm:w-auto text-center inline-block bg-[#09a252] text-white font-semibold px-6 py-3 sm:py-4 rounded-lg shadow-md hover:bg-green-700 transition-colors duration-300 min-h-[44px] touch-manipulation"
                     >
                       Află mai mult
                     </Link>
                   </div>
-                </div>
-                <div className="border-4 p-6 border-gray-200 bg-gray-50 rounded-lg shadow-lg">
-                  <OptimizedImage
-                    className="w-full rounded-lg shadow-lg hidden sm:block transition-transform duration-300"
-                    src="/images/group2.jpg"
-                    alt="Comunitate APNS"
-                    width={600}
-                    height={400}
-                    quality={80}
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
-                  />
                 </div>
               </div>
             </div>
@@ -277,22 +309,22 @@ export default function Home() {
         <ObesityStatsSection />
 
         {/* BMI Test Section */}
-        <section className="w-full bg-[#09a252] text-white py-16">
-          <div className="max-w-screen-xl mx-auto p-6 text-center  border-4 border-gray-200 rounded-lg shadow-2xl">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">Vrei să afli dacă ești la risc?</h2>
-            <p className="text-xl mb-8">
+        <section className="w-full bg-[#09a252] text-white py-12 sm:py-16">
+          <div className="max-w-screen-xl mx-auto p-4 sm:p-6 text-center border-4 border-gray-200 rounded-lg shadow-2xl">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 sm:mb-6">Vrei să afli dacă ești la risc?</h2>
+            <p className="text-lg sm:text-xl mb-6 sm:mb-8 leading-relaxed">
               Fă testul IMC de mai jos și descoperă ce poți schimba pentru sănătatea ta!
             </p>
-            <div className="flex flex-col md:flex-row justify-center gap-4">
+            <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 max-w-md sm:max-w-none mx-auto">
               <Link
                 href="/test-imc-adulti"
-                className="bg-white text-[#09a252] font-semibold px-8 py-4 rounded-lg shadow-md hover:bg-green-50 hover:shadow-xl hover:-translate-y-1 hover:scale-105 transition-all duration-300 transform"
+                className="bg-white text-[#09a252] font-semibold px-6 sm:px-8 py-3 sm:py-4 rounded-lg shadow-md hover:bg-green-50 hover:shadow-xl hover:-translate-y-1 hover:scale-105 transition-all duration-300 transform min-h-[44px] touch-manipulation"
               >
                 Test IMC Adulți
               </Link>
               <Link
                 href="/test-imc-copii"
-                className="bg-white text-[#09a252] font-semibold px-8 py-4 rounded-lg shadow-md hover:bg-green-50 hover:shadow-xl hover:-translate-y-1 hover:scale-105 transition-all duration-300 transform"
+                className="bg-white text-[#09a252] font-semibold px-6 sm:px-8 py-3 sm:py-4 rounded-lg shadow-md hover:bg-green-50 hover:shadow-xl hover:-translate-y-1 hover:scale-105 transition-all duration-300 transform min-h-[44px] touch-manipulation"
               >
                 Test IMC Copii
               </Link>
@@ -300,26 +332,26 @@ export default function Home() {
           </div>
         </section>
 
-        {/* donates Section */}
-        <section className="py-16 bg-green-50">
-          <div className="max-w-screen-xl mx-auto px-6">
-            <div className="flex flex-col md:flex-row md:items-center gap-8">
-              <div className="md:w-1/2">
-                <h2 className="text-3xl font-bold text-gray-900 mb-4">Împărtășește povestea ta!</h2>
-                <p className="text-gray-700 mb-6">
+        {/* Volunteer Section */}
+        <section className="py-12 sm:py-16 bg-green-50">
+          <div className="max-w-screen-xl mx-auto px-4 sm:px-6">
+            <div className="flex flex-col md:flex-row md:items-center gap-6 sm:gap-8">
+              <div className="md:w-1/2 order-2 md:order-1">
+                <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">Împărtășește povestea ta!</h2>
+                <p className="text-gray-700 mb-6 text-sm sm:text-base leading-relaxed">
                   Alătură-te echipei noastre de dieteticieni și profesioniști din domeniul sănătății.
                   Împreună putem face diferența în comunitățile noastre și putem inspira schimbări pozitive în viețile oamenilor.
                 </p>
                 <Link
                   href="/enroll"
-                  className="inline-block bg-[#09a252] text-white font-semibold px-6 py-3 rounded-lg shadow-md hover:bg-green-700 transition-colors duration-300"
+                  className="inline-block w-full sm:w-auto text-center bg-[#09a252] text-white font-semibold px-6 py-3 sm:py-4 rounded-lg shadow-md hover:bg-green-700 transition-colors duration-300 min-h-[44px] touch-manipulation"
                 >
                   Devino voluntar
                 </Link>
               </div>
 
-              <div className="md:w-1/2">
-                <div className="border-4 p-6 border-gray-200 bg-gray-50 rounded-lg shadow-lg">
+              <div className="md:w-1/2 order-1 md:order-2">
+                <div className="border-4 p-4 sm:p-6 border-gray-200 bg-gray-50 rounded-lg shadow-lg">
                   <OptimizedImage
                     src="/images/donate.jpg"
                     alt="Copii în clasă"
