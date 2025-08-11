@@ -10,6 +10,7 @@
     "optimize:images": "./scripts/optimize-images.sh"
   },
   "dependencies": {
+    "@heroicons/react": "^2.2.0",
     "@sendgrid/mail": "^8.1.5",
     "@supabase/supabase-js": "^2.50.0",
     "framer-motion": "^12.17.0",

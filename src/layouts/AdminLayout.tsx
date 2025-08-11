@@ -2,6 +2,7 @@ import React from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { authService } from '@/lib/services/authService';
+import { useAuth } from '@/lib/hooks/useAuth';
 
 interface AdminLayoutProps {
   children: React.ReactNode;
@@ -15,6 +16,7 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({
   description = 'Panou de administrare APNS',
 }) => {
   const router = useRouter();
+  const { user, loading, isAuthenticated } = useAuth();
 
   const handleLogout = async () => {
     try {
@@ -28,6 +30,33 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({
   const navigateTo = (path: string) => {
     router.push(path);
   };
+
+  // Show loading state while checking authentication
+  if (loading) {
+    return (
+      <>
+        <Head>
+          <title>{title} - APNS Admin</title>
+          <meta name="description" content={description} />
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+          <meta name="robots" content="noindex, nofollow" />
+          <link rel="icon" href="/favicon.ico" />
+        </Head>
+        
+        <div className="bg-green-50 min-h-screen flex items-center justify-center">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#09a252] mx-auto mb-4"></div>
+            <p className="text-gray-600">Se încarcă panoul de administrare...</p>
+          </div>
+        </div>
+      </>
+    );
+  }
+
+  // Don't render anything if not authenticated (redirect is handled by useAuth)
+  if (!isAuthenticated) {
+    return null;
+  }
 
   return (
     <>
@@ -52,39 +81,42 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({
                 >
                   APNS Admin
                 </button>
-                
+
                 <nav className="hidden md:flex space-x-6">
                   <button
-                    onClick={() => navigateTo('/admin')}
-                    className={`text-white hover:text-green-200 transition-colors ${
-                      router.pathname === '/admin' ? 'text-green-200 font-medium' : ''
-                    }`}
-                  >
-                    Dashboard
-                  </button>
-                  <button
                     onClick={() => navigateTo('/admin/articles')}
-                    className={`text-white hover:text-green-200 transition-colors ${
-                      router.pathname.startsWith('/admin/articles') ? 'text-green-200 font-medium' : ''
-                    }`}
+                    className={`text-white hover:text-green-200 transition-colors ${router.pathname.startsWith('/admin/articles') ? 'text-green-200 font-medium' : ''
+                      }`}
                   >
                     Articole
                   </button>
                   <button
                     onClick={() => navigateTo('/admin/members')}
-                    className={`text-white hover:text-green-200 transition-colors ${
-                      router.pathname.startsWith('/admin/members') ? 'text-green-200 font-medium' : ''
-                    }`}
+                    className={`text-white hover:text-green-200 transition-colors ${router.pathname.startsWith('/admin/members') ? 'text-green-200 font-medium' : ''
+                      }`}
                   >
                     Membri
                   </button>
                   <button
                     onClick={() => navigateTo('/admin/ebooks')}
-                    className={`text-white hover:text-green-200 transition-colors ${
-                      router.pathname.startsWith('/admin/ebooks') ? 'text-green-200 font-medium' : ''
-                    }`}
+                    className={`text-white hover:text-green-200 transition-colors ${router.pathname.startsWith('/admin/ebooks') ? 'text-green-200 font-medium' : ''
+                      }`}
                   >
                     E-Books
+                  </button>
+                  <button
+                    onClick={() => navigateTo('/admin/authors')}
+                    className={`text-white hover:text-green-200 transition-colors ${router.pathname.startsWith('/admin/ebooks') ? 'text-green-200 font-medium' : ''
+                      }`}
+                  >
+                    Autori
+                  </button>
+                                    <button
+                    onClick={() => navigateTo('/admin/subscriptions')}
+                    className={`text-white hover:text-green-200 transition-colors ${router.pathname.startsWith('/admin/ebooks') ? 'text-green-200 font-medium' : ''
+                      }`}
+                  >
+                    Abonați
                   </button>
                 </nav>
               </div>

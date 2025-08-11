@@ -3,45 +3,12 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Layout from '@/layouts/NavbarLayout';
 import { authService, AuthUser } from '@/lib/services/authService';
+import AdminLayout from '@/layouts/AdminLayout';
+import { useAuth } from '@/lib/hooks/useAuth';
 
 const AdminDashboard: React.FC = () => {
-    const [user, setUser] = useState<AuthUser | null>(null);
-    const [isLoading, setIsLoading] = useState(true);
     const router = useRouter();
-
-    useEffect(() => {
-        const checkAuth = async () => {
-            try {
-                const { session, user } = await authService.getSession();
-                
-                if (!session || !user) {
-                    // No session, redirect to login
-                    router.push('/admin/login');
-                    return;
-                }
-
-                setUser(user);
-            } catch (error) {
-                console.error('Error checking auth:', error);
-                router.push('/admin/login');
-            } finally {
-                setIsLoading(false);
-            }
-        };
-
-        checkAuth();
-
-        // Listen for auth changes
-        const { data: { subscription } } = authService.onAuthStateChange((user) => {
-            if (!user) {
-                router.push('/admin/login');
-            } else {
-                setUser(user);
-            }
-        });
-
-        return () => subscription.unsubscribe();
-    }, [router]);
+    const { user, loading, isAuthenticated } = useAuth();
 
     const handleLogout = async () => {
         try {
@@ -55,7 +22,8 @@ const AdminDashboard: React.FC = () => {
         }
     };
 
-    if (isLoading) {
+    // Show loading state (handled by AdminLayout, but just in case)
+    if (loading) {
         return (
             <>
                 <div className="bg-green-50 min-h-screen flex items-center justify-center">
@@ -68,12 +36,13 @@ const AdminDashboard: React.FC = () => {
         );
     }
 
-    if (!user) {
-        return null; // Will redirect to login
+    // Don't render if not authenticated (redirect handled by useAuth)
+    if (!isAuthenticated || !user) {
+        return null;
     }
 
     return (
-        <>
+        <AdminLayout>
             <Head>
                 <title>Admin Dashboard - APNS | Asociația pentru Promovarea Nutriției Sănătoase</title>
                 <meta name="description" content="Panou de administrare APNS" />
@@ -84,9 +53,9 @@ const AdminDashboard: React.FC = () => {
 
             <div className="bg-green-50 min-h-screen">
                 {/* Hero Section */}
-                <section className="bg-[#09a252] relative overflow-hidden">
+                <section className="bg-[#09a252] rounded-lg relative overflow-hidden">
                     <div className="relative max-w-screen-xl mx-auto px-6 py-20">
-                        <div className="flex justify-between items-center text-white">
+                        <div className="flex flex-col items-center justify-center text-white text-center">
                             <div>
                                 <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
                                     Panou de Administrare
@@ -95,15 +64,6 @@ const AdminDashboard: React.FC = () => {
                                     Bine ai venit!
                                 </p>
                             </div>
-                            <button
-                                onClick={handleLogout}
-                                className="bg-white text-[#09a252] hover:bg-green-100 font-semibold py-2 px-4 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg flex items-center"
-                            >
-                                <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
-                                </svg>
-                                Deconectare
-                            </button>
                         </div>
                     </div>
                 </section>
@@ -135,7 +95,7 @@ const AdminDashboard: React.FC = () => {
                                 </div>
                                 <h3 className="text-xl font-bold text-gray-800 mb-2">Articole</h3>
                                 <p className="text-gray-600 mb-4 flex-grow">Gestionează articolele și conținutul educațional</p>
-                                <button 
+                                <button
                                     onClick={() => router.push('/admin/articles')}
                                     className="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-300 mt-auto"
                                 >
@@ -152,7 +112,9 @@ const AdminDashboard: React.FC = () => {
                                 </div>
                                 <h3 className="text-xl font-bold text-gray-800 mb-2">Membri Echipă</h3>
                                 <p className="text-gray-600 mb-4 flex-grow">Adaugă și editează membrii echipei APNS</p>
-                                <button className="w-full bg-[#09a252] text-white py-2 px-4 rounded-lg hover:bg-green-700 transition duration-300 mt-auto">
+                                <button
+                                    onClick={() => router.push('/admin/members')}
+                                    className="w-full bg-[#09a252] text-white py-2 px-4 rounded-lg hover:bg-green-700 transition duration-300 mt-auto">
                                     Gestionează Membri
                                 </button>
                             </div>
@@ -166,8 +128,28 @@ const AdminDashboard: React.FC = () => {
                                 </div>
                                 <h3 className="text-xl font-bold text-gray-800 mb-2">E-Books</h3>
                                 <p className="text-gray-600 mb-4 flex-grow">Adaugă și gestionează cărțile electronice</p>
-                                <button className="w-full bg-purple-600 text-white py-2 px-4 rounded-lg hover:bg-purple-700 transition duration-300 mt-auto">
+                                <button
+                                    onClick={() => router.push('/admin/ebooks')}
+                                    className="w-full bg-purple-600 text-white py-2 px-4 rounded-lg hover:bg-purple-700 transition duration-300 mt-auto"
+                                >
                                     Gestionează E-Books
+                                </button>
+                            </div>
+
+                            {/* Authors Management */}
+                            <div className="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow duration-300 flex flex-col h-full">
+                                <div className="bg-orange-100 p-3 rounded-full w-12 h-12 mb-4 flex items-center justify-center">
+                                    <svg className="w-6 h-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                                    </svg>
+                                </div>
+                                <h3 className="text-xl font-bold text-gray-800 mb-2">Autori</h3>
+                                <p className="text-gray-600 mb-4 flex-grow">Gestionează autorii pentru ebook-uri</p>
+                                <button
+                                    onClick={() => router.push('/admin/authors')}
+                                    className="w-full bg-orange-600 text-white py-2 px-4 rounded-lg hover:bg-orange-700 transition duration-300 mt-auto"
+                                >
+                                    Gestionează Autori
                                 </button>
                             </div>
 
@@ -180,37 +162,10 @@ const AdminDashboard: React.FC = () => {
                                 </div>
                                 <h3 className="text-xl font-bold text-gray-800 mb-2">Abonați Newsletter</h3>
                                 <p className="text-gray-600 mb-4 flex-grow">Vizualizează și gestionează abonații la newsletter</p>
-                                <button className="w-full bg-yellow-600 text-white py-2 px-4 rounded-lg hover:bg-yellow-700 transition duration-300 mt-auto">
+                                <button
+                                    onClick={() => router.push('/admin/subscriptions')}
+                                    className="w-full bg-yellow-600 text-white py-2 px-4 rounded-lg hover:bg-yellow-700 transition duration-300 mt-auto">
                                     Gestionează Abonați
-                                </button>
-                            </div>
-
-                            {/* File Storage */}
-                            <div className="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow duration-300 flex flex-col h-full">
-                                <div className="bg-indigo-100 p-3 rounded-full w-12 h-12 mb-4 flex items-center justify-center">
-                                    <svg className="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
-                                    </svg>
-                                </div>
-                                <h3 className="text-xl font-bold text-gray-800 mb-2">Fișiere</h3>
-                                <p className="text-gray-600 mb-4 flex-grow">Gestionează imaginile și fișierele PDF</p>
-                                <button className="w-full bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-700 transition duration-300 mt-auto">
-                                    Gestionează Fișiere
-                                </button>
-                            </div>
-
-                            {/* Settings */}
-                            <div className="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow duration-300 flex flex-col h-full">
-                                <div className="bg-gray-100 p-3 rounded-full w-12 h-12 mb-4 flex items-center justify-center">
-                                    <svg className="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                                    </svg>
-                                </div>
-                                <h3 className="text-xl font-bold text-gray-800 mb-2">Setări</h3>
-                                <p className="text-gray-600 mb-4 flex-grow">Configurează setările site-ului și contului</p>
-                                <button className="w-full bg-gray-600 text-white py-2 px-4 rounded-lg hover:bg-gray-700 transition duration-300 mt-auto">
-                                    Accesează Setări
                                 </button>
                             </div>
                         </div>
@@ -242,7 +197,7 @@ const AdminDashboard: React.FC = () => {
                     </div>
                 </div>
             </div>
-        </>
+        </AdminLayout>
     );
 };
 

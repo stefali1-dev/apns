@@ -259,9 +259,10 @@ export class EBookService {
     // Admin methods for managing ebooks
     async createEBook(ebook: Omit<EBook, 'id' | 'authors'>, authorIds: number[]): Promise<EBook | null> {
         try {
+            const dbEbook = this.mapEBookToDatabase(ebook);
             const { data: ebookData, error: ebookError } = await supabase
                 .from(this.tableName)
-                .insert([ebook])
+                .insert([dbEbook])
                 .select()
                 .single();
 
@@ -296,9 +297,17 @@ export class EBookService {
 
     async updateEBook(id: number, updates: Partial<Omit<EBook, 'id' | 'authors'>>, authorIds?: number[]): Promise<EBook | null> {
         try {
+            // First, get the current ebook to check for old files that need cleanup
+            const currentEbook = await this.getEBookById(id);
+            if (!currentEbook) {
+                console.error('Ebook not found for update');
+                return null;
+            }
+
+            const dbUpdates = this.mapEBookToDatabase(updates);
             const { data, error } = await supabase
                 .from(this.tableName)
-                .update(updates)
+                .update(dbUpdates)
                 .eq('id', id)
                 .select()
                 .single();
@@ -306,6 +315,24 @@ export class EBookService {
             if (error) {
                 console.error('Error updating ebook:', error);
                 return null;
+            }
+
+            // Cleanup old files if they're being replaced
+            try {
+                const { storageService } = await import('@/lib/services/storageService');
+                
+                // Cleanup old image if it's being replaced
+                if (updates.imageUrl && currentEbook.imageUrl && updates.imageUrl !== currentEbook.imageUrl) {
+                    await storageService.deleteImage('ebooks', currentEbook.imageUrl);
+                }
+                
+                // Cleanup old PDF if it's being replaced
+                if (updates.fileUrl && currentEbook.fileUrl && updates.fileUrl !== currentEbook.fileUrl) {
+                    await storageService.deleteImage('ebook-files', currentEbook.fileUrl);
+                }
+            } catch (cleanupError) {
+                console.warn('Failed to cleanup old files during update:', cleanupError);
+                // Continue with update even if cleanup fails
             }
 
             // Update ebook-author relationships if provided
@@ -343,6 +370,31 @@ export class EBookService {
 
     async deleteEBook(id: number): Promise<boolean> {
         try {
+            // First, get the ebook to check for files that need cleanup
+            const ebook = await this.getEBookById(id);
+            if (!ebook) {
+                console.error('Ebook not found for deletion');
+                return false;
+            }
+
+            // Delete files from storage
+            try {
+                const { storageService } = await import('@/lib/services/storageService');
+                
+                // Delete image if exists
+                if (ebook.imageUrl) {
+                    await storageService.deleteImage('ebooks', ebook.imageUrl);
+                }
+                
+                // Delete PDF file if exists
+                if (ebook.fileUrl) {
+                    await storageService.deleteImage('ebook-files', ebook.fileUrl);
+                }
+            } catch (cleanupError) {
+                console.warn('Failed to cleanup files during deletion:', cleanupError);
+                // Continue with deletion even if cleanup fails
+            }
+
             // Delete ebook-author relationships first
             await supabase
                 .from('ebook_authors')
@@ -423,6 +475,88 @@ export class EBookService {
             return true;
         } catch (error) {
             console.error('Error in updateEBookFile:', error);
+            return false;
+        }
+    }
+
+    // CRUD methods for authors
+    async createAuthor(author: Omit<Author, 'id'>): Promise<Author | null> {
+        try {
+            const dbAuthor = this.mapAuthorToDatabase(author);
+            const { data, error } = await supabase
+                .from(this.authorsTableName)
+                .insert([dbAuthor])
+                .select()
+                .single();
+
+            if (error) {
+                console.error('Error creating author:', error);
+                return null;
+            }
+
+            return data ? this.mapDatabaseToAuthor(data) : null;
+        } catch (error) {
+            console.error('Error in createAuthor:', error);
+            return null;
+        }
+    }
+
+    async updateAuthor(id: number, updates: Partial<Author>): Promise<Author | null> {
+        try {
+            const dbUpdates = this.mapAuthorToDatabase(updates);
+            const { data, error } = await supabase
+                .from(this.authorsTableName)
+                .update(dbUpdates)
+                .eq('id', id)
+                .select()
+                .single();
+
+            if (error) {
+                console.error('Error updating author:', error);
+                return null;
+            }
+
+            return data ? this.mapDatabaseToAuthor(data) : null;
+        } catch (error) {
+            console.error('Error in updateAuthor:', error);
+            return null;
+        }
+    }
+
+    async deleteAuthor(id: number): Promise<boolean> {
+        try {
+            // First, get the author to check if they have an image
+            const author = await this.getAuthorById(id);
+            if (!author) {
+                console.error('Author not found for deletion');
+                return false;
+            }
+
+            // If the author has an image, delete it from storage first
+            if (author.imageUrl) {
+                try {
+                    const { storageService } = await import('@/lib/services/storageService');
+                    await storageService.deleteImage('authors', author.imageUrl);
+                } catch (imageError) {
+                    console.warn('Failed to delete author image from storage:', imageError);
+                    // Continue with author deletion even if image deletion fails
+                }
+            }
+
+            // Delete the author from the database
+            const { error } = await supabase
+                .from(this.authorsTableName)
+                .delete()
+                .eq('id', id);
+
+            if (error) {
+                console.error('Error deleting author:', error);
+                return false;
+            }
+
+            return true;
+        } catch (error) {
+            console.error('Error in deleteAuthor:', error);
             return false;
         }
     }
