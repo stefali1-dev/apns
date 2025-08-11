@@ -233,7 +233,7 @@ export default function Navbar() {
                         <div className="flex gap-4 p-4 rounded-lg hover:bg-gray-50 transition-colors">
                           <div className="bg-[#09a252] h-12 w-12 flex justify-center items-center rounded-lg flex-shrink-0">
                             <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
-                              <path d="M4 21h9.62a3.995 3.995 0 0 0 3.037-1.397l5.102-5.952a1 1 0 0 0-.442-1.6l-1.968-.656a3.043 3.043 0 0 0-2.823.503l-3.185 2.547-.617-1.235A3.98 3.98 0 0 0 9.146 11H4c-1.103 0-2 .897-2 2v6c0 1.103.897 2 2 2zm0-8h5.146c.763 0 1.448.423 1.789 1.105l.447.895H7v2h6.014a.996.996 0 0 0 .442-.11l.003-.001.004-.002h.003l.002-.001h.004l.001-.001c.009.003.003-.001.003-.001.01 0 .002-.001.002-.001h.001l.002-.001.003-.001.002-.001.002-.001.003-.001.002-.001c.003 0 .001-.001.002-.001l.003-.002.002-.001.002-.001.003-.001.002-.001h.001l.002-.001h.001l.002-.001.002-.001c.009-.001.003-.001.003-.001l.002-.001a.915.915 0 0 0 .11-.078l4.146-3.317c.262-.208.623-.273.94-.167l.557.186-4.133 4.823a2.029 2.029 0 0 1-1.52.688H4v-6zM16 2h-.017c-.163.002-1.006.039-1.983.705-.951-.648-1.774-.7-1.968-.704L12.002 2h-.004c-.801 0-1.555.313-2.119.878C9.313 3.445 9 4.198 9 5s.313 1.555.861 2.104l3.414 3.586a1.006 1.006 0 0 0 1.45-.001l3.396-3.568C18.688 6.555 19 5.802 19 5s-.313-1.555-.878-2.121A2.978 2.978 0 0 0 16.002 2H16zm1 3c0 .267-.104.518-.311.725L14 8.55l-2.707-2.843C11.104 5.518 11 5.267 11 5s.104-.518.294-.708A.977.977 0 0 1 11.979 4c.025.001.502.032 1.067.485.081.065.163.139.247.222l.707.707.707-.707c.084-.083.166-.157.247-.222.529-.425.976-.478 1.052-.484a.987.987 0 0 1 .701.292c.189.189.293.44.293.707z"/>
+                              <path d="M4 21h9.62a3.995 3.995 0 0 0 3.037-1.397l5.102-5.952a1 1 0 0 0-.442-1.6l-1.968-.656a3.043 3.043 0 0 0-2.823.503l-3.185 2.547-.617-1.235A3.98 3.98 0 0 0 9.146 11H4c-1.103 0-2 .897-2 2v6c0 1.103.897 2 2 2zm0-8h5.146c.763 0 1.448.423 1.789 1.105l.447.895H7v2h6.014a.996.996 0 0 0 .442-.11l.003-.001.004-.002h.003l.002-.001h.004l.001-.001c.009.003.003-.001.003-.001.01 0 .002-.001.002-.001h.001l.002-.001.003-.001.002-.001.002-.001.003-.001.002-.001c.003 0 .001-.001.002-.001l.003-.002.002-.001.002-.001.003-.001.002-.001h.001l.002-.001h.001l.002-.001.002-.001c.009-.001.003-.001.003-.001l.002-.001a.915.915 0 0 0 .11-.078l4.146-3.317c.262-.208.623-.273.94-.167l.557.186-4.133 4.823a2.029 2.029 0 0 1-1.52.688H4v-6zM16 2h-.017c-.163.002-1.006.039-1.983.705-.951-.648-1.774-.7-1.968-.704L12.002 2h-.004c-.801 0-1.555.313-2.119.878C9.313 3.445 9 4.198 9 5s.313 1.555.861 2.104l3.414 3.586a1.006 1.006 0 0 0 1.45-.001l3.396-3.568C18.688 6.555 19 5.802 19 5s-.313-1.555-.878-2.121A2.978 2.978 0 0 0 16.002 2H16zm1 3c0 .267-.104.518-.311.725L14 8.55l-2.707-2.843C11.104 5.518 11 5.267 11 5s.104-.518.294-.708A.977.977 0 0 1 11.979 4c.025.001.502.032 1.067.485.081.065.163.139.247.222l.707.707.707-.707c.084-.083.166-.157.247-.222.529-.425.976-.478 1.052-.484a.987.987 0 0 1 .701.292c.189.189.293.44.293.707z" />
                             </svg>
                           </div>
                           <div>
@@ -344,7 +344,7 @@ export default function Navbar() {
                           </Link>
                         </div>
                       </div>
-                      
+
                       {/* Call to action button */}
                       <div className="mt-6 pt-4 border-t border-gray-200">
                         <Link
@@ -435,57 +435,34 @@ export default function Navbar() {
 
       {/* Mobile menu */}
       {mobileMenuOpen && (
-        <div
-          className="md:hidden bg-white border-t border-gray-200"
-        >
-          <div className="px-2 pt-2 pb-3 space-y-1">
-            {/* Mobile search and donate */}
-            <div className="p-2 space-y-3">
-              <form action="#" method="GET" className="relative">
-                <input
-                  type="search"
-                  name="q"
-                  placeholder="Search"
-                  className="w-full border border-gray-300 rounded-full pl-4 pr-10 py-2 focus:outline-none
-                         focus:ring-2 focus:ring-[#09a252] focus:border-transparent transition-all"
-                />
-                <button
-                  type="submit"
-                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-[#09a252]"
-                >
-                  <svg
-                    className="h-4 w-4"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    viewBox="0 0 24 24"
-                  >
-                    <circle cx="11" cy="11" r="8" />
-                    <line x1="21" y1="21" x2="16.65" y2="16.65" />
-                  </svg>
-                </button>
-              </form>
+        <div className="md:hidden bg-white border-t border-gray-200 shadow-lg">
+          <div className="px-4 py-4 space-y-2 max-h-[80vh] overflow-y-auto">
+            {/* Primary navigation items */}
+            <Link
+              href="/"
+              className="flex items-center px-4 py-3 text-gray-800 font-medium hover:bg-gray-50 hover:text-[#09a252] rounded-lg transition-colors"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              <svg className="w-5 h-5 mr-3 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+              </svg>
+              Acasă
+            </Link>
 
-              <Link
-                href="/donate"
-                className="block w-full text-center bg-[#09a252] text-white font-bold py-2 px-4 rounded-full hover:bg-green-800 transition-colors"
-              >
-                Donează
-              </Link>
-            </div>
-
-            {/* Mobile navigation menu */}
-            {/* Despre noi dropdown */}
+            {/* Despre noi section */}
             <div className="space-y-1">
               <button
                 onClick={() => setMobileDespreNoiOpen(!mobileDespreNoiOpen)}
-                className="w-full flex justify-between items-center px-3 py-2 text-gray-700 hover:bg-gray-50 rounded-lg transition-colors"
+                className="w-full flex items-center justify-between px-4 py-3 text-gray-800 font-medium hover:bg-gray-50 rounded-lg transition-colors"
               >
-                <span className="font-semibold">Despre noi</span>
+                <div className="flex items-center">
+                  <svg className="w-5 h-5 mr-3 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
+                  </svg>
+                  Despre noi
+                </div>
                 <svg
-                  className={`w-4 h-4 transition-transform ${mobileDespreNoiOpen ? 'rotate-90' : ''}`}
+                  className={`w-5 h-5 transition-transform duration-200 ${mobileDespreNoiOpen ? 'rotate-180' : ''}`}
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -493,24 +470,55 @@ export default function Navbar() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
                 </svg>
               </button>
+
               {mobileDespreNoiOpen && (
-                <div className="pl-4 space-y-1">
-                  <Link href="/team" className="block px-3 py-2 text-gray-600 hover:bg-green-50 hover:text-[#09a252] rounded-lg transition-colors">Voluntari</Link>
-                  <Link href="/proiecte" className="block px-3 py-2 text-gray-600 hover:bg-green-50 hover:text-[#09a252] rounded-lg transition-colors">Proiecte</Link>
-                  <Link href="/coming-soon" className="block px-3 py-2 text-gray-600 hover:bg-green-50 hover:text-[#09a252] rounded-lg transition-colors">Statut</Link>
+                <div className="ml-8 space-y-1 animate-in slide-in-from-top-2 duration-200">
+                  <Link
+                    href="/asociatie"
+                    className="block px-4 py-2 text-gray-600 hover:bg-green-50 hover:text-[#09a252] rounded-lg transition-colors"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    Asociație
+                  </Link>
+                  <Link
+                    href="/team"
+                    className="block px-4 py-2 text-gray-600 hover:bg-green-50 hover:text-[#09a252] rounded-lg transition-colors"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    Echipa noastră
+                  </Link>
+                  <Link
+                    href="/proiecte"
+                    className="block px-4 py-2 text-gray-600 hover:bg-green-50 hover:text-[#09a252] rounded-lg transition-colors"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    Proiecte
+                  </Link>
+                  <Link
+                    href="/dietetician"
+                    className="block px-4 py-2 text-gray-600 hover:bg-green-50 hover:text-[#09a252] rounded-lg transition-colors"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    Ce este un dietetician?
+                  </Link>
                 </div>
               )}
             </div>
 
-            {/* Articole dropdown */}
+            {/* Articole section */}
             <div className="space-y-1">
               <button
                 onClick={() => setMobileArticoleOpen(!mobileArticoleOpen)}
-                className="w-full flex justify-between items-center px-3 py-2 text-gray-700 hover:bg-gray-50 rounded-lg transition-colors"
+                className="w-full flex items-center justify-between px-4 py-3 text-gray-800 font-medium hover:bg-gray-50 rounded-lg transition-colors"
               >
-                <span className="font-semibold">Articole</span>
+                <div className="flex items-center">
+                  <svg className="w-5 h-5 mr-3 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                  </svg>
+                  Articole
+                </div>
                 <svg
-                  className={`w-4 h-4 transition-transform ${mobileArticoleOpen ? 'rotate-90' : ''}`}
+                  className={`w-5 h-5 transition-transform duration-200 ${mobileArticoleOpen ? 'rotate-180' : ''}`}
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -518,36 +526,157 @@ export default function Navbar() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
                 </svg>
               </button>
+
               {mobileArticoleOpen && (
-                <div className="pl-4 space-y-1">
-                  <Link href="/article/obesity" className="block px-3 py-2 text-gray-600 hover:bg-green-50 hover:text-[#09a252] rounded-lg transition-colors">Obezitate</Link>
-                  <Link href="/article/diabetes" className="block px-3 py-2 text-gray-600 hover:bg-green-50 hover:text-[#09a252] rounded-lg transition-colors">Diabet zaharat</Link>
-                  <Link href="/coming-soon" className="block px-3 py-2 text-gray-600 hover:bg-green-50 hover:text-[#09a252] rounded-lg transition-colors">Boli cardiovasculare</Link>
-                  <Link href="/coming-soon" className="block px-3 py-2 text-gray-600 hover:bg-green-50 hover:text-[#09a252] rounded-lg transition-colors">Boli digestive</Link>
-                  <Link href="/coming-soon" className="block px-3 py-2 text-gray-600 hover:bg-green-50 hover:text-[#09a252] rounded-lg transition-colors">Boli autoimune</Link>
-                  <Link href="/coming-soon" className="block px-3 py-2 text-gray-600 hover:bg-green-50 hover:text-[#09a252] rounded-lg transition-colors">Oncologie</Link>
-                  <Link href="/coming-soon" className="block px-3 py-2 text-gray-600 hover:bg-green-50 hover:text-[#09a252] rounded-lg transition-colors">Pediatrie</Link>
-                  <Link href="/coming-soon" className="block px-3 py-2 text-gray-600 hover:bg-green-50 hover:text-[#09a252] rounded-lg transition-colors">Sport / Fitness</Link>
-                  <div className="pt-2 mt-2 border-t border-gray-200">
-                    <Link href="/articole" className="block px-3 py-2 text-[#09a252] font-semibold hover:bg-green-50 rounded-lg transition-colors">Vezi toate articolele</Link>
+                <div className="ml-8 space-y-1 animate-in slide-in-from-top-2 duration-200">
+                  {/* Medical conditions - organized in groups for better mobile UX */}
+                  <div className="space-y-1">
+                    <Link
+                      href="/article/obesity"
+                      className="block px-4 py-2 text-gray-600 hover:bg-green-50 hover:text-[#09a252] rounded-lg transition-colors"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      Obezitate
+                    </Link>
+                    <Link
+                      href="/article/diabetes"
+                      className="block px-4 py-2 text-gray-600 hover:bg-green-50 hover:text-[#09a252] rounded-lg transition-colors"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      Diabet zaharat
+                    </Link>
+                    <Link
+                      href="/coming-soon"
+                      className="block px-4 py-2 text-gray-600 hover:bg-green-50 hover:text-[#09a252] rounded-lg transition-colors"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      Boli cardiovasculare
+                    </Link>
+                    <Link
+                      href="/coming-soon"
+                      className="block px-4 py-2 text-gray-600 hover:bg-green-50 hover:text-[#09a252] rounded-lg transition-colors"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      Boli digestive
+                    </Link>
+                  </div>
+
+                  <div className="space-y-1 pt-2">
+                    <Link
+                      href="/coming-soon"
+                      className="block px-4 py-2 text-gray-600 hover:bg-green-50 hover:text-[#09a252] rounded-lg transition-colors"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      Boli autoimune
+                    </Link>
+                    <Link
+                      href="/coming-soon"
+                      className="block px-4 py-2 text-gray-600 hover:bg-green-50 hover:text-[#09a252] rounded-lg transition-colors"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      Oncologie
+                    </Link>
+                    <Link
+                      href="/coming-soon"
+                      className="block px-4 py-2 text-gray-600 hover:bg-green-50 hover:text-[#09a252] rounded-lg transition-colors"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      Pediatrie
+                    </Link>
+                    <Link
+                      href="/coming-soon"
+                      className="block px-4 py-2 text-gray-600 hover:bg-green-50 hover:text-[#09a252] rounded-lg transition-colors"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      Sport / Fitness
+                    </Link>
+                  </div>
+
+                  <div className="border-t border-gray-100 mt-3 pt-3">
+                    <Link
+                      href="/articole"
+                      className="flex items-center px-4 py-2 text-[#09a252] font-medium hover:bg-green-50 rounded-lg transition-colors"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                      Vezi toate articolele
+                    </Link>
                   </div>
                 </div>
               )}
             </div>
 
-            {/* Other menu items */}
-            <Link href="/ebooks" className="block px-3 py-2 text-gray-700 font-semibold hover:bg-gray-50 hover:text-[#09a252] rounded-lg transition-colors">
+            {/* Other main navigation items */}
+            <Link
+              href="/ebooks"
+              className="flex items-center px-4 py-3 text-gray-800 font-medium hover:bg-gray-50 hover:text-[#09a252] rounded-lg transition-colors"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              <svg className="w-5 h-5 mr-3 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
               eBooks
             </Link>
-            <Link href="/blog" className="block px-3 py-2 text-gray-700 font-semibold hover:bg-gray-50 hover:text-[#09a252] rounded-lg transition-colors">
-              Blog
+
+            <Link
+              href="/coming-soon"
+              className="flex items-center px-4 py-3 text-gray-800 font-medium hover:bg-gray-50 hover:text-[#09a252] rounded-lg transition-colors"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              <svg className="w-5 h-5 mr-3 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+              </svg>
+              Webinarii
             </Link>
-            <Link href="/enroll" className="block px-3 py-2 text-gray-700 font-semibold hover:bg-gray-50 hover:text-[#09a252] rounded-lg transition-colors">
+
+            <Link
+              href="/enroll"
+              className="flex items-center px-4 py-3 text-gray-800 font-medium hover:bg-gray-50 hover:text-[#09a252] rounded-lg transition-colors"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              <svg className="w-5 h-5 mr-3 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
+              </svg>
               Înscriere
             </Link>
-            <Link href="/contact" className="block px-3 py-2 text-gray-700 font-semibold hover:bg-gray-50 hover:text-[#09a252] rounded-lg transition-colors">
+
+            <Link
+              href="/contact"
+              className="flex items-center px-4 py-3 text-gray-800 font-medium hover:bg-gray-50 hover:text-[#09a252] rounded-lg transition-colors"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              <svg className="w-5 h-5 mr-3 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
               Contact
             </Link>
+
+            {/* Quick access tools section */}
+            <div className="border-t border-gray-100 mt-4 pt-4">
+              <p className="px-4 py-1 text-xs font-semibold text-gray-500 uppercase tracking-wide">Instrumente utile</p>
+              <Link
+                href="/test-imc-adulti"
+                className="flex items-center px-4 py-3 text-gray-700 hover:bg-green-50 hover:text-[#09a252] rounded-lg transition-colors"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                <svg className="w-5 h-5 mr-3 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                </svg>
+                Test IMC Adulți
+              </Link>
+              <Link
+                href="/test-imc-copii"
+                className="flex items-center px-4 py-3 text-gray-700 hover:bg-green-50 hover:text-[#09a252] rounded-lg transition-colors"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                <svg className="w-5 h-5 mr-3 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                </svg>
+                Test IMC Copii
+              </Link>
+            </div>
           </div>
         </div>
       )}
