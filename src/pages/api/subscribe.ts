@@ -1,10 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { createClient } from '@supabase/supabase-js';
-
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY! // folosește cheia SECRETĂ doar pe server
-);
+import { subscribeUser } from '@/lib/services/subscriptionService';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') {
@@ -17,13 +12,16 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     return res.status(400).json({ error: 'Email invalid' });
   }
 
-  const { error } = await supabase
-    .from('subscribers')
-    .insert({ email });
-
-  if (error) {
-    return res.status(500).json({ error: error.message });
+  try {
+    const result = await subscribeUser(email);
+    
+    if (result.success) {
+      return res.status(200).json({ success: true, message: result.message });
+    } else {
+      return res.status(400).json({ error: result.message });
+    }
+  } catch (error) {
+    console.error('Subscribe API error:', error);
+    return res.status(500).json({ error: 'A apărut o eroare la procesarea cererii' });
   }
-
-  return res.status(200).json({ success: true });
 }

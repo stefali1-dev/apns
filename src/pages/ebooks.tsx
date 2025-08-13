@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import Layout from '@/layouts/NavbarLayout';
 import { ebookService } from '@/lib/services/ebookService';
+import { subscribeUser } from '@/lib/services/subscriptionService';
 import { EBook } from '@/lib/types/ebook';
 
 interface FilterState {
@@ -19,6 +20,8 @@ export default function EBooksPage() {
   const router = useRouter();
   const [currentPage, setCurrentPage] = useState(1);
   const [emailSubscription, setEmailSubscription] = useState('');
+  const [subscriptionLoading, setSubscriptionLoading] = useState(false);
+  const [subscriptionMessage, setSubscriptionMessage] = useState<{ type: 'success' | 'error', text: string } | null>(null);
   const [ebooks, setEbooks] = useState<EBook[]>([]);
   const [loading, setLoading] = useState(true);
   const [filters, setFilters] = useState<FilterState>({
@@ -146,12 +149,26 @@ export default function EBooksPage() {
     router.push(router.pathname, undefined, { shallow: true });
   };
 
-  const handleSubscription = (e: React.FormEvent) => {
+  const handleSubscription = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Aici ar fi logica pentru abonarea la newsletter
-    console.log('Subscription for:', emailSubscription);
-    setEmailSubscription('');
-    // Ar putea fi afișat un mesaj de succes
+    if (!emailSubscription.trim()) return;
+
+    setSubscriptionLoading(true);
+    setSubscriptionMessage(null);
+
+    try {
+      const result = await subscribeUser(emailSubscription);
+      if (result.success) {
+        setSubscriptionMessage({ type: 'success', text: 'Te-ai abonat cu succes la newsletter!' });
+        setEmailSubscription('');
+      } else {
+        setSubscriptionMessage({ type: 'error', text: result.message || 'A apărut o eroare la abonare.' });
+      }
+    } catch (error) {
+      setSubscriptionMessage({ type: 'error', text: 'A apărut o eroare neașteptată.' });
+    } finally {
+      setSubscriptionLoading(false);
+    }
   };
 
   const formatDate = (dateString: string) => {
@@ -469,21 +486,33 @@ export default function EBooksPage() {
               autoComplete="off"
             >
               <input
-          type="email"
-          value={emailSubscription}
-          onChange={(e) => setEmailSubscription(e.target.value)}
-          placeholder="Adresa ta de email"
-          className="px-6 py-3 border border-white rounded-lg focus:ring-2 focus:ring-white focus:border-white flex-grow transition-all placeholder-green-900 bg-white text-black font-medium"
-          required
-          aria-label="Adresa ta de email"
+                type="email"
+                value={emailSubscription}
+                onChange={(e) => setEmailSubscription(e.target.value)}
+                placeholder="Adresa ta de email"
+                className="px-6 py-3 border border-white rounded-lg focus:ring-2 focus:ring-white focus:border-white flex-grow transition-all placeholder-green-900 bg-white text-black font-medium"
+                required
+                disabled={subscriptionLoading}
+                aria-label="Adresa ta de email"
               />
               <button
-          type="submit"
-          className="bg-white text-[#09a252] px-8 py-3 rounded-lg hover:bg-green-100 hover:shadow-lg font-semibold whitespace-nowrap transition-all duration-300 border border-white"
+                type="submit"
+                disabled={subscriptionLoading}
+                className="bg-white text-[#09a252] px-8 py-3 rounded-lg hover:bg-green-100 hover:shadow-lg font-semibold whitespace-nowrap transition-all duration-300 border border-white disabled:opacity-50 disabled:cursor-not-allowed"
               >
-          Abonează-te
+                {subscriptionLoading ? 'Se procesează...' : 'Abonează-te'}
               </button>
             </form>
+
+            {subscriptionMessage && (
+              <div className={`mt-4 p-3 rounded-lg max-w-md mx-auto ${
+                subscriptionMessage.type === 'success' 
+                  ? 'bg-white/20 text-white border border-white/30' 
+                  : 'bg-red-100 text-red-800 border border-red-200'
+              }`}>
+                {subscriptionMessage.text}
+              </div>
+            )}
 
             <p className="text-sm text-green-100 mt-4">
               Ne respectăm abonații. Dezabonează-te oricând cu un singur click.

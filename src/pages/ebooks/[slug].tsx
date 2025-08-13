@@ -7,6 +7,7 @@ import { GetStaticProps, GetStaticPaths } from 'next';
 import Layout from '@/layouts/NavbarLayout';
 import { EBook } from '@/lib/types/ebook';
 import { ebookService } from '@/lib/services/ebookService';
+import { subscribeUser } from '@/lib/services/subscriptionService';
 
 interface EBookDetailProps {
   ebook: EBook | null;
@@ -69,13 +70,16 @@ export default function EBookDetail({ ebook, relatedEbooks }: EBookDetailProps) 
     setLoading(true);
 
     try {
-      // Since we removed the download functionality from the service,
-      // we'll just show a success message for now
-      // This can be replaced with actual download logic later
+      // Subscribe user to newsletter first
+      await subscribeUser(email);
+      
+      // Show success message - in a real implementation, 
+      // this would trigger the actual download
       setSuccess(true);
       setEmail('');
     } catch (error) {
-      alert('A apărut o eroare');
+      console.error('Download error:', error);
+      alert('A apărut o eroare la procesarea cererii');
     } finally {
       setLoading(false);
     }

@@ -11,13 +11,20 @@ interface Subscription {
 export async function subscribeUser(email: string): Promise<{ success: boolean; message?: string }> {
   try {
     // Check if email already exists
-    const { data: existingSubscription, error: checkError } = await supabase
+    const { data: existingSubscriptions, error: checkError } = await supabase
       .from('subscriptions')
       .select('email')
-      .eq('email', email)
-      .single();
+      .eq('email', email);
 
-    if (existingSubscription) {
+    if (checkError) {
+      console.error('Error checking existing subscription:', checkError);
+      return { 
+        success: false, 
+        message: 'A apărut o eroare la verificarea email-ului.' 
+      };
+    }
+
+    if (existingSubscriptions && existingSubscriptions.length > 0) {
       return { 
         success: false, 
         message: 'Email-ul este deja înregistrat pentru newsletter.' 

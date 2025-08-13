@@ -8,6 +8,7 @@ import VolunteerCarousel from '@/components/VolunteerCarousel';
 import ArticleCarousel from '@/components/ArticleCarousel';
 import OptimizedImage from '@/components/OptimizedImage';
 import ObesityStatsSection from '@/components/ObesityStatsSection';
+import { subscribeUser } from '@/lib/services/subscriptionService';
 
 
 export default function Home() {
@@ -47,10 +48,22 @@ export default function Home() {
     setModalClosedCookie();
   };
 
-  const handleSubscribe = (email: string) => {
-    console.log('Subscribing email:', email);
-    document.cookie = 'email_subscribed=true; max-age=2592000'; // 30 d
-    setShowModal(false);
+  const handleSubscribe = async (email: string) => {
+    try {
+      const result = await subscribeUser(email);
+      if (result.success) {
+        console.log('Successfully subscribed:', email);
+        document.cookie = 'email_subscribed=true; max-age=2592000'; // 30 d
+        setShowModal(false);
+      } else {
+        console.warn('Subscription failed:', result.message);
+        // Could show an error message to user
+        throw new Error(result.message || 'Subscription failed');
+      }
+    } catch (error) {
+      console.error('Error subscribing:', error);
+      throw error; // Let SubscribeModal handle the error display
+    }
   };
 
   const cardWidth = isMobile ? 100 : 100 / 3;
