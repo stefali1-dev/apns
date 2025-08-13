@@ -171,6 +171,7 @@ const EbookForm: React.FC<EbookFormProps> = ({
     pageCount: 0,
     publishedDate: new Date().toISOString().split('T')[0],
     slug: '',
+    active: true,
   });
   const [errors, setErrors] = useState<string[]>([]);
   const [authorCreationError, setAuthorCreationError] = useState<string | null>(null);
@@ -195,6 +196,7 @@ const EbookForm: React.FC<EbookFormProps> = ({
         pageCount: ebook.pageCount,
         publishedDate: ebook.publishedDate.split('T')[0],
         slug: ebook.slug,
+        active: ebook.active ?? true,
       });
       setSlugGenerated(true);
     }
@@ -317,6 +319,7 @@ const EbookForm: React.FC<EbookFormProps> = ({
             pageCount: 0,
             publishedDate: new Date().toISOString().split('T')[0],
             slug: '',
+            active: true,
           });
           setSlugGenerated(false);
         }
@@ -489,6 +492,26 @@ const EbookForm: React.FC<EbookFormProps> = ({
                   placeholder="29.99"
                 />
               )}
+            </div>
+
+            {/* Visibility */}
+            <div className="space-y-3">
+              <div className="flex items-center space-x-2">
+                <input
+                  type="checkbox"
+                  id="active"
+                  name="active"
+                  checked={formData.active}
+                  onChange={handleChange}
+                  className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                />
+                <label htmlFor="active" className="text-sm font-medium text-gray-700">
+                  Ebook vizibil (activ)
+                </label>
+              </div>
+              <p className="text-xs text-gray-500">
+                Doar ebook-urile active vor fi vizibile pe site pentru utilizatori
+              </p>
             </div>
 
             <div className="grid grid-cols-2 gap-4">

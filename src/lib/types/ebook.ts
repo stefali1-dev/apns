@@ -21,4 +21,5 @@ export interface EBook {
   price?: number;
   pageCount: number;
   publishedDate: string;
+  active: boolean; // Whether the ebook should be displayed
 }

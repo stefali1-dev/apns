@@ -21,6 +21,7 @@ const EbooksAdmin: React.FC = () => {
     createEbook,
     updateEbook,
     deleteEbook,
+    toggleEbookActive,
     createAuthor,
     searchEbooks,
     generateSlug,
@@ -140,6 +141,26 @@ const EbooksAdmin: React.FC = () => {
 
   const handleDeleteClick = (ebook: EBook) => {
     setDeleteConfirm(ebook);
+  };
+
+  const handleToggleActive = async (ebook: EBook) => {
+    setActionLoading(true);
+    setActionError(null);
+    
+    try {
+      const success = await toggleEbookActive(ebook.id);
+      if (success) {
+        setSuccessMessage(
+          `Ebook-ul "${ebook.title}" a fost ${ebook.active ? 'dezactivat' : 'activat'} cu succes!`
+        );
+      } else {
+        setActionError('A apărut o eroare la schimbarea statusului ebook-ului');
+      }
+    } catch (err) {
+      setActionError('A apărut o eroare neașteptată');
+    } finally {
+      setActionLoading(false);
+    }
   };
 
   const handleCancelEdit = () => {

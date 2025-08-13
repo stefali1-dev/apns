@@ -22,7 +22,8 @@ export class EBookService {
             isFree: dbEBook.is_free,
             price: dbEBook.price,
             pageCount: dbEBook.page_count,
-            publishedDate: dbEBook.published_date
+            publishedDate: dbEBook.published_date,
+            active: dbEBook.active !== undefined ? dbEBook.active : true
         };
     }
 
@@ -53,6 +54,7 @@ export class EBookService {
         if (ebook.price !== undefined) dbEBook.price = ebook.price;
         if (ebook.pageCount !== undefined) dbEBook.page_count = ebook.pageCount;
         if (ebook.publishedDate !== undefined) dbEBook.published_date = ebook.publishedDate;
+        if (ebook.active !== undefined) dbEBook.active = ebook.active;
         return dbEBook;
     }
 
@@ -77,6 +79,7 @@ export class EBookService {
                         authors(*)
                     )
                 `)
+                .eq('active', true)
                 .order('published_date', { ascending: false });
 
             if (error) {
@@ -87,6 +90,30 @@ export class EBookService {
             return (data || []).map(item => this.mapDatabaseToEBook(item));
         } catch (error) {
             console.error('Error in getEBooks:', error);
+            return [];
+        }
+    }
+
+    async getAllEBooks(): Promise<EBook[]> {
+        try {
+            const { data, error } = await supabase
+                .from(this.tableName)
+                .select(`
+                    *,
+                    ebook_authors!inner(
+                        authors(*)
+                    )
+                `)
+                .order('published_date', { ascending: false });
+
+            if (error) {
+                console.error('Error fetching all ebooks:', error);
+                return [];
+            }
+
+            return (data || []).map(item => this.mapDatabaseToEBook(item));
+        } catch (error) {
+            console.error('Error in getAllEBooks:', error);
             return [];
         }
     }
@@ -127,6 +154,7 @@ export class EBookService {
                     )
                 `)
                 .eq('slug', slug)
+                .eq('active', true)
                 .single();
 
             if (error) {
@@ -137,6 +165,31 @@ export class EBookService {
             return data ? this.mapDatabaseToEBook(data) : null;
         } catch (error) {
             console.error('Error in getEBookBySlug:', error);
+            return null;
+        }
+    }
+
+    async getEBookBySlugAdmin(slug: string): Promise<EBook | null> {
+        try {
+            const { data, error } = await supabase
+                .from(this.tableName)
+                .select(`
+                    *,
+                    ebook_authors!inner(
+                        authors(*)
+                    )
+                `)
+                .eq('slug', slug)
+                .single();
+
+            if (error) {
+                console.error('Error fetching ebook by slug (admin):', error);
+                return null;
+            }
+
+            return data ? this.mapDatabaseToEBook(data) : null;
+        } catch (error) {
+            console.error('Error in getEBookBySlugAdmin:', error);
             return null;
         }
     }

@@ -16,6 +16,7 @@ export interface EBookFormData {
   pageCount: number;
   publishedDate: string;
   slug: string;
+  active: boolean;
 }
 
 export interface AuthorFormData {
@@ -36,7 +37,7 @@ export const useEbooks = () => {
     setLoading(true);
     setError(null);
     try {
-      const data = await ebookService.getEBooks();
+      const data = await ebookService.getAllEBooks();
       setEbooks(data);
     } catch (err) {
       setError('Eroare la încărcarea ebook-urilor');
@@ -132,6 +133,34 @@ export const useEbooks = () => {
       setLoading(false);
     }
   }, []);
+
+  // Toggle ebook active status
+  const toggleEbookActive = useCallback(async (id: number): Promise<boolean> => {
+    setLoading(true);
+    setError(null);
+    try {
+      const ebook = ebooks.find(e => e.id === id);
+      if (!ebook) return false;
+
+      const updatedEbook = await ebookService.updateEBook(id, { active: !ebook.active }, ebook.authors.map(a => a.id));
+      
+      if (updatedEbook) {
+        setEbooks(prev => 
+          prev.map(e => 
+            e.id === id ? updatedEbook : e
+          )
+        );
+        return true;
+      }
+      return false;
+    } catch (err) {
+      setError('Eroare la actualizarea statusului ebook-ului');
+      console.error('Error toggling ebook active status:', err);
+      return false;
+    } finally {
+      setLoading(false);
+    }
+  }, [ebooks]);
 
   // Create author
   const createAuthor = useCallback(async (authorData: AuthorFormData): Promise<Author | null> => {
@@ -275,6 +304,7 @@ export const useEbooks = () => {
     createEbook,
     updateEbook,
     deleteEbook,
+    toggleEbookActive,
     createAuthor,
     updateAuthor,
     deleteAuthor,
