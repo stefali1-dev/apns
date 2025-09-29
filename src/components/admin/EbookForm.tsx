@@ -387,13 +387,13 @@ const EbookForm: React.FC<EbookFormProps> = ({
             />
 
             <Textarea
-              label="Descriere completă"
+              label="Descriere completă (HTML)"
               name="fullDescription"
               value={formData.fullDescription}
               onChange={handleChange}
               required
               rows={5}
-              placeholder="Descrierea detaliată a ebook-ului..."
+              placeholder="Descrierea detaliată a ebook-ului in HTML..."
             />
 
             <Textarea
