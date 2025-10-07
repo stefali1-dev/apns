@@ -70,16 +70,16 @@ export default function EBookDetail({ ebook, relatedEbooks }: EBookDetailProps) 
     setLoading(true);
 
     try {
-      // Subscribe user to newsletter first
-      await subscribeUser(email);
+      const result = await ebookService.sendEBookDownload(ebook.slug, email);
       
-      // Show success message - in a real implementation, 
-      // this would trigger the actual download
-      setSuccess(true);
-      setEmail('');
+      if (result.success) {
+        setSuccess(true);
+        setEmail('');
+      } else {
+        alert(result.error || 'A apărut o eroare');
+      }
     } catch (error) {
-      console.error('Download error:', error);
-      alert('A apărut o eroare la procesarea cererii');
+      alert('A apărut o eroare');
     } finally {
       setLoading(false);
     }

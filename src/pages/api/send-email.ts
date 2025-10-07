@@ -23,11 +23,11 @@ export default async function handler(
     });
   }
 
-  const fromEmail = 'no-reply@appns.ro'; // Trebuie să fie o adresă verificată în SelfMailKit
-  let apiKey = process.env.SELFMAILKIT_API_KEY;
+  const fromEmail = 'contact@appns.ro'; // Trebuie să fie o adresă verificată în MailDiver
+  let apiKey = process.env.MAILDIVER_API_KEY;
 
   if (!apiKey) {
-    return res.status(500).json({ message: 'SELFMAILKIT_API_KEY lipsă din variabilele de mediu.' });
+    return res.status(500).json({ message: 'MAILDIVER_API_KEY lipsă din variabilele de mediu.' });
   }
 
   // Elimina spațiile sau newline-urile
@@ -41,7 +41,7 @@ export default async function handler(
   };
 
   try {
-    const response = await fetch('https://api.selfmailkit.com/v1/emails', {
+    const response = await fetch('https://api.maildiver.com/v1/emails', {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${apiKey}`,
@@ -52,18 +52,18 @@ export default async function handler(
 
     if (!response.ok) {
       const errorBody = await response.json();
-      console.error(`[SelfMailKit] Eroare API:`, errorBody);
+      console.error(`[MailDiver] Eroare API:`, errorBody);
       return res.status(response.status).json({
-        message: 'Eroare la trimiterea emailului prin SelfMailKit.',
+        message: 'Eroare la trimiterea emailului prin MailDiver.',
         details: errorBody,
       });
     }
 
-    console.log(`[SelfMailKit] Email trimis cu succes către: ${toEmail}`);
+    console.log(`[MailDiver] Email trimis cu succes către: ${toEmail}`);
     return res.status(200).json({ message: 'Email trimis cu succes!' });
 
   } catch (error: any) {
-    console.error(`[SelfMailKit] Eroare necunoscută:`, error);
+    console.error(`[MailDiver] Eroare necunoscută:`, error);
     return res.status(500).json({
       message: 'A apărut o eroare necunoscută la trimiterea emailului.',
       details: error.message || 'Verifică log-urile serverului.',
