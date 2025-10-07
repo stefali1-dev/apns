@@ -191,6 +191,9 @@ const SubscriptionList: React.FC<SubscriptionListProps> = ({
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Status
               </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Sursa
+              </th>
               <th 
                 className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100"
                 onClick={() => handleSort('created_at')}
@@ -254,6 +257,27 @@ const SubscriptionList: React.FC<SubscriptionListProps> = ({
                         </span>
                       )}
                     </button>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    {(() => {
+                      const source = (subscription as any).source as string | undefined;
+                      const labelMap: Record<string, string> = {
+                        modal: 'Modal',
+                        ebook_download: 'E-book',
+                        unknown: 'Necunoscut'
+                      };
+                      const colorMap: Record<string, string> = {
+                        modal: 'bg-blue-100 text-blue-800',
+                        ebook_download: 'bg-purple-100 text-purple-800',
+                        unknown: 'bg-gray-100 text-gray-600'
+                      };
+                      const key = source || 'unknown';
+                      return (
+                        <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${colorMap[key] || colorMap.unknown}`}>
+                          {labelMap[key] || labelMap.unknown}
+                        </span>
+                      );
+                    })()}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                     <div className="flex items-center">

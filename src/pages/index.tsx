@@ -50,7 +50,7 @@ export default function Home() {
 
   const handleSubscribe = async (email: string) => {
     try {
-      const result = await subscribeUser(email);
+      const result = await subscribeUser(email, 'modal');
       if (result.success) {
         console.log('Successfully subscribed:', email);
         document.cookie = 'email_subscribed=true; max-age=2592000'; // 30 d

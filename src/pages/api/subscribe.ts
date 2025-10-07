@@ -6,14 +6,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const { email } = req.body;
+  const { email, source } = req.body as { email?: string; source?: 'modal' | 'ebook_download' | 'unknown' };
 
   if (!email || !email.includes('@')) {
     return res.status(400).json({ error: 'Email invalid' });
   }
 
   try {
-    const result = await subscribeUser(email);
+  const result = await subscribeUser(email, source || 'modal');
     
     if (result.success) {
       return res.status(200).json({ success: true, message: result.message });

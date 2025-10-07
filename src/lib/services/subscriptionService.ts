@@ -6,14 +6,19 @@ interface Subscription {
   email: string;
   created_at?: string;
   is_active?: boolean;
+  source?: 'modal' | 'ebook_download' | 'unknown';
 }
 
-export async function subscribeUser(email: string): Promise<{ success: boolean; message?: string }> {
+// Subscribes a user. Idempotent: if email exists, we optionally update source if it was 'unknown'.
+export async function subscribeUser(
+  email: string,
+  source: 'modal' | 'ebook_download' | 'unknown' = 'modal'
+): Promise<{ success: boolean; message?: string }> {
   try {
     // Check if email already exists
     const { data: existingSubscriptions, error: checkError } = await supabase
       .from('subscriptions')
-      .select('email')
+      .select('id,email,source')
       .eq('email', email);
 
     if (checkError) {
@@ -25,22 +30,29 @@ export async function subscribeUser(email: string): Promise<{ success: boolean; 
     }
 
     if (existingSubscriptions && existingSubscriptions.length > 0) {
+      // Already subscribed. Optionally update source if previous was unknown and new is more specific.
+      const existing = existingSubscriptions[0];
+      if (existing.source === 'unknown' && source !== 'unknown') {
+        await supabase
+          .from('subscriptions')
+          .update({ source })
+          .eq('email', email);
+      }
       return { 
-        success: false, 
-        message: 'Email-ul este deja înregistrat pentru newsletter.' 
+        success: true, 
+        message: 'Email existent – abonare deja activă.' 
       };
     }
 
-    // Insert new subscription
-    const { data, error } = await supabase
+    // Insert new subscription with source
+    const { error } = await supabase
       .from('subscriptions')
       .insert([{ 
         email, 
         is_active: true,
-        created_at: new Date().toISOString()
-      }])
-      .select()
-      .single();
+        created_at: new Date().toISOString(),
+        source
+      }]);
 
     if (error) {
       console.error('Error subscribing user:', error);

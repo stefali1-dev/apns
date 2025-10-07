@@ -157,7 +157,7 @@ export default function EBooksPage() {
     setSubscriptionMessage(null);
 
     try {
-      const result = await subscribeUser(emailSubscription);
+  const result = await subscribeUser(emailSubscription, 'modal');
       if (result.success) {
         setSubscriptionMessage({ type: 'success', text: 'Te-ai abonat cu succes la newsletter!' });
         setEmailSubscription('');

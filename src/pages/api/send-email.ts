@@ -23,7 +23,7 @@ export default async function handler(
     });
   }
 
-  const fromEmail = 'contact@appns.ro'; // Trebuie să fie o adresă verificată în MailDiver
+  const fromEmail = 'no-reply@appns.ro'; // Trebuie să fie o adresă verificată în MailDiver
   let apiKey = process.env.MAILDIVER_API_KEY;
 
   if (!apiKey) {

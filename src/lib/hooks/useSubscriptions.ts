@@ -7,6 +7,7 @@ export interface Subscription {
   is_active: boolean;
   created_at: string;
   updated_at: string;
+  source?: 'modal' | 'ebook_download' | 'unknown';
 }
 
 export interface SubscriptionStats {
@@ -261,12 +262,13 @@ export const useSubscriptions = (): UseSubscriptionsReturn => {
         return null;
       }
 
-      const headers = ['Email', 'Status', 'Data înregistrării', 'Ultima actualizare'];
+      const headers = ['Email', 'Status', 'Sursa', 'Data înregistrării', 'Ultima actualizare'];
       const csvContent = [
         headers.join(','),
         ...data.map(sub => [
           sub.email,
           sub.is_active ? 'Activ' : 'Inactiv',
+          sub.source || '—',
           new Date(sub.created_at).toLocaleDateString('ro-RO'),
           new Date(sub.updated_at).toLocaleDateString('ro-RO')
         ].join(','))

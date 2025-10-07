@@ -15,7 +15,7 @@ export default function ArticleLayout({ children }: { children: React.ReactNode 
         setMessage(null);
 
         try {
-            const result = await subscribeUser(email);
+            const result = await subscribeUser(email, 'modal');
             if (result.success) {
                 setMessage({ type: 'success', text: 'Te-ai abonat cu succes la newsletter!' });
                 setEmail('');

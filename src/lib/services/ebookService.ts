@@ -1,5 +1,6 @@
 import { EBook, Author } from "@/lib/types/ebook";
 import { supabase } from "@/lib/supabaseClient";
+import { subscribeUser } from "@/lib/services/subscriptionService";
 
 // services/ebookService.ts
 export class EBookService {
@@ -637,6 +638,12 @@ export class EBookService {
         }
 
         try {
+            // Ensure subscription recorded (idempotent) with ebook_download source
+            try {
+                await subscribeUser(email, 'ebook_download');
+            } catch (e) {
+                console.warn('Failed to record ebook_download subscription (continuing):', e);
+            }
             // Pentru moment, folosim întotdeauna spring-restart.pdf
             const baseUrl = typeof window !== 'undefined'
                 ? window.location.origin
