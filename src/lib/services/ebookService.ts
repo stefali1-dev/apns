@@ -637,6 +637,11 @@ export class EBookService {
             return { success: false, error: 'Acest e-book nu este gratuit' };
         }
 
+        // Verifică dacă există un fișier asociat
+        if (!ebook.fileUrl || (typeof ebook.fileUrl === 'string' && ebook.fileUrl.trim() === '')) {
+            return { success: false, error: 'Fișierul e-book nu este disponibil momentan.' };
+        }
+
         try {
             // Ensure subscription recorded (idempotent) with ebook_download source
             try {
@@ -644,11 +649,13 @@ export class EBookService {
             } catch (e) {
                 console.warn('Failed to record ebook_download subscription (continuing):', e);
             }
-            // Pentru moment, folosim întotdeauna spring-restart.pdf
+
             const baseUrl = typeof window !== 'undefined'
                 ? window.location.origin
                 : process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
-            const ebookUrl = `${baseUrl}/ebooks/spring-restart.pdf`;
+
+            const isAbsolute = /^https?:\/\//i.test(ebook.fileUrl);
+            const ebookUrl = isAbsolute ? ebook.fileUrl : `${baseUrl}${ebook.fileUrl.startsWith('/') ? '' : '/'}${ebook.fileUrl}`;
 
             // Creează corpul email-ului cu styling consistent
             const htmlContent = this.createEbookEmailTemplate(ebook, ebookUrl);
