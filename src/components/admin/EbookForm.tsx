@@ -4,6 +4,7 @@ import { EBookFormData, AuthorFormData } from '@/lib/hooks/useEbooks';
 import Button from '@/components/ui/Button';
 import Input from '@/components/ui/Input';
 import Textarea from '@/components/ui/Textarea';
+import RichTextEditor from '@/components/ui/RichTextEditor';
 import Alert from '@/components/ui/Alert';
 import Modal from '@/components/ui/Modal';
 import ImageUpload from '@/components/admin/ImageUpload';
@@ -340,7 +341,7 @@ const EbookForm: React.FC<EbookFormProps> = ({
         )}
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {/* Left Column */}
+          {/* Left Column - Basic Info */}
           <div className="space-y-4">
             <Input
               label="Titlu"
@@ -386,29 +387,29 @@ const EbookForm: React.FC<EbookFormProps> = ({
               placeholder="Descrierea scurtă care va apărea în listă..."
             />
 
-            <Textarea
-              label="Descriere completă (HTML)"
-              name="fullDescription"
-              value={formData.fullDescription}
-              onChange={handleChange}
-              required
-              rows={5}
-              placeholder="Descrierea detaliată a ebook-ului in HTML..."
-            />
+            <div className="grid grid-cols-2 gap-4">
+              <Input
+                label="Număr pagini"
+                name="pageCount"
+                type="text"
+                value={formData.pageCount.toString()}
+                onChange={handleChange}
+                required
+                placeholder="100"
+              />
 
-            <Textarea
-              label="Cuprins (HTML)"
-              name="toc"
-              value={formData.toc}
-              onChange={handleChange}
-              required
-              rows={6}
-              placeholder="<ul><li>Capitolul 1: ...</li><li>Capitolul 2: ...</li></ul>"
-            />
-            <p className="text-xs text-gray-500 mt-1">Folosește HTML pentru formatarea cuprinsului</p>
+              <Input
+                label="Data publicării"
+                name="publishedDate"
+                type="date"
+                value={formData.publishedDate}
+                onChange={handleChange}
+                required
+              />
+            </div>
           </div>
 
-          {/* Right Column */}
+          {/* Right Column - Media & Settings */}
           <div className="space-y-4">
             {/* Authors Selection */}
             <div>
@@ -513,28 +514,47 @@ const EbookForm: React.FC<EbookFormProps> = ({
                 Doar ebook-urile active vor fi vizibile pe site pentru utilizatori
               </p>
             </div>
-
-            <div className="grid grid-cols-2 gap-4">
-              <Input
-                label="Număr pagini"
-                name="pageCount"
-                type="text"
-                value={formData.pageCount.toString()}
-                onChange={handleChange}
-                required
-                placeholder="100"
-              />
-
-              <Input
-                label="Data publicării"
-                name="publishedDate"
-                type="date"
-                value={formData.publishedDate}
-                onChange={handleChange}
-                required
-              />
-            </div>
           </div>
+        </div>
+
+        {/* TOC (Table of Contents) Editor - Full Width */}
+        <div className="border-t border-gray-200 pt-6">
+          <RichTextEditor
+            label="Cuprins"
+            content={formData.toc}
+            onChange={(html) => {
+              setFormData(prev => ({
+                ...prev,
+                toc: html
+              }));
+              // Clear errors when user starts typing
+              if (errors.length > 0) {
+                setErrors([]);
+              }
+            }}
+            placeholder="Scrie cuprinsul ebook-ului... Folosește liste pentru capitole și subcapitole."
+            required
+          />
+        </div>
+
+        {/* Full Description Editor - Full Width Below */}
+        <div className="border-t border-gray-200 pt-6">
+          <RichTextEditor
+            label="Descriere completă"
+            content={formData.fullDescription}
+            onChange={(html) => {
+              setFormData(prev => ({
+                ...prev,
+                fullDescription: html
+              }));
+              // Clear errors when user starts typing
+              if (errors.length > 0) {
+                setErrors([]);
+              }
+            }}
+            placeholder="Scrie descrierea detaliată a ebook-ului..."
+            required
+          />
         </div>
 
         <div className="flex justify-end space-x-3 pt-6 border-t border-gray-200">

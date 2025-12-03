@@ -4,6 +4,7 @@ import { ArticleFormData } from '@/lib/hooks/useArticles';
 import Button from '@/components/ui/Button';
 import Input from '@/components/ui/Input';
 import Textarea from '@/components/ui/Textarea';
+import RichTextEditor from '@/components/ui/RichTextEditor';
 import Alert from '@/components/ui/Alert';
 import ImageUpload from '@/components/admin/ImageUpload';
 
@@ -219,14 +220,21 @@ const ArticleForm: React.FC<ArticleFormProps> = ({
         placeholder="O descriere scurtă a articolului pentru previzualizare"
       />
 
-      <Textarea
+      <RichTextEditor
         label="Conținut"
-        name="content"
-        value={formData.content}
-        onChange={handleChange}
+        content={formData.content}
+        onChange={(html) => {
+          setFormData(prev => ({
+            ...prev,
+            content: html
+          }));
+          // Clear errors when user starts typing
+          if (errors.length > 0) {
+            setErrors([]);
+          }
+        }}
+        placeholder="Scrie conținutul articolului..."
         required
-        rows={12}
-        placeholder="Conținutul articolului (acceptă HTML)"
       />
 
       <div className="flex justify-end space-x-4">
